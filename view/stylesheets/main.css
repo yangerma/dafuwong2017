@@ -1,0 +1,39 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#mainCanvas {
+	position: absolute;
+	height: 200px;
+	width: 200px;
+	margin: 0 auto;
+	border: solid blue 5px;
+}
+
+#container{
+	position: absolute;
+	left: calc(50% - 350px);
+	top: 50px;
+	width: 700px;
+	height: 700px;
+	border: solid blue 2px;
+	padding: 100px;
+}
+
+.circle{
+	position: absolute;
+	width:100px;
+	height:100px;
+	background:#0cc;
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
+
+.triangle{
+	position: absolute;
+	width:100px;
+	height:87px;
+	background:#c00;
+	-webkit-clip-path:polygon(0% 100%, 50%  0%,100% 100%);
+}

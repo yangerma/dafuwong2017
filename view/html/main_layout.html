@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>2017 CSIE camp Monopoly!</title>
+	<link type="text/css" rel="stylesheet" href="../stylesheets/main.css">
+</head>
+
+<body>
+
+	<div id="container">
+	
+		<script type="text/javascript">  
+		var tleft = ['50% - 50px', '100% - 50px', '80.86% - 50px', '19.14% - 50px', '0% - 50px' ];
+		var ttop  = ['0% - 43.5px', '38.31% - 43.5px', '100% - 43.5px', '100% - 43.5px', '38.31% - 43.5px'];
+			for (var i = 0; i < 5; i++) {
+				var iContent;
+				iContent = '<div class="triangle" id="t' + i + '"';
+				iContent += ' style="top:calc(' +ttop[i]+ '); left:calc(' +tleft[i]+ ');"></div>';
+				document.write(iContent);
+				for (var j = 0; j < 5; j++) {
+					var jContent;
+					jContent = '<div class="circle" id="c' + i + '' + j + '"></div>';
+			    	//document.write(jContent);
+			    }	
+			}
+		</script>  
+
+	</div>
+</body>
+
+</html>
