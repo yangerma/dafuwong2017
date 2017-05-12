@@ -14,26 +14,36 @@
 
 #container{
 	position: absolute;
-	left: calc(50% - 350px);
+	left: calc(50% - 400px);
 	top: 50px;
-	width: 700px;
+	width: 800px;
 	height: 700px;
-	border: solid blue 2px;
+	border: solid grey 1px;
 	padding: 100px;
 }
 
 .circle{
 	position: absolute;
-	width:100px;
-	height:100px;
+	width:50px;
+	height:50px;
 	background:#0cc;
 	-webkit-clip-path:circle(50% at 50% 50%);
 }
 
 .triangle{
 	position: absolute;
-	width:100px;
-	height:87px;
+	width:80px;
+	height:69.6px;
 	background:#c00;
 	-webkit-clip-path:polygon(0% 100%, 50%  0%,100% 100%);
+}
+
+#switch{
+	position: absolute;
+	left: calc(50% - 64.8px);
+	top: calc(50% - 61.6px);
+	width:129.6px;
+	height:123.2px;
+	background:#095;
+	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
 }
