@@ -1,0 +1,62 @@
+client:	
+	# Register player name.
+	(new_player, str name)
+
+	# Request a dice result.
+	(roll_dice)
+
+	# Reqeust a chance.
+	(get_chance)
+
+	# Request a destiny.
+	(get_destiny)
+
+	# Request a question.
+	(get_question)
+
+	# Buy house or not.
+	(buy_house, bool buy)
+
+	# Player $(player_id) buy item $(item_id).
+	(buy_item, int player_id, int item_id)
+
+	# Answer question with $(ans).
+	(answer_question, int ans)
+	
+	# Player $(player_id) use item $(item_id).
+	(use_item, int player_id, int item_id)
+
+server:
+	# When all players ready, return players' info.
+	(player_info, (int ,str) (player_id, player_name)[5])
+
+	# Return a dice result.
+	(dice_result, int result)
+	
+	# Return a chance.
+	(chance, int chance_id)
+
+	# Return a destiny.
+	(destiny, int destiny_id)
+
+	# Return a question.
+	(question, int question_id)
+	
+
+--------------------------------------------------------------
+		|Client request		|Server broadcast
+--------------------------------------------------------------
+Initial		|new_player		|player_info
+--------------------------------------------------------------
+Player's turn	|roll_dice		|dice_result
+		|get_chance		|chance
+		|get_destiny		|destiny
+		|get_question		|question
+
+		|answer_question	|answer_question
+		|buy_house		|buy_house		
+		|use_item		|use_item
+--------------------------------------------------------------
+Any time	|buy_item		|buy_item
+--------------------------------------------------------------
+
