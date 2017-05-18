@@ -4,21 +4,13 @@
           box-sizing: border-box;
 }
 
-#mainCanvas {
-	position: absolute;
-	height: 200px;
-	width: 200px;
-	margin: 0 auto;
-	border: solid blue 5px;
-}
-
 #container{
 	position: absolute;
-	left: calc(50% - 400px);
+	left: calc(50% - 450px);
 	top: 50px;
-	width: 800px;
+	width: 900px;
 	height: 700px;
-	border: solid grey 1px;
+	border: solid grey 0.2px;
 	padding: 100px;
 }
 
@@ -28,6 +20,16 @@
 	height:50px;
 	background:#0cc;
 	-webkit-clip-path:circle(50% at 50% 50%);
+}
+
+#c03 {
+	background: orange;
+	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+}
+
+#c33 {
+	background: orange;
+	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
 }
 
 .triangle{
