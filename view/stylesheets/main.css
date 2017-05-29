@@ -16,15 +16,15 @@
 #map{
 	position: absolute;
 	//left: calc(50% - 450px);
-	left: 130px;
-	//left: 50px;
+	//left: 130px;
+	left: 50px;
 	top: 50px;
 	width: 900px;
 	height: 700px;
 	border: solid grey 1px;
 	padding: 100px;
-	transform-origin:top;
-	transform:skewX(-15deg);
+	//transform-origin:top;
+	//transform:skewX(-15deg);
 }
 #scoreboard {
 	margin-left: 1000px;
@@ -82,3 +82,23 @@
 	background:#095;
 	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
 }
+
+.questionbox {
+	width: 700px;
+	height: 500px;
+	position: absolute;
+	left: calc(50% - 350px);
+	top: calc(50% - 250px);
+	padding: 50px;
+	border: solid grey 1px;
+	background-color:rgba(255,255,255,0.85);
+}
+
+.q-title {
+	text-align: center;
+}
+
+
+
+
+
