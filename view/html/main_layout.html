@@ -5,23 +5,88 @@
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
 	<link type="text/css" rel="stylesheet" href="../stylesheets/main.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 </head>
 
 <body>
+
 <div id ="container">
-	<div id="dice"></div>
+	<div id="dice">
+		<img src="../img/wifi.gif" id="wifi">
+		<script type="text/javascript">
+			$("#dice").click(function() {
+			 	$("#dice").find('img').attr("src", "../img/wifi.gif");
+			})
+		</script>
+		
+	</div>
 	<div id="map">
 		<div id="switch"></div>
 		<script language="JavaScript" src="../js/CircleTriangle.js"></script> 
 	</div>
 	<div id="scoreboard">
-		<h1>Scoreboard</h1>
-		<div class="rank"></div>
-		<div class="rank"></div>
-		<div class="rank"></div>
-		<div class="rank"></div>
-		<div class="rank"></div>
+		<div class="title">
+			<h1>Scoreboard</h1>
+		</div>
+		<div class="rank">
+			<img id="profile" src="../img/prof.png">
+			<div class="info">
+				<h4>第一小隊</h4>
+				<p>$5000</p>
+			</div>
+		</div>
+		<div class="rank">
+			<img id="profile" src="../img/prof.png">
+			<div class="info">
+				<h4>第二小隊</h4>
+				<p>$4000</p>
+			</div>
+		</div>
+		<div class="rank">
+			<img id="profile" src="../img/prof.png">
+			<div class="info">
+				<h4>第三小隊</h4>
+				<p>$3000</p>
+			</div>
+		</div>
+		<div class="rank">
+			<img id="profile" src="../img/prof.png">
+			<div class="info">
+				<h4>第四小隊</h4>
+				<p>$2000</p>
+			</div>
+		</div>
+		<div class="rank">
+			<img id="profile" src="../img/prof.png">
+			<div class="info">
+				<h4>第五小隊</h4>
+				<p>$1000</p>
+			</div>
+		</div>
 	</div>
+
+	<div class="questionBox">
+		<div class="qTitle"><h1>題目名稱</h1></div>
+		<div class="closeButton"></div>
+		<div class="qDes">
+			<p>題目敘述題目敘述～～～題目敘述題 目敘述題目敘述題目敘述題目敘述？！<br>
+			題目敘  述題目敘述題目敘，述題目敘述題目!<br>敘述題目敘述題目敘述
+			題目敘述題目敘述題目    敘述題目敘述<br>題目敘述題目  敘述題目敘述
+			題目敘述題目，敘述。<br>題目敘述題目敘述題目敘述題目敘 述題目敘述
+			題 目敘述題目敘述   題目敘述題目敘述『題目敘述』、『題目敘述題目』敘述
+			題目敘述題目敘 述題目敘述題目敘述題！目！敘！述！<br>題目敘述題目敘述?</p>
+		</div>
+		<form class="question">
+			<input type="radio" name="q1" value="1"> 選項一
+			<input type="radio" name="q1" value="2"> 選項二
+			<input type="radio" name="q1" value="3"> 選項三
+			<input type="radio" name="q1" value="4"> 選項四
+			<br><br>
+			<input type="submit" id="submitButton" value="Submit">
+		</form>
+	</div>
+
 </div>
 </body>
 
