@@ -4,7 +4,7 @@ function Pair(first, second) {
 	this.S = second;
 }
 
-function Node(id, property, position, nextA, nextB) {
+function Node(id, property, nextA, nextB) {
 	this.id = id;	//its id in css
 	this.property = property;
 	/*
@@ -15,8 +15,8 @@ function Node(id, property, position, nextA, nextB) {
 	* 'cf' for chance/fate
 	* 'no' for nothing
 	*/
+	this.x = this.y = 0;
 	this.house = new Pair(-1, -1);
-	this.position = position;	//(left, top) pair
 	
 	this.next = new Array(nextA, nextB);	//id of two possible next Nodes
 }
@@ -35,6 +35,7 @@ function Player(id, name) {
 
 var firewall = new Array();
 var player = new Array();
+var rank = new Array(0, 1, 2, 3, 4);
 
 for(var i = 0; i < 5; i++) {
 	player.push(new Player(i, "Meow"));
@@ -74,4 +75,9 @@ for (var i = 0; i < 5; i++) {
 		}
     }	
 
+}
+
+for(var val of map.values()) {
+	val.x = $('#'+val.id).offset().left;
+	val.y = $('#'+val.id).offset().top;
 }
