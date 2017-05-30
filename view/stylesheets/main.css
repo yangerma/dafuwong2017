@@ -17,7 +17,12 @@ body {
 	top: 50px;
 	width: 100px;
 	height: 100px;
-	border: solid grey 1px;
+	//border: solid grey 1px;
+}
+
+#dice #wifi {
+	width: 100px;
+	height: 100px;
 }
 
 #map{
