@@ -119,10 +119,10 @@ body {
 
 .questionBox {
 	display: none;
-	width: 700px;
+	width: 800px;
 	height: 500px;
 	position: absolute;
-	left: calc(50% - 350px);
+	left: calc(50% - 400px);
 	top: calc(50% - 250px);
 	padding: 50px;
 	border: solid grey 1px;
