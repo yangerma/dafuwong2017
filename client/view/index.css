@@ -4,81 +4,55 @@
           box-sizing: border-box;
 }
 
-#dice{
-	position: fixed;
-	left: 50px;
-	top: 50px;
-	width: 100px;
-	height: 100px;
-	border: solid grey 1px;
+body {
+	font-family: 'Noto Sans TC', sans-serif;
+	font-weight: 300;
+} 
+
+.title {
+	text-align: center;
 }
 
-#map{
+#container {
+	margin: 50px;
+}
+
+#shop {
+	
+	height: 700px;
+	border: solid grey 1px;
+	margin-left: 320px;
+}
+
+#profile {
 	position: absolute;
-	//left: calc(50% - 450px);
-	left: 130px;
-	//left: 50px;
-	top: 50px;
-	width: 900px;
+	width: 300px;
 	height: 700px;
 	border: solid grey 1px;
-	padding: 100px;
-	transform-origin:top;
-	transform:skewX(-15deg);
+	padding: 20px;
 }
-#scoreboard {
-	margin-left: 1000px;
-	margin-top: 50px;
-	margin-right: 30px;
-	height: 700px;
+
+#profile #teamName {
+	margin: 0px auto;
+	line-height: 50px;
 	border: solid grey 1px;
 }
 
-#scoreboard h1 {
-	margin: 10px;
-	padding: 10px;
-	height: 70px;
-	border: solid grey 1px;
+#profile #profilePic {
+	width: 260px;
+	height: 260px;
+	margin: 0;
+	overflow: hidden;
 }
 
-#scoreboard .rank {
-	margin: 10px;
+#profile .profileInfo {
+	width: 260px;
 	height: 50px;
+	margin: 10px auto;
 	border: solid grey 1px;
 }
 
-.circle{
-	position: absolute;
-	width:50px;
-	height:50px;
-	background:#0cc;
-	-webkit-clip-path:circle(50% at 50% 50%);
-}
 
-#c03 {
-	background: orange;
-	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-}
 
-#c33 {
-	background: orange;
-	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-}
 
-.triangle{
-	position: absolute;
-	width:80px;
-	height:69.6px;
-	background:#c00;
-	-webkit-clip-path:polygon(0% 100%, 50%  0%,100% 100%);
-}
 
-#switch{
-	position: absolute;
-	left: calc(50% - 64.8px);
-	top: calc(50% - 61.6px);
-	width:129.6px;
-	height:123.2px;
-	background:#095;
-	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
-}
