@@ -1,7 +1,14 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+body {
+	font-family: 'Noto Sans TC', sans-serif;
+	font-weight: 300;
 }
 
 #dice{
@@ -16,21 +23,20 @@
 #map{
 	position: absolute;
 	//left: calc(50% - 450px);
-	//left: 130px;
-	left: 50px;
+	left: 110px;
+	//left: 50px;
 	top: 50px;
 	width: 900px;
 	height: 700px;
-	border: solid grey 1px;
+	//border: solid grey 1px;
 	padding: 100px;
-	//transform-origin:top;
-	//transform:skewX(-15deg);
+	transform-origin:top;
+	transform:skewX(-10deg);
 }
 #scoreboard {
 	margin-left: 1000px;
 	margin-top: 50px;
 	margin-right: 30px;
-	height: 700px;
 	border: solid grey 1px;
 }
 
@@ -112,6 +118,7 @@
 }
 
 .questionBox {
+	display: none;
 	width: 700px;
 	height: 500px;
 	position: absolute;
