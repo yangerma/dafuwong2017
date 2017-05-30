@@ -5,9 +5,20 @@ function getPosition(id) {
 }
 
 function updateScoreBoard() {
-	for (var i = 1; i <= 5; i++) {
-		var j = 
-		$('#info' + i + ' h4').text(player[i-1].name);
-		$('#info' + i + ' p').text('$' + player[i-1].money);
+	for (var i = 0; i < 5; i++) {
+		//var j = i;
+		var j = rank[i];
+		$('#info' + (i+1) + ' h4').text(player[j].name);
+		$('#info' + (i+1) + ' p').text('$' + player[j].money);
+	}
+}
+
+function updatePosition() {
+	for (var i = 0; i < 5; i++) {
+		var currPos = '#' + player[i].pos;
+		var x = $(currPos).offset().left;
+		var y = $(currPos).offset().top;
+		$("#player" + i).css('top', y);
+		$("#player" + i).css('left', x);
 	}
 }
