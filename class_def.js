@@ -21,7 +21,7 @@ function Node(id, property, position, nextA, nextB) {
 	this.next = new Array(nextA, nextB);	//id of two possible next Nodes
 }
 
-const var money_init = 9487;
+const money_init = 9487;
 function Player(id, name) {
 	this.id = id;	//0-indexed
 	this.ip = '192.168.'+(id+1)+'.1';
@@ -52,19 +52,17 @@ for (var i = 0; i < 5; i++) {
 
 	if( i==0 || i==2 ) {
 		for (var j = 1; j < 4; j++) {
-				var nxt = (j==1) ? 'switch' : 's'+i+''+(j-1);			
-				map.set('s'+i+''+j, new Node('s'+i+''+j, 'no', nxt, nxt));
-
-			}
+			var nxt = (j==1) ? 'switch' : 's'+i+''+(j-1);			
+			map.set('s'+i+''+j, new Node('s'+i+''+j, 'no', nxt, nxt));
 		}
 	}
 	if( i==3 ) {
 		for (var j = 1; j < 4; j++) {
-				var nxt = (j==3) ? 't'+i : 's'+i+''+(j+1);
-				map.set('s'+i+''+j, new Node('s'+i+''+j, 'no', nxt, nxt));
-			}
+			var nxt = (j==3) ? 't'+i : 's'+i+''+(j+1);
+			map.set('s'+i+''+j, new Node('s'+i+''+j, 'no', nxt, nxt));
 		}
 	}
+	
 
 	for (var j = 1; j < 6; j++) {
 		if(j==5) {
@@ -72,7 +70,7 @@ for (var i = 0; i < 5; i++) {
 		} else if( (i==0 || i==3) && j==3) {
 			map.set('c'+i+''+j, new Node('c'+i+''+j, 'dh', 'c'+i+'4', 'c'+i+'4'));
 		} else {
-			map.set('c'+i+''+j, new Node('c'+i+''+j, 'no', 'c'+i+''+(j+1), 'c'+i+''+(j+1));
+			map.set('c'+i+''+j, new Node('c'+i+''+j, 'no', 'c'+i+''+(j+1), 'c'+i+''+(j+1)));
 		}
     }	
 
