@@ -1,18 +1,90 @@
+@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-#container{
+body {
+	font-family: 'Noto Sans TC', sans-serif;
+	font-weight: 300;
+}
+
+#dice{
+	position: fixed;
+	left: 50px;
+	top: 50px;
+	width: 100px;
+	height: 100px;
+	//border: solid grey 1px;
+}
+
+#dice #wifi {
+	width: 100px;
+	height: 100px;
+}
+
+#map{
 	position: absolute;
-	left: calc(50% - 450px);
+	//left: calc(50% - 450px);
+	left: 110px;
+	//left: 50px;
 	top: 50px;
 	width: 900px;
 	height: 700px;
-	border: solid grey 0.2px;
+	//border: solid grey 1px;
 	padding: 100px;
+	transform-origin:top;
+	transform:skewX(-10deg);
 }
+#scoreboard {
+	margin-left: 1000px;
+	margin-top: 50px;
+	margin-right: 30px;
+	border: solid grey 1px;
+}
+
+#scoreboard .title {
+	margin: 10px;
+	height: 70px;
+	border: solid grey 1px;
+	text-align: center;
+}
+
+#scoreboard .title h1{
+	margin: auto;
+	line-height: 70px;
+}
+
+#scoreboard .rank {
+	padding: 5px;
+	margin: 10px;
+	height: 60px;
+	border: solid grey 1px;
+}
+
+#scoreboard .rank img{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+}
+
+#scoreboard .rank .info{
+	margin-left: 55px;
+	padding-left: 10px;
+}
+
+#scoreboard .rank h4{
+	margin: 0;
+	line-height: 25px;
+}
+
+#scoreboard .rank p{
+	margin: 0;
+	line-height: 25px;
+}
+
 
 .circle{
 	position: absolute;
@@ -49,3 +121,27 @@
 	background:#095;
 	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
 }
+
+.questionBox {
+	display: none;
+	width: 800px;
+	height: 500px;
+	position: absolute;
+	left: calc(50% - 400px);
+	top: calc(50% - 250px);
+	padding: 50px;
+	border: solid grey 1px;
+	background-color:rgba(255,255,255,0.85);
+}
+
+.qTitle {
+	text-align: center;
+}
+
+#players img {
+	position: absolute;
+	width: 50px;
+	height: 50px;
+}
+
+
