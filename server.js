@@ -10,10 +10,10 @@ console.log(controller);
 
 var playerCount = 0;
 
-app.use(express.static(path.join(__dirname, 'view')));
+app.use(express.static(path.join(__dirname, '.')));
 app.get('/', function(req, res){
-	res.sendFile(__dirname + '/view/html/main_layout.html');
-	//res.sendFile(__dirname + '/index.html');
+	//res.sendFile(__dirname + '/view/html/main_layout.html');
+	res.sendFile(__dirname + '/view/index.html');
 });
 
 io.on('connection', function(player){

@@ -121,7 +121,7 @@ body {
 	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
 }
 
-.questionBox {
+#questionBox {
 	display: none;
 	width: 800px;
 	height: 500px;
