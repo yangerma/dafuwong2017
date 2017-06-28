@@ -45,16 +45,6 @@ Controller.prototype = {
 
 		//this.state = WAIT_TO_BUY;
 	},
-	init : function() {
-		this.players.forEach(function(player, id, array) {
-			player.on("roll_dice", this.rollDice(player));
-		});
-		this.state = WAIT_TO_ROLL;
-	},
-	addPlayer : function(player) {
-		this.players.push(player);
-	},
-	
 	nextTurn : function() {
 		this.nowPlaying = (this.nowPlaying + 1) % MAX_PLAYER;
 		if (this.nowPlaying == 0) {
