@@ -30,7 +30,8 @@ socket.on('update', function( data ) {
 		$('#info' + (i+1) + ' p').text('$' + player[j].money);
 
 		// update ip
-
+		
+		
 		// update items 
 
 	}
