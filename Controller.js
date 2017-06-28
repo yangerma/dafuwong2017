@@ -23,9 +23,10 @@ Controller = function(io) {
 Controller.prototype = {
 	init : function() {
 		this.players.forEach(function(player, id, array) {
-			player.on("roll_dice", this.rollDice);
-			
-		});
+			player.on("roll_dice", (player) => {
+				this.rollDice(player);
+			});
+		}.bind(this));
 		this.state = WAIT_TO_ROLL;
 	},
 	addPlayer : function(player) {
@@ -34,17 +35,20 @@ Controller.prototype = {
 	rollDice : function(player) {
 		if (player.player_id == this.nowPlaying) {
 			var diceResult = Math.ceil(Math.random() * 4)
+			var player_id = player.player_id
 			this.io.emit("dice_result", {
-				player : playerId,
-				dice_result : diceResult
+				dice_result : diceResult,
+				player : player_id
 			});
+			this.nextTurn();
 		}
 		//this.state = WAIT_TO_BUY;
-		this.nextTurn();
 	},
 	nextTurn : function() {
 		this.nowPlaying = (this.nowPlaying + 1) % MAX_PLAYER;
-		this.turns++;
+		if (this.nowPlaying == 0) {
+			this.turns++;
+		}
 	},
 	start : function() {
 		this.init();
