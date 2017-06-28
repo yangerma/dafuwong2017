@@ -1,12 +1,20 @@
 var socket = io();
+var playerId = null;
+
+socket.on("player_id", function(res) {
+	playerId = res.player_id;
+});
 
 function roll_dice() {
-    socket.emit('roll_dice');
-    return false;
+	$('#rollDice').hide();
+    console.log("emit roll dice " + playerId);
+    socket.emit('roll_dice', {player_id : playerId});
 }
 
 socket.on('dice_result', function show_dice_result( res ) {
-	player_ID = res.player_id;
+
+	console.log("on dice result");
+	player_ID = res.player;
 	dice_result = res.dice_result;
 	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
 	$('#diceResult .txtbox h1').text( dice_result );

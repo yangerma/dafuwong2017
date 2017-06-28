@@ -13,7 +13,7 @@
 	<script language="JavaScript" src="./model/class_def.js"></script>
 	<script language="JavaScript" src="./model/question.js"></script>
 	<script language="JavaScript" src="./view/js/update.js"></script>
-	<script language="JavaScript" src="./view/js/Websocket.js"></script>
+	
 
 </head>
 <body>
@@ -117,7 +117,12 @@
 		<script type="text/javascript">
 			$("#roll_dice_btn").click(function() {
 			 	$("#rollDice img").attr("src", "./view/img/wifi.gif");
-			 	setTimeout( " roll_dice(); ", 2000 );
+			 	setTimeout( function(){
+				 // 	$('#rollDice').hide();
+				 // 	console.log("emit roll dice " + playerId);
+					// socket.emit('roll_dice', {player_id : playerId});
+					roll_dice();
+    			}, 2000 );
 			})
 		</script>
 	</div>

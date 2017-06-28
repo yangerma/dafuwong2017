@@ -23,8 +23,9 @@ Controller = function(io) {
 Controller.prototype = {
 	init : function() {
 		this.players.forEach(function(player, id, array) {
-			player.on("roll_dice", (player) => {
-				this.rollDice(player);
+			player.on("roll_dice", (play) => {
+				console.log( play);
+				this.rollDice(play);
 			});
 		}.bind(this));
 		this.state = WAIT_TO_ROLL;
@@ -33,6 +34,7 @@ Controller.prototype = {
 		this.players.push(player);
 	},
 	rollDice : function(player) {
+		console.log("roll dice "+player);
 		if (player.player_id == this.nowPlaying) {
 			var diceResult = Math.ceil(Math.random() * 4)
 			var player_id = player.player_id
@@ -40,6 +42,7 @@ Controller.prototype = {
 				dice_result : diceResult,
 				player : player_id
 			});
+			console.log("emit dice result 2");
 			this.nextTurn();
 		}
 
