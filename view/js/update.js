@@ -11,6 +11,14 @@ socket.on('dice_result', function(res){
        'user ' + res.player + ' got '+ res.dice_result;
 });
 
+function show_dice_result( dice_result, player_ID ) {
+	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
+	$('#diceResult .txtbox h1').text( dice_result );
+	$('#diceResult img').attr( 'src', "./view/img/wifi" + dice_result + ".png" );
+	$('#diceResult').show();
+	setTimeout( " $('#diceResult').hide(); ", 2000 );
+}
+
 socket.on('update', function( data ) {
 	var player = data.player;	
 	var rank = data.rank;
@@ -30,8 +38,8 @@ socket.on('update', function( data ) {
 		$('#info' + (i+1) + ' p').text('$' + player[j].money);
 
 		// update ip
-		
-		
+
+
 		// update items 
 
 	}

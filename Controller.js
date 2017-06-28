@@ -21,16 +21,6 @@ Controller = function(io) {
 	return this;
 }
 Controller.prototype = {
-	init : function() {
-		this.players.forEach(function(player, id, array) {
-			player.on("roll_dice", this.rollDice);
-			
-		});
-		this.state = WAIT_TO_ROLL;
-	},
-	addPlayer : function(player) {
-		this.players.push(player);
-	},
 	rollDice : function(player) {
 		if (player.player_id == this.nowPlaying) {
 			var diceResult = Math.ceil(Math.random() * 4)
@@ -39,9 +29,20 @@ Controller.prototype = {
 				dice_result : diceResult
 			});
 		}
+
 		//this.state = WAIT_TO_BUY;
 		this.nextTurn();
 	},
+	init : function() {
+		this.players.forEach(function(player, id, array) {
+			player.on("roll_dice", this.rollDice(player));
+		});
+		this.state = WAIT_TO_ROLL;
+	},
+	addPlayer : function(player) {
+		this.players.push(player);
+	},
+	
 	nextTurn : function() {
 		this.nowPlaying = (this.nowPlaying + 1) % MAX_PLAYER;
 		this.turns++;
