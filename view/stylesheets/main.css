@@ -6,7 +6,6 @@
           box-sizing: border-box;
 }
 
-
 body {
 	font-family: 'Noto Sans TC', sans-serif;
 	font-weight: 300;
@@ -18,7 +17,6 @@ body {
 	top: 50px;
 	width: 100px;
 	height: 100px;
-	//border: solid grey 1px;
 }
 
 #dice #wifi {
@@ -123,7 +121,7 @@ body {
 	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
 }
 
-.questionBox {
+#questionBox {
 	display: none;
 	width: 800px;
 	height: 500px;
@@ -144,5 +142,38 @@ body {
 	width: 50px;
 	height: 50px;
 }
+
+#diceResult {
+	text-align: center;
+	display: none;
+	width: 600px;
+	height: 440px;
+	position: absolute;
+	left: calc(50% - 300px);
+	top: calc(50% - 220px);
+	padding: 20px;
+	border: solid grey 1px;
+	background-color:rgba(255,255,255,0.85);
+}
+#diceResult .txtbox {
+	margin: auto;
+	height: 130px;
+	text-align: center;
+}
+#diceResult img {
+	margin: auto;
+	height: 250px;
+	width: 250px;
+}
+#diceResult h1 {
+	font-size: 60px;
+	line-height: 60px;
+	margin: 10px;
+}
+#diceResult h2 {
+	line-height: 40px;
+	margin: 10px;
+}
+
 
 

@@ -4,14 +4,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
-	<link type="text/css" rel="stylesheet" href="../stylesheets/main.css">
+	<link type="text/css" rel="stylesheet" href="./view/stylesheets/main.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
 	<script language="JavaScript" src="/socket.io/socket.io.js"></script>
-	<script src="../js/class_def.js"></script>
-	<script src="../js/function.js"></script>
+	<script language="JavaScript" src="./model/class_def.js"></script>
+	<script language="JavaScript" src="./model/question.js"></script>
+	<script language="JavaScript" src="./view/js/update.js"></script>
 
 
 </head>
@@ -19,30 +20,26 @@
 
 <div id ="container">
 
-	
-
 	<div id="dice">
-		<img src="../img/wifi.gif" id="wifi">
+		<img src="./view/img/wifi.gif" id="wifi">
 		<script type="text/javascript">
 			$("#dice").click(function() {
-			 	$("#dice").find('img').attr("src", "../img/wifi.gif");
+			 	$("#dice").find('img').attr("src", "./view/img/wifi.gif");
 			})
 		</script>
-		
 	</div>
 
 	<div id="map">
 		<div id="switch"></div>
-		<script src="../js/CircleTriangle.js"></script> 
-		<script src="../../class_def.js"></script>
+		<script src="./view/js/CircleTriangle.js"></script> 
 	</div>
 
 	<div id="players">
-		<img src="../img/prof.png" id="player0">
-		<img src="../img/wifi1.png" id="player1">
-		<img src="../img/wifi2.png" id="player2">
-		<img src="../img/wifi3.png" id="player3">
-		<img src="../img/wifi4.png" id="player4">
+		<img src="./view/img/prof.png" id="player0">
+		<img src="./view/img/wifi1.png" id="player1">
+		<img src="./view/img/wifi2.png" id="player2">
+		<img src="./view/img/wifi3.png" id="player3">
+		<img src="./view/img/wifi4.png" id="player4">
 	</div>
 
 	<div id="scoreboard">
@@ -50,35 +47,35 @@
 			<h1>Scoreboard</h1>
 		</div>
 		<div class="rank">
-			<img id="profile" src="../img/prof.png">
+			<img id="profile" src="./view/img/prof.png">
 			<div class="info" id="info1">
 				<h4>第一小隊</h4>
 				<p>$1000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="../img/prof.png">
+			<img id="profile" src="./view/img/prof.png">
 			<div class="info"  id="info2">
 				<h4>第二小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="../img/prof.png">
+			<img id="profile" src="./view/img/prof.png">
 			<div class="info" id="info3">
 				<h4>第三小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="../img/prof.png">
+			<img id="profile" src="./view/img/prof.png">
 			<div class="info" id="info4">
 				<h4>第四小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="../img/prof.png">
+			<img id="profile" src="./view/img/prof.png">
 			<div class="info"  id="info5">
 				<h4>第五小隊</h4>
 				<p>$2000</p>
@@ -86,18 +83,13 @@
 		</div>
 	</div>
 
-	<div class="questionBox">
+	<div id="questionBox">
 		<div class="qTitle"><h1>題目名稱</h1></div>
 		<div class="closeButton"></div>
 		<div class="qDes">
-			<p>題目敘述題目敘述～～～題目敘述題 目敘述題目敘述題目敘述題目敘述？！<br>
-			題目敘  述題目敘述題目敘，述題目敘述題目!<br>敘述題目敘述題目敘述
-			題目敘述題目敘述題目    敘述題目敘述<br>題目敘述題目  敘述題目敘述
-			題目敘述題目，敘述。<br>題目敘述題目敘述題目敘述題目敘 述題目敘述
-			題 目敘述題目敘述   題目敘述題目敘述『題目敘述』、『題目敘述題目』敘述
-			題目敘述題目敘 述題目敘述題目敘述題！目！敘！述！<br>題目敘述題目敘述?</p>
+			<p>default.</p>
 		</div>
-		<form class="question">
+		<form class="options">
 			<input type="radio" name="q1" value="1"> 選項一
 			<input type="radio" name="q1" value="2"> 選項二
 			<input type="radio" name="q1" value="3"> 選項三
@@ -105,6 +97,14 @@
 			<br><br>
 			<input type="submit" id="submitButton" value="Submit">
 		</form>
+	</div>
+
+	<div id="diceResult">
+		<div class="txtbox">
+			<h2>Player # got</h2>
+			<h1>3!</h1>
+		</div>
+		<img src="./view/img/wifi1.png">
 	</div>
 
 </div>
