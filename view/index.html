@@ -4,15 +4,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
-	<link type="text/css" rel="stylesheet" href="./view/stylesheets/main.css">
+	<link type="text/css" rel="stylesheet" href="./view/index.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
-	<script language="JavaScript" src="/socket.io/socket.io.js"></script>
-	<script language="JavaScript" src="./model/class_def.js"></script>
-	<script language="JavaScript" src="./model/question.js"></script>
-	<script language="JavaScript" src="./view/js/update.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="./model/ClassDef.js"></script>
+	<script src="./model/Questions.js"></script>
+	<script src="./view/View.js"></script>
 	
 
 </head>
@@ -20,19 +20,9 @@
 
 <div id ="container">
 
-	<!--div id="dice">
-		<img src="./view/img/wifi.gif" id="wifi">
-		<script type="text/javascript">
-			$("#dice").click(function() {
-			 	$("#dice").find('img').attr("src", "./view/img/wifi.gif");
-			 	roll_dice();
-			})
-		</script>
-	</div-->
-
 	<div id="map">
 		<div id="switch"></div>
-		<script src="./view/js/CircleTriangle.js"></script> 
+		<script src="./view/CircleTriangle.js"></script> 
 	</div>
 
 	<div id="players">
@@ -117,12 +107,7 @@
 		<script type="text/javascript">
 			$("#roll_dice_btn").click(function() {
 			 	$("#rollDice img").attr("src", "./view/img/wifi.gif");
-			 	setTimeout( function(){
-				 // 	$('#rollDice').hide();
-				 // 	console.log("emit roll dice " + playerId);
-					// socket.emit('roll_dice', {player_id : playerId});
-					roll_dice();
-    			}, 2000 );
+			 	setTimeout( "roll_dice();", 2000 );
 			})
 		</script>
 	</div>
