@@ -14,6 +14,9 @@ socket.on('dice_result', function ( res ) {
 });
 
 function roll_dice() {
+	$('#rollDice').hide();
+	console.log("emit roll dice " + playerId);
+	socket.emit('roll_dice', {player_id : playerId});
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
