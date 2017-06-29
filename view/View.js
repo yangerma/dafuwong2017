@@ -80,9 +80,13 @@ function show_question( qid ){
 
 	$('#submitButton').click( function(){
 		var ans = [];
-		if( !q.multi ) {
-			ans.push( Number( $('input[name=qq]:checked').val() ) );
+		if( !q.multi ) ans.push( Number( $('input[name=qq]:checked').val() ) );
+		else {
+			$("input:checkbox[name=mq]:checked").each( function(){
+			    ans.push( Number( $(this).val() ) );
+			});
 		}
+
 		// else for (var i = 0; i < q.options.length; i++) {
 		// 	if( q.multi && $('#mop'+i+" input").checked ) ans.push(i);
 		// }
