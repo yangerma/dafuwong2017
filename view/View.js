@@ -12,7 +12,6 @@ function roll_dice() {
 }
 
 socket.on('dice_result', function show_dice_result( res ) {
-
 	console.log("on dice result");
 	player_ID = res.player;
 	dice_result = res.dice_result;
@@ -78,6 +77,17 @@ function show_question( qid ){
 			else $('#sop'+i).hide();
 		}
 	}
+
+	$('#submitButton').click( function(){
+		var ans = [];
+		for (var i = 0; i < q.options.length; i++) {
+			if( q.multi && $('#mop'+i).checked ) ans.push(i);
+			else if( !q.multi && $('#sop'+i).checked ) ans.push(i);
+		}
+		console.log(ans);
+		console.log(q.correct);
+		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
+	})
 
 }
 
