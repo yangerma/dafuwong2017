@@ -1,25 +1,29 @@
 var socket = io();
+var playerId = null;
 
-function roll_dice() {
-    socket.emit('roll_dice');
-    return false;
-}
-
-socket.on('dice_result', function(res){
-    console.log('haha');
-    document.getElementById('output').innerHTML =
-       'user ' + res.player + ' got '+ res.dice_result;
+socket.on("player_id", function(res) {
+	playerId = res.player_id;
 });
 
-function show_dice_result( dice_result, player_ID ) {
+function roll_dice() {
+	$('#rollDice').hide();
+    console.log("emit roll dice " + playerId);
+    socket.emit('roll_dice', {player_id : playerId});
+}
+
+socket.on('dice_result', function show_dice_result( res ) {
+
+	console.log("on dice result");
+	player_ID = res.player;
+	dice_result = res.dice_result;
 	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
 	$('#diceResult .txtbox h1').text( dice_result );
 	$('#diceResult img').attr( 'src', "./view/img/wifi" + dice_result + ".png" );
 	$('#diceResult').show();
 	setTimeout( " $('#diceResult').hide(); ", 2000 );
-}
+});
 
-socket.on('update', function( data ) {
+socket.on('update', function update( data ) {
 	var player = data.player;	
 	var rank = data.rank;
 
@@ -44,25 +48,6 @@ socket.on('update', function( data ) {
 
 	}
 });
-
-function updatePosition() {
-	for (var i = 0; i < 5; i++) {
-		var currPos = '#' + player[i].pos;
-		var x = $(currPos).offset().left;
-		var y = $(currPos).offset().top;
-		$("#player" + i).css('top', y);
-		$("#player" + i).css('left', x);
-	}
-}
-
-function updateScoreBoard() {
-	for (var i = 0; i < 5; i++) {
-		//var j = i;
-		var j = rank[i];
-		$('#info' + (i+1) + ' h4').text(player[j].name);
-		$('#info' + (i+1) + ' p').text('$' + player[j].money);
-	}
-}
 
 function show_question( q ){
 

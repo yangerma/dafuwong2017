@@ -34,6 +34,7 @@ Controller.prototype = {
 		this.players.forEach(player => player.emit("update", this.state));
 	},
 	rollDice : function(player) {
+		console.log("roll dice "+player);
 		if (player.player_id == this.nowPlaying) {
 			var diceResult = Math.ceil(Math.random() * 4)
 			var playerId = player.player_id
@@ -41,7 +42,6 @@ Controller.prototype = {
 				dice_result : diceResult,
 				player : playerId
 			});
-			console.log("Player " + playerId + " roll " + diceResult);
 			this.nextTurn();
 		}
 		else {
