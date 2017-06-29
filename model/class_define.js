@@ -10,7 +10,6 @@ function Node(id, property, nextA, nextB) {
 	//switch, dhcp, home, problem, chancefate, nothing
 	this.x = this.y = 0;
 	this.house = new Pair(-1, -1);
-	
 	this.next = new Array(nextA, nextB);	//id of two possible next Nodes
 }
 
