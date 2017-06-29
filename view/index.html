@@ -142,13 +142,7 @@
 			<h1>Player # roll the dice!</h1>
 		</div>
 		<img src="img/wifi.gif" id="wifi">
-		<input type="button" value="Roll Dice!" id="roll_dice_btn" ></input>
-		<script type="text/javascript">
-			$("#roll_dice_btn").click(function() {
-			 	$("#rollDice img").attr("src", "/img/wifi.gif");
-			 	setTimeout( "roll_dice();", 2000 );
-			})
-		</script>
+		<input type="button" value="Roll Dice!" id="roll_dice_btn" onclick="roll_dice()"/>
 	</div>
 
 </div>
