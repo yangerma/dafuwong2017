@@ -1,37 +1,20 @@
-var express = require('express');
+var express = require("express");
+var app = express();
 var port = 9487;
-var path = require('path');
-var app= express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var path = require("path");
+var http = require("http").Server(app);
+var io = require("socket.io")(http);
 var Controller = require("./Controller.js");
-var controller = new Controller(io);
-console.log(controller);
-
-var playerCount = 0;
 
 app.use(express.static(path.join(__dirname, 'view')));
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/view/html/main_layout.html');
-	//res.sendFile(__dirname + '/index.html');
+	//res.sendFile(__dirname + '/index.html');;
 });
 
-io.on('connection', function(player){
-	player.emit("player_id", {player_id : playerCount});
-	console.log('Player '+ playerCount + ' connected.');
-
-	var playerId = playerCount++;
-	controller.addPlayer(player);
-		
-	player.on('disconnect', function(){
-		console.log('Player ' + playerId + ' disconnectedQQ');
-	});
-
-	if (playerCount == 2) {
-		controller.start();
-	}
-});
-
+var controller = new Controller(io);
+controller.start(io);
+	
 http.listen(port, function(){
 	console.log('listening on *:'+port);
 });
