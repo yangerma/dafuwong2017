@@ -17,6 +17,11 @@ Controller = function(io) {
 	return this;
 }
 Controller.prototype = {
+
+	// whenever it's somone's turn:
+	// this.io.emit('ready_to_roll', now_playing);
+	// 會接到view.js第12行
+
 	start : function() {
 		this.io.on("connection", (player) => {
 			console.log("New connection.");
@@ -57,6 +62,29 @@ Controller.prototype = {
 			this.turns++;
 		}
 		console.log("player " + this.state.nowPlaying + "'s turn.");
+	},
+
+	/***************************************************************/
+	move : function( steps ) {
+		var cnt = 0;
+		var move_one_step = function(){
+			cnt++;
+
+			/*
+				update model here
+				(include position & rank)
+			*/
+
+			/*
+				then tell view to update:
+				this.io.emit('update', data);
+				(view.js第42行)
+			*/
+
+			if( cnt < steps ) setTimeout(move_one_step, 1000);
+		}
+		setTimeout(move_one_step, 1000);
 	}
+	/***************************************************************/
 }
 module.exports = Controller;
