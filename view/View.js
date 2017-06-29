@@ -81,13 +81,13 @@ function show_question( qid ){
 	$('#submitButton').click( function(){
 		var ans = [];
 		if( !q.multi ) {
-			ans.push( $('input[name=qq]:checked').val() );
+			ans.push( Number( $('input[name=qq]:checked').val() ) );
 		}
 		// else for (var i = 0; i < q.options.length; i++) {
 		// 	if( q.multi && $('#mop'+i+" input").checked ) ans.push(i);
 		// }
-		console.log(ans);
-		console.log(q.correct);
+		console.log( JSON.stringify(ans) );
+		console.log( JSON.stringify(q.correct) );
 		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
 	})
 
