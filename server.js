@@ -6,10 +6,10 @@ var http = require("http").Server(app);
 var io = require("socket.io")(http);
 var Controller = require("./Controller.js");
 
-app.use(express.static(path.join(__dirname, '.')));
+app.use(express.static(path.join(__dirname, 'view/')));
 app.get('/', function(req, res){
 	//res.sendFile(__dirname + '/view/html/main_layout.html');
-	res.sendFile(__dirname + '/view/login.html');
+	res.sendFile(__dirname + 'login.html');
 });
 
 var controller = new Controller(io);

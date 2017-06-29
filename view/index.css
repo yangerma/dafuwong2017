@@ -54,13 +54,13 @@ body {
 
 #map{
 	position: absolute;
-	//left: calc(50% - 450px);
+	/*left: calc(50% - 450px);*/
 	left: 110px;
-	//left: 50px;
+	/*left: 50px;*/
 	top: 50px;
 	width: 900px;
 	height: 700px;
-	//border: solid grey 1px;
+	/*border: solid grey 1px;*/
 	padding: 100px;
 	transform-origin:top;
 	transform:skewX(-10deg);
