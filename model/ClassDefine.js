@@ -7,14 +7,7 @@ function Pair(first, second) {
 function Node(id, property, nextA, nextB) {
 	this.id = id;	//its id in css
 	this.property = property;
-	/*
-	* 'sw' for switch
-	* 'dh' for dhcp
-	* 'hm' for home
-	* 'pb' for problem
-	* 'cf' for chance/fate
-	* 'no' for nothing
-	*/
+	//switch, dhcp, home, problem, chancefate, nothing
 	this.x = this.y = 0;
 	this.house = new Pair(-1, -1);
 	

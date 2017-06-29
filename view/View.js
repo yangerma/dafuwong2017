@@ -58,9 +58,9 @@ function update( data ) {
 	}
 }
 
-function show_question( qid ){
+function show_question( q ){
 
-	var q = questions[qid];
+	// var q = questions[qid];
 	$('#questionBox').show();
 	$('#questionBox .qTitle h1').text(q.subject);
 	$('#questionBox .qDes p').text(q.description);
