@@ -3,7 +3,7 @@ var questions = [
 		"id": 0,
 		"multi" : true,
 		"subject" : "Python",
-		"description" : "在 Python 中，下列哪些資料結構是唯獨的是錯誤的",
+		"description" : "在 Python 中，下列哪些資料結構是唯讀的？",
 		"options" : [
 			"tuple", 
 			"list", 

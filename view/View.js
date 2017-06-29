@@ -49,17 +49,37 @@ socket.on('update', function update( data ) {
 	}
 });
 
-function show_question( q ){
+function show_question( qid ){
 
+	var q = questions[qid];
 	$('#questionBox').show();
 	$('#questionBox .qTitle h1').text(q.subject);
 	$('#questionBox .qDes p').text(q.description);
 
-	// if( q.multi == true ) {
-
-	// }
-	// else {
-
-	// }
+	if( q.multi ) {
+		$('#questionBox #multiOptions').show();
+		$('#questionBox #singleOptions').hide();
+		for (var i = 0; i < 5; i++) {
+			if( i < q.options.length ) {
+				$('#mop'+i).show();
+				$('#mop'+i+' label').text( q.options[i] );
+			}
+			else $('#mop'+i).hide();
+		}
+	}
+	else {
+		$('#questionBox #multiOptions').hide();
+		$('#questionBox #singleOptions').show();
+		for (var i = 0; i < 5; i++) {
+			if( i < q.options.length ) {
+				$('#sop'+i).show();
+				$('#sop'+i+' label').text( q.options[i] );
+			}
+			else $('#sop'+i).hide();
+		}
+	}
 
 }
+
+
+
