@@ -1,31 +1,44 @@
 var socket = io();
-var playerId = JSON.parse( window.localStorage.getItem('tmpId') );
+var playerId = Number( JSON.parse( window.localStorage.getItem('tmpId') ) ); 
 
 // socket.on("player_id", function(res) {
 // 	playerId = res.player_id;
 // });
 
+socket.on('update', function( data ) {
+	update(data);
+});
+
+socket.on('dice_result', function ( res ) {
+	show_dice_result( res );
+});
+
 function roll_dice() {
 	$('#rollDice').hide();
 	console.log("emit roll dice " + playerId);
 	socket.emit('roll_dice', {player_id : playerId});
+	$("#rollDice img").attr("src", "img/wifi.gif");
+	setTimeout( function(){
+		$('#rollDice').hide();
+		console.log("emit roll dice " + playerId);
+		socket.emit('roll_dice', {player_id : playerId});
+	}, 2000 );
 }
 
-socket.on('dice_result', function show_dice_result( res ) {
+function show_dice_result( res ) {
 	console.log("on dice result");
 	player_ID = res.player;
 	dice_result = res.dice_result;
 	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
 	$('#diceResult .txtbox h1').text( dice_result );
-	$('#diceResult img').attr( 'src', "/img/wifi" + dice_result + ".png" );
+	$('#diceResult img').attr( 'src', "img/wifi" + dice_result + ".png" );
 	$('#diceResult').show();
 	setTimeout( " $('#diceResult').hide(); ", 2000 );
-});
+}
 
-socket.on('update', function update( data ) {
+function update( data ) {
 	var player = data.player;	
 	var rank = data.rank;
-
 	for (var i = 0; i < 5; i++) {
 
 		// update position
@@ -46,7 +59,7 @@ socket.on('update', function update( data ) {
 		// update items 
 
 	}
-});
+}
 
 function show_question( qid ){
 
@@ -86,10 +99,6 @@ function show_question( qid ){
 			    ans.push( Number( $(this).val() ) );
 			});
 		}
-
-		// else for (var i = 0; i < q.options.length; i++) {
-		// 	if( q.multi && $('#mop'+i+" input").checked ) ans.push(i);
-		// }
 		console.log( JSON.stringify(ans) );
 		console.log( JSON.stringify(q.correct) );
 		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
