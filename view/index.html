@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
 	<link type="text/css" rel="stylesheet" href="index.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 </head>
 
 <body>
@@ -13,8 +15,51 @@
 
 	<div id="map">
 		<div id="switch"></div>
-		<script src="CircleTriangle.js"></script> 
+		<div class="triangle" id="t0" style="left: 410px; top: -34.8px;"></div>
+		<div class="circle" id="s01" style="left: 425.7px; top: 230.5px;"></div>
+		<div class="circle" id="s02" style="left: 423.8px; top: 141.8px;"></div>
+		<div class="circle" id="s03" style="left: 421.9px; top: 53.1px;"></div>
+		<div class="circle" id="c01" style="left: 500px; top: 18.695px;"></div>
+		<div class="circle" id="c02" style="left: 575px; top: 63.39px;"></div>
+		<div class="circle" id="c03" style="left: 650px; top: 108.085px;"></div>
+		<div class="circle" id="c04" style="left: 725px; top: 152.78px;"></div>
+		<div class="circle" id="c05" style="left: 800px; top: 197.475px;"></div>
+		<div class="triangle" id="t1" style="left: 860px; top: 233.37px;"></div>
+		<div class="circle" id="c11" style="left: 846.29px; top: 314.142px;"></div>
+		<div class="circle" id="c12" style="left: 817.58px; top: 386.113px;"></div>
+		<div class="circle" id="c13" style="left: 788.87px; top: 458.085px;"></div>
+		<div class="circle" id="c14" style="left: 760.16px; top: 530.057px;"></div>
+		<div class="circle" id="c15" style="left: 731.45px; top: 602.028px;"></div>
+		<div class="triangle" id="t2" style="left: 687.74px; top: 665.2px;"></div>
+		<div class="circle" id="s21" style="left: 495.135px; top: 405.5px;"></div>
+		<div class="circle" id="s22" style="left: 562.67px; top: 491.8px;"></div>
+		<div class="circle" id="s23" style="left: 630.205px; top: 578.1px;"></div>
+		<div class="circle" id="c21" style="left: 610.16px; top: 674px;"></div>
+		<div class="circle" id="c22" style="left: 517.58px; top: 674px;"></div>
+		<div class="circle" id="c23" style="left: 425px; top: 674px;"></div>
+		<div class="circle" id="c24" style="left: 332.42px; top: 674px;"></div>
+		<div class="circle" id="c25" style="left: 239.84px; top: 674px;"></div>
+		<div class="triangle" id="t3" style="left: 132.26px; top: 665.2px;"></div>
+		<div class="circle" id="s31" style="left: 356.265px; top: 405.5px;"></div>
+		<div class="circle" id="s32" style="left: 284.93px; top: 491.8px;"></div>
+		<div class="circle" id="s33" style="left: 213.595px; top: 578.1px;"></div>
+		<div class="circle" id="c31" style="left: 118.55px; top: 602.028px;"></div>
+		<div class="circle" id="c32" style="left: 89.84px; top: 530.057px;"></div>
+		<div class="circle" id="c33" style="left: 61.13px; top: 458.085px;"></div>
+		<div class="circle" id="c34" style="left: 32.42px; top: 386.113px;"></div>
+		<div class="circle" id="c35" style="left: 3.71px; top: 314.142px;"></div>
+		<div class="triangle" id="t4" style="left: -40px; top: 233.37px;"></div>
+		<div class="circle" id="c41" style="left: 50px; top: 197.475px;"></div>
+		<div class="circle" id="c42" style="left: 125px; top: 152.78px;"></div>
+		<div class="circle" id="c43" style="left: 200px; top: 108.085px;"></div>
+		<div class="circle" id="c44" style="left: 275px; top: 63.39px;"></div>
+		<div class="circle" id="c45" style="left: 350px; top: 18.695px;"></div> 
 	</div>
+
+	<!-- <div id="map">
+		<div id="switch"></div>
+		<script src="CircleTriangle.js"></script> 
+	</div> -->
 
 	<div id="players">
 		<img src="img/player0.png" id="player0">
@@ -157,9 +202,8 @@
 
 </html>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"/>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"/>
-<script src="/socket.io/socket.io.js"/>
-<script src="view.js"/>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="view.js"></script>
 
 
