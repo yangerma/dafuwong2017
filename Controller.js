@@ -1,68 +1,60 @@
-/* 
- * This controller can only handle sequential event for every players turn.
- * I think at least there should be 1 more controller to handle realtime event (eg: buy items).
- */
-
 var MAX_PLAYER = 2;
 
 /* Define game state. */
 const GAMEOVER = 0;
 const START = 1;
-const WAIT_CONNECT = 2;
-const WAIT_TO_ROLL = 3;
-const WAIT_TO_BUY = 4;
+const WAIT_TO_ROLL = 2;
+const WAIT_TO_BUY = 3;
 
 Controller = function(io) {
 	this.io = io;
-	this.state = WAIT_CONNECT;
-	this.nowPlaying = 0;
+	this.state = {
+		code : WAIT_TO_ROLL,
+		nowPlaying : 0
+	}
 	this.turns = 0;
 	this.players = new Array();
 	return this;
 }
 Controller.prototype = {
-	init : function() {
-		this.players.forEach(function(player, id, array) {
-			player.on("roll_dice", (player) => {
-				this.rollDice(player);
+	start : function() {
+		this.io.on("connection", (player) => {
+			console.log("New connection.");
+			this.players.push(player);
+			player.on("disconnect", () => {
+				console.log("Player disconnect.");
+				this.players.splice(this.players.indexOf(player), 1);
 			});
-		}.bind(this));
-		this.state = WAIT_TO_ROLL;
+			player.on("roll_dice", (playerId) => {
+				this.rollDice(playerId);
+			});
+		});
 	},
-	addPlayer : function(player) {
-		this.players.push(player);
+	update : function() {
+		this.players.forEach(player => player.emit("update", this.state));
 	},
 	rollDice : function(player) {
 		if (player.player_id == this.nowPlaying) {
 			var diceResult = Math.ceil(Math.random() * 4)
-			var player_id = player.player_id
+			var playerId = player.player_id
 			this.io.emit("dice_result", {
 				dice_result : diceResult,
-				player : player_id
+				player : playerId
 			});
+			console.log("Player " + playerId + " roll " + diceResult);
 			this.nextTurn();
 		}
-
+		else {
+			console.log("not ur turn!");
+		}
 		//this.state = WAIT_TO_BUY;
 	},
-	init : function() {
-		this.players.forEach(function(player, id, array) {
-			player.on("roll_dice", this.rollDice(player));
-		});
-		this.state = WAIT_TO_ROLL;
-	},
-	addPlayer : function(player) {
-		this.players.push(player);
-	},
-	
 	nextTurn : function() {
 		this.nowPlaying = (this.nowPlaying + 1) % MAX_PLAYER;
 		if (this.nowPlaying == 0) {
 			this.turns++;
 		}
-	},
-	start : function() {
-		this.init();
+		console.log("player " + this.nowPlaying + "'s turn.");
 	}
 }
 module.exports = Controller;
