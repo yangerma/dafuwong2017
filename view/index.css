@@ -11,6 +11,9 @@ body {
 	font-weight: 300;
 }
 
+#container {
+	display: none;
+}
 
 #scoreboard {
 	margin-left: 1000px;

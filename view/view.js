@@ -1,9 +1,6 @@
 var socket = io();
-var playerId = Number( JSON.parse( window.localStorage.getItem('tmpId') ) ); 
-
-// socket.on("player_id", function(res) {
-// 	playerId = res.player_id;
-// });
+// var playerId = Number( JSON.parse( window.localStorage.getItem('tmpId') ) ); 
+var playerId = null;
 
 socket.on('update', function( data ) {
 	update(data);
@@ -13,10 +10,12 @@ socket.on('dice_result', function ( res ) {
 	show_dice_result( res );
 });
 
+socket.on('ready_to_roll', function ( now_playing ) {
+	if( now_playing == playerId )
+		$('#rollDice').show();
+});
+
 function roll_dice() {
-	$('#rollDice').hide();
-	console.log("emit roll dice " + playerId);
-	socket.emit('roll_dice', {player_id : playerId});
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
@@ -104,4 +103,10 @@ function show_question( q ){
 		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
 	})
 
+}
+
+function login(){
+	playerID = Number( $('#teamID').val() );
+	$('#container').show();
+	$('#login').hide();
 }
