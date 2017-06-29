@@ -7,8 +7,8 @@ socket.on("player_id", function(res) {
 
 function roll_dice() {
 	$('#rollDice').hide();
-    console.log("emit roll dice " + playerId);
-    socket.emit('roll_dice', {player_id : playerId});
+	console.log("emit roll dice " + playerId);
+	socket.emit('roll_dice', {player_id : playerId});
 }
 
 socket.on('dice_result', function show_dice_result( res ) {
