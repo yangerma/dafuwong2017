@@ -34,10 +34,12 @@ Controller.prototype = {
 		this.players.forEach(player => player.emit("update", this.state));
 	},
 	rollDice : function(player) {
-		console.log("roll dice "+player);
-		if (player.player_id == this.nowPlaying) {
+		if (player.player_id == this.state.nowPlaying) {
 			var diceResult = Math.ceil(Math.random() * 4)
 			var playerId = player.player_id
+			
+			console.log("Player" + playerId + " roll dice " + diceResult);
+			
 			this.io.emit("dice_result", {
 				dice_result : diceResult,
 				player : playerId
@@ -50,11 +52,11 @@ Controller.prototype = {
 		//this.state = WAIT_TO_BUY;
 	},
 	nextTurn : function() {
-		this.nowPlaying = (this.nowPlaying + 1) % MAX_PLAYER;
-		if (this.nowPlaying == 0) {
+		this.state.nowPlaying = (this.state.nowPlaying + 1) % MAX_PLAYER;
+		if (this.state.nowPlaying == 0) {
 			this.turns++;
 		}
-		console.log("player " + this.nowPlaying + "'s turn.");
+		console.log("player " + this.state.nowPlaying + "'s turn.");
 	}
 }
 module.exports = Controller;
