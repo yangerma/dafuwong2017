@@ -4,15 +4,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
-	<link type="text/css" rel="stylesheet" href="./view/index.css">
+	<link type="text/css" rel="stylesheet" href="index.css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="./model/ClassDefine.js"></script>
-	<script src="./model/Questions.js"></script>
-	<script src="./view/View.js"></script>
+	<script src="../model/ClassDefine.js"></script>
+	<script src="../model/Questions.js"></script>
+	<script src="View.js"></script>
 	
 
 </head>
@@ -22,15 +22,15 @@
 
 	<div id="map">
 		<div id="switch"></div>
-		<script src="./view/CircleTriangle.js"></script> 
+		<script src="CircleTriangle.js"></script> 
 	</div>
 
 	<div id="players">
-		<img src="./view/img/player0.png" id="player0">
-		<img src="./view/img/player1.png" id="player1">
-		<img src="./view/img/player2.png" id="player2">
-		<img src="./view/img/player3.png" id="player3">
-		<img src="./view/img/player4.png" id="player4">
+		<img src="img/player0.png" id="player0">
+		<img src="img/player1.png" id="player1">
+		<img src="img/player2.png" id="player2">
+		<img src="img/player3.png" id="player3">
+		<img src="img/player4.png" id="player4">
 	</div>
 
 	<div id="scoreboard">
@@ -38,35 +38,35 @@
 			<h1>Scoreboard</h1>
 		</div>
 		<div class="rank">
-			<img id="profile" src="./view/img/prof.png">
+			<img id="profile" src="img/prof.png">
 			<div class="info" id="info1">
 				<h4>第一小隊</h4>
 				<p>$1000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="./view/img/prof.png">
+			<img id="profile" src="img/prof.png">
 			<div class="info"  id="info2">
 				<h4>第二小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="./view/img/prof.png">
+			<img id="profile" src="img/prof.png">
 			<div class="info" id="info3">
 				<h4>第三小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="./view/img/prof.png">
+			<img id="profile" src="img/prof.png">
 			<div class="info" id="info4">
 				<h4>第四小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img id="profile" src="./view/img/prof.png">
+			<img id="profile" src="img/prof.png">
 			<div class="info"  id="info5">
 				<h4>第五小隊</h4>
 				<p>$2000</p>
@@ -134,14 +134,14 @@
 			<h2>Player # got</h2>
 			<h1>3!</h1>
 		</div>
-		<img src="./view/img/wifi1.png">
+		<img src="img/wifi1.png">
 	</div>
 
 	<div class="diceBox" id="rollDice">
 		<div class="txtbox">
 			<h1>Player # roll the dice!</h1>
 		</div>
-		<img src="./view/img/wifi.gif" id="wifi">
+		<img src="img/wifi.gif" id="wifi">
 		<input type="button" value="Roll Dice!" id="roll_dice_btn" ></input>
 		<script type="text/javascript">
 			$("#roll_dice_btn").click(function() {

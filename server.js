@@ -12,7 +12,7 @@ var playerCount = 0;
 
 app.use(express.static(path.join(__dirname, '.')));
 app.get('/', function(req, res){
-	res.sendFile(__dirname + '/view/index.html');
+	res.sendFile(__dirname + '/view/login.html');
 });
 
 io.on('connection', function(player){
