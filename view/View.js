@@ -1,9 +1,9 @@
 var socket = io();
-var playerId = null;
+var playerId = JSON.parse( window.localStorage.getItem('tmpId') );
 
-socket.on("player_id", function(res) {
-	playerId = res.player_id;
-});
+// socket.on("player_id", function(res) {
+// 	playerId = res.player_id;
+// });
 
 function roll_dice() {
 	$('#rollDice').hide();
@@ -17,7 +17,7 @@ socket.on('dice_result', function show_dice_result( res ) {
 	dice_result = res.dice_result;
 	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
 	$('#diceResult .txtbox h1').text( dice_result );
-	$('#diceResult img').attr( 'src', "./view/img/wifi" + dice_result + ".png" );
+	$('#diceResult img').attr( 'src', "/img/wifi" + dice_result + ".png" );
 	$('#diceResult').show();
 	setTimeout( " $('#diceResult').hide(); ", 2000 );
 });
@@ -80,10 +80,12 @@ function show_question( qid ){
 
 	$('#submitButton').click( function(){
 		var ans = [];
-		for (var i = 0; i < q.options.length; i++) {
-			if( q.multi && $('#mop'+i).checked ) ans.push(i);
-			else if( !q.multi && $('#sop'+i).checked ) ans.push(i);
+		if( !q.multi ) {
+			ans.push( $('input[name=qq]:checked').val() );
 		}
+		// else for (var i = 0; i < q.options.length; i++) {
+		// 	if( q.multi && $('#mop'+i+" input").checked ) ans.push(i);
+		// }
 		console.log(ans);
 		console.log(q.correct);
 		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
