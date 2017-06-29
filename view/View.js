@@ -102,6 +102,3 @@ function show_question( qid ){
 	})
 
 }
-
-
-
