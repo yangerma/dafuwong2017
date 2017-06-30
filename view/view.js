@@ -10,6 +10,7 @@ const WAIT_TO_ROLL = 4;
 
 socket.on('update', function(data) {
 	model = data;
+	update();
 	var state = model.state;
 	if (state == WAIT_TO_ROLL) {
 		if (model.nowPlaying == playerId) {
@@ -20,13 +21,8 @@ socket.on('update', function(data) {
 		}
 	} else if (state == ROLL_DICE) {
 		showDiceResult();
-		setTimeout( () => {
-			$('#diceResult').hide();
-			socket.emit("ready_to_move", playerId);
-		}, 1000);
 	} else if (state == MOVE) {
-		update();
-		setTimeout(() => socket.emit("ready_to_move", playerId), 500);
+		hideDice();
 	} else {
 		console.log("Wrong state:" + state);
 	}
@@ -35,7 +31,9 @@ socket.on('update', function(data) {
 function showDice() {
 	$('#rollDice').show();
 }
-
+function hideDice() {
+	$('#diceResult').hide();
+}
 function roll_dice() {
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){

@@ -13,7 +13,6 @@ var Player = require("./model/player.js");
 Controller = function(io) {
 	var io = io;
 	var playerIO = new Array();
-	var readySet = [false, false, false, false, false];
 	var model = {
 		state: WAIT_TO_ROLL,
 		nowPlaying: 0,
@@ -42,38 +41,33 @@ Controller = function(io) {
 			model.diceResult = Math.ceil(Math.random() * 4);
 			console.log("Player " + id + " roll " + model.diceResult);
 			publish();
+			setTimeout(move, 1000);
+
 		} else {
 			console.log("Wrong player roll dice:" + id);
 		}
-	},
+	}
 	nextTurn = function() {
 		model.state = WAIT_TO_ROLL;
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
 		console.log("player " + model.nowPlaying + "'s turn.");
-	},
-	ready = function(id, event) {
-		readySet[id] = true;
-		console.log(readySet);
-		for (var i = 0; i < MAX_PLAYER; i++) {
-			if (model.players[i].connect == true && readySet[i] == false) {
-				return false;
-			}
-		}
-		readySet = [false, false, false, false, false];
-		event();
 	}
 	move = function() {
-		if (model.diceResult == 0) {
-			model.state = WAIT_TO_ROLL;
-			nextTurn();
-		} else {
-			model.state = MOVE;
-			model.diceResult -= 1;	
-			model.players[model.nowPlaying].pos = 
-				map[model.players[model.nowPlaying].pos].next[0]
-		}
+		model.state = MOVE;
 		publish();
+		for (var i = 0; i < model.diceResult; i++) {	
+			setTimeout(() => {
+				model.players[model.nowPlaying].pos = 
+					map[model.players[model.nowPlaying].pos].next[0];
+				publish();
+			}, 500 * (i + 1));
+		}
+		setTimeout(() => {
+			nextTurn();
+			publish();
+		}, 500 * (model.diceResult + 2));
 	}
+	
 
 	/* Listen new connection */
 	io.on("connection", (player) => {
@@ -95,7 +89,6 @@ Controller = function(io) {
 			player.emit("update", model);
 		})
 		player.on("roll_dice", (id) => rollDice(id));
-		player.on("ready_to_move", (id) => ready(id, move));
 	});
 	/***************************************************************/
 }
