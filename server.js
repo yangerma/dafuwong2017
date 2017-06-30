@@ -4,15 +4,14 @@ var port = 9487;
 var path = require("path");
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
-var Controller = require("./Controller.js");
+var game_start = require("./Controller.js");
 
 app.use(express.static(path.join(__dirname, 'view')));
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-var controller = new Controller(io);
-controller.start(io);
+game_start(io);
 	
 http.listen(port, function(){
 	console.log('listening on *:'+port);

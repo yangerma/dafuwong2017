@@ -1,51 +1,69 @@
 var socket = io();
 var playerId = null;
+var model = null
 
-socket.on('update', function( data ) {
-	update(data);
+const GAMEOVER = 0;
+const START = 1;
+const ROLL_DICE = 2;
+const MOVE = 3;;
+const WAIT_TO_ROLL = 4;
+
+socket.on('update', function(data) {
+	model = data;
+	var state = model.state;
+	if (state == WAIT_TO_ROLL) {
+		if (model.nowPlaying == playerId) {
+			console.log("It your turn!");
+			showDice();
+		} else {
+			console.log("Player" + model.nowPlaying + "'s turn.");
+		}
+	} else if (state == ROLL_DICE) {
+		showDiceResult();
+		setTimeout(() => socket.emit("ready_to_move", playerId), 1000);
+	} else if (state == MOVE) {
+		update();
+		setTimeout(() => socket.emit("ready_to_move", playerId), 100);
+	} else {
+		console.log("Wrong state:" + state);
+	}
 });
 
-socket.on('dice_result', function ( res ) {
-	show_dice_result( res );
-});
-
-socket.on('ready_to_roll', function ( now_playing ) {
-	if( now_playing == playerId ) $('#rollDice').show();
-});
+function showDice() {
+	$('#rollDice').show();
+}
 
 function roll_dice() {
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
-		console.log("emit roll dice " + playerId);
-		socket.emit('roll_dice', {player_id : playerId});
+		console.log("emit roll dice");
+		socket.emit('roll_dice', playerId);
 	}, 2000 );
 }
 
 function login(){
-	playerID = Number( $('#teamID').val() );
+	playerId = Number( $('#teamID').val() );
 	$('#container').show();
 	$('#login').hide();
+	socket.emit("login", playerId);
 }
 
-function show_dice_result( res ) {
-	console.log("on dice result");
-	player_ID = res.player;
-	dice_result = res.dice_result;
+function showDiceResult() {
+	player_ID = model.nowPlaying;
+	dice_result = model.diceResult;
 	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
 	$('#diceResult .txtbox h1').text( dice_result );
 	$('#diceResult img').attr( 'src', "img/wifi" + dice_result + ".png" );
 	$('#diceResult').show();
-	setTimeout( " $('#diceResult').hide(); ", 2000 );
+	setTimeout( " $('#diceResult').hide(); ", 1000 );
 }
 
-function update( data ) {
-	var player = data.player;	
-	var rank = data.rank;
+function update() {
 	for (var i = 0; i < 5; i++) {
 
 		// update position
-		var currPos = '#' + player[i].pos;
+		var currPos = '#' + model.players[i].pos;
 		var x = $(currPos).offset().left;
 		var y = $(currPos).offset().top;
 		$("#player" + i).css('top', y);
@@ -53,8 +71,8 @@ function update( data ) {
 
 		// update scoreboard
 		var j = i;
-		$('#info' + (i+1) + ' h4').text(player[j].name);
-		$('#info' + (i+1) + ' p').text('$' + player[j].money);
+		$('#info' + (i+1) + ' h4').text(model.players[j].name);
+		$('#info' + (i+1) + ' p').text('$' + model.players[j].money);
 
 		// update ip
 

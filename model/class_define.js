@@ -1,16 +1,7 @@
-//For houses or firewalls.
-function Pair(first, second) {
-	this.F = first;
-	this.S = second;
-}
-
-function Node(id, property, nextA, nextB) {
+function Node(id, type, next) {
 	this.id = id;	//its id in css
-	this.property = property;
-	//switch, dhcp, home, problem, chancefate, nothing
-	this.x = this.y = 0;
-	this.house = new Pair(-1, -1);
-	this.next = new Array(nextA, nextB);	//id of two possible next Nodes
+	this.type = type;
+	this.next = next	//id of two possible next Nodes
 }
 
 const money_init = 9487;
@@ -68,8 +59,4 @@ for (var i = 0; i < 5; i++) {
     }	
 
 }
-
-for(var val of map.values()) {
-	val.x = $('#'+val.id).offset().left;
-	val.y = $('#'+val.id).offset().top;
-}
+console.log(map);
