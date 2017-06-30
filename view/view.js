@@ -20,10 +20,13 @@ socket.on('update', function(data) {
 		}
 	} else if (state == ROLL_DICE) {
 		showDiceResult();
-		setTimeout(() => socket.emit("ready_to_move", playerId), 1000);
+		setTimeout( () => {
+			$('#diceResult').hide();
+			socket.emit("ready_to_move", playerId);
+		}, 1000);
 	} else if (state == MOVE) {
 		update();
-		setTimeout(() => socket.emit("ready_to_move", playerId), 100);
+		setTimeout(() => socket.emit("ready_to_move", playerId), 500);
 	} else {
 		console.log("Wrong state:" + state);
 	}
@@ -56,7 +59,6 @@ function showDiceResult() {
 	$('#diceResult .txtbox h1').text( dice_result );
 	$('#diceResult img').attr( 'src', "img/wifi" + dice_result + ".png" );
 	$('#diceResult').show();
-	setTimeout( " $('#diceResult').hide(); ", 1000 );
 }
 
 function update() {
