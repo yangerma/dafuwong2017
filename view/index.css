@@ -243,6 +243,8 @@ body {
 	height: 50px;
 	margin: 10px auto;
 	border: solid grey 1px;
+	line-height: 50px;
+	text-align: center;
 }
 #shop {
 	height: 100%;

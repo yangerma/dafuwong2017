@@ -86,6 +86,8 @@ function update() {
 	// update items 
 	$('#firewall .cnt').text('目前共有' + model.players[playerId].item[0] + '個');
 	$('#vpn .cnt').text('目前共有' + model.players[playerId].item[1] + '個');
+	$('#profMoney').text('you have $' + model.players[playerId].money);
+	$('#profIP').text('your IP is ' + model.players[playerId].ip);
 }
 
 function showQuestion(q){
