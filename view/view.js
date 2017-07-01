@@ -14,7 +14,7 @@ socket.on('update', function(data) {
 	if (state == WAIT_TO_ROLL) {
 		if (model.nowPlaying == playerId) {
 			console.log("It your turn!");
-			showDice();
+			showDice( playerId );
 		} else {
 			console.log("Player" + model.nowPlaying + "'s turn.");
 		}
@@ -32,7 +32,8 @@ socket.on('update', function(data) {
 	}
 });
 
-function showDice() {
+function showDice( playerId ) {
+	$('#rollDice .txtbox h1').text("Player" + playerId + "'s to roll the dice!");
 	$('#rollDice').show();
 }
 
@@ -127,4 +128,12 @@ function show_question( q ){
 		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
 	})
 
+}
+
+function showBackpack() {
+	// update items in popBox
+	$('#backpack').show();
+}
+function closeBackpack() {
+	$('#backpack').hide();
 }

@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
 	<link type="text/css" rel="stylesheet" href="index.css">
+	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanstc.css">
 </head>
 
 <body>
@@ -180,7 +181,8 @@
 		<input type="button" value="Roll Dice!" id="roll_dice_btn" onclick="roll_dice()"/>
 	</div>
 
-	<div id="popBox">
+	<div id="openBackpack" onclick="showBackpack()"> Check my backpack </div>
+	<div id="backpack">
 		<div id="profile">
 			<div class="title">
 				<h1 id="teamName">第一小隊</h1>
@@ -194,6 +196,7 @@
 		</div>
 		<div id="shop">
 		</div>
+		<img src="img/close.png" class="closeButton" onclick="closeBackpack()">
 	</div>
 
 </div>
