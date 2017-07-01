@@ -16,7 +16,7 @@ socket.on('update', function(data) {
 	if (state == WAIT_TO_ROLL) {
 		if (model.nowPlaying == playerId) {
 			console.log("It your turn!");
-			showDice();
+			showDice( playerId );
 		} else {
 			console.log("Player" + model.nowPlaying + "'s turn.");
 		}
@@ -33,7 +33,8 @@ socket.on('update', function(data) {
 	}
 });
 
-function showDice() {
+function showDice( playerId ) {
+	$('#rollDice .txtbox h1').text("Player" + playerId + "'s to roll the dice!");
 	$('#rollDice').show();
 }
 function hideDice() {
@@ -91,6 +92,8 @@ function showQuestion(q){
 
 	// var q = questions[qid];
 	$('#questionBox').show();
+	$('#questionBox .closeButton').hide();
+	$('#questionBox #answerResult').hide();
 	$('#questionBox .qTitle h1').text(q.subject);
 	$('#questionBox .qDes p').text(q.description);
 
@@ -116,6 +119,7 @@ function showQuestion(q){
 			else $('#sop'+i).hide();
 		}
 	}
+	$('#questionBox form').show();
 
 	$('#submitButton').click( function(){
 		var ans = [];
@@ -125,11 +129,38 @@ function showQuestion(q){
 			    ans.push( Number( $(this).val() ) );
 			});
 		}
-		console.log( JSON.stringify(ans) );
-		console.log( JSON.stringify(q.correct) );
-		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );
-		$("#questionBox").hide();
-		socket.emit("turn_over");
+
+		//
+		var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
+		if (correct) {
+			$('#answerResult h1').text("答對了！");
+			$('#answerResult img').attr( 'src', "img/correct.png" );
+		}
+		else {
+			$('#answerResult h1').text("答錯了QQ");
+			$('#answerResult img').attr( 'src', "img/wrong.png" );
+		}
+
+		var correctAns = '正確答案：';
+		for (var i = 0; i < q.correct.length; i++) {
+			if( i!=0 ) correctAns += ",   ";
+			correctAns += ( q.options[ q.correct[i] ] );
+		}
+		
+		$('#questionBox #answerResult p').text(correctAns);
+		$('#questionBox form').hide();
+		$('#questionBox .closeButton').show();
+		$('#questionBox #answerResult').show();
 	})
 
+}
+
+function showBackpack() {
+	// update items in popBox
+	$('#backpack').show();
+}
+
+function closeQuestion() {
+	$('#questionBox').hide();
+	socket.emit("turn_over");
 }
