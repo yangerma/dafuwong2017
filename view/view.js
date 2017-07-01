@@ -34,7 +34,7 @@ socket.on('update', function(data) {
 });
 
 function showDice( playerId ) {
-	$('#rollDice .txtbox h1').text("Player" + playerId + "'s to roll the dice!");
+	$('#rollDice .txtbox h1').text("Player" + playerId + "'s turn to roll the dice!");
 	$('#rollDice').show();
 }
 function hideDice() {
