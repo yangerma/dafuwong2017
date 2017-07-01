@@ -81,11 +81,11 @@ function update() {
 		$('#info' + (i+1) + ' p').text('$' + model.players[j].money);
 
 		// update ip
-
-
-		// update items 
-
 	}
+
+	// update items 
+	$('#firewall .cnt').text('目前共有' + model.players[playerId].item[0] + '個');
+	$('#vpn .cnt').text('目前共有' + model.players[playerId].item[1] + '個');
 }
 
 function showQuestion(q){
@@ -187,4 +187,11 @@ function showBackpack() {
 function closeQuestion() {
 	$('#questionBox').hide();
 	socket.emit("turn_over");
+}
+
+function buyItem( itemID ) {
+	var itemName;
+	if( itemID == 0 ) itemName = 'firewall';
+	else if( itemID == 1 ) itemName = 'vpn';
+	socket.emit('buy_item', playerId, itemName);
 }
