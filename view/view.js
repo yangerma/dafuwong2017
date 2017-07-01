@@ -137,6 +137,13 @@ function show_question( q ){
 			$('#answerResult img').attr( 'src', "img/wrong.png" );
 		}
 
+		var correctAns = '正確答案：';
+		for (var i = 0; i < q.correct.length; i++) {
+			if( i!=0 ) correctAns += ",   ";
+			correctAns += ( q.options[ q.correct[i] ] );
+		}
+		
+		$('#questionBox #answerResult p').text(correctAns);
 		$('#questionBox form').hide();
 		$('#questionBox .closeButton').show();
 		$('#questionBox #answerResult').show();
