@@ -7,6 +7,7 @@ const START = 1;
 const ROLL_DICE = 2;
 const MOVE = 3;;
 const WAIT_TO_ROLL = 4;
+const QUESTION = 5;
 
 socket.on('update', function(data) {
 	model = data;
@@ -15,7 +16,7 @@ socket.on('update', function(data) {
 	if (state == WAIT_TO_ROLL) {
 		if (model.nowPlaying == playerId) {
 			console.log("It your turn!");
-			showDice();
+			showDice( playerId );
 		} else {
 			console.log("Player" + model.nowPlaying + "'s turn.");
 		}
@@ -23,18 +24,23 @@ socket.on('update', function(data) {
 		showDiceResult();
 	} else if (state == MOVE) {
 		hideDice();
+	} else if (state == QUESTION) {
+		if (model.nowPlaying == playerId) {
+			showQuestion(model.question);
+		}
 	} else {
 		console.log("Wrong state:" + state);
 	}
 });
 
-function showDice() {
+function showDice( playerId ) {
+	$('#rollDice .txtbox h1').text("Player" + playerId + "'s turn to roll the dice!");
 	$('#rollDice').show();
 }
 function hideDice() {
 	$('#diceResult').hide();
 }
-function roll_dice() {
+function rollDice() {
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
@@ -43,7 +49,7 @@ function roll_dice() {
 	}, 2000 );
 }
 
-function login(){
+function login() {
 	playerId = Number( $('#teamID').val() );
 	$('#container').show();
 	$('#login').hide();
@@ -82,10 +88,13 @@ function update() {
 	}
 }
 
-function show_question( q ){
+function showQuestion(q){
 
 	// var q = questions[qid];
 	$('#questionBox').show();
+	$('#questionBox #timeLeft').show();
+	$('#questionBox .closeButton').hide();
+	$('#questionBox #answerResult').hide();
 	$('#questionBox .qTitle h1').text(q.subject);
 	$('#questionBox .qDes p').text(q.description);
 
@@ -111,8 +120,33 @@ function show_question( q ){
 			else $('#sop'+i).hide();
 		}
 	}
+	$('#questionBox form').show();
+
+	var cnt = 120;
+	$('#questionBox #timeLeft').text('剩餘時間：'+cnt);
+	var timer =  setInterval(function(){
+		cnt--;
+		$('#questionBox #timeLeft').text('剩餘時間：'+cnt);
+		if( cnt == 0 ) {
+			clearInterval(timer);
+			$('#questionBox #timeLeft').hide();
+			$('#answerResult h1').text("來不及了QQ");
+			$('#answerResult img').attr( 'src', "img/wrong.png" );
+			var correctAns = '正確答案：';
+			for (var i = 0; i < q.correct.length; i++) {
+				if( i!=0 ) correctAns += ",   ";
+				correctAns += ( q.options[ q.correct[i] ] );
+			}
+			$('#questionBox #answerResult p').text(correctAns);
+			$('#questionBox form').hide();
+			$('#questionBox .closeButton').show();
+			$('#questionBox #answerResult').show();
+		}
+	} , 1000);
 
 	$('#submitButton').click( function(){
+		clearInterval(timer);
+		$('#questionBox #timeLeft').hide();
 		var ans = [];
 		if( !q.multi ) ans.push( Number( $('input[name=qq]:checked').val() ) );
 		else {
@@ -120,9 +154,37 @@ function show_question( q ){
 			    ans.push( Number( $(this).val() ) );
 			});
 		}
-		console.log( JSON.stringify(ans) );
-		console.log( JSON.stringify(q.correct) );
-		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
+
+		var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
+		if (correct) {
+			$('#answerResult h1').text("答對了！");
+			$('#answerResult img').attr( 'src', "img/correct.png" );
+		}
+		else {
+			$('#answerResult h1').text("答錯了QQ");
+			$('#answerResult img').attr( 'src', "img/wrong.png" );
+		}
+
+		var correctAns = '正確答案：';
+		for (var i = 0; i < q.correct.length; i++) {
+			if( i!=0 ) correctAns += ",   ";
+			correctAns += ( q.options[ q.correct[i] ] );
+		}
+		
+		$('#questionBox #answerResult p').text(correctAns);
+		$('#questionBox form').hide();
+		$('#questionBox .closeButton').show();
+		$('#questionBox #answerResult').show();
 	})
 
+}
+
+function showBackpack() {
+	// update items in popBox
+	$('#backpack').show();
+}
+
+function closeQuestion() {
+	$('#questionBox').hide();
+	socket.emit("turn_over");
 }

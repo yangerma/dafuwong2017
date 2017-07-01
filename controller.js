@@ -1,14 +1,16 @@
 var MAX_PLAYER = 1;
-
+var N_QUESTION = 13; 
 /* Define game state. */
 const GAMEOVER = 0;
 const START = 1;
 const ROLL_DICE = 2;
 const MOVE = 3;
 const WAIT_TO_ROLL = 4;
+const QUESTION = 5;
 
 var map = require("./model/map.js");
 var Player = require("./model/player.js");
+var questions = require("./model/questions.js");
 
 Controller = function(io) {
 	var io = io;
@@ -26,9 +28,10 @@ Controller = function(io) {
 			Player(4, "p4")
 		],
 		switchState: 1,
+		question: null,
 	}
 	
-	publish = function() {
+	function publish() {
 		for (var i = 0; i < MAX_PLAYER; i++) {
 			if (model.players[i].connect == true) {
 				playerIO[i].emit("update", model);
@@ -36,24 +39,26 @@ Controller = function(io) {
 		}
 	}
 
-	rollDice = function(id) {
+	function rollDice(id) {
 		if (id == model.nowPlaying) {
 			model.state = ROLL_DICE;
 			model.diceResult = Math.ceil(Math.random() * 4);
 			console.log("Player " + id + " roll " + model.diceResult);
 			publish();
-			setTimeout(move, 100);
+			setTimeout(move, 1000);
 
 		} else {
 			console.log("Wrong player roll dice:" + id);
 		}
 	}
-	nextTurn = function() {
+	function nextTurn() {
 		model.state = WAIT_TO_ROLL;
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
 		console.log("player " + model.nowPlaying + "'s turn.");
+		publish();
 	}
-	move = function() {
+
+	function move() {
 		model.state = MOVE;
 		publish();
 		for (var i = 0; i < model.diceResult; i++) {	
@@ -71,12 +76,19 @@ Controller = function(io) {
 				model.players[model.nowPlaying].pos = next;
 				model.players[model.nowPlaying].last = current.id;
 				publish();
-			}, 100 * (i + 1));
+			}, 500 * (i + 1));
 		}
 		setTimeout(() => {
-			nextTurn();
-			publish();
-		}, 100 * (model.diceResult + 2));
+			event();
+		}, 500 * model.diceResult + 1000);
+	}
+	function event() {
+		var nodeType = map[model.players[model.nowPlaying].pos].type;
+		model.state = QUESTION;
+		var questionId = Math.round(Math.random() * N_QUESTION);
+		console.log("event: question " + questions[questionId]);
+		model.question = questions[questionId];
+		publish();
 	}
 	
 
@@ -100,6 +112,7 @@ Controller = function(io) {
 			player.emit("update", model);
 		})
 		player.on("roll_dice", (id) => rollDice(id));
+		player.on("turn_over", nextTurn);
 	});
 	/***************************************************************/
 }
