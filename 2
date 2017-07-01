@@ -24,8 +24,7 @@ Controller = function(io) {
 			Player(2, "p2"),
 			Player(3, "p3"),
 			Player(4, "p4")
-		],
-		switchState: 1,
+		]
 	}
 	
 	publish = function() {
@@ -42,7 +41,7 @@ Controller = function(io) {
 			model.diceResult = Math.ceil(Math.random() * 4);
 			console.log("Player " + id + " roll " + model.diceResult);
 			publish();
-			setTimeout(move, 100);
+			setTimeout(move, 1000);
 
 		} else {
 			console.log("Wrong player roll dice:" + id);
@@ -59,24 +58,22 @@ Controller = function(io) {
 		for (var i = 0; i < model.diceResult; i++) {	
 			setTimeout(() => {
 				var next;
-				var current = model.map[model.players[model.nowPlaying].pos];
-				var srcId = current.next.indexOf(model.players[model.nowPlaying].last);
-				if (current.type == "switch") {
-					next = current.next[(srcId + model.switchState + 3) % 3];
-					model.switchState *= -1;
-				} else {
-					next = current.next[srcId == 0 ? 1 : 0];
-					current.next.reverse();
-				}
+				var current = map[model.players[model.nowPlaying].pos];
+				
+				do {
+					next = map[current.id].next[0];
+					current.next.push(current.next.shift()); 
+				} while(next == model.players[model.nowPlaying].last);
+				
 				model.players[model.nowPlaying].pos = next;
-				model.players[model.nowPlaying].last = current.id;
+				model.players[model.nowPlaying].last = current;
 				publish();
-			}, 100 * (i + 1));
+			}, 500 * (i + 1));
 		}
 		setTimeout(() => {
 			nextTurn();
 			publish();
-		}, 100 * (model.diceResult + 2));
+		}, 500 * (model.diceResult + 2));
 	}
 	
 

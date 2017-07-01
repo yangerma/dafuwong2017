@@ -5,6 +5,7 @@ Player = function(id, name) {
 		name: name,
 		money: MONEY_INIT,
 		pos: "t" + id,
+		last: null, 
 		item: [0, 0, 0],
 		connect: false
 	}
