@@ -194,4 +194,8 @@ function buyItem( itemID ) {
 	if( itemID == 0 ) itemName = 'firewall';
 	else if( itemID == 1 ) itemName = 'vpn';
 	socket.emit('buy_item', playerId, itemName);
+	socket.on('buy_result', function(success){
+		//if success, controller should send a 'update' messege
+		if( success == false ) console.log("Failed to buy item QQ");
+	});
 }
