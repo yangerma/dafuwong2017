@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
 	<link type="text/css" rel="stylesheet" href="index.css">
+	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanstc.css">
 </head>
 
 <body>
@@ -110,7 +111,8 @@
 	</div>
 
 	<div id="questionBox">
-		<div class="qTitle"><h1>題目名稱</h1></div>
+		<img src="img/close.png" class="closeButton" onclick="closeQuestion()">
+		<div class="qTitle"><h1>題目名稱</h1><div id="timeLeft"></div></div>
 		<div class="qDes">
 			<p>default.</p>
 		</div>
@@ -162,6 +164,13 @@
 			<br><br>
 			<input type="button" id="submitButton" value="Submit">
 		</form>
+
+		<div id="answerResult">
+			<h1>答對/錯了</h1>
+			<img src="">
+			<p></p>
+		</div>
+
 	</div>
 
 	<div class="diceBox" id="diceResult">
@@ -176,11 +185,11 @@
 		<div class="txtbox">
 			<h1>Player # roll the dice!</h1>
 		</div>
-		<img src="img/wifi.gif" id="wifi">
-		<input type="button" value="Roll Dice!" id="roll_dice_btn" onclick="roll_dice()"/>
+		<img src="img/wifi4.png" id="wifi" onclick="rollDice()">
 	</div>
 
-	<div id="popBox">
+	<div id="openBackpack" onclick="showBackpack()"> Check my backpack </div>
+	<div id="backpack">
 		<div id="profile">
 			<div class="title">
 				<h1 id="teamName">第一小隊</h1>
@@ -194,6 +203,7 @@
 		</div>
 		<div id="shop">
 		</div>
+		<img src="img/close.png" class="closeButton" onclick="$('#backpack').hide()">
 	</div>
 
 </div>
@@ -205,5 +215,3 @@
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="view.js"></script>
-
-

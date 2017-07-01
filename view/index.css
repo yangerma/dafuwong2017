@@ -1,5 +1,3 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosanstc.css);
-
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -14,7 +12,6 @@ body {
 #container {
 	display: none;
 }
-
 #scoreboard {
 	margin-left: 1000px;
 	margin-top: 50px;
@@ -57,13 +54,10 @@ body {
 
 #map{
 	position: absolute;
-	/*left: calc(50% - 450px);*/
 	left: 110px;
-	/*left: 50px;*/
 	top: 50px;
 	width: 900px;
 	height: 700px;
-	/*border: solid grey 1px;*/
 	padding: 100px;
 	transform-origin:top;
 	transform:skewX(-10deg);
@@ -107,13 +101,33 @@ body {
 	position: absolute;
 	left: calc(50% - 400px);
 	top: calc(50% - 250px);
-	padding: 50px;
+	padding: 20px;
 	border: solid grey 1px;
 	background-color:rgba(255,255,255,0.85);
 }
 #questionBox .qTitle {
 	text-align: center;
 }
+#questionBox .qTitle #timeLeft{
+	color: red;
+}
+#questionBox #answerResult {
+	margin-top: 20px;
+	text-align: center;
+}
+#questionBox #answerResult img{
+	height: 100px;
+	width: 100px;
+	margin: 0px;
+}
+#questionBox #answerResult div h1{
+	margin: 0px;
+	font-size: 30px;
+	font-weight: 300;
+}
+
+
+
 #players img {
 	position: absolute;
 	width: 50px;
@@ -131,6 +145,17 @@ body {
 	padding: 20px;
 	border: solid grey 1px;
 	background-color:rgba(255,255,255,0.85);
+}
+#rollDice img {
+	margin: 20px;
+	width: 256px;
+	height: 256px;
+}
+#rollDice img:hover {
+	position: relative;
+	top: 10px;
+	width: 236px;
+	height: 236px;
 }
 #diceResult .txtbox {
 	margin: auto;
@@ -152,21 +177,35 @@ body {
 	margin: 10px;
 }
 
-#popBox {
+#openBackpack {
+	margin-left: 1000px;
+	margin-top: 20px;
+	margin-right: 30px;
+	border: solid grey 1px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 16px;
+}
+#openBackpack:hover {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+#backpack {
 	display: none;
-	width: 1220px;
-	height: 720px;
+	width: 95%;
+	height: 95%;
 	position: absolute;
-	left: calc(50% - 610px);
-	top: calc(50% - 360px);
+	left: 2.5%;
+	top: 2.5%;
 	padding: 20px;
 	border: solid grey 1px;
-	background-color:rgba(255,255,255,0.85);
+	background-color:rgba(255,255,255,0.9);
 }
 #profile {
 	position: absolute;
 	width: 300px;
-	height: 680px;
+	height: calc(100% - 40px);
 	border: solid grey 1px;
 	padding: 20px;
 }
@@ -191,9 +230,24 @@ body {
 	border: solid grey 1px;
 }
 #shop {
-	height: 680px;
+	height: 100%;
 	border: solid grey 1px;
 	margin-left: 320px;
+}
+
+.closeButton {
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	top: 25px;
+	right: 25px;
+}
+.closeButton:hover {
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
 }
 
 
