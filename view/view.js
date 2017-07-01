@@ -92,6 +92,7 @@ function showQuestion(q){
 
 	// var q = questions[qid];
 	$('#questionBox').show();
+	$('#questionBox #timeLeft').show();
 	$('#questionBox .closeButton').hide();
 	$('#questionBox #answerResult').hide();
 	$('#questionBox .qTitle h1').text(q.subject);
@@ -121,7 +122,31 @@ function showQuestion(q){
 	}
 	$('#questionBox form').show();
 
+	var cnt = 120;
+	$('#questionBox #timeLeft').text('剩餘時間：'+cnt);
+	var timer =  setInterval(function(){
+		cnt--;
+		$('#questionBox #timeLeft').text('剩餘時間：'+cnt);
+		if( cnt == 0 ) {
+			clearInterval(timer);
+			$('#questionBox #timeLeft').hide();
+			$('#answerResult h1').text("來不及了QQ");
+			$('#answerResult img').attr( 'src', "img/wrong.png" );
+			var correctAns = '正確答案：';
+			for (var i = 0; i < q.correct.length; i++) {
+				if( i!=0 ) correctAns += ",   ";
+				correctAns += ( q.options[ q.correct[i] ] );
+			}
+			$('#questionBox #answerResult p').text(correctAns);
+			$('#questionBox form').hide();
+			$('#questionBox .closeButton').show();
+			$('#questionBox #answerResult').show();
+		}
+	} , 1000);
+
 	$('#submitButton').click( function(){
+		clearInterval(timer);
+		$('#questionBox #timeLeft').hide();
 		var ans = [];
 		if( !q.multi ) ans.push( Number( $('input[name=qq]:checked').val() ) );
 		else {
@@ -130,7 +155,6 @@ function showQuestion(q){
 			});
 		}
 
-		//
 		var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
 		if (correct) {
 			$('#answerResult h1').text("答對了！");

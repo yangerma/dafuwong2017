@@ -101,12 +101,15 @@ body {
 	position: absolute;
 	left: calc(50% - 400px);
 	top: calc(50% - 250px);
-	padding: 50px;
+	padding: 20px;
 	border: solid grey 1px;
 	background-color:rgba(255,255,255,0.85);
 }
 #questionBox .qTitle {
 	text-align: center;
+}
+#questionBox .qTitle #timeLeft{
+	color: red;
 }
 #questionBox #answerResult {
 	margin-top: 20px;
