@@ -1,4 +1,4 @@
-var questions = [
+module.exports = [
 	{
 		"id": 0,
 		"multi" : true,

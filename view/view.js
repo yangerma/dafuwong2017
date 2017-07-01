@@ -7,6 +7,7 @@ const START = 1;
 const ROLL_DICE = 2;
 const MOVE = 3;;
 const WAIT_TO_ROLL = 4;
+const QUESTION = 5;
 
 socket.on('update', function(data) {
 	model = data;
@@ -23,6 +24,10 @@ socket.on('update', function(data) {
 		showDiceResult();
 	} else if (state == MOVE) {
 		hideDice();
+	} else if (state == QUESTION) {
+		if (model.nowPlaying == playerId) {
+			showQuestion(model.question);
+		}
 	} else {
 		console.log("Wrong state:" + state);
 	}
@@ -34,7 +39,7 @@ function showDice() {
 function hideDice() {
 	$('#diceResult').hide();
 }
-function roll_dice() {
+function rollDice() {
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
@@ -43,7 +48,7 @@ function roll_dice() {
 	}, 2000 );
 }
 
-function login(){
+function login() {
 	playerId = Number( $('#teamID').val() );
 	$('#container').show();
 	$('#login').hide();
@@ -82,7 +87,7 @@ function update() {
 	}
 }
 
-function show_question( q ){
+function showQuestion(q){
 
 	// var q = questions[qid];
 	$('#questionBox').show();
@@ -122,7 +127,9 @@ function show_question( q ){
 		}
 		console.log( JSON.stringify(ans) );
 		console.log( JSON.stringify(q.correct) );
-		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
+		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );
+		$("#questionBox").hide();
+		socket.emit("turn_over");
 	})
 
 }
