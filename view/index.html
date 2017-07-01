@@ -111,6 +111,7 @@
 	</div>
 
 	<div id="questionBox">
+		<img src="img/close.png" class="closeButton" onclick="$('#questionBox').hide()">
 		<div class="qTitle"><h1>題目名稱</h1></div>
 		<div class="qDes">
 			<p>default.</p>
@@ -163,6 +164,13 @@
 			<br><br>
 			<input type="button" id="submitButton" value="Submit">
 		</form>
+
+		<div id="answerResult">
+			<h1>答對/錯了</h1>
+			<img src="">
+			<p>正確答案：</p>
+		</div>
+
 	</div>
 
 	<div class="diceBox" id="diceResult">
@@ -196,7 +204,7 @@
 		</div>
 		<div id="shop">
 		</div>
-		<img src="img/close.png" class="closeButton" onclick="closeBackpack()">
+		<img src="img/close.png" class="closeButton" onclick="$('#backpack').hide()">
 	</div>
 
 </div>
@@ -208,5 +216,3 @@
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="view.js"></script>
-
-

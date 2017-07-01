@@ -108,6 +108,22 @@ body {
 #questionBox .qTitle {
 	text-align: center;
 }
+#questionBox #answerResult {
+	margin-top: 30px;
+	text-align: center;
+}
+#questionBox #answerResult img{
+	height: 100px;
+	width: 100px;
+}
+#questionBox #answerResult div h1{
+	margin: 0px;
+	font-size: 30px;
+	font-weight: 300;
+}
+
+
+
 #players img {
 	position: absolute;
 	width: 50px;
@@ -203,14 +219,15 @@ body {
 	border: solid grey 1px;
 	margin-left: 320px;
 }
-#backpack .closeButton {
+
+.closeButton {
 	height: 40px;
 	width: 40px;
 	position: absolute;
 	top: 25px;
 	right: 25px;
 }
-#backpack .closeButton:hover {
+.closeButton:hover {
 	height: 50px;
 	width: 50px;
 	position: absolute;

@@ -89,6 +89,8 @@ function show_question( q ){
 
 	// var q = questions[qid];
 	$('#questionBox').show();
+	$('#questionBox .closeButton').hide();
+	$('#questionBox #answerResult').hide();
 	$('#questionBox .qTitle h1').text(q.subject);
 	$('#questionBox .qDes p').text(q.description);
 
@@ -114,6 +116,7 @@ function show_question( q ){
 			else $('#sop'+i).hide();
 		}
 	}
+	$('#questionBox form').show();
 
 	$('#submitButton').click( function(){
 		var ans = [];
@@ -123,9 +126,21 @@ function show_question( q ){
 			    ans.push( Number( $(this).val() ) );
 			});
 		}
-		console.log( JSON.stringify(ans) );
-		console.log( JSON.stringify(q.correct) );
-		console.log( JSON.stringify(ans)==JSON.stringify(q.correct) );  
+
+		var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
+		if (correct) {
+			$('#answerResult h1').text("答對了！");
+			$('#answerResult img').attr( 'src', "img/correct.png" );
+		}
+		else {
+			$('#answerResult h1').text("答錯了QQ");
+			$('#answerResult img').attr( 'src', "img/wrong.png" );
+		}
+
+		$('#questionBox form').hide();
+		$('#questionBox .closeButton').show();
+		$('#questionBox #answerResult').show();
+
 	})
 
 }
@@ -133,7 +148,4 @@ function show_question( q ){
 function showBackpack() {
 	// update items in popBox
 	$('#backpack').show();
-}
-function closeBackpack() {
-	$('#backpack').hide();
 }
