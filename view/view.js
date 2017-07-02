@@ -1,6 +1,7 @@
 var socket = io();
 var playerId = null;
-var model = null
+var model = null;
+var timer = null;
 
 const GAMEOVER = 0;
 const START = 1;
@@ -36,6 +37,13 @@ socket.on('update', function(data) {
 	}
 });
 
+function login() {
+	playerId = Number( $('#teamID').val() );
+	$('#container').show();
+	$('#login').hide();
+	socket.emit("login", playerId);
+}
+
 function showDice( playerId ) {
 	$('#rollDice .txtbox h1').text("Player" + playerId + "'s turn to roll the dice!");
 	$('#rollDice').show();
@@ -51,14 +59,6 @@ function rollDice() {
 		socket.emit('roll_dice', playerId);
 	}, 2000 );
 }
-
-function login() {
-	playerId = Number( $('#teamID').val() );
-	$('#container').show();
-	$('#login').hide();
-	socket.emit("login", playerId);
-}
-
 function showDiceResult() {
 	player_ID = model.nowPlaying;
 	dice_result = model.diceResult;
@@ -136,7 +136,7 @@ function showQuestion(q){
 
 	var cnt = 120;
 	$('#questionBox #timeLeft').text('剩餘時間：'+cnt);
-	var timer =  setInterval(function(){
+	timer =  setInterval(function(){
 		cnt--;
 		$('#questionBox #timeLeft').text('剩餘時間：'+cnt);
 		if( cnt == 0 ) {
@@ -190,15 +190,55 @@ function showQuestion(q){
 	})
 
 }
+function closeQuestion() {
+	$('#questionBox').hide();
+	socket.emit("turn_over");
+}
 
 function showBackpack() {
 	// update items in popBox
 	$('#backpack').show();
 }
 
-function closeQuestion() {
-	$('#questionBox').hide();
-	socket.emit("turn_over");
+function arriveLand( land ) {
+	if( land.ownerId == null ) {
+		$('#buyHouse .housePrice').text( land.updatePrice );
+		$('#buyHouse').show();
+	}
+	else if( land.ownerId == playerId ) {
+		$('#updateHouse .housePrice').text( land.updatePrice );
+		$('#updateHouse').show();
+	}
+	else {	//other's land
+		$('#passOthersHouse .houseOwner').text( 'player' + land.ownerId );
+		$('#passOthersHouse .housePrice').text( land.passPrice );
+		$('#passOthersHouse').show();
+	}
+
+	var cnt = 30;
+	$('.houseBox .timer').text('剩餘時間：'+cnt);
+	timer =  setInterval(function(){
+		cnt--;
+		$('.houseBox .timer').text('剩餘時間：'+cnt);
+		if( cnt == 0 ) {
+			clearInterval(timer);
+			$('.houseBox').hide();
+			$('#timeOut').show();
+			setTimeout( function(){
+				$('#timeOut').hide();
+			}, 700);
+		}
+	} , 1000);
+
+}
+
+function closeHouseBox() {
+	$('.houseBox').hide();
+	clearInterval(timer);
+}
+
+function buyHouse() {
+
 }
 
 function buyItem(itemId) {
@@ -207,4 +247,12 @@ function buyItem(itemId) {
 	} else {
 		console.log("Failed to buy item QQ");
 	}
+}
+
+function updateHouse() {
+	
+}
+
+function passOthersHouse() {
+	
 }

@@ -24,6 +24,28 @@ body {
 	right: 20px;
 }
 
+.alertBox {
+	position: absolute;
+	display: none;
+	width: 100%;
+	height: 200px;
+	line-height: 200px;
+	top: calc(50% - 100px);
+	text-align: center;
+	color: #990000;
+	font-size: 100px;
+	font-weight: 700;
+	background-color:rgba(255,255,255,0.5);
+}
+
+.timer {
+	color: red;
+}
+
+.title {
+	text-align: center;
+}
+
 #container {
 	display: none;
 }
@@ -37,7 +59,6 @@ body {
 	margin: 10px;
 	height: 70px;
 	border: solid grey 1px;
-	text-align: center;
 }
 #scoreboard .title h1{
 	margin: auto;
@@ -67,7 +88,6 @@ body {
 	line-height: 25px;
 }
 
-
 #questionBox {
 	display: none;
 	width: 800px;
@@ -78,12 +98,6 @@ body {
 	padding: 20px;
 	border: solid grey 1px;
 	background-color:rgba(255,255,255,0.85);
-}
-#questionBox .qTitle {
-	text-align: center;
-}
-#questionBox .qTitle #timeLeft{
-	color: red;
 }
 #questionBox #answerResult {
 	margin-top: 20px;
@@ -100,12 +114,10 @@ body {
 	font-weight: 300;
 }
 
-
-
 #players img {
 	position: absolute;
-	width: 50px;
-	height: 50px;
+	width: 80px;
+	height: 80px;
 }
 
 .diceBox {
@@ -150,111 +162,3 @@ body {
 	line-height: 40px;
 	margin: 10px;
 }
-
-#openBackpack {
-	margin-left: 1000px;
-	margin-top: 20px;
-	margin-right: 30px;
-	border: solid grey 1px;
-	text-align: center;
-	line-height: 50px;
-	font-size: 16px;
-}
-#openBackpack:hover {
-	font-size: 20px;
-	font-weight: 500;
-}
-
-#backpack {
-	display: none;
-	width: 95%;
-	height: 95%;
-	position: absolute;
-	left: 2.5%;
-	top: 2.5%;
-	padding: 20px;
-	border: solid grey 1px;
-	background-color:rgba(255,255,255,0.9);
-}
-#profile {
-	position: absolute;
-	width: 300px;
-	height: calc(100% - 40px);
-	border: solid grey 1px;
-	padding: 20px;
-}
-#profile .title {
-	text-align: center;
-}
-#profile #teamName {
-	margin: 0px auto;
-	line-height: 50px;
-	border: solid grey 1px;
-}
-#profile #profilePic {
-	width: 240px;
-	height: 240px;
-	margin: 10px;
-	overflow: hidden;
-}
-#profile .profileInfo {
-	width: 260px;
-	height: 50px;
-	margin: 10px auto;
-	border: solid grey 1px;
-	line-height: 50px;
-	text-align: center;
-}
-#shop {
-	height: 100%;
-	margin-left: 320px;
-	border: solid grey 1px;
-}
-#shop div{
-	border: solid grey 1px;
-}
-#shop #shopTitle {
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
-	font-size: 36px;
-	font-weight: 700;
-	margin: 20px;
-	margin-bottom: 0px;
-}
-#shop .item{
-	width: 50%;
-	padding: 10px 20px;
-	float: left;
-	border: none;
-}
-#shop .item div{
-	margin: 10px auto;
-}
-#shop .item .itemName {
-	line-height: 50px;
-	text-align: center;
-	font-size: 26px;
-	margin: 0px auto;
-}
-#shop .itemPic {
-	height: 250px;
-}
-#shop .itemDes {
-	height: 110px;
-}
-#shop .itemBlock {
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
-}
-#shop .item .buy {
-	margin: 0px auto;
-}
-#shop .item .buy:hover {
-	font-weight: 500;
-	font-size: 20px;
-}
-
-
-
