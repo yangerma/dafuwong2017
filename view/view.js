@@ -93,6 +93,11 @@ function update() {
 	$('#vpn .itemPrice').text('$' + model.items[1].cost);
 	$('#firewall .itemPrice').text('$' + model.items[0].cost);
 	$('#profIP').text('your IP is ' + model.players[playerId].ip);
+
+	// update switch state
+	if( model.switchState == 1 ) $('#switch img').attr('transform', 'scale(1,1)');
+	else $('#switch img').attr('transform', 'scale(-1,-1)');
+
 }
 
 function showQuestion(q){
