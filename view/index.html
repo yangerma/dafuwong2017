@@ -5,6 +5,9 @@
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
 	<link type="text/css" rel="stylesheet" href="index.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/backpack.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/map.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/house.css">
 	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanstc.css">
 </head>
 
@@ -112,7 +115,10 @@
 
 	<div id="questionBox">
 		<img src="img/close.png" class="closeButton" onclick="closeQuestion()">
-		<div class="qTitle"><h1>題目名稱</h1><div id="timeLeft"></div></div>
+		<div class="title">
+			<h1>題目名稱</h1>
+			<div class="timer" id="timeLeft"></div>
+		</div>
 		<div class="qDes">
 			<p>default.</p>
 		</div>
@@ -186,6 +192,47 @@
 			<h1>Player # roll the dice!</h1>
 		</div>
 		<img src="img/wifi4.png" id="wifi" onclick="rollDice()">
+	</div>
+
+	<div class="houseBox" id="buyHouse">
+		<h1>要不要來架一台server呀</h1>
+		<p>一台只要 <span>$2000</span> ，還可以跟別人收過路費唷。</p>
+		<div class="buttons">
+			<div class="buttonBlock"  onclick="buyHouse()">
+				<img src="img/ok.png" class="okButton">
+				<div class="reply">好啊>_<</div>
+			</div>
+			<div class="buttonBlock" onclick="$('.houseBox').hide()">
+				<img src="img/close.png" class="noButton" >
+				<div class="reply">不要ouo</div>
+			</div>
+		</div>
+		<div class="timer"></div>
+	</div>
+
+	<div class="houseBox" id="updateHouse">
+		<h1>要不要升級一下server呀</h1>
+		<p>一次只要 <span>$3000</span> ，就可以收更多的過路費唷。</p>
+		<div class="buttons">
+			<div class="buttonBlock"  onclick="updateHouse()">
+				<img src="img/ok.png" class="okButton">
+				<div class="reply">好啊>_<</div>
+			</div>
+			<div class="buttonBlock" onclick="$('.houseBox').hide()">
+				<img src="img/close.png" class="noButton" >
+				<div class="reply">不要ouo</div>
+			</div>
+		</div>
+		<div class="timer"></div>
+	</div>
+
+	<div class="houseBox" id="passOthersHouse">
+		<h1>哎呀！你踩到 <span>XXX</span> 的地盤了</h1>
+		<p>該付人家 <span>$500</span> 的過路費了唷。</p>
+		<div class="buttonBlock" id="iKnow" onclick="$('.houseBox').hide()">
+			<img src="img/ok.png" class="okButton">
+			<div class="reply">QQ 知道了啦</div>
+		</div>
 	</div>
 
 	<div id="openBackpack" onclick="showBackpack()"> Check my backpack </div>

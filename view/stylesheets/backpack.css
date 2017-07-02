@@ -1,0 +1,56 @@
+#openBackpack {
+	margin-left: 1000px;
+	margin-top: 20px;
+	margin-right: 30px;
+	border: solid grey 1px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 16px;
+}
+#openBackpack:hover {
+	font-size: 20px;
+	font-weight: 500;
+}
+
+#backpack {
+	display: none;
+	width: 95%;
+	height: 95%;
+	position: absolute;
+	left: 2.5%;
+	top: 2.5%;
+	padding: 20px;
+	border: solid grey 1px;
+	background-color:rgba(255,255,255,0.9);
+}
+
+#profile {
+	position: absolute;
+	width: 300px;
+	height: calc(100% - 40px);
+	border: solid grey 1px;
+	padding: 20px;
+}
+#profile #teamName {
+	margin: 0px auto;
+	line-height: 50px;
+	border: solid grey 1px;
+}
+#profile #profilePic {
+	width: 250px;
+	height: 250px;
+	margin: 10px;
+	overflow: hidden;
+}
+#profile .profileInfo {
+	width: 260px;
+	height: 50px;
+	margin: 10px auto;
+	border: solid grey 1px;
+}
+
+#shop {
+	height: 100%;
+	border: solid grey 1px;
+	margin-left: 320px;
+}

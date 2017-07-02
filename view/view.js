@@ -33,38 +33,6 @@ socket.on('update', function(data) {
 	}
 });
 
-function showDice( playerId ) {
-	$('#rollDice .txtbox h1').text("Player" + playerId + "'s turn to roll the dice!");
-	$('#rollDice').show();
-}
-function hideDice() {
-	$('#diceResult').hide();
-}
-function rollDice() {
-	$("#rollDice img").attr("src", "img/wifi.gif");
-	setTimeout( function(){
-		$('#rollDice').hide();
-		console.log("emit roll dice");
-		socket.emit('roll_dice', playerId);
-	}, 2000 );
-}
-
-function login() {
-	playerId = Number( $('#teamID').val() );
-	$('#container').show();
-	$('#login').hide();
-	socket.emit("login", playerId);
-}
-
-function showDiceResult() {
-	player_ID = model.nowPlaying;
-	dice_result = model.diceResult;
-	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
-	$('#diceResult .txtbox h1').text( dice_result );
-	$('#diceResult img').attr( 'src', "img/wifi" + dice_result + ".png" );
-	$('#diceResult').show();
-}
-
 function update() {
 	for (var i = 0; i < 5; i++) {
 
@@ -87,6 +55,38 @@ function update() {
 
 	}
 }
+
+function login() {
+	playerId = Number( $('#teamID').val() );
+	$('#container').show();
+	$('#login').hide();
+	socket.emit("login", playerId);
+}
+
+function showDice( playerId ) {
+	$('#rollDice .txtbox h1').text("Player" + playerId + "'s turn to roll the dice!");
+	$('#rollDice').show();
+}
+function hideDice() {
+	$('#diceResult').hide();
+}
+function rollDice() {
+	$("#rollDice img").attr("src", "img/wifi.gif");
+	setTimeout( function(){
+		$('#rollDice').hide();
+		console.log("emit roll dice");
+		socket.emit('roll_dice', playerId);
+	}, 2000 );
+}
+function showDiceResult() {
+	player_ID = model.nowPlaying;
+	dice_result = model.diceResult;
+	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
+	$('#diceResult .txtbox h1').text( dice_result );
+	$('#diceResult img').attr( 'src', "img/wifi" + dice_result + ".png" );
+	$('#diceResult').show();
+}
+
 
 function showQuestion(q){
 
@@ -178,13 +178,24 @@ function showQuestion(q){
 	})
 
 }
+function closeQuestion() {
+	$('#questionBox').hide();
+	socket.emit("turn_over");
+}
 
 function showBackpack() {
 	// update items in popBox
 	$('#backpack').show();
 }
 
-function closeQuestion() {
-	$('#questionBox').hide();
-	socket.emit("turn_over");
+function buyHouse() {
+
+}
+
+function updateHouse() {
+	
+}
+
+function passOthersHouse() {
+	
 }

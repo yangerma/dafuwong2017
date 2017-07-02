@@ -9,6 +9,29 @@ body {
 	font-weight: 300;
 }
 
+.closeButton {
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	top: 25px;
+	right: 25px;
+}
+.closeButton:hover {
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+.timer {
+	color: red;
+}
+
+.title {
+	text-align: center;
+}
+
 #container {
 	display: none;
 }
@@ -22,7 +45,6 @@ body {
 	margin: 10px;
 	height: 70px;
 	border: solid grey 1px;
-	text-align: center;
 }
 #scoreboard .title h1{
 	margin: auto;
@@ -52,48 +74,6 @@ body {
 	line-height: 25px;
 }
 
-#map{
-	position: absolute;
-	left: 110px;
-	top: 50px;
-	width: 900px;
-	height: 700px;
-	padding: 100px;
-	transform-origin:top;
-	transform:skewX(-10deg);
-}
-#map .circle{
-	position: absolute;
-	width:50px;
-	height:50px;
-	background:#0cc;
-	-webkit-clip-path:circle(50% at 50% 50%);
-}
-#map #c03 {
-	background: orange;
-	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-}
-#map #c33 {
-	background: orange;
-	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-}
-#map .triangle{
-	position: absolute;
-	width:80px;
-	height:69.6px;
-	background:#c00;
-	-webkit-clip-path:polygon(0% 100%, 50%  0%,100% 100%);
-}
-#map #switch{
-	position: absolute;
-	left: calc(50% - 64.8px);
-	top: calc(50% - 61.6px);
-	width:129.6px;
-	height:123.2px;
-	background:#095;
-	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
-}
-
 #questionBox {
 	display: none;
 	width: 800px;
@@ -104,12 +84,6 @@ body {
 	padding: 20px;
 	border: solid grey 1px;
 	background-color:rgba(255,255,255,0.85);
-}
-#questionBox .qTitle {
-	text-align: center;
-}
-#questionBox .qTitle #timeLeft{
-	color: red;
 }
 #questionBox #answerResult {
 	margin-top: 20px;
@@ -126,12 +100,10 @@ body {
 	font-weight: 300;
 }
 
-
-
 #players img {
 	position: absolute;
-	width: 50px;
-	height: 50px;
+	width: 80px;
+	height: 80px;
 }
 
 .diceBox {
@@ -209,9 +181,6 @@ body {
 	border: solid grey 1px;
 	padding: 20px;
 }
-#profile .title {
-	text-align: center;
-}
 #profile #teamName {
 	margin: 0px auto;
 	line-height: 50px;
@@ -234,21 +203,3 @@ body {
 	border: solid grey 1px;
 	margin-left: 320px;
 }
-
-.closeButton {
-	height: 40px;
-	width: 40px;
-	position: absolute;
-	top: 25px;
-	right: 25px;
-}
-.closeButton:hover {
-	height: 50px;
-	width: 50px;
-	position: absolute;
-	top: 20px;
-	right: 20px;
-}
-
-
-

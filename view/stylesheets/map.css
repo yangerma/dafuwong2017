@@ -1,0 +1,41 @@
+#map{
+	position: absolute;
+	left: 110px;
+	top: 50px;
+	width: 900px;
+	height: 700px;
+	padding: 100px;
+	transform-origin:top;
+	transform:skewX(-10deg);
+}
+#map .circle{
+	position: absolute;
+	width:50px;
+	height:50px;
+	background:#0cc;
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
+#map #c03 {
+	background: orange;
+	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+}
+#map #c33 {
+	background: orange;
+	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+}
+#map .triangle{
+	position: absolute;
+	width:80px;
+	height:69.6px;
+	background:#c00;
+	-webkit-clip-path:polygon(0% 100%, 50%  0%,100% 100%);
+}
+#map #switch{
+	position: absolute;
+	left: calc(50% - 64.8px);
+	top: calc(50% - 61.6px);
+	width:129.6px;
+	height:123.2px;
+	background:#095;
+	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
+}
