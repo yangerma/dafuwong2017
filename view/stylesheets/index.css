@@ -84,11 +84,35 @@ strong {
 	font-weight: 700;
 }
 
-.notification {
-	right: 50px;
-	top: 50px;
-	height: 100px;
-	width: 300px;
+#notification {
+	right: 30px;
+	top: 30px;
+	height: 120px;
+	width: 350px;
+	padding: 10px;
+	background-color:rgba(255,255,255,0.9);
+}
+#notification img{
+	float: left;
+	height: 80px;
+	width: 80px;
+	margin: 10px;
+}
+#notification div{
+	float: left;
+	margin: 10px;
+	height: 80px;
+}
+#notification p {
+	text-align: left;
+	line-height: 40px;
+	padding-left: 20px;
+	margin: 0px;
+	font-size: 18px;
+}
+#notification #team {
+	font-size: 22px;
+	font-weight: 500;
 }
 
 

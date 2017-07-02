@@ -247,14 +247,12 @@ function endRound() {
 }
 
 function recvNotification( res ) {
-	//res: { id, item }
-	$('#notification img').attr('src', 'img/prof' + res.id + '.png');
-	$('#notification h4').text('Player' + res.id );
-	$('#notification strong').text(res.item);
+	//res: { teamId, item }
+	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
+	$('#notification #team').text('Player ' + res.teamId );
+	$('#notification span').text(res.item);
 	$('#notification').fadeIn(1000);
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
 	},2000);
 }
-
-//var res  = { id: 0, item:'VPN' }
