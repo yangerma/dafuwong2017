@@ -245,3 +245,14 @@ function endRound() {
 	$('#end').hide();
 	socket.emit("turn_over");
 }
+
+function recvNotification( res ) {
+	//res: { teamId, item }
+	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
+	$('#notification #team').text('Player ' + res.teamId );
+	$('#notification span').text(res.item);
+	$('#notification').fadeIn(1000);
+	setTimeout(function(){
+		$('#notification').fadeOut(1000);
+	},2000);
+}

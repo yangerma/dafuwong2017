@@ -50,22 +50,6 @@ strong {
 	background-color:rgba(255,255,255,0.85);
 }
 
-#end {
-	border-radius: 10px;
-	height: 100px;
-	width: 200px;
-	line-height: 100px;
-	left: calc(50% - 100px);
-	top: calc(50% - 50px);
-	font-weight: 500;
-	font-size: 32px;
-}
-#end:hover {
-	font-size: 40px;
-	font-weight: 700;
-}
-
-
 .timer {
 	color: red;
 }
@@ -83,3 +67,54 @@ strong {
 	width: 80px;
 	height: 80px;
 }
+
+#end {
+	border-radius: 10px;
+	height: 100px;
+	width: 200px;
+	line-height: 100px;
+	left: calc(50% - 100px);
+	top: calc(50% - 50px);
+	font-weight: 500;
+	font-size: 32px;
+}
+
+#end:hover {
+	font-size: 40px;
+	font-weight: 700;
+}
+
+#notification {
+	right: 30px;
+	top: 30px;
+	height: 120px;
+	width: 350px;
+	padding: 10px;
+	background-color:rgba(255,255,255,0.9);
+}
+#notification img{
+	float: left;
+	height: 80px;
+	width: 80px;
+	margin: 10px;
+}
+#notification div{
+	float: left;
+	margin: 10px;
+	height: 80px;
+}
+#notification p {
+	text-align: left;
+	line-height: 40px;
+	padding-left: 20px;
+	margin: 0px;
+	font-size: 18px;
+}
+#notification #team {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+
+
+
