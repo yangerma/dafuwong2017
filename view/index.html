@@ -4,10 +4,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
-	<link type="text/css" rel="stylesheet" href="index.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/backpack.css">
-	<link type="text/css" rel="stylesheet" href="stylesheets/map.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/dice.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/house.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/index.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/map.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/question.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/scoreboard.css">
 	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanstc.css">
 </head>
 
@@ -21,57 +24,67 @@
 
 <div id ="container">
 
-	
-
 	<div id="map">
-		<div id="switch"></div>
-		<div class="triangle" id="t0" style="left: 410px; top: -34.8px;"></div>
-		<div class="circle" id="s01" style="left: 425.7px; top: 230.5px;"></div>
-		<div class="circle" id="s02" style="left: 423.8px; top: 141.8px;"></div>
-		<div class="circle" id="s03" style="left: 421.9px; top: 53.1px;"></div>
-		<div class="circle" id="c01" style="left: 500px; top: 18.695px;"></div>
-		<div class="circle" id="c02" style="left: 575px; top: 63.39px;"></div>
-		<div class="circle" id="c03" style="left: 650px; top: 108.085px;"></div>
-		<div class="circle" id="c04" style="left: 725px; top: 152.78px;"></div>
-		<div class="circle" id="c05" style="left: 800px; top: 197.475px;"></div>
-		<div class="triangle" id="t1" style="left: 860px; top: 233.37px;"></div>
-		<div class="circle" id="c11" style="left: 846.29px; top: 314.142px;"></div>
-		<div class="circle" id="c12" style="left: 817.58px; top: 386.113px;"></div>
-		<div class="circle" id="c13" style="left: 788.87px; top: 458.085px;"></div>
-		<div class="circle" id="c14" style="left: 760.16px; top: 530.057px;"></div>
-		<div class="circle" id="c15" style="left: 731.45px; top: 602.028px;"></div>
-		<div class="triangle" id="t2" style="left: 687.74px; top: 665.2px;"></div>
-		<div class="circle" id="s21" style="left: 495.135px; top: 405.5px;"></div>
-		<div class="circle" id="s22" style="left: 562.67px; top: 491.8px;"></div>
-		<div class="circle" id="s23" style="left: 630.205px; top: 578.1px;"></div>
-		<div class="circle" id="c21" style="left: 610.16px; top: 674px;"></div>
-		<div class="circle" id="c22" style="left: 517.58px; top: 674px;"></div>
-		<div class="circle" id="c23" style="left: 425px; top: 674px;"></div>
-		<div class="circle" id="c24" style="left: 332.42px; top: 674px;"></div>
-		<div class="circle" id="c25" style="left: 239.84px; top: 674px;"></div>
-		<div class="triangle" id="t3" style="left: 132.26px; top: 665.2px;"></div>
-		<div class="circle" id="s31" style="left: 356.265px; top: 405.5px;"></div>
-		<div class="circle" id="s32" style="left: 284.93px; top: 491.8px;"></div>
-		<div class="circle" id="s33" style="left: 213.595px; top: 578.1px;"></div>
-		<div class="circle" id="c31" style="left: 118.55px; top: 602.028px;"></div>
-		<div class="circle" id="c32" style="left: 89.84px; top: 530.057px;"></div>
-		<div class="circle" id="c33" style="left: 61.13px; top: 458.085px;"></div>
-		<div class="circle" id="c34" style="left: 32.42px; top: 386.113px;"></div>
-		<div class="circle" id="c35" style="left: 3.71px; top: 314.142px;"></div>
-		<div class="triangle" id="t4" style="left: -40px; top: 233.37px;"></div>
-		<div class="circle" id="c41" style="left: 50px; top: 197.475px;"></div>
-		<div class="circle" id="c42" style="left: 125px; top: 152.78px;"></div>
-		<div class="circle" id="c43" style="left: 200px; top: 108.085px;"></div>
-		<div class="circle" id="c44" style="left: 275px; top: 63.39px;"></div>
-		<div class="circle" id="c45" style="left: 350px; top: 18.695px;"></div> 
+		<div id="switch">
+			<img src="img/cycle.png">
+		</div>
+		<div class="home" id="t0" style="left: 410px; top: -34.8px;">
+			<img src="img/home0.png">
+		</div>
+		<div class="node" id="s01" style="left: 425.7px; top: 230.5px;"></div>
+		<div class="node" id="s02" style="left: 423.8px; top: 141.8px;"></div>
+		<div class="node" id="s03" style="left: 421.9px; top: 53.1px;"></div>
+		<div class="node" id="c01" style="left: 500px; top: 18.695px;"></div>
+		<div class="node" id="c02" style="left: 575px; top: 63.39px;"></div>
+		<div class="dhcp" id="c03" style="left: 650px; top: 108.085px;">DHCP</div>
+		<div class="node" id="c04" style="left: 725px; top: 152.78px;"></div>
+		<div class="node" id="c05" style="left: 800px; top: 197.475px;"></div>
+		<div class="home" id="t1" style="left: 860px; top: 233.37px;">
+			<img src="img/home1.png">
+		</div>
+		<div class="node" id="c11" style="left: 846.29px; top: 314.142px;"></div>
+		<div class="node" id="c12" style="left: 817.58px; top: 386.113px;"></div>
+		<div class="node" id="c13" style="left: 788.87px; top: 458.085px;"></div>
+		<div class="node" id="c14" style="left: 760.16px; top: 530.057px;"></div>
+		<div class="node" id="c15" style="left: 731.45px; top: 602.028px;"></div>
+		<div class="home" id="t2" style="left: 687.74px; top: 665.2px;">
+			<img src="img/home2.png">
+		</div>
+		<div class="node" id="s21" style="left: 495.135px; top: 405.5px;"></div>
+		<div class="node" id="s22" style="left: 562.67px; top: 491.8px;"></div>
+		<div class="node" id="s23" style="left: 630.205px; top: 578.1px;"></div>
+		<div class="node" id="c21" style="left: 610.16px; top: 674px;"></div>
+		<div class="node" id="c22" style="left: 517.58px; top: 674px;"></div>
+		<div class="node" id="c23" style="left: 425px; top: 674px;"></div>
+		<div class="node" id="c24" style="left: 332.42px; top: 674px;"></div>
+		<div class="node" id="c25" style="left: 239.84px; top: 674px;"></div>
+		<div class="home" id="t3" style="left: 132.26px; top: 665.2px;">
+			<img src="img/home3.png">
+		</div>
+		<div class="node" id="s31" style="left: 356.265px; top: 405.5px;"></div>
+		<div class="node" id="s32" style="left: 284.93px; top: 491.8px;"></div>
+		<div class="node" id="s33" style="left: 213.595px; top: 578.1px;"></div>
+		<div class="node" id="c31" style="left: 118.55px; top: 602.028px;"></div>
+		<div class="node" id="c32" style="left: 89.84px; top: 530.057px;"></div>
+		<div class="dhcp" id="c33" style="left: 61.13px; top: 458.085px;">DHCP</div>
+		<div class="node" id="c34" style="left: 32.42px; top: 386.113px;"></div>
+		<div class="node" id="c35" style="left: 3.71px; top: 314.142px;"></div>
+		<div class="home" id="t4" style="left: -40px; top: 233.37px;">
+			<img src="img/home4.png">
+		</div>
+		<div class="node" id="c41" style="left: 50px; top: 197.475px;"></div>
+		<div class="node" id="c42" style="left: 125px; top: 152.78px;"></div>
+		<div class="node" id="c43" style="left: 200px; top: 108.085px;"></div>
+		<div class="node" id="c44" style="left: 275px; top: 63.39px;"></div>
+		<div class="node" id="c45" style="left: 350px; top: 18.695px;"></div> 
 	</div>
 
 	<div id="players">
-		<img src="img/player0.png" id="player0">
-		<img src="img/player1.png" id="player1">
-		<img src="img/player2.png" id="player2">
-		<img src="img/player3.png" id="player3">
-		<img src="img/player4.png" id="player4">
+		<img src="img/player0.gif" id="player0">
+		<img src="img/player1.gif" id="player1">
+		<img src="img/player2.gif" id="player2">
+		<img src="img/player3.gif" id="player3">
+		<img src="img/player4.gif" id="player4">
 	</div>
 
 	<div id="scoreboard">
@@ -79,35 +92,35 @@
 			<h1>Scoreboard</h1>
 		</div>
 		<div class="rank">
-			<img class="picture" src="img/prof.png">
+			<img class="picture" src="img/prof0.png">
 			<div class="info" id="info1">
 				<h4>第一小隊</h4>
 				<p>$1000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img class="picture" src="img/prof.png">
+			<img class="picture" src="img/prof1.png">
 			<div class="info"  id="info2">
 				<h4>第二小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img class="picture" src="img/prof.png">
+			<img class="picture" src="img/prof2.png">
 			<div class="info" id="info3">
 				<h4>第三小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img class="picture" src="img/prof.png">
+			<img class="picture" src="img/prof3.png">
 			<div class="info" id="info4">
 				<h4>第四小隊</h4>
 				<p>$2000</p>
 			</div>
 		</div>
 		<div class="rank">
-			<img class="picture" src="img/prof.png">
+			<img class="picture" src="img/prof4.png">
 			<div class="info"  id="info5">
 				<h4>第五小隊</h4>
 				<p>$2000</p>
@@ -115,7 +128,7 @@
 		</div>
 	</div>
 
-	<div id="questionBox">
+	<div class="popBox" id="questionBox">
 		<img src="img/close.png" class="closeButton" onclick="closeQuestion()">
 		<div class="title">
 			<h1>題目名稱</h1>
@@ -181,7 +194,7 @@
 
 	</div>
 
-	<div class="diceBox" id="diceResult">
+	<div class="diceBox popBox" id="diceResult">
 		<div class="txtbox">
 			<h2>Player # got</h2>
 			<h1>3!</h1>
@@ -189,14 +202,14 @@
 		<img src="img/wifi1.png">
 	</div>
 
-	<div class="diceBox" id="rollDice">
+	<div class="diceBox popBox" id="rollDice">
 		<div class="txtbox">
 			<h1>Player # roll the dice!</h1>
 		</div>
 		<img src="img/wifi4.png" id="wifi" onclick="rollDice()">
 	</div>
 
-	<div class="houseBox" id="buyHouse">
+	<div class="houseBox popBox" id="buyHouse">
 		<h1>要不要來架一台server呀</h1>
 		<p>一台只要 $<span class="housePrice">2000</span> ，還可以跟別人收過路費唷。</p>
 		<div class="buttons">
@@ -212,7 +225,7 @@
 		<div class="timer"></div>
 	</div>
 
-	<div class="houseBox" id="updateHouse">
+	<div class="houseBox popBox" id="updateHouse">
 		<h1>要不要升級一下server呀</h1>
 		<p>一次只要 $<span class="housePrice">3000</span> ，就可以收更多的過路費唷。</p>
 		<div class="buttons">
@@ -228,7 +241,7 @@
 		<div class="timer"></div>
 	</div>
 
-	<div class="houseBox" id="passOthersHouse">
+	<div class="houseBox popBox" id="passOthersHouse">
 		<h1>哎呀！你踩到 <span class="houseOwner">XXX</span> 的地盤了</h1>
 		<p>該付人家 <span class="housePrice">$500</span> 的過路費了唷。</p>
 		<div class="buttonBlock" id="iKnow" onclick="closeHouseBox()">
@@ -237,43 +250,68 @@
 		</div>
 	</div>
 
-	<div id="openBackpack" onclick="showBackpack()"> Check my backpack </div>
+	<div id="end" class="popBox" onclick="turnOver()">結束回合</div>
+
+	<div id="openBackpack" onclick="$('#backpack').show()"> Check my backpack </div>
 	<div id="backpack">
 		<div id="profile">
 			<div class="title">
 				<h1 id="teamName">第一小隊</h1>
 			</div>
-			<img src="img/player1.png" id="profilePic">
+			<img src="img/player1.gif" id="profilePic">
 			<div class="profileInfo" id="profMoney"></div>
 			<div class="profileInfo" id="profIP"></div>
-			<div class="profileInfo"></div>
-			<div class="profileInfo"></div>
-			<div class="profileInfo"></div>
 		</div>
 		<div id="shop">
-			<div id="shopTitle">S H O P</div>
+
+			<div id="shopTitle">
+				S H O P
+				<img src="img/close.png" class="closeButton" onclick="$('#backpack').hide()">
+			</div>
 			<div class="item" id="firewall">
-				<div class="itemName">Firewall</div>
-				<div class="itemPic">這是防火牆的圖</div>
-				<div class="itemDes">防火的牆</div>
-				<div class="itemPrice itemBlock">$100</div>
-				<div class="cnt itemBlock">目前有0個</div>
+				<div class="itemName">防火牆 Firewall</div>
+				<div class="itemPic"><img src="img/firewall.png"></div>
+				<div class="itemDes">
+				<strong>防火牆（Firewall）</strong>是一項協助確保資訊安全的裝置，會依照特定的規則，允許或是限制傳輸的資料通過。
+				</div>
+				<div class="itemUsage">
+					<strong>功能：</strong>在自己回合使用。在目前所在位置蓋防火牆，會強制阻擋之後經過的第一人。
+				</div>
+				<div class="in">
+					<div class="itemPrice itemBlock"></div>
+					<div class="cnt itemBlock"></div>
+				</div>
 				<div class="buy itemBlock" onclick="buyItem(0)">BUY</div>
 			</div>
 			<div class="item" id="vpn">
-				<div class="itemName">VPN</div>
-				<div class="itemPic">這是vpn的圖</div>
-				<div class="itemDes">穿牆的隧道</div>
-				<div class="itemPrice itemBlock">$200</div>
-				<div class="cnt itemBlock">目前有0個</div>
+				<div class="itemName">虛擬私人網路 VPN</div>
+				<div class="itemPic"><img src="img/vpn.png"></div>
+				<div class="itemDes">
+					<strong>虛擬私人網路（Virtual Private Network）</strong>是一種常用於連線團體間的私人網路的通訊方法。它利用已加密的通道協議來達到私人訊息安全效果。
+				</div>
+				<div class="itemUsage">
+					<strong>功能：</strong>在自己回合使用。若在移動時被防火牆擋下時可以選擇無視他。使用一次後失效。
+				</div>
+				<div class="in">
+					<div class="itemPrice itemBlock"></div>
+					<div class="cnt itemBlock"></div>
+				</div>
 				<div class="buy itemBlock" onclick="buyItem(1)">BUY</div>
 			</div>
 		</div>
-		<img src="img/close.png" class="closeButton" onclick="$('#backpack').hide()">
+		
 	</div>
 
 	<div class="alertBox" id="timeOut">來 不 及 了 QQ</div>
-	<div class="alertBox" id="noMoney">不 好 意 思 你 買 不 起 :(</div>
+	<div class="alertBox" id="noMoney">你 買 不 起 :(</div>
+
+	<div id="notification" class="popBox">
+		<img src="">
+		<div>
+			<p id="team"></p>
+			<p>購買了 <span></span> 。</p>
+		</div>
+	</div>
 
 </div>
 </body>

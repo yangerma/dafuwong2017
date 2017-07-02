@@ -6,12 +6,14 @@
 	text-align: center;
 	line-height: 50px;
 	font-size: 16px;
+	border-radius: 10px;
 }
 #openBackpack:hover {
 	font-size: 20px;
 	font-weight: 500;
+	background-color: #FFE5B5;
+	border: solid black 1.5px;
 }
-
 #backpack {
 	display: none;
 	width: 95%;
@@ -23,6 +25,7 @@
 	border: solid grey 1px;
 	background-color:rgba(255,255,255,0.9);
 }
+
 
 #profile {
 	position: absolute;
@@ -37,20 +40,90 @@
 	border: solid grey 1px;
 }
 #profile #profilePic {
-	width: 250px;
-	height: 250px;
+	position: relative;
+	left: -80px;
+	width: 400px;
+	height: 400px;
 	margin: 10px;
 	overflow: hidden;
 }
 #profile .profileInfo {
 	width: 260px;
-	height: 50px;
+	line-height: 30px;
 	margin: 10px auto;
 	border: solid grey 1px;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
 }
+
 
 #shop {
 	height: 100%;
 	border: solid grey 1px;
 	margin-left: 320px;
+}
+
+#shop div{
+	border: solid grey 1px;
+}
+#shop #shopTitle {
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	font-size: 36px;
+	font-weight: 700;
+	border: none;
+}
+#shop .item{
+	width: 50%;
+	padding: 10px 20px;
+	float: left;
+	border: none;
+}
+#shop .item div{
+	margin: 10px auto;
+	padding: 10px;
+}
+#shop .item .itemName {
+	line-height: 50px;
+	text-align: center;
+	font-size: 26px;
+	font-weight: 500;
+	margin: 0px auto;
+	padding: 0px;
+}
+#shop .itemPic {
+	text-align: center
+}
+#shop .itemPic img{
+	height: 200px;
+	width: 300px;
+}
+#shop .itemBlock {
+	line-height: 30px;
+	text-align: center;
+}
+#shop .item .in{
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+#shop .item .in div {
+	display: inline-block;
+	width: calc( 50% - 10px );
+	margin: 0px;
+}
+#shop .item .in .cnt{
+	margin-left: 10px; 
+}
+#shop .item .buy {
+	margin: 10px auto;
+	font-size: 20px;
+	border-radius: 10px;
+}
+#shop .item .buy:hover {
+	font-weight: 500;
+	background-color: #FFE5B5;
+	border: solid black 1.5px;
 }

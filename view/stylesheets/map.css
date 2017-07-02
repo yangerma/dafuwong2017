@@ -1,41 +1,52 @@
 #map{
 	position: absolute;
-	left: 110px;
+	/*left: 110px;
+	transform-origin:top;
+	transform:skewX(-10deg);*/
+	transform: scale(0.9, 0.9);
+	left: 50px;
 	top: 50px;
 	width: 900px;
 	height: 700px;
 	padding: 100px;
-	transform-origin:top;
-	transform:skewX(-10deg);
 }
-#map .circle{
+#map div{
+	background: #D9D9D9;
+}
+#map .node {
 	position: absolute;
 	width:50px;
 	height:50px;
-	background:#0cc;
 	-webkit-clip-path:circle(50% at 50% 50%);
 }
-#map #c03 {
-	background: orange;
-	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-}
-#map #c33 {
-	background: orange;
-	-webkit-clip-path:polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-}
-#map .triangle{
+#map .home {
 	position: absolute;
 	width:80px;
-	height:69.6px;
-	background:#c00;
-	-webkit-clip-path:polygon(0% 100%, 50%  0%,100% 100%);
+	height:80px;
+	-webkit-clip-path:circle(50% at 50% 50%);
 }
-#map #switch{
+#map .dhcp {
+	background: #B0B0B0;
 	position: absolute;
-	left: calc(50% - 64.8px);
-	top: calc(50% - 61.6px);
-	width:129.6px;
-	height:123.2px;
-	background:#095;
-	-webkit-clip-path:polygon(0% 38.31%, 50% 0%,100% 38.31%,80.86% 100%,19.14% 100%);
+	width:60px;
+	height:60px;
+	text-align: center;
+	line-height: 60px;
+}
+
+#map #switch {
+	position: absolute;
+	width:120px;
+	height:120px;
+	left: calc(50% - 60px);
+	top: calc(50% - 60px);
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
+#map #switch img{
+	position: absolute;
+	height: 80px;
+	width: 80px;
+	left: calc(50% - 42px);
+	top: calc(50% - 42px);
+	opacity: 0.2;
 }

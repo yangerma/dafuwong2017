@@ -17,6 +17,7 @@ socket.on("buy_item", (arg) => showBuyItem(arg.playerId, arg.itemId));
 socket.on('update', function(data) {
 	var old = model;
 	model = data;
+	clearInterval(timer);
 	update();
 	var state = model.state;
 	if (old != null && old.state == state) {
@@ -39,29 +40,6 @@ socket.on('update', function(data) {
 		console.log("Wrong state:" + state);
 	}
 });
-
-function update() {
-	for (var i = 0; i < 5; i++) {
-
-		// update position
-		var currPos = '#' + model.players[i].pos;
-		var x = $(currPos).offset().left;
-		var y = $(currPos).offset().top;
-		$("#player" + i).css('top', y);
-		$("#player" + i).css('left', x);
-
-		// update scoreboard
-		var j = i;
-		$('#info' + (i+1) + ' h4').text(model.players[j].name);
-		$('#info' + (i+1) + ' p').text('$' + model.players[j].money);
-
-		// update ip
-
-
-		// update items 
-
-	}
-}
 
 function login() {
 	playerId = Number( $('#teamID').val() );
@@ -98,8 +76,8 @@ function update() {
 
 		// update position
 		var currPos = '#' + model.players[i].pos;
-		var x = $(currPos).offset().left;
-		var y = $(currPos).offset().top;
+		var x = $(currPos).offset().left - 15 - i;
+		var y = $(currPos).offset().top - 35 - 2*i;
 		$("#player" + i).css('top', y);
 		$("#player" + i).css('left', x);
 
@@ -118,6 +96,11 @@ function update() {
 	$('#vpn .itemPrice').text('$' + model.items[1].cost);
 	$('#firewall .itemPrice').text('$' + model.items[0].cost);
 	$('#profIP').text('your IP is ' + model.players[playerId].ip);
+
+	// update switch state
+	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
+	else $('#switch img').css('transform', 'scale(1,-1)');
+
 }
 
 function showQuestion(){
@@ -193,6 +176,7 @@ function showQuestion(){
 			});
 		}
 		socket.emit("answer_question", ans);
+		showTurnOver();
 
 	})
 
@@ -229,6 +213,9 @@ function showBackpack() {
 	$('#backpack').show();
 }
 
+function showTurnOver() {
+	$("#end").show();
+}
 function showHouseEvent() {
 	var house = model.map[model.players[model.nowPlaying].pos];
 	if( house.owner == null ) {
@@ -262,17 +249,15 @@ function showHouseEvent() {
 
 }
 
-function turnOver() {
-	socket.emit("turn_over");
-}
-
 function closeHouseBox() {
 	$('.houseBox').hide();
+	showTurnOver();
 	clearInterval(timer);
 }
 
 function buyHouse() {
-	socket.emit("buy_house")
+	socket.emit("buy_house");
+	showTurnOver();
 	closeHouseBox();
 }
 
@@ -289,4 +274,20 @@ function buyItem(itemId) {
 	} else {
 		console.log("Failed to buy item QQ");
 	}
+}
+
+function turnOver() {
+	$('#end').hide();
+	socket.emit("turn_over");
+}
+
+function recvNotification( res ) {
+	//res: { teamId, item }
+	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
+	$('#notification #team').text('Player ' + res.teamId );
+	$('#notification span').text(res.item);
+	$('#notification').fadeIn(1000);
+	setTimeout(function(){
+		$('#notification').fadeOut(1000);
+	},2000);
 }
