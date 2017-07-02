@@ -3,6 +3,7 @@
 	/*left: 110px;
 	transform-origin:top;
 	transform:skewX(-10deg);*/
+	transform: scale(0.9, 0.9);
 	left: 50px;
 	top: 50px;
 	width: 900px;
@@ -10,26 +11,27 @@
 	padding: 100px;
 }
 #map div{
-	background: #DEDEDE;
+	background: #D9D9D9;
 }
 #map .node {
 	position: absolute;
 	width:50px;
 	height:50px;
-	/*background:#0cc;*/
 	-webkit-clip-path:circle(50% at 50% 50%);
 }
 #map .home {
 	position: absolute;
 	width:80px;
 	height:80px;
-	/*background:#0cc;*/
 	-webkit-clip-path:circle(50% at 50% 50%);
 }
 #map .dhcp {
+	background: #B0B0B0;
 	position: absolute;
-	width:50px;
-	height:50px;
+	width:60px;
+	height:60px;
+	text-align: center;
+	line-height: 60px;
 }
 
 #map #switch {
@@ -38,7 +40,6 @@
 	height:120px;
 	left: calc(50% - 60px);
 	top: calc(50% - 60px);
-	/*background:#0cc;*/
 	-webkit-clip-path:circle(50% at 50% 50%);
 }
 #map #switch img{
@@ -47,5 +48,5 @@
 	width: 80px;
 	left: calc(50% - 42px);
 	top: calc(50% - 42px);
-	opacity: 0.8;
+	opacity: 0.2;
 }
