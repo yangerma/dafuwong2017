@@ -96,8 +96,8 @@ function update() {
 	$('#profIP').text('your IP is ' + model.players[playerId].ip);
 
 	// update switch state
-	if( model.switchState == 1 ) $('#switch img').attr('transform', 'scale(1,1)');
-	else $('#switch img').attr('transform', 'scale(-1,-1)');
+	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
+	else $('#switch img').css('transform', 'scale(1,-1)');
 
 }
 
@@ -196,11 +196,6 @@ function closeQuestion() {
 	socket.emit("turn_over");
 }
 
-function showBackpack() {
-	// update items in popBox
-	$('#backpack').show();
-}
-
 function arriveLand( land ) {
 	if( land.ownerId == null ) {
 		$('#buyHouse .housePrice').text( land.updatePrice );
@@ -238,22 +233,10 @@ function closeHouseBox() {
 	clearInterval(timer);
 }
 
-function buyHouse() {
-
-}
-
 function buyItem(itemId) {
 	if (model.players[playerId].money >= model.items[itemId].cost) {
 		socket.emit('buy_item', playerId, itemId);
 	} else {
 		console.log("Failed to buy item QQ");
 	}
-}
-
-function updateHouse() {
-	
-}
-
-function passOthersHouse() {
-	
 }

@@ -31,6 +31,8 @@
 	position: absolute;
 	width:50px;
 	height:50px;
+	text-align: center;
+	line-height: 50px;
 }
 
 #map #switch {
@@ -48,5 +50,5 @@
 	width: 80px;
 	left: calc(50% - 42px);
 	top: calc(50% - 42px);
-	opacity: 0.3;
+	opacity: 0.2;
 }

@@ -9,6 +9,10 @@ body {
 	font-weight: 300;
 }
 
+strong {
+	font-weight: 500;
+}
+
 .closeButton {
 	height: 40px;
 	width: 40px;
