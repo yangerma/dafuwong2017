@@ -1,13 +1,12 @@
-var MAX_PLAYER = 1;
+var MAX_PLAYER = 2;
 var N_QUESTION = 13; 
 /* Define game state. */
 const GAMEOVER = 0;
 const START = 1;
-const ROLL_DICE = 2;
-const MOVE = 3;
+const MOVE = 2;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5;
-const BUY_ITEM = 6;
+const HOUSE = 6;
 
 var map = require("./model/map.js");
 var Player = require("./model/player.js");
@@ -20,7 +19,6 @@ Controller = function(io) {
 	var model = {
 		state: WAIT_TO_ROLL,
 		nowPlaying: 0,
-		diceResult: null,
 		map: map,
 		items: items,
 		players: [
@@ -32,9 +30,15 @@ Controller = function(io) {
 		],
 		switchState: 1,
 		question: null,
-		buyItem: null,
 	}
 	
+	function notify(event, arg) {
+		for (var i = 0; i < MAX_PLAYER; i++) {
+			if (model.players[i].connect == true) {
+				playerIO[i].emit(event, arg);
+			}
+		}
+	}
 	function publish() {
 		for (var i = 0; i < MAX_PLAYER; i++) {
 			if (model.players[i].connect == true) {
@@ -44,12 +48,13 @@ Controller = function(io) {
 	}
 
 	function rollDice(id) {
-		if (id == model.nowPlaying) {
-			model.state = ROLL_DICE;
-			model.diceResult = Math.ceil(Math.random() * 4);
-			console.log("Player " + id + " roll " + model.diceResult);
+		if (id == model.nowPlaying && model.state == WAIT_TO_ROLL) {
+			var diceResult = Math.ceil(Math.random() * 4);
+			console.log("Player " + id + " roll " + diceResult);
+			notify("dice_result", diceResult);
+			model.state = MOVE;
 			publish();
-			setTimeout(move, 1000);
+			setTimeout(() => move(diceResult), 3000);
 
 		} else {
 			console.log("Wrong player roll dice:" + id);
@@ -62,10 +67,8 @@ Controller = function(io) {
 		publish();
 	}
 
-	function move() {
-		model.state = MOVE;
-		publish();
-		for (var i = 0; i < model.diceResult; i++) {	
+	function move(steps) {
+		for (var i = 0; i < steps; i++) {	
 			setTimeout(() => {
 				var next;
 				var current = model.map[model.players[model.nowPlaying].pos];
@@ -83,26 +86,49 @@ Controller = function(io) {
 			}, 500 * (i + 1));
 		}
 		setTimeout(() => {
-			event();
-		}, 500 * model.diceResult + 1000);
+			var nodeType = map[model.players[model.nowPlaying].pos].type;
+			houseEvent();
+			return;
+			if (nodeType == "question") {
+				questionEvent();
+			} else if (nodeType == "server") {
+				houseEvent();
+			}
+		}, 500 * steps + 1000);
 	}
-	function event() {
-		var nodeType = map[model.players[model.nowPlaying].pos].type;
+
+	function questionEvent() {
 		model.state = QUESTION;
 		var questionId = Math.round(Math.random() * N_QUESTION);
-		console.log("event: question " + questions[questionId]);
 		model.question = questions[questionId];
 		publish();
 	}
 
+	function houseEvent() {
+		model.state = HOUSE;
+		publish();
+	}
+	function answerQuestion(ans) {
+		if (JSON.stringify(model.question.correct) == JSON.stringify(ans)) {
+			/* TODO: get question reward */
+		}
+		publish();
+		notify("show_answer", ans);
+	}
+	function buyHouse() {
+		var house = model.map[model.players[model.nowPlaying].pos]
+		house.owner = model.nowPlaying;
+		house.price += house.level * 300;
+		house.tolls += house.level * 300;
+		console.log("Player " + model.nowPlaying + " buy " + model.players[model.nowPlaying].pos);
+		publish();
+	}
+
 	function buyItem(playerId, itemId) {
-		var temp = model.state;
-		model.state = BUY_ITEM;
 		model.players[playerId].money -= model.items[itemId].cost;
 		model.players[playerId].items[itemId] += 1;
-		model.buyItem = {playerId: playerId, itemId: itemId};
 		publish();
-		model.state = temp;
+		notify("buy_item", {playerId: playerId, itemId: itemId});
 	}
 	
 
@@ -127,6 +153,8 @@ Controller = function(io) {
 		})
 		player.on("roll_dice", (id) => rollDice(id));
 		player.on("buy_item",  (id, item) => buyItem(id, item));
+		player.on("buy_house", buyHouse);
+		player.on("answer_question", (ans) => answerQuestion(ans));
 		player.on("turn_over", nextTurn);
 	});
 }
