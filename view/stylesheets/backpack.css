@@ -62,13 +62,12 @@
 	border: solid grey 1px;
 }
 #shop #shopTitle {
-	height: 50px;
-	line-height: 50px;
+	height: 60px;
+	line-height: 60px;
 	text-align: center;
 	font-size: 36px;
 	font-weight: 700;
-	margin: 20px;
-	margin-bottom: 0px;
+	border: none;
 }
 #shop .item{
 	width: 50%;
@@ -78,6 +77,7 @@
 }
 #shop .item div{
 	margin: 10px auto;
+	padding: 10px;
 }
 #shop .item .itemName {
 	line-height: 50px;
@@ -85,20 +85,16 @@
 	font-size: 26px;
 	font-weight: 500;
 	margin: 0px auto;
+	padding: 0px;
 }
 #shop .itemPic {
-	padding: 10px;
 	text-align: center
 }
 #shop .itemPic img{
 	height: 200px;
 	width: 300px;
 }
-#shop .itemDes {
-	padding: 10px;
-}
 #shop .itemBlock {
-	padding: 10px;
 	line-height: 30px;
 	text-align: center;
 }
