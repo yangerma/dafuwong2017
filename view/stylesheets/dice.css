@@ -1,14 +1,9 @@
 .diceBox {
-	text-align: center;
-	display: none;
 	width: 600px;
 	height: 440px;
-	position: absolute;
 	left: calc(50% - 300px);
 	top: calc(50% - 220px);
 	padding: 20px;
-	border: solid grey 1px;
-	background-color:rgba(255,255,255,0.85);
 }
 #rollDice img {
 	margin: 20px;

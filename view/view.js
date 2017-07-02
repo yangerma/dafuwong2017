@@ -193,7 +193,7 @@ function showQuestion(q){
 }
 function closeQuestion() {
 	$('#questionBox').hide();
-	socket.emit("turn_over");
+	$('#end').show();
 }
 
 function arriveLand( land ) {
@@ -239,4 +239,9 @@ function buyItem(itemId) {
 	} else {
 		console.log("Failed to buy item QQ");
 	}
+}
+
+function endRound() {
+	$('#end').hide();
+	socket.emit("turn_over");
 }

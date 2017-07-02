@@ -128,7 +128,7 @@
 		</div>
 	</div>
 
-	<div id="questionBox">
+	<div class="popBox" id="questionBox">
 		<img src="img/close.png" class="closeButton" onclick="closeQuestion()">
 		<div class="title">
 			<h1>題目名稱</h1>
@@ -194,7 +194,7 @@
 
 	</div>
 
-	<div class="diceBox" id="diceResult">
+	<div class="diceBox popBox" id="diceResult">
 		<div class="txtbox">
 			<h2>Player # got</h2>
 			<h1>3!</h1>
@@ -202,14 +202,14 @@
 		<img src="img/wifi1.png">
 	</div>
 
-	<div class="diceBox" id="rollDice">
+	<div class="diceBox popBox" id="rollDice">
 		<div class="txtbox">
 			<h1>Player # roll the dice!</h1>
 		</div>
 		<img src="img/wifi4.png" id="wifi" onclick="rollDice()">
 	</div>
 
-	<div class="houseBox" id="buyHouse">
+	<div class="houseBox popBox" id="buyHouse">
 		<h1>要不要來架一台server呀</h1>
 		<p>一台只要 $<span class="housePrice">2000</span> ，還可以跟別人收過路費唷。</p>
 		<div class="buttons">
@@ -225,7 +225,7 @@
 		<div class="timer"></div>
 	</div>
 
-	<div class="houseBox" id="updateHouse">
+	<div class="houseBox popBox" id="updateHouse">
 		<h1>要不要升級一下server呀</h1>
 		<p>一次只要 $<span class="housePrice">3000</span> ，就可以收更多的過路費唷。</p>
 		<div class="buttons">
@@ -241,7 +241,7 @@
 		<div class="timer"></div>
 	</div>
 
-	<div class="houseBox" id="passOthersHouse">
+	<div class="houseBox popBox" id="passOthersHouse">
 		<h1>哎呀！你踩到 <span class="houseOwner">XXX</span> 的地盤了</h1>
 		<p>該付人家 <span class="housePrice">$500</span> 的過路費了唷。</p>
 		<div class="buttonBlock" id="iKnow" onclick="closeHouseBox()">
@@ -249,6 +249,8 @@
 			<div class="reply">QQ 知道了啦</div>
 		</div>
 	</div>
+
+	<div id="end" class="popBox" onclick="endRound()">結束回合</div>
 
 	<div id="openBackpack" onclick="$('#backpack').show()"> Check my backpack </div>
 	<div id="backpack">
@@ -302,6 +304,8 @@
 
 	<div class="alertBox" id="timeOut">來 不 及 了 QQ</div>
 	<div class="alertBox" id="noMoney">你 買 不 起 :(</div>
+
+	<div class="notification"></div>>
 
 </div>
 </body>

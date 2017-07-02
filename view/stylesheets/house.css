@@ -1,14 +1,9 @@
 .houseBox {
-	text-align: center;
-	display: none;
 	width: 560px;
 	height: 300px;
-	position: absolute;
 	left: calc(50% - 280px);
 	top: calc(50% - 150px);
 	padding: 20px;
-	border: solid grey 1px;
-	background-color:rgba(255,255,255,0.85);
 }
 .houseBox .buttonBlock {
 	display: inline-block;
