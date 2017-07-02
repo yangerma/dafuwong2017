@@ -8,6 +8,7 @@ const ROLL_DICE = 2;
 const MOVE = 3;;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5;
+const BUY_ITEM = 6;
 
 socket.on('update', function(data) {
 	model = data;
@@ -28,6 +29,8 @@ socket.on('update', function(data) {
 		if (model.nowPlaying == playerId) {
 			showQuestion(model.question);
 		}
+	} else if (state == BUY_ITEM) {
+		/* update model.buyItem = {playerId, itemId} */
 	} else {
 		console.log("Wrong state:" + state);
 	}
@@ -81,11 +84,15 @@ function update() {
 		$('#info' + (i+1) + ' p').text('$' + model.players[j].money);
 
 		// update ip
-
-
-		// update items 
-
 	}
+
+	// update items 
+	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
+	$('#vpn .cnt').text('目前共有' + model.players[playerId].items[1] + '個');
+	$('#profMoney').text('you have $' + model.players[playerId].money);
+	$('#vpn .itemPrice').text('$' + model.items[1].cost);
+	$('#firewall .itemPrice').text('$' + model.items[0].cost);
+	$('#profIP').text('your IP is ' + model.players[playerId].ip);
 }
 
 function showQuestion(q){
@@ -187,4 +194,12 @@ function showBackpack() {
 function closeQuestion() {
 	$('#questionBox').hide();
 	socket.emit("turn_over");
+}
+
+function buyItem(itemId) {
+	if (model.players[playerId].money >= model.items[itemId].cost) {
+		socket.emit('buy_item', playerId, itemId);
+	} else {
+		console.log("Failed to buy item QQ");
+	}
 }
