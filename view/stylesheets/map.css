@@ -1,0 +1,51 @@
+#map{
+	position: absolute;
+	/*left: 110px;
+	transform-origin:top;
+	transform:skewX(-10deg);*/
+	left: 50px;
+	top: 50px;
+	width: 900px;
+	height: 700px;
+	padding: 100px;
+}
+#map div{
+	background: #DEDEDE;
+}
+#map .node {
+	position: absolute;
+	width:50px;
+	height:50px;
+	/*background:#0cc;*/
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
+#map .home {
+	position: absolute;
+	width:80px;
+	height:80px;
+	/*background:#0cc;*/
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
+#map .dhcp {
+	position: absolute;
+	width:50px;
+	height:50px;
+}
+
+#map #switch {
+	position: absolute;
+	width:120px;
+	height:120px;
+	left: calc(50% - 60px);
+	top: calc(50% - 60px);
+	/*background:#0cc;*/
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
+#map #switch img{
+	position: absolute;
+	height: 80px;
+	width: 80px;
+	left: calc(50% - 42px);
+	top: calc(50% - 42px);
+	opacity: 0.8;
+}
