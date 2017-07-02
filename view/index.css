@@ -201,8 +201,8 @@ body {
 	border: solid grey 1px;
 }
 #profile #profilePic {
-	width: 250px;
-	height: 250px;
+	width: 240px;
+	height: 240px;
 	margin: 10px;
 	overflow: hidden;
 }
@@ -211,9 +211,58 @@ body {
 	height: 50px;
 	margin: 10px auto;
 	border: solid grey 1px;
+	line-height: 50px;
+	text-align: center;
 }
 #shop {
 	height: 100%;
-	border: solid grey 1px;
 	margin-left: 320px;
+	border: solid grey 1px;
 }
+#shop div{
+	border: solid grey 1px;
+}
+#shop #shopTitle {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 36px;
+	font-weight: 700;
+	margin: 20px;
+	margin-bottom: 0px;
+}
+#shop .item{
+	width: 50%;
+	padding: 10px 20px;
+	float: left;
+	border: none;
+}
+#shop .item div{
+	margin: 10px auto;
+}
+#shop .item .itemName {
+	line-height: 50px;
+	text-align: center;
+	font-size: 26px;
+	margin: 0px auto;
+}
+#shop .itemPic {
+	height: 250px;
+}
+#shop .itemDes {
+	height: 110px;
+}
+#shop .itemBlock {
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+#shop .item .buy {
+	margin: 0px auto;
+}
+#shop .item .buy:hover {
+	font-weight: 500;
+	font-size: 20px;
+}
+
+
