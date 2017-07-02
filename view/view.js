@@ -5,16 +5,23 @@ var timer = null;
 
 const GAMEOVER = 0;
 const START = 1;
-const ROLL_DICE = 2;
-const MOVE = 3;;
+const MOVE = 2;
 const WAIT_TO_ROLL = 4;
-const QUESTION = 5;
-const BUY_ITEM = 6;
+const QUESTION = 5
+const HOUSE = 6;
+/* Notification */
+socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
+socket.on("show_answer", (ans) => showAnswer(ans));
+socket.on("buy_item", (arg) => showBuyItem(arg.playerId, arg.itemId));
 
 socket.on('update', function(data) {
+	var old = model;
 	model = data;
 	update();
 	var state = model.state;
+	if (old != null && old.state == state) {
+		return;
+	}
 	if (state == WAIT_TO_ROLL) {
 		if (model.nowPlaying == playerId) {
 			console.log("It your turn!");
@@ -22,16 +29,12 @@ socket.on('update', function(data) {
 		} else {
 			console.log("Player" + model.nowPlaying + "'s turn.");
 		}
-	} else if (state == ROLL_DICE) {
-		showDiceResult();
-	} else if (state == MOVE) {
-		hideDice();
 	} else if (state == QUESTION) {
+		showQuestion();
+	} else if (state == HOUSE) {
 		if (model.nowPlaying == playerId) {
-			showQuestion(model.question);
+			showHouseEvent();
 		}
-	} else if (state == BUY_ITEM) {
-		/* update model.buyItem = {playerId, itemId} */
 	} else {
 		console.log("Wrong state:" + state);
 	}
@@ -75,20 +78,19 @@ function hideDice() {
 	$('#diceResult').hide();
 }
 function rollDice() {
+	socket.emit('roll_dice', playerId);
+}
+function showDiceResult(diceResult) {
+	var playerId = model.nowPlaying;
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
-		console.log("emit roll dice");
-		socket.emit('roll_dice', playerId);
+		$('#diceResult .txtbox h2').text("Player " + playerId + " got");
+		$('#diceResult .txtbox h1').text( diceResult );
+		$('#diceResult img').attr( 'src', "img/wifi" + diceResult + ".png" );
+		$('#diceResult').show();
+		setTimeout(hideDice, 1000);
 	}, 2000 );
-}
-function showDiceResult() {
-	player_ID = model.nowPlaying;
-	dice_result = model.diceResult;
-	$('#diceResult .txtbox h2').text("Player " + player_ID + " got");
-	$('#diceResult .txtbox h1').text( dice_result );
-	$('#diceResult img').attr( 'src', "img/wifi" + dice_result + ".png" );
-	$('#diceResult').show();
 }
 
 function update() {
@@ -118,15 +120,21 @@ function update() {
 	$('#profIP').text('your IP is ' + model.players[playerId].ip);
 }
 
-function showQuestion(q){
+function showQuestion(){
 
-	// var q = questions[qid];
+	var q = model.question;
 	$('#questionBox').show();
 	$('#questionBox #timeLeft').show();
 	$('#questionBox .closeButton').hide();
 	$('#questionBox #answerResult').hide();
 	$('#questionBox .qTitle h1').text(q.subject);
 	$('#questionBox .qDes p').text(q.description);
+	
+	if (playerId == model.nowPlaying) {
+		$("#submitButton").show();
+	} else {
+		$("#submitButton").hide();
+	}
 
 	if( q.multi ) {
 		$('#questionBox #multiOptions').show();
@@ -184,33 +192,36 @@ function showQuestion(q){
 			    ans.push( Number( $(this).val() ) );
 			});
 		}
+		socket.emit("answer_question", ans);
 
-		var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
-		if (correct) {
-			$('#answerResult h1').text("答對了！");
-			$('#answerResult img').attr( 'src', "img/correct.png" );
-		}
-		else {
-			$('#answerResult h1').text("答錯了QQ");
-			$('#answerResult img').attr( 'src', "img/wrong.png" );
-		}
-
-		var correctAns = '正確答案：';
-		for (var i = 0; i < q.correct.length; i++) {
-			if( i!=0 ) correctAns += ",   ";
-			correctAns += ( q.options[ q.correct[i] ] );
-		}
-		
-		$('#questionBox #answerResult p').text(correctAns);
-		$('#questionBox form').hide();
-		$('#questionBox .closeButton').show();
-		$('#questionBox #answerResult').show();
 	})
 
 }
+function showAnswer(ans) {
+	var q = model.question;
+	var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
+	if (correct) {
+		$('#answerResult h1').text("答對了！");
+		$('#answerResult img').attr( 'src', "img/correct.png" );
+	}
+	else {
+		$('#answerResult h1').text("答錯了QQ");
+		$('#answerResult img').attr( 'src', "img/wrong.png" );
+	}
+
+	var correctAns = '正確答案：';
+	for (var i = 0; i < q.correct.length; i++) {
+		if( i!=0 ) correctAns += ",   ";
+		correctAns += ( q.options[ q.correct[i] ] );
+	}
+	
+	$('#questionBox #answerResult p').text(correctAns);
+	$('#questionBox form').hide();
+	$('#questionBox .closeButton').show();
+	$('#questionBox #answerResult').show();
+}
 function closeQuestion() {
 	$('#questionBox').hide();
-	socket.emit("turn_over");
 }
 
 function showBackpack() {
@@ -218,18 +229,19 @@ function showBackpack() {
 	$('#backpack').show();
 }
 
-function arriveLand( land ) {
-	if( land.ownerId == null ) {
-		$('#buyHouse .housePrice').text( land.updatePrice );
+function showHouseEvent() {
+	var house = model.map[model.players[model.nowPlaying].pos];
+	if( house.owner == null ) {
+		$('#buyHouse .housePrice').text( house.price );
 		$('#buyHouse').show();
 	}
-	else if( land.ownerId == playerId ) {
-		$('#updateHouse .housePrice').text( land.updatePrice );
+	else if( house.owner == playerId ) {
+		$('#updateHouse .housePrice').text( house.price );
 		$('#updateHouse').show();
 	}
-	else {	//other's land
-		$('#passOthersHouse .houseOwner').text( 'player' + land.ownerId );
-		$('#passOthersHouse .housePrice').text( land.passPrice );
+	else {	//other's house
+		$('#passOthersHouse .houseOwner').text( 'player' + house.owner );
+		$('#passOthersHouse .housePrice').text( house.tolls );
 		$('#passOthersHouse').show();
 	}
 
@@ -250,13 +262,18 @@ function arriveLand( land ) {
 
 }
 
+function turnOver() {
+	socket.emit("turn_over");
+}
+
 function closeHouseBox() {
 	$('.houseBox').hide();
 	clearInterval(timer);
 }
 
 function buyHouse() {
-
+	socket.emit("buy_house")
+	closeHouseBox();
 }
 
 function updateHouse() {
