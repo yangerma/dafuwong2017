@@ -6,10 +6,13 @@
 	text-align: center;
 	line-height: 50px;
 	font-size: 16px;
+	border-radius: 10px;
 }
 #openBackpack:hover {
 	font-size: 20px;
 	font-weight: 500;
+	background-color: #FFE5B5;
+	border: solid black 1.5px;
 }
 #backpack {
 	display: none;
@@ -38,17 +41,20 @@
 }
 #profile #profilePic {
 	position: relative;
-	left: -25px;
-	width: 300px;
-	height: 300px;
+	left: -80px;
+	width: 400px;
+	height: 400px;
 	margin: 10px;
 	overflow: hidden;
 }
 #profile .profileInfo {
 	width: 260px;
-	height: 50px;
+	line-height: 30px;
 	margin: 10px auto;
 	border: solid grey 1px;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
 }
 
 
@@ -98,10 +104,26 @@
 	line-height: 30px;
 	text-align: center;
 }
+#shop .item .in{
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+#shop .item .in div {
+	display: inline-block;
+	width: calc( 50% - 10px );
+	margin: 0px;
+}
+#shop .item .in .cnt{
+	margin-left: 10px; 
+}
 #shop .item .buy {
-	margin: 0px auto;
+	margin: 10px auto;
+	font-size: 20px;
+	border-radius: 10px;
 }
 #shop .item .buy:hover {
 	font-weight: 500;
-	font-size: 20px;
+	background-color: #FFE5B5;
+	border: solid black 1.5px;
 }

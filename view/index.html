@@ -259,9 +259,6 @@
 			<img src="img/player1.png" id="profilePic">
 			<div class="profileInfo" id="profMoney"></div>
 			<div class="profileInfo" id="profIP"></div>
-			<div class="profileInfo"></div>
-			<div class="profileInfo"></div>
-			<div class="profileInfo"></div>
 		</div>
 		<div id="shop">
 
@@ -278,8 +275,10 @@
 				<div class="itemUsage">
 					<strong>功能：</strong>在自己回合使用。在目前所在位置蓋防火牆，會強制阻擋之後經過的第一人。
 				</div>
-				<div class="itemPrice itemBlock"></div>
-				<div class="cnt itemBlock"></div>
+				<div class="in">
+					<div class="itemPrice itemBlock"></div>
+					<div class="cnt itemBlock"></div>
+				</div>
 				<div class="buy itemBlock" onclick="buyItem(0)">BUY</div>
 			</div>
 			<div class="item" id="vpn">
@@ -291,8 +290,10 @@
 				<div class="itemUsage">
 					<strong>功能：</strong>在自己回合使用。若在移動時被防火牆擋下時可以選擇無視他。使用一次後失效。
 				</div>
-				<div class="itemPrice itemBlock"></div>
-				<div class="cnt itemBlock"></div>
+				<div class="in">
+					<div class="itemPrice itemBlock"></div>
+					<div class="cnt itemBlock"></div>
+				</div>
 				<div class="buy itemBlock" onclick="buyItem(1)">BUY</div>
 			</div>
 		</div>
