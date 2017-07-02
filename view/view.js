@@ -13,6 +13,7 @@ const BUY_ITEM = 6;
 
 socket.on('update', function(data) {
 	model = data;
+	clearInterval(timer);
 	update();
 	var state = model.state;
 	if (state == WAIT_TO_ROLL) {
@@ -73,8 +74,8 @@ function update() {
 
 		// update position
 		var currPos = '#' + model.players[i].pos;
-		var x = $(currPos).offset().left;
-		var y = $(currPos).offset().top;
+		var x = $(currPos).offset().left - 15 - i;
+		var y = $(currPos).offset().top - 35 - 2*i;
 		$("#player" + i).css('top', y);
 		$("#player" + i).css('left', x);
 
