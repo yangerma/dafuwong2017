@@ -86,6 +86,9 @@ function update() {
 		// update items 
 
 	}
+	// update switch state
+	if( model.switchState == 1 ) $('#switch img').attr('transform', 'scale(1,1)');
+	else $('#switch img').attr('transform', 'scale(-1,-1)');
 }
 
 function showQuestion(q){
