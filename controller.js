@@ -7,10 +7,12 @@ const ROLL_DICE = 2;
 const MOVE = 3;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5;
+const BUY_ITEM = 6;
 
 var map = require("./model/map.js");
 var Player = require("./model/player.js");
 var questions = require("./model/questions.js");
+var items = require("./model/items.js");
 
 Controller = function(io) {
 	var io = io;
@@ -20,6 +22,7 @@ Controller = function(io) {
 		nowPlaying: 0,
 		diceResult: null,
 		map: map,
+		items: items,
 		players: [
 			Player(0, "p0"),
 			Player(1, "p1"),
@@ -27,7 +30,8 @@ Controller = function(io) {
 			Player(3, "p3"),
 			Player(4, "p4")
 		],
-		question: null
+		question: null,
+		buyItem: null,
 	}
 	
 	function publish() {
@@ -79,6 +83,16 @@ Controller = function(io) {
 		model.question = questions[questionId];
 		publish();
 	}
+
+	function buyItem(playerId, itemId) {
+		var temp = model.state;
+		model.state = BUY_ITEM;
+		model.players[playerId].money -= model.items[itemId].cost;
+		model.players[playerId].items[itemId] += 1;
+		model.buyItem = {playerId: playerId, itemId: itemId};
+		publish();
+		model.state = temp;
+	}
 	
 
 	/* Listen new connection */
@@ -101,6 +115,7 @@ Controller = function(io) {
 			player.emit("update", model);
 		})
 		player.on("roll_dice", (id) => rollDice(id));
+		player.on("buy_item",  (id, item) => buyItem(id, item));
 		player.on("turn_over", nextTurn);
 	});
 	/***************************************************************/

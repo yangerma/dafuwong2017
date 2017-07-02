@@ -5,7 +5,7 @@ Player = function(id, name) {
 		name: name,
 		money: MONEY_INIT,
 		pos: "t" + id,
-		item: [0, 0, 0],	//firewall, vpn, 不知道
+		items: [0, 0, 0],	//firewall, vpn, 不知道
 		connect: false
 	}
 }
