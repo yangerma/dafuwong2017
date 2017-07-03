@@ -95,7 +95,7 @@ function update() {
 	$('#profMoney').text('you have $' + model.players[playerId].money);
 	$('#vpn .itemPrice').text('$' + model.items[1].cost);
 	$('#firewall .itemPrice').text('$' + model.items[0].cost);
-	$('#profIP').text('your IP is ' + model.players[playerId].ip);
+	$('#profIP').text('your IP is 192.168.' + model.players[playerId].id + '.1');
 
 	// update switch state
 	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
@@ -218,11 +218,12 @@ function showTurnOver() {
 }
 function showHouseEvent() {
 	var house = model.map[model.players[model.nowPlaying].pos];
+	var nowId = model.players[model.nowPlaying].id;
 	if( house.owner == null ) {
 		$('#buyHouse .housePrice').text( house.price );
 		$('#buyHouse').show();
 	}
-	else if( house.owner == playerId ) {
+	else if( house.owner == nowId ) {
 		$('#updateHouse .housePrice').text( house.price );
 		$('#updateHouse').show();
 	}

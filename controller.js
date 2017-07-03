@@ -63,6 +63,10 @@ Controller = function(io) {
 	function nextTurn() {
 		model.state = WAIT_TO_ROLL;
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
+		/* 
+		 * TODO: round (5 turns == 1 round) (?)
+		 * TODO: routing money per round (?)
+		 */
 		console.log("player " + model.nowPlaying + "'s turn.");
 		publish();
 	}
@@ -93,6 +97,12 @@ Controller = function(io) {
 				questionEvent();
 			} else if (nodeType == "server") {
 				houseEvent();
+			} else (nodeType == "dhcp") {
+				dhcpEvent();
+			} else if (nodeType == "switch") {
+				/* TODO: switchEvent(); */
+			} else if (nodeType == "chance") {
+				/* TODO: chanceEvent)();  */
 			}
 		}, 500 * steps + 1000);
 	}
@@ -106,8 +116,24 @@ Controller = function(io) {
 
 	function houseEvent() {
 		model.state = HOUSE;
+		var nowId = model.players[nowPlaying].id;
+		var house = map[model.players[nowPlaying].pos]
+		if (house.owner != null && house.owner != nowId) {
+			/* TODO: players[nowId] pay tolls. */
+		}
 		publish();
+		/* dhcp over */
+		if (nowId != model.nowPlaying) {
+			model.players[model.nowPlaying].id = model.nowPlaying;
+		}
 	}
+
+	function dhcpEvent() {
+		model.players[model.nowPlaying].id = Math.ceil(Math.random() * 5);
+		publish();
+		/* TODO: notify("dhcp"); */
+	}
+
 	function answerQuestion(ans) {
 		if (JSON.stringify(model.question.correct) == JSON.stringify(ans)) {
 			/* TODO: get question reward */
@@ -122,6 +148,7 @@ Controller = function(io) {
 		house.tolls += house.level * 300;
 		console.log("Player " + model.nowPlaying + " buy " + model.players[model.nowPlaying].pos);
 		publish();
+		/* TODO; notify("buy_house"); */
 	}
 
 	function buyItem(playerId, itemId) {
@@ -151,10 +178,11 @@ Controller = function(io) {
 			model.players[id].connect = true;
 			player.emit("update", model);
 		})
-		player.on("roll_dice", (id) => rollDice(id));
-		player.on("buy_item",  (id, item) => buyItem(id, item));
+		player.on("roll_dice", (playerId) => rollDice(playerId));
+		player.on("buy_item",  (playerId, itemId) => buyItem(playerId, itemId));
 		player.on("buy_house", buyHouse);
 		player.on("answer_question", (ans) => answerQuestion(ans));
+		/*  TODO: player.on("use_item", (playerId, itemId) => useItem(playerId, itemId)); */
 		player.on("turn_over", nextTurn);
 	});
 }
