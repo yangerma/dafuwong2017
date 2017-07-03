@@ -1,4 +1,4 @@
-var MAX_PLAYER = 2;
+var MAX_PLAYER = 1;
 var N_QUESTION = 13; 
 /* Define game state. */
 const GAMEOVER = 0;
@@ -91,13 +91,15 @@ Controller = function(io) {
 		}
 		setTimeout(() => {
 			var nodeType = map[model.players[model.nowPlaying].pos].type;
-			houseEvent();
+			/* Test dhcpEvent */
+			dhcpEvent();
 			return;
+			/* -------------- */
 			if (nodeType == "question") {
 				questionEvent();
 			} else if (nodeType == "server") {
 				houseEvent();
-			} else (nodeType == "dhcp") {
+			} else if (nodeType == "dhcp") {
 				dhcpEvent();
 			} else if (nodeType == "switch") {
 				/* TODO: switchEvent(); */
@@ -116,8 +118,8 @@ Controller = function(io) {
 
 	function houseEvent() {
 		model.state = HOUSE;
-		var nowId = model.players[nowPlaying].id;
-		var house = map[model.players[nowPlaying].pos]
+		var nowId = model.players[model.nowPlaying].id;
+		var house = map[model.players[model.nowPlaying].pos]
 		if (house.owner != null && house.owner != nowId) {
 			/* TODO: players[nowId] pay tolls. */
 		}
@@ -130,6 +132,7 @@ Controller = function(io) {
 
 	function dhcpEvent() {
 		model.players[model.nowPlaying].id = Math.ceil(Math.random() * 5);
+		console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].id);
 		publish();
 		/* TODO: notify("dhcp"); */
 	}
@@ -142,11 +145,13 @@ Controller = function(io) {
 		notify("show_answer", ans);
 	}
 	function buyHouse() {
-		var house = model.map[model.players[model.nowPlaying].pos]
-		house.owner = model.nowPlaying;
+		var house = model.map[model.players[model.nowPlaying].pos];
+		var nowId = model.players[model.nowPlaying].id;
+		model.players[nowId];
+		house.owner = nowId;
 		house.price += house.level * 300;
 		house.tolls += house.level * 300;
-		console.log("Player " + model.nowPlaying + " buy " + model.players[model.nowPlaying].pos);
+		console.log("Player " + nowId + " buy " + house.pos);
 		publish();
 		/* TODO; notify("buy_house"); */
 	}
