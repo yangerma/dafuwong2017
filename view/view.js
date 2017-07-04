@@ -282,11 +282,32 @@ function turnOver() {
 	socket.emit("turn_over");
 }
 
-function recvNotification( res ) {
-	//res: { teamId, item }
+function showNotification( res ) {
+
+	// res: { teamId, eventType, arg }
+	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
+
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text('Player ' + res.teamId );
-	$('#notification span').text(res.item);
+
+	switch( res.eventType ) {
+		case 'buyItem' :
+			$('#notification p').text( '購買了 ' + res.arg + ' 。' );
+			break;
+		case 'buyHouse' :
+			$('#notification p').text( '在 ' + res.arg + ' 架了一台server。' );
+			break;
+		case 'updateHouse' :
+			$('#notification p').text( '在 ' + res.arg + ' 升級了server。' );
+			break;
+		case 'passOthersHouse' :
+			$('#notification p').text( '踩到了 Player' + res.arg + ' 的地！' );
+			break;
+		case 'DHCP' :
+			$('#notification p').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
+			break;
+	}
+	
 	$('#notification').fadeIn(1000);
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
