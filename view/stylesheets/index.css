@@ -116,6 +116,23 @@ strong {
 	font-weight: 500;
 }
 
+#login {
+	display: block;
+	height: 200px;
+	width: 500px;
+	left: calc(50% - 250px);
+	top: calc(50% - 100px);
+	padding: 20px;
+}
+#login *{
+	margin: 5px;
+}
+#login .title{
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 45px;
+	height: 45px;
+}
 
 
 

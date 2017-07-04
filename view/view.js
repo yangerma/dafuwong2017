@@ -1,5 +1,6 @@
 var socket = io();
 var playerId = null;
+var playerName = null;
 var model = null;
 var timer = null;
 
@@ -50,13 +51,14 @@ socket.on('update', function(data) {
 
 function login() {
 	playerId = Number( $('#teamID').val() );
+	playerName = $('#teamName').val();
 	$('#container').show();
 	$('#login').hide();
-	socket.emit("login", playerId);
+	socket.emit("login", playerId, playerName);
 }
 
-function showDice( playerId ) {
-	$('#rollDice .txtbox h1').text("Player" + playerId + "'s turn to roll the dice!");
+function showDice( playingId ) {
+	$('#rollDice .txtbox h1').text( model.players[playingId].name + "'s turn to roll the dice!");
 	$('#rollDice').show();
 }
 function hideDice() {
@@ -70,7 +72,7 @@ function showDiceResult(diceResult) {
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
-		$('#diceResult .txtbox h2').text("Player " + playingId + " got");
+		$('#diceResult .txtbox h2').text( model.players[playingId].name + " got");
 		$('#diceResult .txtbox h1').text( diceResult );
 		$('#diceResult img').attr( 'src', "img/wifi" + diceResult + ".png" );
 		$('#diceResult').show();
@@ -95,6 +97,10 @@ function update() {
 
 		// update ip
 	}
+
+	// update backpack
+	$('#profile h1').text( model.players[playerId].name ); 
+	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
 
 	// update items 
 	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
@@ -298,7 +304,7 @@ function showNotification( res ) {
 	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
 
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
-	$('#notification #team').text('Player ' + res.teamId );
+	$('#notification #team').text( model.players[res.teamId].name );
 
 	switch( res.eventType ) {
 		case 'buyItem' :

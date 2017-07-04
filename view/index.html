@@ -16,9 +16,10 @@
 
 <body>
 
-<div id="login">
-	<h1>Please enter your team ID</h1>
-    <input id="teamID" type="number"/>
+<div id="login" class="popBox">
+	<div class="title" id="welcome">Welcome to 2017 CSIE camp Monopoly!</div>
+    請輸入小隊編號： <input id="teamID" type="number"/> <br/>
+    請輸入小隊名稱： <input id="teamName" type="text"/> <br/>
     <input type="button" id="loginButton" value="Submit" onclick="login()">
 </div>
 
@@ -256,7 +257,7 @@
 	<div id="backpack">
 		<div id="profile">
 			<div class="title">
-				<h1 id="teamName">第一小隊</h1>
+				<h1>第一小隊</h1>
 			</div>
 			<img src="img/player1.gif" id="profilePic">
 			<div class="profileInfo" id="profMoney"></div>
