@@ -12,7 +12,7 @@ const WAIT_TO_ROLL = 4;
 const QUESTION = 5
 const HOUSE = 6;
 
-const playerColor = [ '#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
+var playerColor = [ '#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
@@ -336,23 +336,18 @@ function passSwitch() {
 	setTimeout(function(){
 		$('#onSwitch').hide();
 		timeToChooseLand = true;
-	},2000);
-
-	$('#map div').on('hover', function() {
-		if ( !timeToChooseLand ) return;
-		var landID = $( this ).prop('id');
-		console.log( 'choosen #' + landID );
-		timeToChooseLand = false;
-		socket.emit('chooseLand', landID );
-	});
+		$('#map div').addClass('activeLand');
+	},2000);	
 
 	$('#map div').on('click', function() {
 		if ( !timeToChooseLand ) return;
+		$('#map div').removeClass('activeLand');
 		var landID = $( this ).prop('id');
 		console.log( 'choosen #' + landID );
 		timeToChooseLand = false;
 		socket.emit('chooseLand', landID );
 	});
+
 }
 
 
