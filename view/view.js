@@ -12,8 +12,6 @@ const WAIT_TO_ROLL = 4;
 const QUESTION = 5
 const HOUSE = 6;
 
-var playerColor = [ '#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
-
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
 socket.on("show_answer", (ans) => showAnswer(ans));
@@ -68,11 +66,11 @@ function rollDice() {
 	socket.emit('roll_dice', playerId);
 }
 function showDiceResult(diceResult) {
-	var playerId = model.nowPlaying;
+	var playingId = model.nowPlaying;
 	$("#rollDice img").attr("src", "img/wifi.gif");
 	setTimeout( function(){
 		$('#rollDice').hide();
-		$('#diceResult .txtbox h2').text("Player " + playerId + " got");
+		$('#diceResult .txtbox h2').text("Player " + playingId + " got");
 		$('#diceResult .txtbox h1').text( diceResult );
 		$('#diceResult img').attr( 'src', "img/wifi" + diceResult + ".png" );
 		$('#diceResult').show();
@@ -267,6 +265,8 @@ function closeHouseBox() {
 
 function buyHouse() {
 	socket.emit("buy_house");
+	var playerColor = [ '#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
+	$( '#' + model.players[playerId].pos ).css('background-color', playerColor[playerId]);
 	closeHouseBox();
 }
 
@@ -302,19 +302,19 @@ function showNotification( res ) {
 
 	switch( res.eventType ) {
 		case 'buyItem' :
-			$('#notification p').text( '購買了 ' + res.arg + ' 。' );
+			$('#notification #eventDes').text( '購買了 ' + res.arg + ' 。' );
 			break;
 		case 'buyHouse' :
-			$('#notification p').text( '在 ' + res.arg + ' 架了一台server。' );
+			$('#notification #eventDes').text( '在 ' + res.arg + ' 架了一台server。' );
 			break;
 		case 'updateHouse' :
-			$('#notification p').text( '在 ' + res.arg + ' 升級了server。' );
+			$('#notification #eventDes').text( '在 ' + res.arg + ' 升級了server。' );
 			break;
 		case 'passOthersHouse' :
-			$('#notification p').text( '踩到了 Player' + res.arg + ' 的地！' );
+			$('#notification #eventDes').text( '踩到了 Player' + res.arg + ' 的地！' );
 			break;
 		case 'DHCP' :
-			$('#notification p').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
+			$('#notification #eventDes').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
 			break;
 	}
 	
@@ -332,6 +332,7 @@ function showNoMoney() {
 }
 
 function passSwitch() {
+
 	$('#onSwitch').show();
 	setTimeout(function(){
 		$('#onSwitch').hide();
