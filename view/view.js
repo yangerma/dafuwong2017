@@ -3,6 +3,8 @@ var playerId = null;
 var model = null;
 var timer = null;
 
+var timeToChooseLand = false;
+
 const GAMEOVER = 0;
 const START = 1;
 const MOVE = 2;
@@ -12,7 +14,11 @@ const HOUSE = 6;
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
 socket.on("show_answer", (ans) => showAnswer(ans));
-socket.on("buy_item", (arg) => showBuyItem(arg.playerId, arg.itemId));
+socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.itemId}));
+socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId, arg: arg.pos}));
+socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId, arg: arg.pos}));
+socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.pos}));
+socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 
 socket.on('update', function(data) {
 	var old = model;
@@ -258,22 +264,23 @@ function closeHouseBox() {
 
 function buyHouse() {
 	socket.emit("buy_house");
-	showTurnOver();
 	closeHouseBox();
 }
 
 function updateHouse() {
-	
+	socket.emit("update_house");
+	closeHouseBox();
 }
-
+	
 function passOthersHouse() {
 	
 }
 function buyItem(itemId) {
-	if (model.players[playerId].money >= model.items[itemId].cost) {
+	if ( model.players[playerId].money >= model.items[itemId].cost ) {
 		socket.emit('buy_item', playerId, itemId);
 	} else {
 		console.log("Failed to buy item QQ");
+		showNoMoney();
 	}
 }
 
@@ -282,13 +289,62 @@ function turnOver() {
 	socket.emit("turn_over");
 }
 
-function recvNotification( res ) {
-	//res: { teamId, item }
+function showNotification( res ) {
+
+	// res: { teamId, eventType, arg }
+	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
+
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text('Player ' + res.teamId );
-	$('#notification span').text(res.item);
+
+	switch( res.eventType ) {
+		case 'buyItem' :
+			$('#notification p').text( '購買了 ' + res.arg + ' 。' );
+			break;
+		case 'buyHouse' :
+			$('#notification p').text( '在 ' + res.arg + ' 架了一台server。' );
+			break;
+		case 'updateHouse' :
+			$('#notification p').text( '在 ' + res.arg + ' 升級了server。' );
+			break;
+		case 'passOthersHouse' :
+			$('#notification p').text( '踩到了 Player' + res.arg + ' 的地！' );
+			break;
+		case 'DHCP' :
+			$('#notification p').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
+			break;
+	}
+	
 	$('#notification').fadeIn(1000);
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
 	},2000);
 }
+
+function showNoMoney() {
+	$('#noMoney').show();
+	setTimeout(function(){
+		$('#noMoney').hide();
+	},2000);
+}
+
+function passSwitch() {
+	$('#onSwitch').show();
+	setTimeout(function(){
+		$('#onSwitch').hide();
+		timeToChooseLand = true;
+	},2000);
+	$('#map div').on('click', function() {
+		if ( !timeToChooseLand ) return;
+		var landID = $( this ).prop('id');
+		console.log( 'choosen #' + landID );
+		timeToChooseLand = false;
+		socket.emit('chooseLand', landID );
+	});
+}
+
+
+
+
+
+
