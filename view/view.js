@@ -325,16 +325,21 @@ function showNoMoney() {
 }
 
 function passSwitch() {
-	timeToChooseLand = true;
+	$('#onSwitch').show();
+	setTimeout(function(){
+		$('#onSwitch').hide();
+		timeToChooseLand = true;
+	},2000);
+	$('#map div').on('click', function() {
+		if ( !timeToChooseLand ) return;
+		var landID = $( this ).prop('id');
+		console.log( 'choosen #' + landID );
+		timeToChooseLand = false;
+		socket.emit('chooseLand', landID );
+	});
 }
 
-$('#map div').on('click', function() {
-	if ( !timeToChooseLand ) return;
-	var landID = $( this ).prop('id');
-	console.log( 'choosen #' + landID );
-	timeToChooseLand = false;
-	socket.emit('chooseLand', landID );
-});
+
 
 
 
