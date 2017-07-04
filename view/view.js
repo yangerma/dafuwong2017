@@ -11,6 +11,9 @@ const MOVE = 2;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5
 const HOUSE = 6;
+
+const playerColor = [ '#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
+
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
 socket.on("show_answer", (ans) => showAnswer(ans));
@@ -334,6 +337,15 @@ function passSwitch() {
 		$('#onSwitch').hide();
 		timeToChooseLand = true;
 	},2000);
+
+	$('#map div').on('hover', function() {
+		if ( !timeToChooseLand ) return;
+		var landID = $( this ).prop('id');
+		console.log( 'choosen #' + landID );
+		timeToChooseLand = false;
+		socket.emit('chooseLand', landID );
+	});
+
 	$('#map div').on('click', function() {
 		if ( !timeToChooseLand ) return;
 		var landID = $( this ).prop('id');
