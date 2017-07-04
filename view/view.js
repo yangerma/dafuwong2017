@@ -14,7 +14,11 @@ const HOUSE = 6;
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
 socket.on("show_answer", (ans) => showAnswer(ans));
-socket.on("buy_item", (arg) => showBuyItem(arg.playerId, arg.itemId));
+socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.itemId}));
+socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId, arg: arg.pos}));
+socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId, arg: arg.pos}));
+socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.pos}));
+socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 
 socket.on('update', function(data) {
 	var old = model;
@@ -260,14 +264,14 @@ function closeHouseBox() {
 
 function buyHouse() {
 	socket.emit("buy_house");
-	showTurnOver();
 	closeHouseBox();
 }
 
 function updateHouse() {
-	
+	socket.emit("update_house");
+	closeHouseBox();
 }
-
+	
 function passOthersHouse() {
 	
 }

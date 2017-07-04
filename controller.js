@@ -92,8 +92,8 @@ Controller = function(io) {
 		setTimeout(() => {
 			var nodeType = map[model.players[model.nowPlaying].pos].type;
 			/* Test dhcpEvent */
-			dhcpEvent();
-			return;
+			//dhcpEvent();
+			//return;
 			/* -------------- */
 			if (nodeType == "question") {
 				questionEvent();
@@ -121,20 +121,17 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		var house = map[model.players[model.nowPlaying].pos]
 		if (house.owner != null && house.owner != nowId) {
-			/* TODO: players[nowId] pay tolls. */
+			payTolls(nowId, house);
 		}
 		publish();
-		/* dhcp over */
-		if (nowId != model.nowPlaying) {
-			model.players[model.nowPlaying].id = model.nowPlaying;
-		}
 	}
 
 	function dhcpEvent() {
-		model.players[model.nowPlaying].id = Math.ceil(Math.random() * 5);
+		var newIp = Math.ceil(Math.random() * 5);
+		model.players[model.nowPlaying].id = newIp;
 		console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].id);
 		publish();
-		/* TODO: notify("dhcp"); */
+		notify("dhcp", {playerId: model.nowPlaying, ip: newIp});
 	}
 
 	function answerQuestion(ans) {
@@ -147,15 +144,34 @@ Controller = function(io) {
 	function buyHouse() {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
-		model.players[nowId];
+		model.players[model.nowPlaying].money -= house.price;
 		house.owner = nowId;
-		house.price += house.level * 300;
-		house.tolls += house.level * 300;
-		console.log("Player " + nowId + " buy " + house.pos);
+		console.log("Player " + nowId + " buy " + house.id);
+		/* dhcp over */
+		if (nowId != model.nowPlaying) {
+			model.players[model.nowPlaying].id = model.nowPlaying;
+		}
 		publish();
-		/* TODO; notify("buy_house"); */
+		notify("buy_house", {playerId: nowId, pos: house.id});
 	}
 
+	function updateHouse() {
+		var house = model.map[model.players[model.nowPlaying].pos];
+		var nowId = model.players[model.nowPlaying].id;
+		model.players[model.nowPlaying].money -= house.price;
+		house.level += 1;
+		/* TODO: update house price & tolls */
+		/* dhcp over */
+		if (nowId != model.nowPlaying) {
+			model.players[model.nowPlaying].id = model.nowPlaying;
+		}
+		publish();
+		notify("update_house", {playerId: nowId, pos: house.pos});
+	}
+	function payTolls(id, house) {
+		// TODO
+		publish();
+	}
 	function buyItem(playerId, itemId) {
 		model.players[playerId].money -= model.items[itemId].cost;
 		model.players[playerId].items[itemId] += 1;
@@ -187,6 +203,7 @@ Controller = function(io) {
 		player.on("buy_item",  (playerId, itemId) => buyItem(playerId, itemId));
 		player.on("buy_house", buyHouse);
 		player.on("answer_question", (ans) => answerQuestion(ans));
+		player.on("update_house", updateHouse);
 		/*  TODO: player.on("use_item", (playerId, itemId) => useItem(playerId, itemId)); */
 		player.on("turn_over", nextTurn);
 	});
