@@ -83,7 +83,7 @@ function update() {
 	$('#profMoney').text('you have $' + model.players[playerId].money);
 	$('#vpn .itemPrice').text('$' + model.items[1].cost);
 	$('#firewall .itemPrice').text('$' + model.items[0].cost);
-	$('#profIP').text('your IP is 192.168.' + model.players[playerId].id + '.1');
+	$('#profIP').text('your IP ' + model.players[playerId].ip );
 
 	// update switch state
 	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
@@ -109,6 +109,8 @@ function showNotification( res ) {
 
 	// res: { teamId, eventType, arg }
 	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
+
+	if ( res.teamId == playerId ) return;
 
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text( model.players[res.teamId].name );

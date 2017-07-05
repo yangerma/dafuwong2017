@@ -4,6 +4,11 @@ function showSwitch() {
 	$('#switchBox').show();
 }
 
+function showDHCP() {
+	$('#dhcpBox .ip').text( model.players[playerId].ip );
+	$('#dhcpBox').show();
+}
+
 function chooseLand() {
 
 	$('#switchBox').hide();
