@@ -9,8 +9,10 @@ function chooseLand() {
 	$('#switchBox').hide();
 	timeToChooseLand = true;
 	$('#map div').addClass('activeLand');	
+	$('#map .inner').removeClass('activeLand');
 
 	$('#map div').on('click', function() {
+		$('#map .inner').addClass('activeLand');	
 		$('#map div').removeClass('activeLand');
 		if ( !timeToChooseLand ) return;
 		var landID = $( this ).prop('id');
