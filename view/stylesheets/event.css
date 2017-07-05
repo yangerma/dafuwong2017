@@ -1,11 +1,13 @@
-.houseBox {
+/* include house, switch, dhcp */
+
+.eventBox {
 	width: 560px;
 	height: 300px;
 	left: calc(50% - 280px);
 	top: calc(50% - 150px);
 	padding: 20px;
 }
-.houseBox .buttonBlock {
+.eventBox .buttonBlock {
 	display: inline-block;
 	border: solid grey 1px;
 	height: 70px;
@@ -13,31 +15,31 @@
 	padding: 10px;
 	margin: 10px;
 }
-.houseBox #iKnow{
+.eventBox #iKnow{
 	width: 220px;
 }
-.houseBox #iKnow .reply{
+.eventBox #iKnow .reply{
 	width: calc(100% - 52px);
 }
-.houseBox .buttonBlock img{
+.eventBox .buttonBlock img{
 	float: left;
 	margin: 10px;
 	height: 30px;
 	width: 30px;
 }
-.houseBox .buttonBlock .reply{
+.eventBox .buttonBlock .reply{
 	float: left;
 	height: 50px;
 	width: 100px;
 	line-height: 50px;
 	font-size: 20px;
 }
-.houseBox .buttonBlock:hover img{
+.eventBox .buttonBlock:hover img{
 	margin: 5px;
 	height: 40px;
 	width: 40px;
 }
-.houseBox .buttonBlock:hover .reply{
+.eventBox .buttonBlock:hover .reply{
 	font-size: 22px;
 	font-weight: 500;
 }

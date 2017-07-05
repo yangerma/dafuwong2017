@@ -4,11 +4,10 @@ var playerName = null;
 var model = null;
 var timer = null;
 
-var timeToChooseLand = false;
-
 const GAMEOVER = 0;
 const START = 1;
 const MOVE = 2;
+const SWITCH = 3;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5
 const HOUSE = 6;
@@ -43,6 +42,10 @@ socket.on('update', function(data) {
 	} else if (state == HOUSE) {
 		if (model.nowPlaying == playerId) {
 			showHouseEvent();
+		}
+	} else if (state == SWITCH) {
+		if (model.nowPlaying == playerId) {
+			showSwitch();
 		}
 	} else {
 		console.log("Wrong state:" + state);
@@ -85,7 +88,7 @@ function update() {
 	$('#profMoney').text('you have $' + model.players[playerId].money);
 	$('#vpn .itemPrice').text('$' + model.items[1].cost);
 	$('#firewall .itemPrice').text('$' + model.items[0].cost);
-	$('#profIP').text('your IP is 192.168.' + model.players[playerId].id + '.1');
+	$('#profIP').text('your IP ' + model.players[playerId].ip );
 
 	// update switch state
 	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
@@ -112,6 +115,8 @@ function showNotification( res ) {
 	// res: { teamId, eventType, arg }
 	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
 
+	if ( res.teamId == playerId ) return;
+
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text( model.players[res.teamId].name );
 
@@ -120,10 +125,10 @@ function showNotification( res ) {
 			$('#notification #eventDes').text( '購買了 ' + res.arg + ' 。' );
 			break;
 		case 'buyHouse' :
-			$('#notification #eventDes').text( '在 ' + res.arg + ' 架了一台server。' );
+			$('#notification #eventDes').text( '架了一台server。' );
 			break;
 		case 'updateHouse' :
-			$('#notification #eventDes').text( '在 ' + res.arg + ' 升級了server。' );
+			$('#notification #eventDes').text( '升級了server。' );
 			break;
 		case 'passOthersHouse' :
 			$('#notification #eventDes').text( '踩到了 Player' + res.arg + ' 的地！' );
@@ -137,24 +142,4 @@ function showNotification( res ) {
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
 	},2000);
-}
-
-function passSwitch() {
-
-	$('#onSwitch').show();
-	setTimeout(function(){
-		$('#onSwitch').hide();
-		timeToChooseLand = true;
-		$('#map div').addClass('activeLand');
-	},2000);	
-
-	$('#map div').on('click', function() {
-		if ( !timeToChooseLand ) return;
-		$('#map div').removeClass('activeLand');
-		var landID = $( this ).prop('id');
-		console.log( 'choosen #' + landID );
-		timeToChooseLand = false;
-		socket.emit('chooseLand', landID );
-	});
-
 }
