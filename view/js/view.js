@@ -45,7 +45,7 @@ socket.on('update', function(data) {
 		}
 	} else if (state == SWITCH) {
 		if (model.nowPlaying == playerId) {
-			showSwitchEvent();
+			showSwitch();
 		}
 	} else {
 		console.log("Wrong state:" + state);
@@ -142,24 +142,4 @@ function showNotification( res ) {
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
 	},2000);
-}
-
-function showSwitchEvent() {
-
-	$('#onSwitch').show();
-	setTimeout(function(){
-		$('#onSwitch').hide();
-		timeToChooseLand = true;
-		$('#map div').addClass('activeLand');
-	},2000);	
-
-	$('#map div').on('click', function() {
-		if ( !timeToChooseLand ) return;
-		$('#map div').removeClass('activeLand');
-		var landID = $( this ).prop('id');
-		console.log( 'choosen #' + landID );
-		timeToChooseLand = false;
-		socket.emit('switch', landID );
-	});
-
 }

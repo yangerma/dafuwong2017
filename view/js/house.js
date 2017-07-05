@@ -16,13 +16,13 @@ function showHouseEvent() {
 	}
 
 	var cnt = 30;
-	$('.houseBox .timer').text('剩餘時間：'+cnt);
+	$('.eventBox .timer').text('剩餘時間：'+cnt);
 	timer =  setInterval(function(){
 		cnt--;
-		$('.houseBox .timer').text('剩餘時間：'+cnt);
+		$('.eventBox .timer').text('剩餘時間：'+cnt);
 		if( cnt == 0 ) {
 			clearInterval(timer);
-			$('.houseBox').hide();
+			$('.eventBox').hide();
 			$('#timeOut').show();
 			setTimeout( function(){
 				$('#timeOut').hide();
@@ -33,7 +33,7 @@ function showHouseEvent() {
 }
 
 function closeHouseBox() {
-	$('.houseBox').hide();
+	$('.eventBox').hide();
 	showTurnOver();
 	clearInterval(timer);
 }

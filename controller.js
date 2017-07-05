@@ -1,4 +1,4 @@
-var MAX_PLAYER = 1;
+var MAX_PLAYER = 2;
 var N_QUESTION = 13; 
 /* Define game state. */
 const GAMEOVER = 0;
@@ -96,7 +96,10 @@ Controller = function(io) {
 			}, 500 * (i + 1));
 		}
 		setTimeout(() => {
-			var nodeType = map[model.players[model.nowPlaying].pos].type;
+			var nodeType = model.map[model.players[model.nowPlaying].pos].type;
+			houseEvent();
+			return;
+		
 			if (nodeType == "question") {
 				questionEvent();
 			} else if (nodeType == "server") {
@@ -121,7 +124,7 @@ Controller = function(io) {
 	function houseEvent() {
 		model.state = HOUSE;
 		var nowId = model.players[model.nowPlaying].id;
-		var house = map[model.players[model.nowPlaying].pos]
+		var house = model.map[model.players[model.nowPlaying].pos]
 		if (house.owner != null && house.owner != nowId) {
 			payTolls(nowId, house);
 		}
@@ -131,14 +134,14 @@ Controller = function(io) {
 	function dhcpEvent() {
 		var newIp = Math.ceil(Math.random() * 5);
 		model.players[model.nowPlaying].id = newIp;
-		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 87);
-		console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
+		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 86 + 1); // Can't higher than 87 !
+		//console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
 		publish();
 		notify("dhcp", {playerId: model.nowPlaying, ip: model.players[model.nowPlaying].ip});
 	}
 
 	function switchEvent() {
-		state = SWITCH;
+		model.state = SWITCH;
 		publish();
 	}
 
@@ -180,6 +183,7 @@ Controller = function(io) {
 
 	function teleport(pos) {
 		model.players[model.nowPlaying].pos = pos;
+		model.players[model.nowPlaying].last = null;
 		publish();
 	}
 
@@ -209,7 +213,7 @@ Controller = function(io) {
 			playerIO[id] = player;
 			model.players[id].connect = true;
 			model.players[id].name = name;
-			player.emit("update", model);
+			publish();
 		})
 		player.on("roll_dice", (playerId) => rollDice(playerId));
 		player.on("buy_item",  (playerId, itemId) => buyItem(playerId, itemId));
