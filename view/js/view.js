@@ -4,8 +4,6 @@ var playerName = null;
 var model = null;
 var timer = null;
 
-var timeToChooseLand = false;
-
 const GAMEOVER = 0;
 const START = 1;
 const MOVE = 2;
@@ -137,24 +135,4 @@ function showNotification( res ) {
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
 	},2000);
-}
-
-function passSwitch() {
-
-	$('#onSwitch').show();
-	setTimeout(function(){
-		$('#onSwitch').hide();
-		timeToChooseLand = true;
-		$('#map div').addClass('activeLand');
-	},2000);	
-
-	$('#map div').on('click', function() {
-		if ( !timeToChooseLand ) return;
-		$('#map div').removeClass('activeLand');
-		var landID = $( this ).prop('id');
-		console.log( 'choosen #' + landID );
-		timeToChooseLand = false;
-		socket.emit('chooseLand', landID );
-	});
-
 }
