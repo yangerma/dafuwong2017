@@ -1,4 +1,4 @@
-var MAX_PLAYER = 2;
+var MAX_PLAYER = 1;
 var N_QUESTION = 13; 
 /* Define game state. */
 const GAMEOVER = 0;
@@ -55,7 +55,7 @@ Controller = function(io) {
 			notify("dice_result", diceResult);
 			model.state = MOVE;
 			publish();
-			setTimeout(() => move(diceResult), 3000);
+			setTimeout(() => move(diceResult), 3500);
 
 		} else {
 			console.log("Wrong player roll dice:" + id);
@@ -78,40 +78,46 @@ Controller = function(io) {
 	}
 
 	function move(steps) {
-		for (var i = 0; i < steps; i++) {	
-			setTimeout(() => {
-				var next;
-				var current = model.map[model.players[model.nowPlaying].pos];
-				var srcId = current.next.indexOf(model.players[model.nowPlaying].last);
-				if (current.type == "switch") {
-					next = current.next[(srcId + model.switchState + 3) % 3];
-					model.switchState *= -1;
-				} else {
-					next = current.next[srcId == 0 ? 1 : 0];
-					current.next.reverse();
-				}
-				model.players[model.nowPlaying].pos = next;
-				model.players[model.nowPlaying].last = current.id;
-				publish();
-			}, 500 * (i + 1));
+		var next;
+		var current = model.map[model.players[model.nowPlaying].pos];
+		var srcId = current.next.indexOf(model.players[model.nowPlaying].last);
+		var nowId = model.players[model.nowPlaying].id;
+		if (current.type == "switch") {
+			next = current.next[(srcId + model.switchState + 3) % 3];
+			model.switchState *= -1;
+		} else {
+			next = current.next[srcId == 0 ? 1 : 0];
+			current.next.reverse();
 		}
-		setTimeout(() => {
-			var nodeType = model.map[model.players[model.nowPlaying].pos].type;
+		model.players[model.nowPlaying].pos = next;
+		model.players[model.nowPlaying].last = current.id;
+		publish();
+		if (steps <= 1 || model.map[next].firewall.indexOf(nowId) != -1) {
+			setTimeout(() => {
+				nodeEvent();
+			}, 500);
+		} else {
+			setTimeout(() => move(steps - 1), 500);
+		}
+	}
+
+	function nodeEvent() {
+		var node = model.map[model.players[model.nowPlaying].pos]
+		var nowId = model.players[model.nowPlaying].id;
+		if (node.firewall.indexOf(nowId) != 1) {
+			node.firewall = [];
+		}
+		if (node.type == "question") {
+			questionEvent();
+		} else if (node.type == "server") {
 			houseEvent();
-			return;
-		
-			if (nodeType == "question") {
-				questionEvent();
-			} else if (nodeType == "server") {
-				houseEvent();
-			} else if (nodeType == "dhcp") {
-				dhcpEvent();
-			} else if (nodeType == "switch") {
-				switchEvent();
-			} else if (nodeType == "chance") {
-				/* TODO: chanceEvent)();  */
-			}
-		}, 500 * steps + 1000);
+		} else if (node.type == "dhcp") {
+			dhcpEvent();
+		} else if (node.type == "switch") {
+			switchEvent();
+		} else if (node.type == "chance") {
+			/* TODO: chanceEvent)();  */
+		}
 	}
 
 	function questionEvent() {
@@ -185,6 +191,7 @@ Controller = function(io) {
 		model.players[model.nowPlaying].pos = pos;
 		model.players[model.nowPlaying].last = null;
 		publish();
+		nodeEvent();
 	}
 
 	function buyItem(playerId, itemId) {
@@ -194,6 +201,11 @@ Controller = function(io) {
 		notify("buy_item", {playerId: playerId, itemId: itemId});
 	}
 	
+	function setFirewall(blockList) {
+		model.map[model.players[model.nowPlaying].pos].firewall = blockList;
+		model.players[model.nowPlaying].items[0] -= 1;
+		publish();
+	}
 
 	/* Listen new connection */
 	io.on("connection", (player) => {
@@ -221,7 +233,7 @@ Controller = function(io) {
 		player.on("answer_question", (ans) => answerQuestion(ans));
 		player.on("update_house", updateHouse);
 		player.on("switch", (pos) => teleport(pos));
-		/*  TODO: player.on("use_item", (playerId, itemId) => useItem(playerId, itemId)); */
+		player.on("set_firewall", (blockList) => setFirewall(blockList));
 		player.on("turn_over", nextTurn);
 	});
 }

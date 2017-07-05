@@ -24,12 +24,12 @@ socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.play
 socket.on('update', function(data) {
 	var old = model;
 	model = data;
-	clearInterval(timer);
 	update();
 	var state = model.state;
 	if (old != null && old.state == state) {
 		return;
 	}
+	clearInterval(timer);
 	if (state == WAIT_TO_ROLL) {
 		if (model.nowPlaying == playerId) {
 			console.log("It your turn!");
