@@ -23,7 +23,11 @@
 	position: absolute;
 	width:80px;
 	height:80px;
-	-webkit-clip-path:circle(50% at 50% 50%);
+	background: none;
+}
+#map .home img{
+	width:80px;
+	height:80px;
 }
 #map .dhcp {
 	background: #B0B0B0;
@@ -54,3 +58,6 @@
 #map .activeLand:hover {
 	transform: scale(1.15, 1.15);
 }
+
+#map #t1 { transform: rotate(112deg); }
+#map #t4 { transform: rotate(328deg); }
