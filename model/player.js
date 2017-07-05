@@ -7,7 +7,8 @@ Player = function(id, name) {
 		pos: "t" + id,
 		last: null, 
 		items: [0, 0, 0],	//firewall, vpn, 不知道
-		connect: false
+		connect: false,
+		ip: "192.168." + id + ".1",
 	}
 }
 

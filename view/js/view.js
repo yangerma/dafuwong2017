@@ -9,6 +9,7 @@ var timeToChooseLand = false;
 const GAMEOVER = 0;
 const START = 1;
 const MOVE = 2;
+const SWITCH = 3;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5
 const HOUSE = 6;
@@ -43,6 +44,10 @@ socket.on('update', function(data) {
 	} else if (state == HOUSE) {
 		if (model.nowPlaying == playerId) {
 			showHouseEvent();
+		}
+	} else if (state == SWITCH) {
+		if (model.nowPlaying == playerId) {
+			showSwitchEvent();
 		}
 	} else {
 		console.log("Wrong state:" + state);
@@ -139,7 +144,7 @@ function showNotification( res ) {
 	},2000);
 }
 
-function passSwitch() {
+function showSwitchEvent() {
 
 	$('#onSwitch').show();
 	setTimeout(function(){
@@ -154,7 +159,7 @@ function passSwitch() {
 		var landID = $( this ).prop('id');
 		console.log( 'choosen #' + landID );
 		timeToChooseLand = false;
-		socket.emit('chooseLand', landID );
+		socket.emit('switch', landID );
 	});
 
 }
