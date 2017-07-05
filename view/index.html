@@ -269,6 +269,39 @@
 		</div>
 	</div>
 
+	<div class="popBox eventBox" id="firewallBox">
+		<div class="title">
+			<h1>設定防火牆</h1>
+		</div>
+		<div class="qDes">
+			<p>請設定你要阻擋的子網域</p>
+		</div>
+		<form>
+			<div class="options">
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=0> 192.168.0.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=1> 192.168.1.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=2> 192.168.2.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=3> 192.168.3.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=4> 192.168.4.0/255.255.255.0
+				</div>
+				<br/>
+			</div>
+			<input type="button" id="submitButton" value="Submit">
+		</form>
+	</div>
+		
+
+	</div>
+
 	<div id="end" class="popBox" onclick="turnOver()">結束回合</div>
 
 	<div id="openBackpack" onclick="$('#backpack').show()"> Check my backpack </div>
