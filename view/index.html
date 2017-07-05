@@ -16,9 +16,10 @@
 
 <body>
 
-<div id="login">
-	<h1>Please enter your team ID</h1>
-    <input id="teamID" type="number"/>
+<div id="login" class="popBox">
+	<div class="title" id="welcome">Welcome to 2017 CSIE camp Monopoly!</div>
+    請輸入小隊編號： <input id="teamID" type="number"/> <br/>
+    請輸入小隊名稱： <input id="teamName" type="text"/> <br/>
     <input type="button" id="loginButton" value="Submit" onclick="login()">
 </div>
 
@@ -256,7 +257,7 @@
 	<div id="backpack">
 		<div id="profile">
 			<div class="title">
-				<h1 id="teamName">第一小隊</h1>
+				<h1>第一小隊</h1>
 			</div>
 			<img src="img/player1.gif" id="profilePic">
 			<div class="profileInfo" id="profMoney"></div>
@@ -310,7 +311,7 @@
 		<img src="">
 		<div>
 			<p id="team"></p>
-			<p></p>
+			<p id="eventDes"></p>
 		</div>
 	</div>
 
@@ -322,4 +323,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="view.js"></script>
+<script src="js/view.js"></script>
+<script src="js/dice.js"></script>
+<script src="js/buy.js"></script>
+<script src="js/house.js"></script>
+<script src="js/question.js"></script>

@@ -34,7 +34,7 @@
 	border: solid grey 1px;
 	padding: 20px;
 }
-#profile #teamName {
+#profile h1 {
 	margin: 0px auto;
 	line-height: 50px;
 	border: solid grey 1px;

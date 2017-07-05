@@ -89,7 +89,7 @@ strong {
 	right: 30px;
 	top: 30px;
 	height: 120px;
-	width: 400px;
+	width: 420px;
 	padding: 10px;
 	background-color:rgba(255,255,255,0.9);
 }
@@ -107,7 +107,7 @@ strong {
 #notification p {
 	text-align: left;
 	line-height: 40px;
-	padding-left: 20px;
+	padding-left: 10px;
 	margin: 0px;
 	font-size: 18px;
 }
@@ -116,6 +116,23 @@ strong {
 	font-weight: 500;
 }
 
+#login {
+	display: block;
+	height: 200px;
+	width: 500px;
+	left: calc(50% - 250px);
+	top: calc(50% - 100px);
+	padding: 20px;
+}
+#login *{
+	margin: 5px;
+}
+#login .title{
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 45px;
+	height: 45px;
+}
 
 
 

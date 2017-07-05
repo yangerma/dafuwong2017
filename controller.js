@@ -193,10 +193,11 @@ Controller = function(io) {
 			}
 		});
 
-		player.on("login", (id) => {
+		player.on("login", (id, name) => {
 			console.log("Player " + id + " login.");
 			playerIO[id] = player;
 			model.players[id].connect = true;
+			model.players[id].name = name;
 			player.emit("update", model);
 		})
 		player.on("roll_dice", (playerId) => rollDice(playerId));
