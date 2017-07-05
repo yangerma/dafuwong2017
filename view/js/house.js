@@ -49,7 +49,3 @@ function updateHouse() {
 	socket.emit("update_house");
 	closeHouseBox();
 }
-	
-function passOthersHouse() {
-	
-}
