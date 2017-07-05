@@ -120,10 +120,10 @@ function showNotification( res ) {
 			$('#notification #eventDes').text( '購買了 ' + res.arg + ' 。' );
 			break;
 		case 'buyHouse' :
-			$('#notification #eventDes').text( '在 ' + res.arg + ' 架了一台server。' );
+			$('#notification #eventDes').text( '架了一台server。' );
 			break;
 		case 'updateHouse' :
-			$('#notification #eventDes').text( '在 ' + res.arg + ' 升級了server。' );
+			$('#notification #eventDes').text( '升級了server。' );
 			break;
 		case 'passOthersHouse' :
 			$('#notification #eventDes').text( '踩到了 Player' + res.arg + ' 的地！' );
