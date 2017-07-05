@@ -6,7 +6,7 @@
 	<title>2017 CSIE camp Monopoly!</title>
 	<link type="text/css" rel="stylesheet" href="stylesheets/backpack.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/dice.css">
-	<link type="text/css" rel="stylesheet" href="stylesheets/house.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/event.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/index.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/map.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/question.css">
@@ -16,24 +16,25 @@
 
 <body>
 
-<div id="login">
-	<h1>Please enter your team ID</h1>
-    <input id="teamID" type="number"/>
+<div id="login" class="popBox">
+	<div class="title" id="welcome">Welcome to 2017 CSIE camp Monopoly!</div>
+    請輸入小隊編號： <input id="teamID" type="number"/> <br/>
+    請輸入小隊名稱： <input id="teamName" type="text"/> <br/>
     <input type="button" id="loginButton" value="Submit" onclick="login()">
 </div>
 
 <div id ="container">
 
 	<div id="map">
-		<div id="switch">
+		<div class="inner" id="switch">
 			<img src="img/cycle.png">
 		</div>
 		<div class="home" id="t0" style="left: 410px; top: -34.8px;">
 			<img src="img/home0.png">
 		</div>
-		<div class="node" id="s01" style="left: 425.7px; top: 230.5px;"></div>
-		<div class="node" id="s02" style="left: 423.8px; top: 141.8px;"></div>
-		<div class="node" id="s03" style="left: 421.9px; top: 53.1px;"></div>
+		<div class="inner node" id="s01" style="left: 425.7px; top: 230.5px;"></div>
+		<div class="inner node" id="s02" style="left: 423.8px; top: 141.8px;"></div>
+		<div class="inner node" id="s03" style="left: 421.9px; top: 53.1px;"></div>
 		<div class="node" id="c01" style="left: 500px; top: 18.695px;"></div>
 		<div class="node" id="c02" style="left: 575px; top: 63.39px;"></div>
 		<div class="dhcp" id="c03" style="left: 650px; top: 108.085px;">DHCP</div>
@@ -50,9 +51,9 @@
 		<div class="home" id="t2" style="left: 687.74px; top: 665.2px;">
 			<img src="img/home2.png">
 		</div>
-		<div class="node" id="s21" style="left: 495.135px; top: 405.5px;"></div>
-		<div class="node" id="s22" style="left: 562.67px; top: 491.8px;"></div>
-		<div class="node" id="s23" style="left: 630.205px; top: 578.1px;"></div>
+		<div class="inner node" id="s21" style="left: 495.135px; top: 405.5px;"></div>
+		<div class="inner node" id="s22" style="left: 562.67px; top: 491.8px;"></div>
+		<div class="inner node" id="s23" style="left: 630.205px; top: 578.1px;"></div>
 		<div class="node" id="c21" style="left: 610.16px; top: 674px;"></div>
 		<div class="node" id="c22" style="left: 517.58px; top: 674px;"></div>
 		<div class="node" id="c23" style="left: 425px; top: 674px;"></div>
@@ -61,9 +62,9 @@
 		<div class="home" id="t3" style="left: 132.26px; top: 665.2px;">
 			<img src="img/home3.png">
 		</div>
-		<div class="node" id="s31" style="left: 356.265px; top: 405.5px;"></div>
-		<div class="node" id="s32" style="left: 284.93px; top: 491.8px;"></div>
-		<div class="node" id="s33" style="left: 213.595px; top: 578.1px;"></div>
+		<div class="inner node" id="s31" style="left: 356.265px; top: 405.5px;"></div>
+		<div class="inner node" id="s32" style="left: 284.93px; top: 491.8px;"></div>
+		<div class="inner node" id="s33" style="left: 213.595px; top: 578.1px;"></div>
 		<div class="node" id="c31" style="left: 118.55px; top: 602.028px;"></div>
 		<div class="node" id="c32" style="left: 89.84px; top: 530.057px;"></div>
 		<div class="dhcp" id="c33" style="left: 61.13px; top: 458.085px;">DHCP</div>
@@ -80,11 +81,11 @@
 	</div>
 
 	<div id="players">
-		<img src="img/player0.png" id="player0">
-		<img src="img/player1.png" id="player1">
-		<img src="img/player2.png" id="player2">
-		<img src="img/player3.png" id="player3">
-		<img src="img/player4.png" id="player4">
+		<img src="img/player0.gif" id="player0">
+		<img src="img/player1.gif" id="player1">
+		<img src="img/player2.gif" id="player2">
+		<img src="img/player3.gif" id="player3">
+		<img src="img/player4.gif" id="player4">
 	</div>
 
 	<div id="scoreboard">
@@ -128,7 +129,7 @@
 		</div>
 	</div>
 
-	<div class="popBox" id="questionBox">
+	<div class="popBox eventBox" id="questionBox">
 		<img src="img/close.png" class="closeButton" onclick="closeQuestion()">
 		<div class="title">
 			<h1>題目名稱</h1>
@@ -209,7 +210,7 @@
 		<img src="img/wifi4.png" id="wifi" onclick="rollDice()">
 	</div>
 
-	<div class="houseBox popBox" id="buyHouse">
+	<div class="eventBox popBox" id="buyHouse">
 		<h1>要不要來架一台server呀</h1>
 		<p>一台只要 $<span class="housePrice">2000</span> ，還可以跟別人收過路費唷。</p>
 		<div class="buttons">
@@ -225,7 +226,7 @@
 		<div class="timer"></div>
 	</div>
 
-	<div class="houseBox popBox" id="updateHouse">
+	<div class="eventBox popBox" id="updateHouse">
 		<h1>要不要升級一下server呀</h1>
 		<p>一次只要 $<span class="housePrice">3000</span> ，就可以收更多的過路費唷。</p>
 		<div class="buttons">
@@ -241,7 +242,7 @@
 		<div class="timer"></div>
 	</div>
 
-	<div class="houseBox popBox" id="passOthersHouse">
+	<div class="eventBox popBox" id="passOthersHouse">
 		<h1>哎呀！你踩到 <span class="houseOwner">XXX</span> 的地盤了</h1>
 		<p>該付人家 <span class="housePrice">$500</span> 的過路費了唷。</p>
 		<div class="buttonBlock" id="iKnow" onclick="closeHouseBox()">
@@ -250,15 +251,33 @@
 		</div>
 	</div>
 
-	<div id="end" class="popBox" onclick="endRound()">結束回合</div>
+	<div class="eventBox popBox" id="switchBox">
+		<h1>哎呀！你踩到 <span>switch</span> 了</h1>
+		<p>你有一次機會，可以去到外圈的任何地方！ (直接點選目的地)</p>
+		<div class="buttonBlock" id="iKnow" onclick="chooseLand()">
+			<img src="img/ok.png" class="okButton">
+			<div class="reply"> 好哦！</div>
+		</div>
+	</div>
+
+	<div class="eventBox popBox" id="dhcpBox">
+		<h1>哎呀！你踩到 <span>DHCP</span> 了</h1>
+		<p> 你的ip已經被更改為 <strong class="ip"></strong> 。</p>
+		<div class="buttonBlock" id="iKnow" onclick="showTurnOver()">
+			<img src="img/ok.png" class="okButton">
+			<div class="reply">了解！</div>
+		</div>
+	</div>
+
+	<div id="end" class="popBox" onclick="turnOver()">結束回合</div>
 
 	<div id="openBackpack" onclick="$('#backpack').show()"> Check my backpack </div>
 	<div id="backpack">
 		<div id="profile">
 			<div class="title">
-				<h1 id="teamName">第一小隊</h1>
+				<h1>第一小隊</h1>
 			</div>
-			<img src="img/player1.png" id="profilePic">
+			<img src="img/player1.gif" id="profilePic">
 			<div class="profileInfo" id="profMoney"></div>
 			<div class="profileInfo" id="profIP"></div>
 		</div>
@@ -309,7 +328,7 @@
 		<img src="">
 		<div>
 			<p id="team"></p>
-			<p>購買了 <span></span> 。</p>
+			<p id="eventDes"></p>
 		</div>
 	</div>
 
@@ -321,4 +340,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="view.js"></script>
+<script src="js/view.js"></script>
+<script src="js/dice.js"></script>
+<script src="js/buy.js"></script>
+<script src="js/house.js"></script>
+<script src="js/question.js"></script>
+<script src="js/house.js"></script>
+<script src="js/switch.js"></script>

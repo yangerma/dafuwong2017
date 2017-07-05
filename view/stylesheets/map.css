@@ -50,3 +50,7 @@
 	top: calc(50% - 42px);
 	opacity: 0.2;
 }
+
+#map .activeLand:hover {
+	transform: scale(1.15, 1.15);
+}
