@@ -4,7 +4,7 @@ var port = 9487;
 var path = require("path");
 var http = require("http").Server(app);
 var io = require("socket.io")(http);
-var game_start = require("./Controller.js");
+var game_start = require("./controller.js");
 
 app.use(express.static(path.join(__dirname, 'view')));
 app.get('/', function(req, res){
