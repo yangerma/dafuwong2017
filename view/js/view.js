@@ -91,6 +91,17 @@ function update() {
 	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
 	else $('#switch img').css('transform', 'scale(1,-1)');
 
+	// check intersection
+	if( model.map.t0.next[0] == 'c01' ) 
+		 $('#t0').css('transform', 'rotate(30deg)');
+	else $('#t0').css('transform', 'rotate(90deg)');
+	if( model.map.t2.next[0] == 'c21' )	
+		 $('#t2').css('transform', 'rotate(180deg)');
+	else $('#t2').css('transform', 'rotate(225deg)');
+	if( model.map.t3.next[0] == 'c31' )	
+		 $('#t3').css('transform', 'rotate(248deg)');
+	else $('#t3').css('transform', 'rotate(305deg)');
+
 }
 
 function showBackpack() {
