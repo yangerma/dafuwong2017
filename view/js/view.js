@@ -99,18 +99,6 @@ function update() {
 		// update ip
 	}
 
-	// update backpack
-	$('#profile h1').text( model.players[playerId].name ); 
-	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
-
-	// update items 
-	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
-	$('#vpn .cnt').text('目前共有' + model.players[playerId].items[1] + '個');
-	$('#profMoney').text('you have $' + model.players[playerId].money);
-	$('#vpn .itemPrice').text('$' + model.items[1].cost);
-	$('#firewall .itemPrice').text('$' + model.items[0].cost);
-	$('#profIP').text('your IP ' + model.players[playerId].ip );
-
 	// update switch state
 	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
 	else $('#switch img').css('transform', 'scale(1,-1)');
@@ -127,6 +115,23 @@ function update() {
 	else $('#t3').css('transform', 'rotate(305deg)');
 
 
+	// update backpack
+	if (playerId >= 5) {
+		return;
+	}
+
+	$('#profile h1').text( model.players[playerId].name ); 
+	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
+
+	// update items 
+	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
+	$('#vpn .cnt').text('目前共有' + model.players[playerId].items[1] + '個');
+	$('#profMoney').text('you have $' + model.players[playerId].money);
+	$('#vpn .itemPrice').text('$' + model.items[1].cost);
+	$('#firewall .itemPrice').text('$' + model.items[0].cost);
+	$('#profIP').text('your IP ' + model.players[playerId].ip );
+
+	
 }
 
 function showBackpack() {
