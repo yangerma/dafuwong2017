@@ -24,6 +24,7 @@ socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", t
 socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 socket.on("vpn", (arg => showNotification({eventType: "vpn", teamId: arg.playerId})));
+socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
 socket.on("HowDoYouTurnThisOn", () => admin = true);
 
 socket.on('update', function(data) {
@@ -58,11 +59,6 @@ socket.on('update', function(data) {
 		case SWITCH:
 			if (model.nowPlaying == playerId) {
 				showSwitch();
-			}
-			break;
-		case DHCP:
-			if (model.nowPlaying == playerId) {
-				showDHCP();
 			}
 			break;
 		default:	
@@ -131,6 +127,7 @@ function showBackpack() {
 }
 
 function showTurnOver() {
+	$('#eventBox').hide();
 	$("#end").show();
 }
 
@@ -144,7 +141,14 @@ function showNotification( res ) {
 	// res: { teamId, eventType, arg }
 	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
 
-	if ( res.teamId == playerId ) return;
+	if ( res.teamId == playerId ) {
+		if (res.eventType == 'DHCP') {
+			showDHCP();
+		} else if (res.eventType == 'home') {
+			showHome(res.arg);
+		}
+		return;
+	}
 
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text( model.players[res.teamId].name );
@@ -168,7 +172,9 @@ function showNotification( res ) {
 		case 'vpn':
 			$('#notification #eventDes').text( '使用VPN繞過了防火牆！' );
 			break;
-
+		case 'home':
+			$('#notification #eventDes').text( '挖礦挖到了$ ' + res.arg + ' !' );
+			break;
 	}
 	
 	$('#notification').fadeIn(1000);

@@ -12,5 +12,4 @@ function closeFirewall() {
 	console.log(ans);
 
 	$('#firewallBox').hide();
-	showTurnOver();
 }

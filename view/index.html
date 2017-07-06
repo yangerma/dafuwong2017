@@ -263,42 +263,22 @@
 	<div class="eventBox popBox" id="dhcpBox">
 		<h1>哎呀！你踩到 <span>DHCP</span> 了</h1>
 		<p> 你的ip已經被更改為 <strong class="ip"></strong> 。</p>
-		<div class="buttonBlock" id="iKnow" onclick="showTurnOver()">
+		<div class="buttonBlock" id="iKnow" onclick="$('#dhcpBox').hide();showTurnOver()">
 			<img src="img/ok.png" class="okButton">
 			<div class="reply">了解！</div>
 		</div>
 	</div>
 
-	<div class="popBox eventBox" id="firewallBox">
-		<div class="title">
-			<h1>設定防火牆</h1>
+	<div class="eventBox popBox" id="homeBox">
+		<h1> 回家惹～</h1>
+		<p> 家裡的server挖礦獲得了＄ <strong class="reward"></strong> !</p>
+		<div class="buttonBlock" id="iKnow" onclick="$('#homeBox').hide();showTurnOver()">
+			<img src="img/ok.png" class="okButton">
+			<div class="reply"> 好喔！</div>
 		</div>
-		<div class="qDes">
-			<p>請設定你要阻擋的子網域</p>
-		</div>
-		<form>
-			<div class="options">
-				<div class="opBox">
-					<input type="checkbox" name="mq" value=0> 192.168.0.0/255.255.255.0
-				</div>
-				<div class="opBox">
-					<input type="checkbox" name="mq" value=1> 192.168.1.0/255.255.255.0
-				</div>
-				<div class="opBox">
-					<input type="checkbox" name="mq" value=2> 192.168.2.0/255.255.255.0
-				</div>
-				<div class="opBox">
-					<input type="checkbox" name="mq" value=3> 192.168.3.0/255.255.255.0
-				</div>
-				<div class="opBox">
-					<input type="checkbox" name="mq" value=4> 192.168.4.0/255.255.255.0
-				</div>
-				<br/>
-			</div>
-			<input type="button" value="Submit" onclick="closeFirewall()">
-		</form>
 	</div>
-		
+
+			
 
 	</div>
 
@@ -333,7 +313,7 @@
 					<div class="itemPrice itemBlock"></div>
 					<div class="cnt itemBlock"></div>
 				</div>
-				<div class="buy itemBlock" onclick="buyItem(0)">BUY</div>
+				<div class="buy itemBlock" onclick="showFirewall()">BUY</div>
 			</div>
 			<div class="item" id="vpn">
 				<div class="itemName">虛擬私人網路 VPN</div>
@@ -351,6 +331,36 @@
 				<div class="buy itemBlock" onclick="buyItem(1)">BUY</div>
 			</div>
 		</div>	
+	</div>
+
+	<div class="popBox eventBox" id="firewallBox">
+		<div class="title">
+			<h1>設定防火牆</h1>
+		</div>
+		<div class="qDes">
+			<p>請設定你要阻擋的子網域</p>
+		</div>
+		<form>
+			<div class="options">
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=0> 192.168.0.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=1> 192.168.1.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=2> 192.168.2.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=3> 192.168.3.0/255.255.255.0
+				</div>
+				<div class="opBox">
+					<input type="checkbox" name="mq" value=4> 192.168.4.0/255.255.255.0
+				</div>
+				<br/>
+			</div>
+			<input type="button" value="Submit" onclick="closeFirewall()">
+		</form>
 	</div>
 
 	<div class="alertBox" id="timeOut">來 不 及 了 QQ</div>
