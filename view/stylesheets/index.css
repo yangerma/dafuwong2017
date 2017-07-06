@@ -134,5 +134,10 @@ strong {
 	height: 45px;
 }
 
-
-
+#firewallBox h1{
+	margin: 10px;
+}
+#firewallBox {
+	height: 340px;
+	top: calc(50% - 170px);
+}
