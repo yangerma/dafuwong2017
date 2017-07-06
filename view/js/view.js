@@ -3,6 +3,7 @@ var playerId = null;
 var playerName = null;
 var model = null;
 var timer = null;
+var admin = false;
 
 const GAMEOVER = 0;
 const START = 1;
@@ -11,6 +12,8 @@ const SWITCH = 3;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5
 const HOUSE = 6;
+const DHCP = 7;
+const HOME = 8;
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
@@ -20,8 +23,12 @@ socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId:
 socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId, arg: arg.pos}));
 socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.pos}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
+socket.on("HowDoYouTurnThisOn", () => admin = true);
 
 socket.on('update', function(data) {
+	if (admin) {
+		playerId = data.nowPlaying;
+	}
 	var old = model;
 	model = data;
 	update();
@@ -30,25 +37,35 @@ socket.on('update', function(data) {
 		return;
 	}
 	clearInterval(timer);
-	if (state == WAIT_TO_ROLL) {
-		if (model.nowPlaying == playerId) {
-			console.log("It your turn!");
-			showDice( playerId );
-		} else {
-			console.log("Player" + model.nowPlaying + "'s turn.");
-		}
-	} else if (state == QUESTION) {
-		showQuestion();
-	} else if (state == HOUSE) {
-		if (model.nowPlaying == playerId) {
-			showHouseEvent();
-		}
-	} else if (state == SWITCH) {
-		if (model.nowPlaying == playerId) {
-			showSwitch();
-		}
-	} else {
-		console.log("Wrong state:" + state);
+	switch (state) {
+		case WAIT_TO_ROLL:
+			if (model.nowPlaying == playerId) {
+				console.log("It your turn!");
+				showDice( playerId );
+			} else {
+				console.log("Player" + model.nowPlaying + "'s turn.");
+			}
+			break;
+		case QUESTION:
+			showQuestion();
+			break;
+		case HOUSE:
+			if (model.nowPlaying == playerId) {
+				showHouseEvent();
+			}
+			break;
+		case SWITCH:
+			if (model.nowPlaying == playerId) {
+				showSwitch();
+			}
+			break;
+		case DHCP:
+			if (model.nowPlaying == playerId) {
+				showDHCP();
+			}
+			break;
+		default:	
+			console.log("Wrong state:" + state);
 	}
 });
 
