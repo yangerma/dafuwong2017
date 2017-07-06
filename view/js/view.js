@@ -4,6 +4,7 @@ var playerName = null;
 var model = null;
 var timer = null;
 var admin = false;
+var playerColor = ['#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
 
 const GAMEOVER = 0;
 const START = 1;
@@ -75,6 +76,12 @@ function login() {
 }
 
 function update() {
+	/* update map */
+	$.each(model.map, (id, node) => {
+		if (node.owner != null) {
+			$( '#' + node.id ).css('background-color', playerColor[node.owner]);
+		}
+	});
 	for (var i = 0; i < 5; i++) {
 
 		// update position
@@ -118,6 +125,7 @@ function update() {
 	if( model.map.t3.next[0] == 'c31' )	
 		 $('#t3').css('transform', 'rotate(248deg)');
 	else $('#t3').css('transform', 'rotate(305deg)');
+
 
 }
 

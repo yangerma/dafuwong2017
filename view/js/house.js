@@ -40,8 +40,6 @@ function closeHouseBox() {
 
 function buyHouse() {
 	socket.emit("buy_house");
-	var playerColor = [ '#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
-	$( '#' + model.players[playerId].pos ).css('background-color', playerColor[playerId]);
 	closeHouseBox();
 }
 
