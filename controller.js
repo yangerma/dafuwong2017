@@ -103,19 +103,19 @@ Controller = function(io) {
 		model.players[model.nowPlaying].last = current.id;
 		publish();
 		if (model.map[next].firewall.indexOf(nowId) != -1) {
-			if (model.players[model.nowPlayers].item[1] > 0) {
-				model.players[model.nowPlaying].item[1] -= 1;
+			if (model.players[model.nowPlaying].items[1] > 0) {
+				model.players[model.nowPlaying].items[1] -= 1;
 				setTimeout(() => {
 					notify('vpn', {playerId: model.nowPlaying});
-					move(steps - 1)
+					move(steps - 1);
 				}, 500);
 			} else {
-				setTimeout(() => nodeEvent, 500);
+				setTimeout(nodeEvent, 500);
 			}
 			return;
 		}
 		if (steps <= 1)  {
-			setTimeout(() => nodeEvent, 500);
+			setTimeout(nodeEvent, 500);
 		} else {
 			setTimeout(() => move(steps - 1), 500);
 		}
