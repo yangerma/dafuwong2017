@@ -102,10 +102,20 @@ Controller = function(io) {
 		model.players[model.nowPlaying].pos = next;
 		model.players[model.nowPlaying].last = current.id;
 		publish();
-		if (steps <= 1 || model.map[next].firewall.indexOf(nowId) != -1) {
-			setTimeout(() => {
-				nodeEvent();
-			}, 500);
+		if (model.map[next].firewall.indexOf(nowId) != -1) {
+			if (model.players[model.nowPlayers].item[1] > 0) {
+				model.players[model.nowPlaying].item[1] -= 1;
+				setTimeout(() => {
+					notify('vpn', {playerId: model.nowPlaying});
+					move(steps - 1)
+				}, 500);
+			} else {
+				setTimeout(() => nodeEvent, 500);
+			}
+			return;
+		}
+		if (steps <= 1)  {
+			setTimeout(() => nodeEvent, 500);
 		} else {
 			setTimeout(() => move(steps - 1), 500);
 		}
@@ -179,7 +189,7 @@ Controller = function(io) {
 		house.owner = nowId;
 		console.log("Player " + nowId + " buy " + house.id);
 		publish();
-		notify("buy_house", {playerId: nowId, pos: house.id});
+		notify("buy_house", {playerId: nowId});
 	}
 
 	function updateHouse() {
@@ -189,7 +199,7 @@ Controller = function(io) {
 		house.level += 1;
 		/* TODO: update house price & tolls */
 		publish();
-		notify("update_house", {playerId: nowId, pos: house.id});
+		notify("update_house", {playerId: nowId});
 	}
 
 	function payTolls(id, house) {
@@ -197,7 +207,7 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		model.players[nowId].money -= house.tolls;
 		publish();
-		notify("pay_tolls", {playerId: nowId, pos: house.id});
+		notify("pay_tolls", {playerId: nowId});
 	}
 
 	function teleport(pos) {
