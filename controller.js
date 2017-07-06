@@ -1,4 +1,4 @@
-var MAX_PLAYER = 1;
+var MAX_PLAYER = 5;
 var N_QUESTION = 13; 
 /* Define game state. */
 const GAMEOVER = 0;
@@ -8,6 +8,8 @@ const SWITCH = 3;
 const WAIT_TO_ROLL = 4;
 const QUESTION = 5;
 const HOUSE = 6;
+const DHCP = 7;
+const HOME = 8;
 
 var map = require("./model/map.js");
 var Player = require("./model/player.js");
@@ -17,6 +19,8 @@ var items = require("./model/items.js");
 Controller = function(io) {
 	var io = io;
 	var playerIO = new Array();
+	var adminIO = null;
+	var obIO = null;
 	var model = {
 		state: WAIT_TO_ROLL,
 		nowPlaying: 0,
@@ -27,7 +31,7 @@ Controller = function(io) {
 			Player(1, "p1"),
 			Player(2, "p2"),
 			Player(3, "p3"),
-			Player(4, "p4")
+			Player(4, "p4"),
 		],
 		switchState: 1,
 		question: null,
@@ -39,12 +43,22 @@ Controller = function(io) {
 				playerIO[i].emit(event, arg);
 			}
 		}
+		if (adminIO != null)
+			adminIO.emit(event, arg);
+		if (obIO != null)
+			obIO.emit(event, arg);
 	}
 	function publish() {
 		for (var i = 0; i < MAX_PLAYER; i++) {
 			if (model.players[i].connect == true) {
 				playerIO[i].emit("update", model);
 			}
+		}
+		if (adminIO != null) {
+			adminIO.emit("update", model);
+		}
+		if (obIO != null) {
+			obIO.emit("update", model);
 		}
 	}
 
@@ -64,10 +78,6 @@ Controller = function(io) {
 	function nextTurn() {
 		model.state = WAIT_TO_ROLL;
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
-		/* 
-		 * TODO: round (5 turns == 1 round) (?)
-		 * TODO: routing money per round (?)
-		 */
 		/* dhcp over */
 		if (model.players[model.nowPlaying].id != model.nowPlaying) {
 			model.players[model.nowPlaying].id = model.nowPlaying;
@@ -117,6 +127,8 @@ Controller = function(io) {
 			switchEvent();
 		} else if (node.type == "chance") {
 			/* TODO: chanceEvent)();  */
+		} else if (node.type == "home") {
+			/* TODO: homeEvent(); */
 		}
 	}
 
@@ -139,6 +151,7 @@ Controller = function(io) {
 
 	function dhcpEvent() {
 		var newIp = Math.ceil(Math.random() * 5);
+		model.state = DHCP;
 		model.players[model.nowPlaying].id = newIp;
 		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 86 + 1); // Can't higher than 87 !
 		//console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
@@ -221,10 +234,18 @@ Controller = function(io) {
 		});
 
 		player.on("login", (id, name) => {
-			console.log("Player " + id + " login.");
-			playerIO[id] = player;
-			model.players[id].connect = true;
-			model.players[id].name = name;
+			if (id == 87 && name == "ob") {
+				obIO = player;
+			} else if (id == 87 && name == "csie") {
+				adminIO = player;
+				player.emit("HowDoYouTurnThisOn");
+				console.log("admin login!");
+			} else {
+				console.log("Player " + id + " login.");
+				playerIO[id] = player;
+				model.players[id].connect = true;
+				model.players[id].name = name;
+			}
 			publish();
 		})
 		player.on("roll_dice", (playerId) => rollDice(playerId));
@@ -233,7 +254,7 @@ Controller = function(io) {
 		player.on("answer_question", (ans) => answerQuestion(ans));
 		player.on("update_house", updateHouse);
 		player.on("switch", (pos) => teleport(pos));
-		player.on("set_firewall", (blockList) => setFirewall(blockList));
+		player.on("firewall", (blockList) => setFirewall(blockList));
 		player.on("turn_over", nextTurn);
 	});
 }
