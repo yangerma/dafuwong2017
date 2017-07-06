@@ -38,6 +38,6 @@ var map = {
 	c42: { id: 'c42', type: 'server', owner: null, level: 0, price: 500, tolls: 0, next: ['c43'], firewall: [] },
 	c43: { id: 'c43', type: 'server', owner: null, level: 0, price: 500, tolls: 0, next: ['c44'], firewall: [] },
 	c44: { id: 'c44', type: 'server', owner: null, level: 0, price: 500, tolls: 0, next: ['c45'], firewall: [] },
-	c45: { id: 'c45', type: 'server', owner: null, level: 0, price: 500, tolls: 0, next: ['t0'] }
+	c45: { id: 'c45', type: 'server', owner: null, level: 0, price: 500, tolls: 0, next: ['t0'], firewall: [] }
 }
 module.exports = map;

@@ -19,10 +19,11 @@ const HOME = 8;
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
 socket.on("show_answer", (ans) => showAnswer(ans));
 socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.itemId}));
-socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId, arg: arg.pos}));
-socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId, arg: arg.pos}));
-socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.pos}));
+socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId}));
+socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId}));
+socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
+socket.on("vpn", (arg => showNotification({eventType: "vpn", teamId: arg.playerId})));
 socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
 socket.on("HowDoYouTurnThisOn", () => admin = true);
 
@@ -167,6 +168,9 @@ function showNotification( res ) {
 			break;
 		case 'DHCP' :
 			$('#notification #eventDes').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
+			break;
+		case 'vpn':
+			$('#notification #eventDes').text( '使用VPN繞過了防火牆！' );
 			break;
 		case 'home':
 			$('#notification #eventDes').text( '挖礦挖到了$ ' + res.arg + ' !' );
