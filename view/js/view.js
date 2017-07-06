@@ -4,6 +4,7 @@ var playerName = null;
 var model = null;
 var timer = null;
 var admin = false;
+var playerColor = ['#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
 
 const GAMEOVER = 0;
 const START = 1;
@@ -75,6 +76,12 @@ function login() {
 }
 
 function update() {
+	/* update map */
+	$.each(model.map, (id, node) => {
+		if (node.owner != null) {
+			$( '#' + node.id ).css('background-color', playerColor[node.owner]);
+		}
+	});
 	for (var i = 0; i < 5; i++) {
 
 		// update position
@@ -92,18 +99,6 @@ function update() {
 		// update ip
 	}
 
-	// update backpack
-	$('#profile h1').text( model.players[playerId].name ); 
-	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
-
-	// update items 
-	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
-	$('#vpn .cnt').text('目前共有' + model.players[playerId].items[1] + '個');
-	$('#profMoney').text('you have $' + model.players[playerId].money);
-	$('#vpn .itemPrice').text('$' + model.items[1].cost);
-	$('#firewall .itemPrice').text('$' + model.items[0].cost);
-	$('#profIP').text('your IP ' + model.players[playerId].ip );
-
 	// update switch state
 	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
 	else $('#switch img').css('transform', 'scale(1,-1)');
@@ -119,6 +114,24 @@ function update() {
 		 $('#t3').css('transform', 'rotate(248deg)');
 	else $('#t3').css('transform', 'rotate(305deg)');
 
+
+	// update backpack
+	if (playerId >= 5) {
+		return;
+	}
+
+	$('#profile h1').text( model.players[playerId].name ); 
+	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
+
+	// update items 
+	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
+	$('#vpn .cnt').text('目前共有' + model.players[playerId].items[1] + '個');
+	$('#profMoney').text('you have $' + model.players[playerId].money);
+	$('#vpn .itemPrice').text('$' + model.items[1].cost);
+	$('#firewall .itemPrice').text('$' + model.items[0].cost);
+	$('#profIP').text('your IP ' + model.players[playerId].ip );
+
+	
 }
 
 function showBackpack() {
