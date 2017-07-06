@@ -128,7 +128,7 @@ Controller = function(io) {
 		} else if (node.type == "chance") {
 			/* TODO: chanceEvent)();  */
 		} else if (node.type == "home") {
-			/* TODO: homeEvent(); */
+			homeEvent();
 		}
 	}
 
@@ -163,6 +163,14 @@ Controller = function(io) {
 		model.state = SWITCH;
 		publish();
 	}
+
+	function homeEvent() {
+		model.state = HOME;
+		var reward = 500;
+		model.players[model.nowPlaying].money += reward;
+		publish();
+		notify("home", {playerId: model.nowPlaying, reward: reward});
+	}	
 
 	function answerQuestion(ans) {
 		if (JSON.stringify(model.question.correct) == JSON.stringify(ans)) {

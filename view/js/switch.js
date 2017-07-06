@@ -9,6 +9,11 @@ function showDHCP() {
 	$('#dhcpBox').show();
 }
 
+function showHome(reward) {
+	$('#homeBox .reward').text(reward);
+	$('#homeBox').show();
+}
+
 function chooseLand() {
 
 	$('#switchBox').hide();
