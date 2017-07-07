@@ -8,8 +8,20 @@ function closeFirewall() {
 	$("#firewallBox input:checkbox:checked").each( function(){
 	    ans.push( Number( $(this).val() ) );
 	});
-	socket.emit("firewall", ans);
-	console.log(ans);
-
+	
+	firewallPos(ans);
+	$('#backpack').hide()
 	$('#firewallBox').hide();
+}
+function firewallPos(blockList) {
+
+	$('#map div').addClass('activeLand');	
+
+	$('#map div').on('click', function() {
+		$('#map div').removeClass('activeLand');
+		var landID = $( this ).prop('id');
+		timeToChooseLand = false;
+		socket.emit('buy_item', playerId, 'firewall', {pos: landID, blockList: blockList});
+	});
+
 }
