@@ -2,6 +2,7 @@ var socket = io();
 var playerId = null;
 var playerName = null;
 var model = null;
+var old = null;
 var timer = null;
 var admin = false;
 var playerColor = ['#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
@@ -19,7 +20,7 @@ const HOME = 8;
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
 socket.on("show_answer", (ans) => showAnswer(ans));
-socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.itemId}));
+socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.type}));
 socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId}));
 socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId}));
 socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId}));
@@ -32,7 +33,7 @@ socket.on('update', function(data) {
 	if (admin) {
 		playerId = data.nowPlaying;
 	}
-	var old = model;
+	old = model;
 	model = data;
 	update();
 	var state = model.state;
@@ -78,8 +79,12 @@ function login() {
 function update() {
 	/* update map */
 	$.each(model.map, (id, node) => {
-		if (node.owner != null) {
-			$( '#' + node.id ).css('background-color', playerColor[node.owner]);
+		if (node.type == "server" && node.owner != null) {
+			$('#' + node.id).css('background-color', playerColor[node.owner]);
+			$('#' + node.id + ' img').attr('src', 'img/server' + node.level + '.png');
+		}
+		if (old != null && node.level != old.map[node.id].level) {
+			$('#' + node.id + ' img').attr('src', 'img/server_setup' + node.level + '.gif');
 		}
 	});
 	for (var i = 0; i < 5; i++) {
@@ -114,6 +119,9 @@ function update() {
 		 $('#t3').css('transform', 'rotate(248deg)');
 	else $('#t3').css('transform', 'rotate(305deg)');
 
+	$('#hao123 .itemPrice').text('$' + model.items["hao123"].cost);
+	$('#opticalFiber .itemPrice').text('$' + model.items["opticalFiber"].cost);
+	$('#firewall .itemPrice').text('$' + model.items["firewall"].cost);
 
 	// update backpack
 	if (playerId >= 5) {
@@ -124,11 +132,7 @@ function update() {
 	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
 
 	// update items 
-	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
-	$('#vpn .cnt').text('目前共有' + model.players[playerId].items[1] + '個');
 	$('#profMoney').text('you have $' + model.players[playerId].money);
-	$('#vpn .itemPrice').text('$' + model.items[1].cost);
-	$('#firewall .itemPrice').text('$' + model.items[0].cost);
 	$('#profIP').text('your IP ' + model.players[playerId].ip );
 
 	
@@ -168,7 +172,7 @@ function showNotification( res ) {
 
 	switch( res.eventType ) {
 		case 'buyItem' :
-			$('#notification #eventDes').text( '購買了 ' + res.arg + ' 。' );
+			$('#notification #eventDes').text( '購買了 ' + model.items[res.arg].name + ' 。' );
 			break;
 		case 'buyHouse' :
 			$('#notification #eventDes').text( '架了一台server。' );
