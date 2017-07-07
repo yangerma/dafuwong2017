@@ -29,7 +29,7 @@
 
 #profile {
 	position: absolute;
-	width: 300px;
+	width: 280px;
 	height: calc(100% - 40px);
 	border: solid grey 1px;
 	padding: 20px;
@@ -48,7 +48,7 @@
 	overflow: hidden;
 }
 #profile .profileInfo {
-	width: 260px;
+	width: 240px;
 	line-height: 30px;
 	margin: 10px auto;
 	border: solid grey 1px;
@@ -61,7 +61,8 @@
 #shop {
 	height: 100%;
 	border: solid grey 1px;
-	margin-left: 320px;
+	margin-left: 300px;
+	padding: 10px;
 }
 
 #shop div{
@@ -76,19 +77,19 @@
 	border: none;
 }
 #shop .item{
-	width: 33%;
-	padding: 10px 20px;
+	width: calc( 33.33% - 20px );
+	margin: 10px;
 	float: left;
 	border: none;
 }
 #shop .item div{
-	margin: 10px auto;
+	margin: 20px auto;
 	padding: 10px;
 }
 #shop .item .itemName {
 	line-height: 50px;
 	text-align: center;
-	font-size: 26px;
+	font-size: 22px;
 	font-weight: 500;
 	margin: 0px auto;
 	padding: 0px;
@@ -103,8 +104,8 @@
 	text-align: center
 }
 #shop .itemPic img{
-	height: 200px;
-	width: 300px;
+	height: 160px;
+	width: 240px;
 }
 #shop .itemBlock {
 	line-height: 30px;
@@ -123,10 +124,12 @@
 #shop .item .buy {
 	font-size: 20px;
 	border-radius: 10px;
+	margin: 0px;
 }
 #shop .item .itemPrice {
 	font-size: 20px;
 	border-radius: 10px;
+	margin: 0px;
 }
 #shop .item .buy:hover {
 	font-weight: 500;
