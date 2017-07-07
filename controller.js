@@ -66,9 +66,9 @@ Controller = function(io) {
 	function rollDice(id) {
 		if (id == model.nowPlaying && model.state == WAIT_TO_ROLL) {
 			var maxSteps = 4, diceResult;
-			if (model.players[id].boost > 0) {
+			if (model.players[id].opticalFiber > 0) {
 				maxSteps = 8;
-				model.players[id].boost -= 1;
+				model.players[id].opticalFiber -= 1;
 			}
 			diceResult = Math.ceil(Math.random() * maxSteps);
 			console.log("Player " + id + " roll " + diceResult);
@@ -99,8 +99,8 @@ Controller = function(io) {
 			}
 		} else if (item.type == "firewall") {
 			item.arg.blockList.forEach((id) => model.map[arg.pos].firewall.add(id));
-		} else if (item.type == "boost") {
-			model.players[item.playerId].boost += 1;
+		} else if (item.type == "opticalFiber") {
+			model.players[item.playerId].opticalFiber += 1;
 		}
 		publish()
 		setTimeout(itemEvent, 300);
@@ -253,6 +253,7 @@ Controller = function(io) {
 	function buyItem(playerId, type, arg) {
 		itemQueue.push({playerId: playerId, type: type, arg: arg});
 		model.players[playerId].money -= model.items[type].cost;
+		console.log("Player " + playerId + " buy " + type);
 		publish();
 		notify("buy_item", {playerId: playerId, type: type});
 	}

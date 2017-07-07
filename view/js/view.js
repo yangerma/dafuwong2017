@@ -19,7 +19,7 @@ const HOME = 8;
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
 socket.on("show_answer", (ans) => showAnswer(ans));
-socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.itemId}));
+socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.type}));
 socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId}));
 socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId}));
 socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId}));
@@ -115,7 +115,7 @@ function update() {
 	else $('#t3').css('transform', 'rotate(305deg)');
 
 	$('#hao123 .itemPrice').text('$' + model.items["hao123"].cost);
-	$('#opticalFiber .itemPrice').text('$' + model.items["boost"].cost);
+	$('#opticalFiber .itemPrice').text('$' + model.items["opticalFiber"].cost);
 	$('#firewall .itemPrice').text('$' + model.items["firewall"].cost);
 
 	// update backpack
@@ -167,7 +167,7 @@ function showNotification( res ) {
 
 	switch( res.eventType ) {
 		case 'buyItem' :
-			$('#notification #eventDes').text( '購買了 ' + res.arg + ' 。' );
+			$('#notification #eventDes').text( '購買了 ' + model.items[res.arg].name + ' 。' );
 			break;
 		case 'buyHouse' :
 			$('#notification #eventDes').text( '架了一台server。' );
