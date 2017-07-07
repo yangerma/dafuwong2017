@@ -76,7 +76,7 @@
 	border: none;
 }
 #shop .item{
-	width: 50%;
+	width: 33%;
 	padding: 10px 20px;
 	float: left;
 	border: none;
@@ -92,6 +92,12 @@
 	font-weight: 500;
 	margin: 0px auto;
 	padding: 0px;
+}
+#shop .itemDes {
+	height: 120px;
+}
+#shop .itemUsage {
+	height: 90px;
 }
 #shop .itemPic {
 	text-align: center
@@ -112,13 +118,13 @@
 #shop .item .in div {
 	display: inline-block;
 	width: calc( 50% - 10px );
-	margin: 0px;
-}
-#shop .item .in .cnt{
-	margin-left: 10px; 
+	margin-left: 5px;
 }
 #shop .item .buy {
-	margin: 10px auto;
+	font-size: 20px;
+	border-radius: 10px;
+}
+#shop .item .itemPrice {
 	font-size: 20px;
 	border-radius: 10px;
 }

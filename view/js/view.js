@@ -78,7 +78,7 @@ function login() {
 function update() {
 	/* update map */
 	$.each(model.map, (id, node) => {
-		if (node.owner != null) {
+		if (node.type == "server" && node.owner != null) {
 			$( '#' + node.id ).css('background-color', playerColor[node.owner]);
 		}
 	});
@@ -114,6 +114,9 @@ function update() {
 		 $('#t3').css('transform', 'rotate(248deg)');
 	else $('#t3').css('transform', 'rotate(305deg)');
 
+	$('#hao123 .itemPrice').text('$' + model.items["hao123"].cost);
+	$('#opticalFiber .itemPrice').text('$' + model.items["boost"].cost);
+	$('#firewall .itemPrice').text('$' + model.items["firewall"].cost);
 
 	// update backpack
 	if (playerId >= 5) {
@@ -124,11 +127,7 @@ function update() {
 	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
 
 	// update items 
-	$('#firewall .cnt').text('目前共有' + model.players[playerId].items[0] + '個');
-	$('#vpn .cnt').text('目前共有' + model.players[playerId].items[1] + '個');
 	$('#profMoney').text('you have $' + model.players[playerId].money);
-	$('#vpn .itemPrice').text('$' + model.items[1].cost);
-	$('#firewall .itemPrice').text('$' + model.items[0].cost);
 	$('#profIP').text('your IP ' + model.players[playerId].ip );
 
 	

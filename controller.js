@@ -84,7 +84,7 @@ Controller = function(io) {
 
 	function itemEvent() {
 		if (itemQueue.length == 0) {
-			setTimeout(nexTurn, 300);
+			setTimeout(nextTurn, 300);
 			return;
 		}
 		var item = itemQueue.shift();
@@ -133,7 +133,7 @@ Controller = function(io) {
 		model.players[model.nowPlaying].pos = next;
 		model.players[model.nowPlaying].last = current.id;
 		publish();
-		if (steps <= 1 || model.map[next].firewall.indexOf(nowId) != -1)   {
+		if (steps <= 1 || model.map[next].firewall.has(nowId))   {
 			setTimeout(nodeEvent, 300);
 		} else {
 			setTimeout(() => move(steps - 1), 300);
@@ -143,8 +143,8 @@ Controller = function(io) {
 	function nodeEvent() {
 		var node = model.map[model.players[model.nowPlaying].pos]
 		var nowId = model.players[model.nowPlaying].id;
-		if (node.firewall.indexOf(nowId) != 1) {
-			node.firewall = [];
+		if (node.firewall.has(nowId)) {
+			node.firewall.clear;
 		}
 		if (node.type == "question") {
 			questionEvent();
