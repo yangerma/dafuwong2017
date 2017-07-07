@@ -27,6 +27,21 @@
 	width: 240px;
 	height: 135px;
 }
+#map .chance {
+	position: absolute;
+	margin-left: -10px;
+	margin-top: -10px;
+	width:70px;
+	height:70px;
+	border-radius: 35px;
+}
+#map .chance img {
+	position: relative;
+	margin-left: 10px;
+	margin-top: 10px;
+	width: 50px;
+	height: 50px;
+}
 #map .home {
 	position: absolute;
 	width:80px;
