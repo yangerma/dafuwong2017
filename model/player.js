@@ -5,8 +5,8 @@ Player = function(id, name) {
 		name: name,
 		money: MONEY_INIT,
 		pos: "t" + id,
-		last: null, 
-		items: [0, 0, 0],	//firewall, vpn, 不知道
+		last: null,
+		boost: 0,
 		connect: false,
 		ip: "192.168." + id + ".1",
 	}

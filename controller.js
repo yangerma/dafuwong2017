@@ -21,6 +21,7 @@ Controller = function(io) {
 	var playerIO = new Array();
 	var adminIO = null;
 	var obIO = null;
+	var itemQueue = new Array();
 	var model = {
 		state: WAIT_TO_ROLL,
 		nowPlaying: 0,
@@ -64,7 +65,12 @@ Controller = function(io) {
 
 	function rollDice(id) {
 		if (id == model.nowPlaying && model.state == WAIT_TO_ROLL) {
-			var diceResult = Math.ceil(Math.random() * 4);
+			var maxSteps = 4, diceResult;
+			if (model.players[id].boost > 0) {
+				maxSteps = 8;
+				model.players[id].boost -= 1;
+			}
+			diceResult = Math.ceil(Math.random() * maxSteps);
 			console.log("Player " + id + " roll " + diceResult);
 			notify("dice_result", diceResult);
 			model.state = MOVE;
@@ -75,6 +81,31 @@ Controller = function(io) {
 			console.log("Wrong player roll dice:" + id);
 		}
 	}
+
+	function itemEvent() {
+		if (itemQueue.length == 0) {
+			setTimeout(nexTurn, 300);
+			return;
+		}
+		var item = itemQueue.shift();
+		var hao123Set = new Set();
+		if (item.type == "hao123") {
+			if (hao123Set.has(model.players[item.playerId].pos)) {
+				model.players[item.playerId].money += model.items["hao123"].cost;
+				/* TODO: notify player hao123 fail (?) */
+			} else {
+				model.map[model.players[item.playerId].pos].owner = item.playerId;
+				hao123Set.add(model.players[item.playerId].pos);
+			}
+		} else if (item.type == "firewall") {
+			item.arg.blockList.forEach((id) => model.map[arg.pos].firewall.add(id));
+		} else if (item.type == "boost") {
+			model.players[item.playerId].boost += 1;
+		}
+		publish()
+		setTimeout(itemEvent, 300);
+	}
+
 	function nextTurn() {
 		model.state = WAIT_TO_ROLL;
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
@@ -102,22 +133,10 @@ Controller = function(io) {
 		model.players[model.nowPlaying].pos = next;
 		model.players[model.nowPlaying].last = current.id;
 		publish();
-		if (model.map[next].firewall.indexOf(nowId) != -1) {
-			if (model.players[model.nowPlaying].items[1] > 0) {
-				model.players[model.nowPlaying].items[1] -= 1;
-				setTimeout(() => {
-					notify('vpn', {playerId: model.nowPlaying});
-					move(steps - 1);
-				}, 500);
-			} else {
-				setTimeout(nodeEvent, 500);
-			}
-			return;
-		}
-		if (steps <= 1)  {
-			setTimeout(nodeEvent, 500);
+		if (steps <= 1 || model.map[next].firewall.indexOf(nowId) != -1)   {
+			setTimeout(nodeEvent, 300);
 		} else {
-			setTimeout(() => move(steps - 1), 500);
+			setTimeout(() => move(steps - 1), 300);
 		}
 	}
 
@@ -176,10 +195,16 @@ Controller = function(io) {
 
 	function homeEvent() {
 		model.state = HOME;
-		var reward = 500;
-		model.players[model.nowPlaying].money += reward;
-		publish();
-		notify("home", {playerId: model.nowPlaying, reward: reward});
+		var nowId = model.players[model.nowPlaying].id;
+		var home = model.map[model.players[model.nowPlaying].pos];
+		if (nowId == home.owner) {
+			var reward = 500;
+			model.players[model.nowPlaying].money += reward;
+			publish();
+			notify("home", {playerId: model.nowPlaying, reward: reward});
+		} else {
+			payTolls(nowId, home);
+		}
 	}	
 
 	function answerQuestion(ans) {
@@ -225,19 +250,13 @@ Controller = function(io) {
 		nodeEvent();
 	}
 
-	function buyItem(playerId, itemId) {
-		model.players[playerId].money -= model.items[itemId].cost;
-		model.players[playerId].items[itemId] += 1;
+	function buyItem(playerId, type, arg) {
+		itemQueue.push({playerId: playerId, type: type, arg: arg});
+		model.players[playerId].money -= model.items[type].cost;
 		publish();
-		notify("buy_item", {playerId: playerId, itemId: itemId});
+		notify("buy_item", {playerId: playerId, type: type});
 	}
 	
-	function setFirewall(blockList) {
-		model.map[model.players[model.nowPlaying].pos].firewall = blockList;
-		model.players[model.nowPlaying].items[0] -= 1;
-		publish();
-	}
-
 	/* Listen new connection */
 	io.on("connection", (player) => {
 
@@ -267,13 +286,12 @@ Controller = function(io) {
 			publish();
 		})
 		player.on("roll_dice", (playerId) => rollDice(playerId));
-		player.on("buy_item",  (playerId, itemId) => buyItem(playerId, itemId));
+		player.on("buy_item",  (playerId, type, arg) => buyItem(playerId, type, arg));
 		player.on("buy_house", buyHouse);
 		player.on("answer_question", (ans) => answerQuestion(ans));
 		player.on("update_house", updateHouse);
 		player.on("switch", (pos) => teleport(pos));
-		player.on("firewall", (blockList) => setFirewall(blockList));
-		player.on("turn_over", nextTurn);
+		player.on("turn_over", itemEvent);
 	});
 }
 module.exports = Controller;
