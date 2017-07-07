@@ -17,7 +17,15 @@
 	position: absolute;
 	width:50px;
 	height:50px;
-	-webkit-clip-path:circle(50% at 50% 50%);
+	border-radius: 25px;
+	/*-webkit-clip-path:circle(50% at 50% 50%);*/
+}
+#map .node img {
+	position: relative;
+	margin-left: -50px;
+	margin-top: -70px;
+	width: 240px;
+	height: 135px;
 }
 #map .home {
 	position: absolute;

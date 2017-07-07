@@ -2,6 +2,7 @@ var socket = io();
 var playerId = null;
 var playerName = null;
 var model = null;
+var old = null;
 var timer = null;
 var admin = false;
 var playerColor = ['#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
@@ -32,7 +33,7 @@ socket.on('update', function(data) {
 	if (admin) {
 		playerId = data.nowPlaying;
 	}
-	var old = model;
+	old = model;
 	model = data;
 	update();
 	var state = model.state;
@@ -79,7 +80,11 @@ function update() {
 	/* update map */
 	$.each(model.map, (id, node) => {
 		if (node.type == "server" && node.owner != null) {
-			$( '#' + node.id ).css('background-color', playerColor[node.owner]);
+			$('#' + node.id).css('background-color', playerColor[node.owner]);
+			$('#' + node.id + ' img').attr('src', 'img/server' + node.level + '.png');
+		}
+		if (old != null && node.level != old.map[node.id].level) {
+			$('#' + node.id + ' img').attr('src', 'img/server_setup' + node.level + '.gif');
 		}
 	});
 	for (var i = 0; i < 5; i++) {

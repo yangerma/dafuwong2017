@@ -220,6 +220,7 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		model.players[nowId].money -= house.price;
 		house.owner = nowId;
+		house.level = 1;
 		console.log("Player " + nowId + " buy " + house.id);
 		publish();
 		notify("buy_house", {playerId: nowId});
