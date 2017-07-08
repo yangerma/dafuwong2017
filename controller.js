@@ -1,5 +1,4 @@
 var MAX_PLAYER = 5;
-var N_QUESTION = 13; 
 /* Define game state. */
 const GAMEOVER = 0;
 const START = 1;
@@ -10,11 +9,13 @@ const QUESTION = 5;
 const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
+const CHANCE = 9;
 
 var map = require("./model/map.js");
 var Player = require("./model/player.js");
 var questions = require("./model/questions.js");
 var items = require("./model/items.js");
+var chances = require("./model/chance.js");
 
 Controller = function(io) {
 	var io = io;
@@ -36,6 +37,7 @@ Controller = function(io) {
 		],
 		switchState: 1,
 		question: null,
+		chacne: null,
 	}
 	
 	function notify(event, arg) {
@@ -64,6 +66,11 @@ Controller = function(io) {
 	}
 
 	function rollDice(id) {
+		if (id == model.nowPlaying && model.players[id].stop) {
+			model.players[id].stop = false;
+			nextTurn();
+			return;
+		}
 		if (id == model.nowPlaying && model.state == WAIT_TO_ROLL) {
 			var maxSteps = 4, diceResult;
 			if (model.players[id].opticalFiber > 0) {
@@ -155,7 +162,7 @@ Controller = function(io) {
 		} else if (node.type == "switch") {
 			switchEvent();
 		} else if (node.type == "chance") {
-			/* TODO: chanceEvent)();  */
+			chanceEvent();
 		} else if (node.type == "home") {
 			homeEvent();
 		}
@@ -163,7 +170,7 @@ Controller = function(io) {
 
 	function questionEvent() {
 		model.state = QUESTION;
-		var questionId = Math.round(Math.random() * N_QUESTION);
+		var questionId = Math.round(Math.random() * questions.length);
 		model.question = questions[questionId];
 		publish();
 	}
@@ -190,6 +197,13 @@ Controller = function(io) {
 
 	function switchEvent() {
 		model.state = SWITCH;
+		publish();
+	}
+
+	function chanceEvent() {
+		model.state = CHANCE;
+		model.chance = chances[Math.round(Math.random() * chances.length)];
+		model.chance.activate(model);
 		publish();
 	}
 
@@ -241,7 +255,7 @@ Controller = function(io) {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
 		model.players[nowId].money -= house.tolls;
-		model.players[house.owner].nomey += house.tolls;
+		model.players[house.owner].money += house.tolls;
 		publish();
 		notify("pay_tolls", {playerId: nowId});
 	}

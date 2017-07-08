@@ -16,6 +16,7 @@ const QUESTION = 5
 const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
+const CHANCE = 9;
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
@@ -62,6 +63,9 @@ socket.on('update', function(data) {
 				showSwitch();
 			}
 			break;
+		case CHANCE:
+			showChance();
+			break;
 		default:	
 			console.log("Wrong state:" + state);
 	}
@@ -87,7 +91,11 @@ function update() {
 		}
 	});
 	for (var i = 0; i < 5; i++) {
-
+		if (model.players[i].stop) {
+			$('#player' + i).attr('src', 'img/dinosaur.png');
+		} else {
+			$('#player' + i).attr('src', 'img/player' + i + '.gif');
+		}
 		// update position
 		var currPos = '#' + model.players[i].pos;
 		var x = $(currPos).offset().left - 15 - i;

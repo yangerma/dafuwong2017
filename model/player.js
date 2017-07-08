@@ -7,6 +7,7 @@ Player = function(id, name) {
 		pos: "t" + id,
 		last: null,
 		boost: 0,
+		stop: false,
 		connect: false,
 		ip: "192.168." + id + ".1",
 	}
