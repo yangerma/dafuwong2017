@@ -151,7 +151,7 @@ Controller = function(io) {
 		var node = model.map[model.players[model.nowPlaying].pos]
 		var nowId = model.players[model.nowPlaying].id;
 		if (node.firewall.has(nowId)) {
-			node.firewall.clear;
+			node.firewall.clear();
 		}
 		if (node.type == "question") {
 			questionEvent();
@@ -170,7 +170,7 @@ Controller = function(io) {
 
 	function questionEvent() {
 		model.state = QUESTION;
-		var questionId = Math.round(Math.random() * questions.length);
+		var questionId = Math.floor(Math.random() * questions.length);
 		model.question = questions[questionId];
 		publish();
 	}
@@ -186,7 +186,7 @@ Controller = function(io) {
 	}
 
 	function dhcpEvent() {
-		var newIp = Math.ceil(Math.random() * 5);
+		var newIp = Math.floor(Math.random() * 5);
 		model.state = DHCP;
 		model.players[model.nowPlaying].id = newIp;
 		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 86 + 1); // Can't higher than 87 !
@@ -202,7 +202,7 @@ Controller = function(io) {
 
 	function chanceEvent() {
 		model.state = CHANCE;
-		model.chance = chances[Math.round(Math.random() * chances.length)];
+		model.chance = chances[Math.floor(Math.random() * chances.length)];
 		model.chance.activate(model);
 		publish();
 	}
@@ -261,6 +261,7 @@ Controller = function(io) {
 	}
 
 	function teleport(pos) {
+		console.log("Player " + model.nowPlaying + " tp " + pos);
 		model.players[model.nowPlaying].pos = pos;
 		model.players[model.nowPlaying].last = null;
 		publish();

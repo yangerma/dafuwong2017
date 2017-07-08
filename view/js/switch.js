@@ -37,7 +37,7 @@ function chooseLand() {
 		var landID = $( this ).prop('id');
 		console.log( 'choosen #' + landID );
 		timeToChooseLand = false;
-		socket.emit('switch', landID );
+		socket.emit('switch', landID.split('_')[1] );
 	});
 
 }
