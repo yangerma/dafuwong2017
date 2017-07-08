@@ -151,7 +151,7 @@ Controller = function(io) {
 		var node = model.map[model.players[model.nowPlaying].pos]
 		var nowId = model.players[model.nowPlaying].id;
 		if (node.firewall[nowId]) {
-			node.firewallforEach((x, id, a) => a[id] = false);
+			node.firewall.forEach((x, id, a) => a[id] = false);
 		}
 		if (node.type == "question") {
 			questionEvent();
