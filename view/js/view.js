@@ -82,15 +82,30 @@ function login() {
 function update() {
 	/* update map */
 	$.each(model.map, (id, node) => {
+		//server
 		if (node.type == "server" && node.owner != null) {
 			$('#' + node.id).css('background-color', playerColor[node.owner]);
-			$('#' + node.id + ' img').show();
-			$('#' + node.id + ' img').attr('src', 'img/server' + node.level + '.png');
+			$('#' + node.id + ' .serverImg').show();
+			$('#' + node.id + ' .serverImg').attr('src', 'img/server' + node.level + '.png');
 
 		}
 		if (old != null && node.level != old.map[node.id].level) {
-			$('#' + node.id + ' img').show();
-			$('#' + node.id + ' img').attr('src', 'img/server_setup' + node.level + '.gif');
+			$('#' + node.id + ' .serverImg').show();
+			$('#' + node.id + ' .serverImg').attr('src', 'img/server_setup' + node.level + '.gif');
+		}
+		//firewall
+		console.log("make firewall great again" + node.firewall.size + " " + old.map[node.id].firewall.size);
+		if (old != null && node.firewall.size > old.map[node.id].firewall.size ) {
+			console.log("make firewall great again");
+			$('#fw_' + node.id + ' .firewallImg').show();
+			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_add.gif');
+		}
+		else if (old != null && node.firewall.size && node.firewall.size == old.map[node.id].firewall.size ) {
+			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_active.gif');
+		}
+		else if (old != null && !node.firewall.size && old.map[node.id].firewall.size ) {
+			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_clear.gif');
+			$('#fw_' + node.id + ' .firewallImg').hide();
 		}
 	});
 	for (var i = 0; i < 5; i++) {

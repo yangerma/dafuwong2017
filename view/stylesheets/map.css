@@ -20,8 +20,15 @@
 	border-radius: 25px;
 	/*-webkit-clip-path:circle(50% at 50% 50%);*/
 }
-#map .node img {
+#map .node .serverImg {
 	display: none;
+	position: relative;
+	margin-left: -50px;
+	margin-top: -70px;
+	width: 240px;
+	height: 135px;
+}
+#map .node .firewallImg {
 	position: relative;
 	margin-left: -50px;
 	margin-top: -70px;

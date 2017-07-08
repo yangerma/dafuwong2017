@@ -105,7 +105,7 @@ Controller = function(io) {
 				hao123Set.add(model.players[item.playerId].pos);
 			}
 		} else if (item.type == "firewall") {
-			item.arg.blockList.forEach((id) => model.map[arg.pos].firewall.add(id));
+			item.arg.blockList.forEach((id) => model.map[item.arg.pos].firewall.add(id));
 		} else if (item.type == "opticalFiber") {
 			model.players[item.playerId].opticalFiber += 1;
 		}
