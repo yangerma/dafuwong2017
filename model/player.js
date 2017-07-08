@@ -1,4 +1,4 @@
-const MONEY_INIT = 2000;
+const MONEY_INIT = 5000;
 Player = function(id, name) {
 	return {
 		id: id,

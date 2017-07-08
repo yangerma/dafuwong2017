@@ -17,26 +17,21 @@ function showNodeProperty( nodeID ) {
 			owner = node.owner;
 			if( owner == null ) {
 				title = "一塊無主的地";
-				/* TODO : add price 
-					price = node.price;
-				*/
+				price = node.price;
 				des = "幸運的話，你可能可以花 $" + price +" 把這塊地買下來喔";
 			}
 			else {
 				house = true;
 				title = "一塊被佔據的地";
-				/* TODO : add price & level info
-					level = node.level;
-					price = node.price;
-				*/
+				level = node.level;
+				price = node.price;
+				tolls = node.tolls;
 			}
 		break;
 		case ("home"):
 			owner = node.owner;
 			title = "這裡是"+ model.players[owner].name +"溫暖的家";
-			/* TODO : add price 
-				price = node.price;
-			*/
+			price = node.tolls;
 			des = "踩到人家家裡，要付 $" + price +" 的過路費喔";
 		break;
 		case ("chance"):
@@ -65,10 +60,9 @@ function showNodeProperty( nodeID ) {
 		$('#nodeProperty #houseInfo').show();
 		$('#nodeProperty #otherInfo').hide();
 		$('#nodeProperty #nodeOwner strong').text(model.players[owner].name);
-		/* TODO : add price & level info
-			$('#nodeProperty #nodeLevel strong').text(level);
-			$('#nodeProperty #nodePrice strong').text(price);
-		*/
+		$('#nodeProperty #nodeLevel strong').text(level);
+		$('#nodeProperty #nodePrice strong').text(price);
+		$('#nodeProperty #nodeTolls strong').text(tolls);
 	}
 	else {
 		$('#nodeProperty #houseInfo').hide();
