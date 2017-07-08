@@ -82,15 +82,31 @@ function login() {
 function update() {
 	/* update map */
 	$.each(model.map, (id, node) => {
+		//server
 		if (node.type == "server" && node.owner != null) {
 			$('#' + node.id).css('background-color', playerColor[node.owner]);
-			$('#' + node.id + ' img').show();
-			$('#' + node.id + ' img').attr('src', 'img/server' + node.level + '.png');
+			$('#' + node.id + ' .serverImg').show();
+			$('#' + node.id + ' .serverImg').attr('src', 'img/server' + node.level + '.png');
 
 		}
 		if (old != null && node.level != old.map[node.id].level) {
-			$('#' + node.id + ' img').show();
-			$('#' + node.id + ' img').attr('src', 'img/server_update' + node.level + '.gif');
+			$('#' + node.id + ' .serverImg').show();
+			$('#' + node.id + ' .serverImg').attr('src', 'img/server_update' + node.level + '.gif');
+		}
+		//firewall
+		if (node.firewall.some((val) => val)) {
+			$('#fw_' + node.id + ' .firewallImg').show();
+			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_active.gif');
+		}
+		if (old != null && node.firewall.some((val, id) => old.map[node.id].firewall[id] != val) ) {
+			console.log("make firewall great again");
+			if (node.firewall.some((val) => val)) {
+				$('#fw_' + node.id + ' .firewallImg').show();
+				$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_add.gif');
+			} else {
+				$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_clear.gif');
+				$('#fw_' + node.id + ' .firewallImg').hide();
+			}
 		}
 	});
 	for (var i = 0; i < 5; i++) {
