@@ -203,6 +203,7 @@ Controller = function(io) {
 			publish();
 			notify("home", {playerId: model.nowPlaying, reward: reward});
 		} else {
+			model.state = HOUSE;
 			payTolls(nowId, home);
 		}
 	}	
