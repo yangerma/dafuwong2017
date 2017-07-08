@@ -241,6 +241,7 @@ Controller = function(io) {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
 		model.players[nowId].money -= house.tolls;
+		model.players[house.owner].nomey += house.tolls;
 		publish();
 		notify("pay_tolls", {playerId: nowId});
 	}
