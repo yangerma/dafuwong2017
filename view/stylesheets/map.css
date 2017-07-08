@@ -28,13 +28,7 @@
 	width: 240px;
 	height: 135px;
 }
-#map .node .firewallImg {
-	position: relative;
-	margin-left: -50px;
-	margin-top: -70px;
-	width: 240px;
-	height: 135px;
-}
+
 #map .chance {
 	position: absolute;
 	margin-left: -10px;

@@ -16,10 +16,10 @@
 #fw_map .firewallImg {
 	display: none;
 	position: relative;
-	margin-left: -50px;
-	margin-top: -70px;
-	width: 240px;
-	height: 135px;
+	margin-left: -40px;
+	margin-top: -20px;
+	width: 128px;
+	height: 72px;
 }
 
 #fw_map .chance {

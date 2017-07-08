@@ -94,18 +94,19 @@ function update() {
 			$('#' + node.id + ' .serverImg').attr('src', 'img/server_setup' + node.level + '.gif');
 		}
 		//firewall
-		console.log("make firewall great again" + node.firewall.size + " " + old.map[node.id].firewall.size);
-		if (old != null && node.firewall.size > old.map[node.id].firewall.size ) {
-			console.log("make firewall great again");
+		if (node.firewall.some((val) => val)) {
 			$('#fw_' + node.id + ' .firewallImg').show();
-			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_add.gif');
-		}
-		else if (old != null && node.firewall.size && node.firewall.size == old.map[node.id].firewall.size ) {
 			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_active.gif');
 		}
-		else if (old != null && !node.firewall.size && old.map[node.id].firewall.size ) {
-			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_clear.gif');
-			$('#fw_' + node.id + ' .firewallImg').hide();
+		if (old != null && node.firewall.some((val, id) => old.map[node.id].firewall[id] != val) ) {
+			console.log("make firewall great again");
+			if (node.firewall.some((val) => val)) {
+				$('#fw_' + node.id + ' .firewallImg').show();
+				$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_add.gif');
+			} else {
+				$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_clear.gif');
+				$('#fw_' + node.id + ' .firewallImg').hide();
+			}
 		}
 	});
 	for (var i = 0; i < 5; i++) {
