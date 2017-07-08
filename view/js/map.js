@@ -1,3 +1,11 @@
+$("#cpy_map div").on("mouseover", function() {
+    var nodeID = $( this ).prop('id');
+    nodeID = nodeID.substr(4);
+    showNodeProperty( nodeID );
+}).on("mouseout", function() {
+    $('#nodeProperty').hide();
+});
+
 function showNodeProperty( nodeID ) {
 
 	// move the block

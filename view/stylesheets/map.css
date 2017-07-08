@@ -21,6 +21,7 @@
 	/*-webkit-clip-path:circle(50% at 50% 50%);*/
 }
 #map .node img {
+	display: none;
 	position: relative;
 	margin-left: -50px;
 	margin-top: -70px;
