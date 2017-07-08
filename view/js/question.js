@@ -5,7 +5,7 @@ function showQuestion(){
 	$('#questionBox #timeLeft').show();
 	$('#questionBox .closeButton').hide();
 	$('#questionBox #answerResult').hide();
-	$('#questionBox .qTitle h1').text(q.subject);
+	$('#questionBox .title h1').text(q.subject);
 	$('#questionBox .qDes p').text(q.description);
 	
 	if (playerId == model.nowPlaying) {
