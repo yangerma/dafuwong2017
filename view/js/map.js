@@ -8,8 +8,6 @@ $("#cpy_map div").on("mouseover", function() {
 
 function showNodeProperty( nodeID ) {
 
-	// move the block
-
 	// set content
 	var node = model.map[nodeID];
 	var title, owner, level, price, des;
@@ -66,6 +64,11 @@ function showNodeProperty( nodeID ) {
 	if( house == true ) {
 		$('#nodeProperty #houseInfo').show();
 		$('#nodeProperty #otherInfo').hide();
+		$('#nodeProperty #nodeOwner strong').text(model.players[owner].name);
+		/* TODO : add price & level info
+			$('#nodeProperty #nodeLevel strong').text(level);
+			$('#nodeProperty #nodePrice strong').text(price);
+		*/
 	}
 	else {
 		$('#nodeProperty #houseInfo').hide();
@@ -73,12 +76,13 @@ function showNodeProperty( nodeID ) {
 		$('#nodeProperty #otherInfo p').text(des);
 	}
 
+	// move the block
+	var x = $('#' + nodeID).offset().left - 75;
+	var y = $('#' + nodeID).offset().top -  85;
+	$("#nodeProperty").css('top', y);
+	$("#nodeProperty").css('left', x);
+
 	// hover to show / hide
 	$('#nodeProperty').show();
 
 }
-
-// type
-// if ( chance / switch / dhcp / question / home) => 解釋功能
-// house : owner, level, pass $$
-// 無主地 : price
