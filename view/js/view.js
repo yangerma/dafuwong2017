@@ -90,7 +90,7 @@ function update() {
 		}
 		if (old != null && node.level != old.map[node.id].level) {
 			$('#' + node.id + ' img').show();
-			$('#' + node.id + ' img').attr('src', 'img/server_setup' + node.level + '.gif');
+			$('#' + node.id + ' img').attr('src', 'img/server_update' + node.level + '.gif');
 		}
 	});
 	for (var i = 0; i < 5; i++) {
