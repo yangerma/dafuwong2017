@@ -64,6 +64,11 @@ Controller = function(io) {
 	}
 
 	function rollDice(id) {
+		if (id == model.nowPlaying && model.players[id].stop) {
+			model.players[id].stop = false;
+			nextTurn();
+			return;
+		}
 		if (id == model.nowPlaying && model.state == WAIT_TO_ROLL) {
 			var maxSteps = 4, diceResult;
 			if (model.players[id].opticalFiber > 0) {

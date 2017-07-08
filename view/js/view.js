@@ -16,6 +16,7 @@ const QUESTION = 5
 const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
+const CHANCE = 9;
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
@@ -61,6 +62,9 @@ socket.on('update', function(data) {
 			if (model.nowPlaying == playerId) {
 				showSwitch();
 			}
+			break;
+		case CHANCE:
+			showChance();
 			break;
 		default:	
 			console.log("Wrong state:" + state);
