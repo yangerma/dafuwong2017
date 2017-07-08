@@ -236,6 +236,7 @@ Controller = function(io) {
 		model.players[nowId].money -= house.price;
 		house.owner = nowId;
 		house.level = 1;
+		house.tolls += house.level * 300;
 		console.log("Player " + nowId + " buy " + house.id);
 		publish();
 		notify("buy_house", {playerId: nowId});
@@ -246,7 +247,7 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		model.players[nowId].money -= house.price;
 		house.level += 1;
-		/* TODO: update house price & tolls */
+		house.tolls += house.level * 300;
 		publish();
 		notify("update_house", {playerId: nowId});
 	}
