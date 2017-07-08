@@ -91,7 +91,11 @@ function update() {
 		}
 	});
 	for (var i = 0; i < 5; i++) {
-
+		if (model.players[i].stop) {
+			$('#player' + i).attr('src', 'img/dinosaur.png');
+		} else {
+			$('#player' + i).attr('src', 'img/player' + i + '.gif');
+		}
 		// update position
 		var currPos = '#' + model.players[i].pos;
 		var x = $(currPos).offset().left - 15 - i;
