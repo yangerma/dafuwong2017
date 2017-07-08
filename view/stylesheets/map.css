@@ -100,3 +100,40 @@
 
 #map #t1 { transform: rotate(112deg); }
 #map #t4 { transform: rotate(328deg); }
+
+#nodeProperty {
+	position: absolute;
+	text-align: left;
+	padding: 5px;
+	max-width: 190px;
+}
+#nodeProperty #nodeType{
+	height: 23px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 23px;
+	margin: 5px;
+	padding: 0px;
+}
+#nodeProperty .info{
+	margin: 5px;
+}
+#nodeProperty p{
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

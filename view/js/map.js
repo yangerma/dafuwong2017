@@ -66,6 +66,7 @@ function showNodeProperty( nodeID ) {
 	}
 
 	// hover to show / hide
+	$('#nodeProperty').show();
 
 }
 
