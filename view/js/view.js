@@ -80,9 +80,12 @@ function update() {
 	$.each(model.map, (id, node) => {
 		if (node.type == "server" && node.owner != null) {
 			$('#' + node.id).css('background-color', playerColor[node.owner]);
+			$('#' + node.id + ' img').show();
 			$('#' + node.id + ' img').attr('src', 'img/server' + node.level + '.png');
+
 		}
 		if (old != null && node.level != old.map[node.id].level) {
+			$('#' + node.id + ' img').show();
 			$('#' + node.id + ' img').attr('src', 'img/server_setup' + node.level + '.gif');
 		}
 	});
