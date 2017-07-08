@@ -1,0 +1,138 @@
+#openBackpack {
+	margin-left: 1000px;
+	margin-top: 20px;
+	margin-right: 30px;
+	border: solid grey 1px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 16px;
+	border-radius: 10px;
+}
+#openBackpack:hover {
+	font-size: 20px;
+	font-weight: 500;
+	background-color: #FFE5B5;
+	border: solid black 1.5px;
+}
+#backpack {
+	display: none;
+	width: 95%;
+	height: 95%;
+	position: absolute;
+	left: 2.5%;
+	top: 2.5%;
+	padding: 20px;
+	border: solid grey 1px;
+	background-color:rgba(255,255,255,0.9);
+}
+
+
+#profile {
+	position: absolute;
+	width: 280px;
+	height: calc(100% - 40px);
+	border: solid grey 1px;
+	padding: 20px;
+}
+#profile h1 {
+	margin: 0px auto;
+	line-height: 50px;
+	border: solid grey 1px;
+}
+#profile #profilePic {
+	position: relative;
+	left: -80px;
+	width: 400px;
+	height: 400px;
+	margin: 10px;
+	overflow: hidden;
+}
+#profile .profileInfo {
+	width: 240px;
+	line-height: 30px;
+	margin: 10px auto;
+	border: solid grey 1px;
+	padding: 10px;
+	font-size: 20px;
+	text-align: center;
+}
+
+
+#shop {
+	height: 100%;
+	border: solid grey 1px;
+	margin-left: 300px;
+	padding: 10px;
+}
+
+#shop div{
+	border: solid grey 1px;
+}
+#shop #shopTitle {
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+	font-size: 36px;
+	font-weight: 700;
+	border: none;
+}
+#shop .item{
+	width: calc( 33.33% - 20px );
+	margin: 10px;
+	float: left;
+	border: none;
+}
+#shop .item div{
+	margin: 20px auto;
+	padding: 10px;
+}
+#shop .item .itemName {
+	line-height: 50px;
+	text-align: center;
+	font-size: 22px;
+	font-weight: 500;
+	margin: 0px auto;
+	padding: 0px;
+}
+#shop .itemDes {
+	height: 120px;
+}
+#shop .itemUsage {
+	height: 90px;
+}
+#shop .itemPic {
+	text-align: center
+}
+#shop .itemPic img{
+	height: 160px;
+	width: 240px;
+}
+#shop .itemBlock {
+	line-height: 30px;
+	text-align: center;
+}
+#shop .item .in{
+	padding: 0px;
+	margin: 0px;
+	border: none;
+}
+#shop .item .in div {
+	display: inline-block;
+	width: calc( 50% - 10px );
+	margin-left: 5px;
+}
+#shop .item .buy {
+	font-size: 20px;
+	border-radius: 10px;
+	margin: 0px;
+}
+#shop .item .itemPrice {
+	font-size: 20px;
+	border-radius: 10px;
+	margin: 0px;
+}
+#shop .item .buy:hover {
+	font-weight: 500;
+	background-color: #FFE5B5;
+	border: solid black 1.5px;
+}

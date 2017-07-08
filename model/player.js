@@ -5,9 +5,11 @@ Player = function(id, name) {
 		name: name,
 		money: MONEY_INIT,
 		pos: "t" + id,
-		last: null, 
-		item: [0, 0, 0],
-		connect: false
+		last: null,
+		boost: 0,
+		stop: false,
+		connect: false,
+		ip: "192.168." + id + ".1",
 	}
 }
 
