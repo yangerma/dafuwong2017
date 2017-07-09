@@ -29,7 +29,7 @@ function showHouseEvent() {
 			$('#timeOut').show();
 			setTimeout( function(){
 				$('#timeOut').hide();
-				turnOver();
+				showTurnOver();
 			}, 700);
 		}
 	} , 1000);
