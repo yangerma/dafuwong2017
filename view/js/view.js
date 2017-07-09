@@ -134,8 +134,8 @@ function update() {
 	}
 
 	// update switch state
-	if( model.switchState == 1 ) $('#switch img').attr('src', 'img/cycle.png');
-	else $('#switch img').attr('src', 'img/countercycle.png');
+	if( model.switchState == 1 ) $('#switch img').attr('src', 'img/countercycle.png');
+	else $('#switch img').attr('src', 'img/cycle.png');
 
 	// check intersection
 	if( model.map.t0.next[0] == 'c01' ) 
