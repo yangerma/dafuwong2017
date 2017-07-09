@@ -2,16 +2,16 @@ function showHouseEvent() {
 	var house = model.map[model.players[model.nowPlaying].pos];
 	var nowId = model.players[model.nowPlaying].id;
 	if( house.owner == null ) {
-		$('#buyHouse .housePrice').text( house.price );
+		$('#buyHouse .housePrice').text( house.price[house.level] );
 		$('#buyHouse').show();
 	}
 	else if( house.owner == nowId ) {
-		$('#updateHouse .housePrice').text( house.price );
+		$('#updateHouse .housePrice').text( house.price[house.level] );
 		$('#updateHouse').show();
 	}
 	else {	//other's house
 		$('#passOthersHouse .houseOwner').text( model.players[house.owner].name );
-		$('#passOthersHouse .housePrice').text( house.tolls );
+		$('#passOthersHouse .housePrice').text( house.tolls[house.level] );
 		$('#passOthersHouse').show();
 	}
 

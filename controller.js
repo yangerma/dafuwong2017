@@ -242,10 +242,9 @@ Controller = function(io) {
 	function buyHouse() {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
-		model.players[nowId].money -= house.price;
+		model.players[nowId].money -= house.price[house.level];
 		house.owner = nowId;
 		house.level = 1;
-		house.tolls += house.level * 300;
 		console.log("Player " + nowId + " buy " + house.id);
 		publish();
 		notify("buy_house", {playerId: nowId});
@@ -254,9 +253,8 @@ Controller = function(io) {
 	function updateHouse() {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
-		model.players[nowId].money -= house.price;
+		model.players[nowId].money -= house.price[house.level];
 		house.level += 1;
-		house.tolls += house.level * 300;
 		publish();
 		notify("update_house", {playerId: nowId});
 	}
@@ -264,8 +262,8 @@ Controller = function(io) {
 	function payTolls(id, house) {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
-		model.players[nowId].money -= house.tolls;
-		model.players[house.owner].money += house.tolls;
+		model.players[nowId].money -= house.tolls[house.level];
+		model.players[house.owner].money += house.tolls[house.level];
 		publish();
 		notify("pay_tolls", {playerId: nowId, ownerId: house.owner});
 	}
