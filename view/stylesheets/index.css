@@ -1,0 +1,143 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+	font-family: 'Noto Sans TC', sans-serif;
+	font-weight: 300;
+}
+
+strong {
+	font-weight: 500;
+}
+
+.closeButton {
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	top: 25px;
+	right: 25px;
+}
+.closeButton:hover {
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+.alertBox {
+	position: absolute;
+	display: none;
+	width: 100%;
+	height: 200px;
+	line-height: 200px;
+	top: calc(50% - 100px);
+	text-align: center;
+	color: #990000;
+	font-size: 100px;
+	font-weight: 700;
+	background-color:rgba(255,255,255,0.5);
+}
+
+.popBox {
+	text-align: center;
+	display: none;
+	position: absolute;
+	border: solid grey 1px;
+	background-color:rgba(255,255,255,0.85);
+}
+
+.timer {
+	color: red;
+}
+
+.title {
+	text-align: center;
+}
+
+#container {
+	display: none;
+}
+
+#players img {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+}
+
+#end {
+	border-radius: 10px;
+	height: 100px;
+	width: 200px;
+	line-height: 100px;
+	left: calc(50% - 100px);
+	top: calc(50% - 50px);
+	font-weight: 500;
+	font-size: 32px;
+	color: #990000;
+}
+
+#end:hover {
+	font-size: 40px;
+	font-weight: 700;
+}
+
+#notification {
+	right: 30px;
+	top: 30px;
+	height: 120px;
+	width: 420px;
+	padding: 10px;
+	background-color:rgba(255,255,255,0.9);
+}
+#notification img{
+	float: left;
+	height: 80px;
+	width: 80px;
+	margin: 10px;
+}
+#notification div{
+	float: left;
+	margin: 10px;
+	height: 80px;
+}
+#notification p {
+	text-align: left;
+	line-height: 40px;
+	padding-left: 10px;
+	margin: 0px;
+	font-size: 18px;
+}
+#notification #team {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+#login {
+	display: block;
+	height: 200px;
+	width: 500px;
+	left: calc(50% - 250px);
+	top: calc(50% - 100px);
+	padding: 20px;
+}
+#login *{
+	margin: 5px;
+}
+#login .title{
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 45px;
+	height: 45px;
+}
+
+#firewallBox h1{
+	margin: 10px;
+}
+#firewallBox {
+	height: 340px;
+	top: calc(50% - 170px);
+}

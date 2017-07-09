@@ -1,0 +1,65 @@
+#fw_map{
+	position: absolute;
+	transform: scale(0.9, 0.9);
+	left: 50px;
+	top: 50px;
+	width: 900px;
+	height: 700px;
+	padding: 100px;
+}
+#fw_map .node {
+	position: absolute;
+	width:50px;
+	height:50px;
+	border-radius: 25px;
+}
+#fw_map .firewallImg {
+	display: none;
+	position: relative;
+	margin-left: -40px;
+	margin-top: -10px;
+	width: 128px;
+	height: 72px;
+}
+
+#fw_map .chance {
+	position: absolute;
+	margin-left: -10px;
+	margin-top: -10px;
+	width:70px;
+	height:70px;
+	border-radius: 35px;
+}
+
+#fw_map .question {
+	position: absolute;
+	margin-left: -10px;
+	margin-top: -10px;
+	width:70px;
+	height:70px;
+	border-radius: 35px;
+}
+
+#fw_map .home {
+	position: absolute;
+	width:80px;
+	height:80px;
+	background: none;
+}
+
+#fw_map .dhcp {
+	position: absolute;
+	width:60px;
+	height:60px;
+	text-align: center;
+	line-height: 60px;
+}
+
+#fw_map #fw_switch {
+	position: absolute;
+	width:120px;
+	height:120px;
+	left: calc(50% - 60px);
+	top: calc(50% - 60px);
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
