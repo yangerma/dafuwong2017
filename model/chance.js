@@ -9,7 +9,7 @@ module.exports = [
 	},
 	{
 		description: "在口袋撿到兩百塊~~",
-		effect: "獲得 200塊",
+		effect: "獲得 200元",
 		activate: (model) => {
 			model.players[model.nowPlaying].money+=200;
 			return false;
@@ -17,7 +17,7 @@ module.exports = [
 	},
 	{
 		description: "瓦斯有關嗎? 好像有又好像沒有 衝回家關一下",
-		effect: "立刻回到家 獲得回家獎勵5000塊",
+		effect: "立刻回到家 獲得回家獎勵5000元",
 		activate: (model) => {
 			model.players[model.nowPlaying].pos="t"+model.nowPlaying;
 			model.players[model.nowPlaying].last = null;
@@ -59,7 +59,7 @@ module.exports = [
 	},
 	{
 		description: "被椰林大道的椰子樹樹葉砸到 好痛QQ",
-		effect: "損失 醫藥費500塊",
+		effect: "損失 醫藥費500元",
 		activate: (model) => {
 			model.players[model.nowPlaying].money-=500;
 			return false;
@@ -67,7 +67,7 @@ module.exports = [
 	},
 	{
 		description: "騎ubike逛台大 不幸被水源阿伯拖吊 隔天才去領車",
-		effect: "損失 1000塊",
+		effect: "損失 1000元",
 		activate: (model) => {
 			model.players[model.nowPlaying].money-=2000;
 			return false;
@@ -75,7 +75,7 @@ module.exports = [
 	},
 	{
 		description: "以為自己期末爆了 結果還是領了書卷獎",
-		effect: "獲得 獎學金3000塊",
+		effect: "獲得 獎學金3000元",
 		activate: (model) => {
 			model.players[model.nowPlaying].money+=3000;
 			return false;
@@ -89,9 +89,34 @@ module.exports = [
 		}
 	},
 	{
-		description: "",
-		effect: "",
+		description: "擊落戰鬥機",
+		effect: "獎金3000元",
 		activate: (model) => {
+			model.players[model.nowPlaying].money+=3000;
+			return false;
+		}
+	},
+	{
+		description: "這是你的生日，我也是看FB才知道的",
+		effect: "向每人收取禮金500元",
+		activate: (model) => {
+			model.players[model.nowPlaying].money+=2500;
+			for(var i=0;i<5;i++){
+				model.players[i].money-=500;
+			}
+			return false;
+		}
+	},
+	{
+		description: "機房的冷卻系統漏水 整修自己所有的server",
+		effect: "損失 server*250元",
+		activate: (model) => {
+			for(var id in model.map){
+				node=model.map[id];
+				if(node.type=='server'&&node.owner==model.nowPlaying){
+					model.players[model.nowPlaying].money-=250*(2**(node.level-1));
+				}
+			}
 			return false;
 		}
 	},
