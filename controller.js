@@ -203,8 +203,13 @@ Controller = function(io) {
 	function chanceEvent() {
 		model.state = CHANCE;
 		model.chance = chances[Math.floor(Math.random() * chances.length)];
-		model.chance.activate(model);
+		//model.chance = chances[0];
+		var ret = model.chance.activate(model);
+		console.log("chance on"+model.nowPlaying);
 		publish();
+		if(ret == true){//need nodeEvent();
+			nodeEvent();
+		}
 	}
 
 	function homeEvent() {
