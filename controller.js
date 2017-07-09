@@ -1,6 +1,6 @@
-var MAX_PLAYER = 5;
+ MAX_PLAYER = 5;
 /* Define game state. */
-const GAMEOVER = 0;
+const STOP = 0;
 const START = 1;
 const MOVE = 2;
 const SWITCH = 3;
@@ -65,11 +65,6 @@ Controller = function(io) {
 	}
 
 	function rollDice(id) {
-		if (id == model.nowPlaying && model.players[id].stop) {
-			model.players[id].stop = false;
-			nextTurn();
-			return;
-		}
 		if (id == model.nowPlaying && model.state == WAIT_TO_ROLL) {
 			var maxSteps = 4, diceResult;
 			if (model.players[id].opticalFiber > 0) {
@@ -115,6 +110,7 @@ Controller = function(io) {
 	function nextTurn() {
 		model.state = WAIT_TO_ROLL;
 		var player = model.players[model.nowPlaying];
+		player.stop = false;
 		/* dhcp over */
 		if (model.map[player.pos].type == "server" && player.id != model.nowPlaying) {
 			model.players[model.nowPlaying].id = model.nowPlaying;
@@ -122,7 +118,11 @@ Controller = function(io) {
 		}
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
 		console.log("player " + model.nowPlaying + "'s turn.");
+		if (model.players[model.nowPlaying].stop) {
+			model.state = STOP;
+		}
 		publish();
+
 	}
 
 	function move(steps) {
