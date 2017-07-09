@@ -201,7 +201,7 @@ module.exports = [
 		"id": 13,
 		"multi" : false,
 		"subject" : "Python",
-		"description" : '以下 Python 程式碼執行後會印出？</br><img src="img/q13.png" style="height:181.33px; width:314.67px;">',
+		"description" : '以下 Python 程式碼執行後會印出？<img src="img/q13.png" style="height:181.33px; width:314.67px; float:right;">',
 		"options" : [
 			"145", 
 			"None", 
