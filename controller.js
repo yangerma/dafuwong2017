@@ -11,6 +11,8 @@ const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
 
+var password = ["meow", "beep", "wang", "woof", "oops"];
+
 var map = require("./model/map.js");
 var Player = require("./model/player.js");
 var questions = require("./model/questions.js");
@@ -293,14 +295,14 @@ Controller = function(io) {
 			}
 		});
 
-		player.on("login", (id, name) => {
+		player.on("login", (id, name, psw) => {
 			if (id == 87 && name == "ob") {
 				obIO = player;
 			} else if (id == 87 && name == "csie") {
 				adminIO = player;
 				player.emit("HowDoYouTurnThisOn");
 				console.log("admin login!");
-			} else if (id >= 0 && id < 5){
+			} else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
 				playerIO[id] = player;
 				model.players[id].connect = true;
