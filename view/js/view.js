@@ -45,7 +45,8 @@ socket.on('update', function(data) {
 		case WAIT_TO_ROLL:
 			if (model.nowPlaying == playerId) {
 				console.log("It your turn!");
-				showDice( playerId );
+				if (model.players[i].stop) showNoConnection();
+				else showDice( playerId );
 			} else {
 				console.log("Player" + model.nowPlaying + "'s turn.");
 			}
@@ -220,5 +221,13 @@ function showNotification( res ) {
 	$('#notification').fadeIn(1000);
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
+	},2000);
+}
+
+function showNoConnection() {
+	$('#noConnection').show();
+	setTimeout(function(){
+		$('#noConnection').hide();
+		turnOver();
 	},2000);
 }
