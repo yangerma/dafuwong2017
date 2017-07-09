@@ -170,8 +170,10 @@ Controller = function(io) {
 
 	function questionEvent() {
 		model.state = QUESTION;
-		var questionId = Math.floor(Math.random() * questions.length);
-		model.question = questions[questionId];
+		if (questions.length == 0) {
+			questions = require("./model/questions.js");
+		}
+		model.question = questions.shift()
 		publish();
 	}
 
