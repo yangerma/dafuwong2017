@@ -162,8 +162,7 @@ Controller = function(io) {
 		} else if (node.type == "switch") {
 			switchEvent();
 		} else if (node.type == "chance") {
-			chanceEvent();
-		} else if (node.type == "home") {
+			chanceEvent();		} else if (node.type == "home") {
 			homeEvent();
 		}
 	}
@@ -190,7 +189,7 @@ Controller = function(io) {
 	function dhcpEvent() {
 		var newIp = Math.floor(Math.random() * 5);
 		model.state = DHCP;
-		model.players[model.nowPlaying].id = newIp;
+		//model.players[model.nowPlaying].id = newIp;
 		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 86 + 1); // Can't higher than 87 !
 		//console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
 		publish();
@@ -232,8 +231,7 @@ Controller = function(io) {
 	function answerQuestion(ans) {
 		var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
 		if ( correct ) {
-			var nowId = model.players[model.nowPlaying].id;
-			model.players[nowId].money += model.question.money;
+			model.players[model.nowPlaying].money += model.question.money;
 		}
 		publish();
 		notify("show_answer", correct);
