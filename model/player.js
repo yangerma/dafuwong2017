@@ -10,6 +10,7 @@ Player = function(id, name) {
 		stop: false,
 		connect: false,
 		ip: "192.168." + id + ".1",
+		opticalFiber: 0
 	}
 }
 
