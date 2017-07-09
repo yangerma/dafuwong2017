@@ -23,7 +23,7 @@ Controller = function(io) {
 	var io = io;
 	var playerIO = new Array();
 	var adminIO = null;
-	var obIO = null;
+	var obIO = new Array();
 	var itemQueue = new Array();
 	var model = {
 		state: WAIT_TO_ROLL,
@@ -50,8 +50,7 @@ Controller = function(io) {
 		}
 		if (adminIO != null)
 			adminIO.emit(event, arg);
-		if (obIO != null)
-			obIO.emit(event, arg);
+		obIO.forEach((io) => io.emit(event, arg));
 	}
 	function publish() {
 		for (var i = 0; i < MAX_PLAYER; i++) {
@@ -62,9 +61,7 @@ Controller = function(io) {
 		if (adminIO != null) {
 			adminIO.emit("update", model);
 		}
-		if (obIO != null) {
-			obIO.emit("update", model);
-		}
+		obIO.forEach((io) => io.emit("update", model));
 	}
 
 	function rollDice(id) {
@@ -296,9 +293,7 @@ Controller = function(io) {
 		});
 
 		player.on("login", (id, name, psw) => {
-			if (id == 87 && name == "ob") {
-				obIO = player;
-			} else if (id == 87 && name == "csie") {
+			if (id == 87 && name == "csie") {
 				adminIO = player;
 				player.emit("HowDoYouTurnThisOn");
 				console.log("admin login!");
@@ -308,6 +303,9 @@ Controller = function(io) {
 				model.players[id].connect = true;
 				model.players[id].name = name;
 			} else {
+				obIO.push(player);
+				player.emit("youCantDoNothing!");
+				publish();
 				return;	
 			}
 			publish();
