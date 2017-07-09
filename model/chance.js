@@ -114,7 +114,7 @@ module.exports = [
 			for(var id in model.map){
 				node=model.map[id];
 				if(node.type=='server'&&node.owner==model.nowPlaying){
-					model.players[model.nowPlaying].money-=250*(2**(node.level-1));
+					model.players[model.nowPlaying].money-=250*(1<<(node.level-1));
 				}
 			}
 			return false;
