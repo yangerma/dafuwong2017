@@ -131,6 +131,10 @@ function update() {
 
 		if( model.players[j].ip.split('.')[2] != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
 		else $('#info' + (i+1) + ' p .notMine').removeClass('notMine');
+
+		if( j == model.nowPlaying ) $('#rank' + j).css('background-color', '#E9E9E9');
+		else $('#rank' + j).css('background-color', '');
+
 	}
 
 	// update switch state
@@ -162,8 +166,7 @@ function update() {
 
 	// update items 
 	$('#profMoney').text('you have $' + model.players[playerId].money);
-	$('#profIP').text('your IP ' + model.players[playerId].ip );
-
+	$('#profIP').text('your IP ' + model.players[playerId].ip );	
 	
 }
 

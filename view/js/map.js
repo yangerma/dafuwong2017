@@ -71,8 +71,8 @@ function showNodeProperty( nodeID ) {
 	}
 
 	// move the block
-	var x = $('#' + nodeID).offset().left - 75;
-	var y = $('#' + nodeID).offset().top -  85;
+	var x = $('#' + nodeID).offset().left - 50;
+	var y = $('#' + nodeID).offset().top -  50;
 	$("#nodeProperty").css('top', y);
 	$("#nodeProperty").css('left', x);
 
