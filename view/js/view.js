@@ -75,9 +75,10 @@ socket.on('update', function(data) {
 function login() {
 	playerId = Number( $('#teamID').val() );
 	playerName = $('#teamName').val();
+	password = $('#teamPassword').val();
 	$('#container').show();
 	$('#login').hide();
-	socket.emit("login", playerId, playerName);
+	socket.emit("login", playerId, playerName, password);
 }
 
 function update() {
