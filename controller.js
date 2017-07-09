@@ -297,21 +297,23 @@ Controller = function(io) {
 				adminIO = player;
 				player.emit("HowDoYouTurnThisOn");
 				console.log("admin login!");
-			} else {
+			} else if (id >= 0 && id < 5){
 				console.log("Player " + id + " login.");
 				playerIO[id] = player;
 				model.players[id].connect = true;
 				model.players[id].name = name;
+			} else {
+				return;	
 			}
 			publish();
+			player.on("roll_dice", (playerId) => rollDice(playerId));
+			player.on("buy_item",  (playerId, type, arg) => buyItem(playerId, type, arg));
+			player.on("buy_house", buyHouse);
+			player.on("answer_question", (ans) => answerQuestion(ans));
+			player.on("update_house", updateHouse);
+			player.on("switch", (pos) => teleport(pos));
+			player.on("turn_over", itemEvent);
 		})
-		player.on("roll_dice", (playerId) => rollDice(playerId));
-		player.on("buy_item",  (playerId, type, arg) => buyItem(playerId, type, arg));
-		player.on("buy_house", buyHouse);
-		player.on("answer_question", (ans) => answerQuestion(ans));
-		player.on("update_house", updateHouse);
-		player.on("switch", (pos) => teleport(pos));
-		player.on("turn_over", itemEvent);
 	});
 }
 module.exports = Controller;
