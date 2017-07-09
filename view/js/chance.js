@@ -8,6 +8,6 @@ function showNoConnection() {
 	$('#noConnection').show();
 	setTimeout(function(){
 		$('#noConnection').hide();
-		turnOver();
+		showTurnOver();
 	},1500);
 }
