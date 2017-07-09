@@ -1,4 +1,5 @@
 function showFirewall(){
+	$('#firewallBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 	$("#firewallBox").show();
 }
 

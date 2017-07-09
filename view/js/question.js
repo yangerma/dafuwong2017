@@ -14,6 +14,8 @@ function showQuestion(){
 		$("#submitButton").hide();
 	}
 
+	$('#questionBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+
 	if( q.multi ) {
 		$('#questionBox #multiOptions').show();
 		$('#questionBox #singleOptions').hide();
