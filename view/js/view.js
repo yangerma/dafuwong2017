@@ -89,9 +89,18 @@ function update() {
 			$('#' + node.id + ' .serverImg').attr('src', 'img/server' + node.level + '.png');
 
 		}
-		if (old != null && node.level != old.map[node.id].level) {
+		if (old != null && node.level > old.map[node.id].level) {//server upgrade
 			$('#' + node.id + ' .serverImg').show();
 			$('#' + node.id + ' .serverImg').attr('src', 'img/server_update' + node.level + '.gif');
+		}
+		if (old != null && node.level < old.map[node.id].level) {//server downgrade
+			if(node.owner == null){
+				$('#' + node.id + ' .serverImg').hide();
+				$('#' + node.id).css('background-color', '#D9D9D9');
+			}else{
+				$('#' + node.id + ' .serverImg').show();
+				$('#' + node.id + ' .serverImg').attr('src', 'img/server' + node.level + '.png');
+			}
 		}
 		//firewall
 		if (node.firewall.some((val) => val)) {
