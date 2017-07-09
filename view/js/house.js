@@ -5,9 +5,12 @@ function showHouseEvent() {
 		$('#buyHouse .housePrice').text( house.price[house.level] );
 		$('#buyHouse').show();
 	}
-	else if( house.owner == nowId ) {
+	else if( house.owner == nowId && house.level <3 ) {
 		$('#updateHouse .housePrice').text( house.price[house.level] );
 		$('#updateHouse').show();
+	}
+	else if(house.owner == nowId){
+		$('#cantupdateHouse').show();
 	}
 	else {	//other's house
 		$('#passOthersHouse .houseOwner').text( model.players[house.owner].name );
