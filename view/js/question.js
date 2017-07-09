@@ -73,8 +73,6 @@ function showQuestion(){
 			});
 		}
 		socket.emit("answer_question", ans);
-		showTurnOver();
-
 	})
 
 }
@@ -105,4 +103,5 @@ function showAnswer(ans) {
 
 function closeQuestion() {
 	$('#questionBox').hide();
+	turnOver();
 }
