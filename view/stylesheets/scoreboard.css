@@ -26,7 +26,6 @@
 }
 #scoreboard .rank .info{
 	margin-left: 55px;
-	padding-left: 10px;
 }
 #scoreboard .rank h4{
 	margin: 0;
@@ -35,4 +34,11 @@
 #scoreboard .rank p{
 	margin: 0;
 	line-height: 25px;
+}
+#scoreboard .rank p .scoreboardIP{
+	margin-right: 5px;
+}
+#scoreboard .rank p .notMine{
+	font-weight: 500;
+	color: red;
 }

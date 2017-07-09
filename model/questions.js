@@ -187,7 +187,7 @@ module.exports = [
 		"id": 13,
 		"multi" : false,
 		"subject" : "Python",
-		"description" : "以下 Python 程式碼執行後會印出？</br>def bar(a):</br>  return [ x+10 for x in a ]</br>def foo(a):</br>　sum = 0</br>　for x in a:</br>　　sum += x</br>　return sum</br></br>a = [0,1,2,3,4,5,6,7,8,9]</br>bar(a)</br>print (foo(a))",
+		"description" : '以下 Python 程式碼執行後會印出？</br><img src="img/q13.png" style="">',
 		"options" : [
 			"145", 
 			"None", 
