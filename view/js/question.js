@@ -77,11 +77,11 @@ function showQuestion(){
 
 }
 
-function showAnswer(ans) {
+function showAnswer( correct ) {
 	var q = model.question;
-	var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
+
 	if (correct) {
-		$('#answerResult h1').text("答對了！");
+		$('#answerResult h1').text("答對了！獲得$" + q.money);
 		$('#answerResult img').attr( 'src', "img/correct.png" );
 	}
 	else {

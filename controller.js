@@ -224,11 +224,13 @@ Controller = function(io) {
 	}	
 
 	function answerQuestion(ans) {
-		if (JSON.stringify(model.question.correct) == JSON.stringify(ans)) {
-			/* TODO: get question reward */
+		var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
+		if ( correct ) {
+			var nowId = model.players[model.nowPlaying].id;
+			model.players[nowId].money += model.question.money;
 		}
 		publish();
-		notify("show_answer", ans);
+		notify("show_answer", correct);
 	}
 
 	function buyHouse() {
