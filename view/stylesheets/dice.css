@@ -1,8 +1,8 @@
 .diceBox {
 	width: 600px;
-	height: 440px;
+	height: 460px;
 	left: calc(50% - 300px);
-	top: calc(50% - 220px);
+	top: calc(50% - 230px);
 	padding: 20px;
 }
 #rollDice img {
