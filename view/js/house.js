@@ -26,6 +26,7 @@ function showHouseEvent() {
 			$('#timeOut').show();
 			setTimeout( function(){
 				$('#timeOut').hide();
+				turnOver();
 			}, 700);
 		}
 	} , 1000);
