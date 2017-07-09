@@ -6,7 +6,7 @@ function showQuestion(){
 	$('#questionBox .closeButton').hide();
 	$('#questionBox #answerResult').hide();
 	$('#questionBox .title h1').text(q.subject);
-	$('#questionBox .qDes p').text(q.description);
+	$('#questionBox .qDes p').html(q.description);
 	
 	if (playerId == model.nowPlaying) {
 		$("#submitButton").show();
