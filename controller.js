@@ -205,7 +205,7 @@ Controller = function(io) {
 	function chanceEvent() {
 		model.state = CHANCE;
 		model.chance = chances[Math.floor(Math.random() * chances.length)];
-		//model.chance = chances[0];
+		//model.chance = chances[3];
 		var ret = model.chance.activate(model);
 		console.log("chance on"+model.nowPlaying);
 		publish();
