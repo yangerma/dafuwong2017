@@ -176,6 +176,9 @@ function showTurnOver() {
 }
 
 function turnOver() {
+	if (playerId != model.nowPlaying) {
+		return;
+	}
 	$('#end').hide();
 	socket.emit("turn_over");
 }
