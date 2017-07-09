@@ -45,7 +45,7 @@ socket.on('update', function(data) {
 		case WAIT_TO_ROLL:
 			if (model.nowPlaying == playerId) {
 				console.log("It your turn!");
-				if (model.players[i].stop) showNoConnection();
+				if (model.players[playerId].stop) showNoConnection();
 				else showDice( playerId );
 			} else {
 				console.log("Player" + model.nowPlaying + "'s turn.");
@@ -171,6 +171,9 @@ function showBackpack() {
 }
 
 function showTurnOver() {
+	if (playerId != model.nowPlaying) {
+		return;
+	}
 	$('#eventBox').hide();
 	$("#end").show();
 }
@@ -211,7 +214,7 @@ function showNotification( res ) {
 			$('#notification #eventDes').text( '升級了server。' );
 			break;
 		case 'passOthersHouse' :
-			$('#notification #eventDes').text( '踩到了 Player' + res.arg + ' 的地！' );
+			$('#notification #eventDes').text( '踩到了 ' + model.players[res.arg].name + ' 的地！' );
 			break;
 		case 'DHCP' :
 			$('#notification #eventDes').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
