@@ -115,12 +115,13 @@ Controller = function(io) {
 
 	function nextTurn() {
 		model.state = WAIT_TO_ROLL;
-		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
+		var player = model.players[model.nowPlaying];
 		/* dhcp over */
-		if (model.players[model.nowPlaying].id != model.nowPlaying) {
+		if (model.map[player.pos].type == "server" && player.id != model.nowPlaying) {
 			model.players[model.nowPlaying].id = model.nowPlaying;
 			model.players[model.nowPlaying].ip = "192.168." + model.players[model.nowPlaying].id + ".1";
 		}
+		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
 		console.log("player " + model.nowPlaying + "'s turn.");
 		publish();
 	}
