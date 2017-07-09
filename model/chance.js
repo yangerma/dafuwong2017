@@ -1,6 +1,7 @@
 module.exports = [
 	{
-		description: "海底電纜被鯊魚咬斷，斷線一回合ＱＱ",
+		description: "海底電纜被鯊魚咬斷!!",
+		effect: "此玩家斷線一回合ＱＱ",
 		activate: (model) => {
 			model.players[model.nowPlaying].stop = true;
 			return false;
@@ -8,6 +9,7 @@ module.exports = [
 	},
 	{
 		description: "在口袋撿到兩百塊~~",
+		effect: "獲得 200塊",
 		activate: (model) => {
 			model.players[model.nowPlaying].money+=200;
 			return false;
@@ -15,14 +17,17 @@ module.exports = [
 	},
 	{
 		description: "瓦斯有關嗎? 好像有又好像沒有 衝回家關一下",
+		effect: "立刻回到家 獲得回家獎勵5000塊",
 		activate: (model) => {
 			model.players[model.nowPlaying].pos="t"+model.nowPlaying;
 			model.players[model.nowPlaying].last = null;
-			return true;
+			model.players[model.nowPlaying].money+=5000;
+			return false;
 		}
 	},
 	{
-		description: "五穀豐登登登登~ 隨機升級一排房子!",
+		description: "五穀豐登登登登~",
+		effect: "隨機一排server全部升級",
 		activate: (model) => {
 			var rand = Math.floor(Math.random()*5)
 			for(var i = 1; i <= 5; i++){
@@ -35,7 +40,8 @@ module.exports = [
 		}
 	},
 	{
-		description: "酷斯拉來襲!!! 隨機把一排房子降一等級QAQ",
+		description: "酷斯拉來襲!!!塊塊塊塊塊陶阿",
+		effect: "隨機一排server全部降級",
 		activate: (model) => {
 			var rand = Math.floor(Math.random()*5)
 			for(var i = 1; i <= 5; i++){
@@ -48,6 +54,44 @@ module.exports = [
 						
 				}
 			}
+			return false;
+		}
+	},
+	{
+		description: "被椰林大道的椰子樹樹葉砸到 好痛QQ",
+		effect: "損失 醫藥費500塊",
+		activate: (model) => {
+			model.players[model.nowPlaying].money-=500;
+			return false;
+		}
+	},
+	{
+		description: "騎ubike逛台大 不幸被水源阿伯拖吊 隔天才去領車",
+		effect: "損失 1000塊",
+		activate: (model) => {
+			model.players[model.nowPlaying].money-=2000;
+			return false;
+		}
+	},
+	{
+		description: "以為自己期末爆了 結果還是領了書卷獎",
+		effect: "獲得 獎學金3000塊",
+		activate: (model) => {
+			model.players[model.nowPlaying].money+=3000;
+			return false;
+		}
+	},
+	{
+		description: "去google做實習 累積了很多經驗 學習了很多新知識",
+		effect: "就是很爽而已",
+		activate: (model) => {
+			return false;
+		}
+	},
+	{
+		description: "",
+		effect: "",
+		activate: (model) => {
 			return false;
 		}
 	},
