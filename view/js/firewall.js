@@ -1,4 +1,5 @@
 function showFirewall(){
+	$('#firewallBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 	$("#firewallBox").show();
 }
 
@@ -12,6 +13,13 @@ function closeFirewall() {
 	firewallPos(ans);
 	$('#backpack').hide()
 	$('#firewallBox').hide();
+
+	$('#pleaseChooseLand').show();
+	setTimeout(function(){
+		$('#pleaseChooseLand').hide();
+		firewallPos(ans);
+	},1500);
+
 }
 
 

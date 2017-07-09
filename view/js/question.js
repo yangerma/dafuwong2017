@@ -6,13 +6,15 @@ function showQuestion(){
 	$('#questionBox .closeButton').hide();
 	$('#questionBox #answerResult').hide();
 	$('#questionBox .title h1').text(q.subject);
-	$('#questionBox .qDes p').text(q.description);
+	$('#questionBox .qDes p').html(q.description);
 	
 	if (playerId == model.nowPlaying) {
 		$("#submitButton").show();
 	} else {
 		$("#submitButton").hide();
 	}
+
+	$('#questionBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 
 	if( q.multi ) {
 		$('#questionBox #multiOptions').show();
@@ -71,8 +73,6 @@ function showQuestion(){
 			});
 		}
 		socket.emit("answer_question", ans);
-		showTurnOver();
-
 	})
 
 }
@@ -103,4 +103,5 @@ function showAnswer(ans) {
 
 function closeQuestion() {
 	$('#questionBox').hide();
+	turnOver();
 }

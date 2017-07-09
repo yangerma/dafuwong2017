@@ -45,7 +45,8 @@ socket.on('update', function(data) {
 		case WAIT_TO_ROLL:
 			if (model.nowPlaying == playerId) {
 				console.log("It your turn!");
-				showDice( playerId );
+				if (model.players[i].stop) showNoConnection();
+				else showDice( playerId );
 			} else {
 				console.log("Player" + model.nowPlaying + "'s turn.");
 			}
@@ -131,8 +132,8 @@ function update() {
 	}
 
 	// update switch state
-	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
-	else $('#switch img').css('transform', 'scale(1,-1)');
+	if( model.switchState == 1 ) $('#switch img').attr('src', 'img/cycle.png');
+	else $('#switch img').attr('src', 'img/countercycle.png');
 
 	// check intersection
 	if( model.map.t0.next[0] == 'c01' ) 
