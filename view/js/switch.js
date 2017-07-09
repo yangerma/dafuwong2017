@@ -17,9 +17,14 @@ function showHome(reward) {
 function chooseLand() {
 
 	$('#switchBox').hide();
-	timeToChooseLand = true;
-	$('#cpy_map div').addClass('activeLand');	
-	$('#cpy_map .inner').removeClass('activeLand');
+
+	$('#pleaseChooseLand').show();
+	setTimeout(function(){
+		$('#pleaseChooseLand').hide();
+		timeToChooseLand = true;
+		$('#cpy_map div').addClass('activeLand');	
+		$('#cpy_map .inner').removeClass('activeLand');
+	},1500);
 
 	var nodeID;
 	$("#cpy_map .activeLand").on("mouseover", function() {

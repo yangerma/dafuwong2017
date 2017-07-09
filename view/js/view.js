@@ -223,11 +223,3 @@ function showNotification( res ) {
 		$('#notification').fadeOut(1000);
 	},2000);
 }
-
-function showNoConnection() {
-	$('#noConnection').show();
-	setTimeout(function(){
-		$('#noConnection').hide();
-		turnOver();
-	},2000);
-}

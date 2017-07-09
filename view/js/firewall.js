@@ -13,6 +13,13 @@ function closeFirewall() {
 	firewallPos(ans);
 	$('#backpack').hide()
 	$('#firewallBox').hide();
+
+	$('#pleaseChooseLand').show();
+	setTimeout(function(){
+		$('#pleaseChooseLand').hide();
+		firewallPos(ans);
+	},1500);
+
 }
 
 
