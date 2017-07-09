@@ -10,7 +10,7 @@ function showHouseEvent() {
 		$('#updateHouse').show();
 	}
 	else {	//other's house
-		$('#passOthersHouse .houseOwner').text( 'player' + house.owner );
+		$('#passOthersHouse .houseOwner').text( model.players[house.owner].name );
 		$('#passOthersHouse .housePrice').text( house.tolls );
 		$('#passOthersHouse').show();
 	}
