@@ -202,12 +202,13 @@ Controller = function(io) {
 
 	function chanceEvent() {
 		model.state = CHANCE;
-		model.chance = chances[Math.floor(Math.random() * chances.length)];
+		//model.chance = chances[Math.floor(Math.random() * chances.length)];
+		model.chance = chances[chances.length-1];
 		var ret = model.chance.activate(model);
 		publish();
-        if(ret == true){//need nodeEvent();
-            nodeEvent();
-        }
+		if(ret == true){//need nodeEvent();
+			nodeEvent();
+		}
 	}
 
 	function homeEvent() {
