@@ -126,9 +126,11 @@ function update() {
 		// update scoreboard
 		var j = i;
 		$('#info' + (i+1) + ' h4').text(model.players[j].name);
-		$('#info' + (i+1) + ' p').text('$' + model.players[j].money);
+		$('#info' + (i+1) + ' p .scoreboardMoney').text('$' + model.players[j].money);
+		$('#info' + (i+1) + ' p .scoreboardIP').text(model.players[j].ip);
 
-		// update ip
+		if( model.players[j].ip.split('.')[2] != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
+		else $('#info' + (i+1) + ' p .notMine').removeClass('notMine');
 	}
 
 	// update switch state
@@ -148,7 +150,7 @@ function update() {
 
 	$('#hao123 .itemPrice').text('$' + model.items["hao123"].cost);
 	$('#opticalFiber .itemPrice').text('$' + model.items["opticalFiber"].cost);
-	$('#firewall .itemPrice').text('$' + model.items["firewall"].cost);
+	$('#firewall .itemPrice').text(model.items["firewall"].cost);
 
 	// update backpack
 	if (playerId >= 5) {
