@@ -277,7 +277,7 @@ module.exports = [
 	{
 		"money": 5000,
 		"id": 18,
-		"multi" : false,
+		"multi" : true,
 		"subject" : "Machine Learning",
 		"description" : "下列哪些應用是用機器學習的方式實現的？ (多選)",
 		"options" : [
