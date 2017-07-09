@@ -258,7 +258,7 @@ Controller = function(io) {
 		model.players[nowId].money -= house.tolls;
 		model.players[house.owner].money += house.tolls;
 		publish();
-		notify("pay_tolls", {playerId: nowId});
+		notify("pay_tolls", {playerId: nowId, ownerId: house.owner});
 	}
 
 	function teleport(pos) {

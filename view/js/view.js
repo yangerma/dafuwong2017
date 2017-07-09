@@ -24,7 +24,7 @@ socket.on("show_answer", (ans) => showAnswer(ans));
 socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.type}));
 socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId}));
 socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId}));
-socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId}));
+socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.ownerId}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
 socket.on("HowDoYouTurnThisOn", () => admin = true);
