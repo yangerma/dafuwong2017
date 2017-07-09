@@ -1,5 +1,6 @@
 module.exports = [
 	{
+		"money": 5000,
 		"id": 0,
 		"multi" : true,
 		"subject" : "Python",
@@ -14,6 +15,7 @@ module.exports = [
 	},
 
 	{
+		"money": 3000,
 		"id": 1,
 		"multi" : false,
 		"subject" : "Secure",
@@ -28,6 +30,7 @@ module.exports = [
 	},
 
 	{
+		"money": 2000,
 		"id": 2,
 		"multi" : false,
 		"subject" : "Secure",
@@ -42,6 +45,7 @@ module.exports = [
 	},
 
 	{
+		"money": 5000,
 		"id": 3,
 		"multi" : false,
 		"subject" : "Secure",
@@ -56,6 +60,7 @@ module.exports = [
 	},
 
 	{
+		"money": 3000,
 		"id": 4,
 		"multi" : false,
 		"subject" : "Secure",
@@ -70,6 +75,7 @@ module.exports = [
 	},
 
 	{
+		"money": 5000,
 		"id": 5,
 		"multi" : false,
 		"subject" : "Network",
@@ -84,6 +90,7 @@ module.exports = [
 	},
 
 	{
+		"money": 3000,
 		"id": 6,
 		"multi" : false,
 		"subject" : "Network",
@@ -98,6 +105,7 @@ module.exports = [
 	},
 
 	{
+		"money": 5000,
 		"id": 7,
 		"multi" : true,
 		"subject" : "Network",
@@ -113,6 +121,7 @@ module.exports = [
 	},
 
 	{
+		"money": 5000,
 		"id": 8,
 		"multi" : false,
 		"subject" : "Network",
@@ -128,6 +137,7 @@ module.exports = [
 	},
 
 	{
+		"money": 3000,
 		"id": 9,
 		"multi" : false,
 		"subject" : "Network",
@@ -141,6 +151,7 @@ module.exports = [
 	},
 
 	{
+		"money": 2000,
 		"id": 10,
 		"multi" : false,
 		"subject" : "Python",
@@ -156,6 +167,7 @@ module.exports = [
 	},
 
 	{
+		"money": 8000,
 		"id": 11,
 		"multi" : true,
 		"subject" : "Python",
@@ -170,6 +182,7 @@ module.exports = [
 	},
 
 	{
+		"money": 3000,
 		"id": 12,
 		"multi" : false,
 		"subject" : "Python",
@@ -184,6 +197,7 @@ module.exports = [
 	},
 
 	{
+		"money": 8000,
 		"id": 13,
 		"multi" : false,
 		"subject" : "Python",
@@ -198,6 +212,7 @@ module.exports = [
 	},
 
 	{
+		"money": 2000,
 		"id": 14,
 		"multi" : false,
 		"subject" : "Machine Learning",
@@ -212,6 +227,7 @@ module.exports = [
 	},
 
 	{
+		"money": 2000,
 		"id": 15,
 		"multi" : true,
 		"subject" : "Machine Learning",
@@ -227,6 +243,7 @@ module.exports = [
 	},
 
 	{
+		"money": 8000,
 		"id": 16,
 		"multi" : true,
 		"subject" : "Machine Learning",
@@ -238,10 +255,11 @@ module.exports = [
 			"利用模擬退火法做最佳化(optimization)時，可能會停在區間極小值而無法得到全域最小值",
 			"比起直接選用(與答案的差距)的絕對值作為損失函數，使用(與答案的差距)的平方會讓損失函數更為平滑"
 		],
-		"correct" : [ 1, 3, 4 ]
+		"correct" : [ 0, 3, 4 ]
 	},
 
 	{
+		"money": 3000,
 		"id": 17,
 		"multi" : true,
 		"subject" : "Machine Learning",
@@ -250,13 +268,14 @@ module.exports = [
 			"利用一個人的頭髮長度與瞳孔顏色，預測他的國文成績",
 			"利用使用者過往點擊廣告的情形，預測使用者喜歡的廣告類型",
 			"利用一個人的身高與BMI值，預測他的體重",
-			"利用一個人的體脂肪、生日、身高、體重，預測他的年齡",
+			"利用一個人的體脂肪、出生年月日、身高、體重，預測他的年齡",
 			"利用電子郵件中的文字，判斷這封信是不是垃圾郵件"
 		],
 		"correct" : [ 1, 4 ]
 	},
 
 	{
+		"money": 5000,
 		"id": 18,
 		"multi" : false,
 		"subject" : "Machine Learning",
