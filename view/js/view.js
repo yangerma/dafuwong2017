@@ -7,7 +7,7 @@ var timer = null;
 var admin = false;
 var playerColor = ['#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
 
-const GAMEOVER = 0;
+const STOP = 0;
 const START = 1;
 const MOVE = 2;
 const SWITCH = 3;
@@ -43,11 +43,15 @@ socket.on('update', function(data) {
 	}
 	clearInterval(timer);
 	switch (state) {
+		case STOP:
+			if (model.players[playerId].stop) {
+				showNoConnection();
+			}
+			break;
 		case WAIT_TO_ROLL:
 			if (model.nowPlaying == playerId) {
 				console.log("It your turn!");
-				if (model.players[playerId].stop) showNoConnection();
-				else showDice( playerId );
+				showDice( playerId );
 			} else {
 				console.log("Player" + model.nowPlaying + "'s turn.");
 			}
