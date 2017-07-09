@@ -204,7 +204,7 @@ Controller = function(io) {
 	function chanceEvent() {
 		model.state = CHANCE;
 		model.chance = chances[Math.floor(Math.random() * chances.length)];
-		//model.chance = chances[0];
+		//model.chance = chances[3];
 		var ret = model.chance.activate(model);
 		console.log("chance on"+model.nowPlaying);
 		publish();
@@ -260,8 +260,12 @@ Controller = function(io) {
 	function payTolls(id, house) {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
-		model.players[nowId].money -= house.tolls[house.level];
-		model.players[house.owner].money += house.tolls[house.level];
+		var tolls = house.tolls[house.level];
+		if(house.type=="home"){
+			tolls = house.tolls;
+		}
+		model.players[nowId].money -= tolls;
+		model.players[house.owner].money += tolls;
 		publish();
 		notify("pay_tolls", {playerId: nowId, ownerId: house.owner});
 	}
