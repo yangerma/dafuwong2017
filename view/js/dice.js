@@ -27,6 +27,6 @@ function showDiceResult(diceResult) {
 	$('#diceResult .txtbox h2').text( model.players[playingId].name + " got");
 	$('#diceResult .txtbox h1').text( diceResult );
 	$('#diceResult img').attr( 'src', "img/wifi" + diceResult + ".png" );
-	$('#diceResult').show();
+	$('#diceResult').show();	
 	setTimeout(hideDice, 1000);
 }

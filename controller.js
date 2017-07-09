@@ -82,7 +82,7 @@ Controller = function(io) {
 			notify("dice_result", diceResult);
 			model.state = MOVE;
 			publish();
-			setTimeout(() => move(diceResult), 3500);
+			setTimeout(() => move(diceResult), 1400);
 
 		} else {
 			console.log("Wrong player roll dice:" + id);
