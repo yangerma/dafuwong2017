@@ -7,7 +7,6 @@ $("#cpy_map div").on("mouseover", function() {
 });
 
 function showNodeProperty( nodeID ) {
-
 	// set content
 	var node = model.map[nodeID];
 	var title, owner, level, price, des;
@@ -70,6 +69,7 @@ function showNodeProperty( nodeID ) {
 		$('#nodeProperty #otherInfo p').text(des);
 	}
 	var firewallList = "";
+	console.log(node);
 	
 	node.firewall.forEach((v,id) => {
 		if (v) {
@@ -78,6 +78,8 @@ function showNodeProperty( nodeID ) {
 	});
 	if (firewallList.length > 0) {
 		$('#nodeProperty #firewallInfo p').text('防火牆：\n' + firewallList);
+	} else {
+		$('#nodeProperty #firewallInfo p').text('');
 	}
 
 	// move the block
