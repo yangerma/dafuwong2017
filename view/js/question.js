@@ -14,8 +14,6 @@ function showQuestion(){
 		$("#submitButton").hide();
 	}
 
-	$('#questionBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
-
 	if( q.multi ) {
 		$('#questionBox #multiOptions').show();
 		$('#questionBox #singleOptions').hide();
@@ -69,7 +67,7 @@ function submitAnswer() {
 	console.log(ans);
 	$('#submitButton').hide();
 	socket.emit("answer_question", ans);
-	ans=[];
+	$('#questionBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 }
 
 function showAnswer( correct ) {
