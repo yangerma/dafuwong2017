@@ -41,7 +41,6 @@ Controller = function(io) {
 		question: null,
 		chacne: null,
 	}
-	
 	function notify(event, arg) {
 		for (var i = 0; i < MAX_PLAYER; i++) {
 			if (model.players[i].connect == true) {
@@ -114,9 +113,10 @@ Controller = function(io) {
 		model.state = WAIT_TO_ROLL;
 		var player = model.players[model.nowPlaying];
 		/* dhcp over */
-		if (model.map[player.pos].type == "server" && player.id != model.nowPlaying) {
+		if ((model.map[player.pos].type == "server" || model.map[player.pos].type == "home") && 
+			player.id != model.nowPlaying) {
 			model.players[model.nowPlaying].id = model.nowPlaying;
-			model.players[model.nowPlaying].ip = "192.168." + model.players[model.nowPlaying].id + ".1";
+			model.players[model.nowPlaying].ip = "192.168." + model.nowPlaying + ".1";
 		}
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
 		console.log("player " + model.nowPlaying + "'s turn.");
@@ -192,9 +192,9 @@ Controller = function(io) {
 	function dhcpEvent() {
 		var newIp = Math.floor(Math.random() * 5);
 		model.state = DHCP;
-		//model.players[model.nowPlaying].id = newIp;
+		model.players[model.nowPlaying].id = newIp;
 		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 86 + 1); // Can't higher than 87 !
-		//console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
+		console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
 		publish();
 		notify("dhcp", {playerId: model.nowPlaying, ip: model.players[model.nowPlaying].ip});
 	}
@@ -207,7 +207,6 @@ Controller = function(io) {
 	function chanceEvent() {
 		model.state = CHANCE;
 		model.chance = chances[Math.floor(Math.random() * chances.length)];
-		//model.chance = chances[3];
 		var ret = model.chance.activate(model);
 		console.log("chance on"+model.nowPlaying);
 		publish();
@@ -310,6 +309,7 @@ Controller = function(io) {
 			if (id == 87 && name == "csie") {
 				adminIO = player;
 				player.emit("HowDoYouTurnThisOn");
+				player.on("WhosYourDaddy", (newModel) => model = newModel);
 				console.log("admin login!");
 			} else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
