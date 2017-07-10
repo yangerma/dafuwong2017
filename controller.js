@@ -108,9 +108,11 @@ Controller = function(io) {
 	}
 
 	function nextTurn() {
+		if (model.state == STOP) {
+			model.players[model.nowPlaying].stop = false;
+		}
 		model.state = WAIT_TO_ROLL;
 		var player = model.players[model.nowPlaying];
-		player.stop = false;
 		/* dhcp over */
 		if (model.map[player.pos].type == "server" && player.id != model.nowPlaying) {
 			model.players[model.nowPlaying].id = model.nowPlaying;
