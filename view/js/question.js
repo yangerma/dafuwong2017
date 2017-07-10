@@ -77,7 +77,7 @@ function showAnswer( correct ) {
 	var q = model.question;
 
 	if (correct) {
-		$('#answerResult h1').text("答對了！獲得$" + q.money);
+		$('#answerResult h1').text("答對了！獲得฿" + q.money);
 		$('#answerResult img').attr( 'src', "img/correct.png" );
 	}
 	else {

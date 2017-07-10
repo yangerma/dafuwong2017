@@ -164,7 +164,7 @@ function update() {
 		// update scoreboard
 		var j = i;
 		$('#info' + (i+1) + ' h4').text(model.players[j].name);
-		$('#info' + (i+1) + ' p .scoreboardMoney').text('$' + model.players[j].money);
+		$('#info' + (i+1) + ' p .scoreboardMoney').text('฿' + model.players[j].money);
 		$('#info' + (i+1) + ' p .scoreboardIP').text(model.players[j].ip);
 
 		if( model.players[j].id != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
@@ -190,9 +190,9 @@ function update() {
 		 $('#t3').css('transform', 'rotate(248deg)');
 	else $('#t3').css('transform', 'rotate(305deg)');
 
-	$('#hao123 .itemPrice').text('$' + model.items["hao123"].cost);
-	$('#opticalFiber .itemPrice').text('$' + model.items["opticalFiber"].cost);
-	$('#firewall .itemPrice').text(model.items["firewall"].cost);
+	$('#hao123 .itemPrice').text('฿' + model.items["hao123"].cost);
+	$('#opticalFiber .itemPrice').text('฿' + model.items["opticalFiber"].cost);
+	$('#firewall .itemPrice').text('฿' + model.items["firewall"].cost);
 
 	// update backpack
 	if (playerId >= 5) {
@@ -203,7 +203,7 @@ function update() {
 	$('#profilePic').attr( 'src', 'img/player' + playerId + '.gif' );
 
 	// update items 
-	$('#profMoney').text('you have $' + model.players[playerId].money);
+	$('#profMoney').text('you have ฿' + model.players[playerId].money);
 	$('#profIP').text('your IP ' + model.players[playerId].ip );	
 	
 }
@@ -254,7 +254,7 @@ function showNotification( res ) {
 			$('#notification #eventDes').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
 			break;
 		case 'home':
-			$('#notification #eventDes').text( '挖礦挖到了$ ' + res.arg + ' !' );
+			$('#notification #eventDes').text( '挖礦挖到了฿ ' + res.arg + ' !' );
 			break;
 	}
 	
