@@ -58,10 +58,10 @@ module.exports = [
 		}
 	},
 	{
-		description: "被椰林大道的椰子樹樹葉砸到 好痛QQ",
-		effect: "損失 醫藥費500元",
+		description: "不小心駭掉別人的帳戶",
+		effect: "獲得 贓款 4000元",
 		activate: (model) => {
-			model.players[model.nowPlaying].money-=500;
+			model.players[model.nowPlaying].money+=4000;
 			return false;
 		}
 	},
