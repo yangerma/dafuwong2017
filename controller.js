@@ -10,6 +10,7 @@ const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
+const WAIT_TURN_OVER = 87;
 
 var password = ["meow", "beep", "wang", "woof", "oops"];
 
@@ -240,6 +241,7 @@ Controller = function(io) {
 		if ( correct ) {
 			model.players[model.nowPlaying].money += model.question.money;
 		}
+		model.state = WAIT_TURN_OVER;
 		publish();
 		notify("show_answer", correct);
 		model.question = null;
@@ -252,6 +254,7 @@ Controller = function(io) {
 		house.owner = nowId;
 		house.level = 1;
 		console.log("Player " + nowId + " buy " + house.id);
+		model.state = WAIT_TURN_OVER;
 		publish();
 		notify("buy_house", {playerId: nowId});
 	}
@@ -261,6 +264,7 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		model.players[nowId].money -= house.price[house.level];
 		house.level += 1;
+		model.state = WAIT_TURN_OVER;
 		publish();
 		notify("update_house", {playerId: nowId});
 	}
