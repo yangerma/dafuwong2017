@@ -175,6 +175,9 @@ function update() {
 
 	}
 
+	// check who's turn
+	if( model.nowPlaying != playerId ) $('#end').hide();
+
 	// update switch state
 	if( model.switchState == 1 ) $('#switch img').attr('src', 'img/countercycle.png');
 	else $('#switch img').attr('src', 'img/cycle.png');
