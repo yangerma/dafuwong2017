@@ -53,7 +53,7 @@ socket.on('update', function(data) {
 	switch (state) {
 		case STOP:
 			if (model.players[playerId].stop) {
-				showNoConnection();
+				showAlert("你 斷 線 了 :(");
 			}
 			break;
 		case WAIT_TO_ROLL:
@@ -219,6 +219,14 @@ function showTurnOver() {
 	}
 	$('#eventBox').hide();
 	$("#end").show();
+}
+
+function showAlert( whatchasay ){
+	$('#alert').text(whatchasay);
+	$('#alert').show();
+	setTimeout(function(){
+		$('#alert').hide();
+	},1500);
 }
 
 function turnOver() {

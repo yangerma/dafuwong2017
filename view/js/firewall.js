@@ -13,13 +13,7 @@ function closeFirewall() {
 	firewallPos(ans);
 	$('#backpack').hide()
 	$('#firewallBox').hide();
-
-	$('#pleaseChooseLand').show();
-	setTimeout(function(){
-		$('#pleaseChooseLand').hide();
-		firewallPos(ans);
-	},1500);
-
+	showAlert("請選擇目標地");
 }
 
 
@@ -44,8 +38,7 @@ function firewallPos(blockList) {
 		landID = landID.substr(4);
 		timeToChooseLand = false;
 		socket.emit('buy_item', playerId, 'firewall', {pos: landID, blockList: blockList});
-		$('#firewallChosen').show();
-		setTimeout(function(){ $('#firewallChosen').hide(); },1500);
+		showAlert("防火牆已設定");
 	});
 
 }
