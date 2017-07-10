@@ -156,8 +156,6 @@ Controller = function(io) {
 		if (node.firewall[nowId]) {
 			node.firewall.forEach((x, id, a) => a[id] = false);
 		}
-		questionEvent();
-		return;
 		if (node.type == "question") {
 			questionEvent();
 		} else if (node.type == "server") {
@@ -234,10 +232,10 @@ Controller = function(io) {
 	}	
 
 	function answerQuestion(ans) {
+		console.log("Player answer: " + ans);
 		if (model.question == null) {
 			return;
 		}
-		console.log("Player answer: " + ans);
 		var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
 		if ( correct ) {
 			model.players[model.nowPlaying].money += model.question.money;
