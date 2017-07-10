@@ -43,11 +43,19 @@ function closeHouseBox() {
 }
 
 function buyHouse() {
-	socket.emit("buy_house");
+	var node = model.map[ model.players[model.nowPlaying].pos ];
+	if ( model.players[playerId].money >= node.price[0] ) {
+		socket.emit("buy_house");
+	} 
+	else showNoMoney();
 	closeHouseBox();
 }
 
 function updateHouse() {
-	socket.emit("update_house");
+	var node = model.map[ model.players[model.nowPlaying].pos ];
+	if ( model.players[playerId].money >= node.price[node.level] ) {
+		socket.emit("update_house");
+	} 
+	else showNoMoney();
 	closeHouseBox();
 }

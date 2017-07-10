@@ -1,8 +1,5 @@
-#map{
+.map{
 	position: absolute;
-	/*left: 110px;
-	transform-origin:top;
-	transform:skewX(-10deg);*/
 	transform: scale(0.9, 0.9);
 	left: 50px;
 	top: 50px;
@@ -10,17 +7,16 @@
 	height: 700px;
 	padding: 100px;
 }
-#map div{
+#origin_map div{
 	background: #D9D9D9;
 }
-#map .node {
+.map .node {
 	position: absolute;
 	width:50px;
 	height:50px;
 	border-radius: 25px;
-	/*-webkit-clip-path:circle(50% at 50% 50%);*/
 }
-#map .node .serverImg {
+#origin_map .node .serverImg {
 	display: none;
 	position: relative;
 	margin-left: -70px;
@@ -29,7 +25,7 @@
 	height: 135px;
 }
 
-#map .chance {
+.map .chance {
 	position: absolute;
 	margin-left: -10px;
 	margin-top: -10px;
@@ -37,14 +33,14 @@
 	height:70px;
 	border-radius: 35px;
 }
-#map .chance img {
+#origin_map .chance img {
 	position: relative;
 	margin-left: 10px;
 	margin-top: 10px;
 	width: 50px;
 	height: 50px;
 }
-#map .question {
+.map .question {
 	position: absolute;
 	margin-left: -10px;
 	margin-top: -10px;
@@ -52,7 +48,7 @@
 	height:70px;
 	border-radius: 35px;
 }
-#map .question img {
+#origin_map .question img {
 	position: relative;
 	margin-left: 15px;
 	margin-top: 15px;
@@ -60,26 +56,32 @@
 	height: 40px;
 	opacity: 0.4;
 }
-#map .home {
+.map .home {
 	position: absolute;
 	width:80px;
 	height:80px;
-	background: none;
+	border-radius: 40px;
 }
-#map .home img{
+#origin_map .home{
+	background-color: white;
+}
+#origin_map .home img{
 	width:80px;
 	height:80px;
 }
-#map .dhcp {
-	background: #B0B0B0;
+.map .dhcp {
 	position: absolute;
 	width:60px;
 	height:60px;
+}
+
+#origin_map .dhcp {
+	background: #B0B0B0;
 	text-align: center;
 	line-height: 60px;
 }
 
-#map #switch {
+.map #switch {
 	position: absolute;
 	width:120px;
 	height:120px;
@@ -87,7 +89,7 @@
 	top: calc(50% - 60px);
 	-webkit-clip-path:circle(50% at 50% 50%);
 }
-#map #switch img{
+#origin_map #switch img{
 	position: absolute;
 	height: 80px;
 	width: 80px;
@@ -96,12 +98,12 @@
 	opacity: 0.2;
 }
 
-#map .activeLand:hover {
+.map .activeLand:hover {
 	transform: scale(1.15, 1.15);
 }
 
-#map #t1 { transform: rotate(112deg); }
-#map #t4 { transform: rotate(328deg); }
+#origin_map #t1 { transform: rotate(112deg); }
+#origin_map #t4 { transform: rotate(328deg); }
 
 #nodeProperty {
 	position: absolute;
@@ -126,16 +128,29 @@
 	margin: 0px;
 }
 
+#cpy_map #cpy_switch {
+	position: absolute;
+	width:120px;
+	height:120px;
+	left: calc(50% - 60px);
+	top: calc(50% - 60px);
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
 
+#fw_map .firewallImg {
+	display: none;
+	position: relative;
+	margin-left: -40px;
+	margin-top: -10px;
+	width: 128px;
+	height: 72px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+#fw_map #fw_switch {
+	position: absolute;
+	width:120px;
+	height:120px;
+	left: calc(50% - 60px);
+	top: calc(50% - 60px);
+	-webkit-clip-path:circle(50% at 50% 50%);
+}
