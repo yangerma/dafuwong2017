@@ -66,9 +66,8 @@ Controller = function(io) {
 	function rollDice(id) {
 		if (id == model.nowPlaying && model.state == WAIT_TO_ROLL) {
 			var maxSteps = 4, diceResult;
-			if (model.players[id].opticalFiber > 0) {
+			if (model.players[id].opticalFiber) {
 				maxSteps = 8;
-				model.players[id].opticalFiber -= 1;
 			}
 			diceResult = Math.ceil(Math.random() * maxSteps);
 			console.log("Player " + id + " roll " + diceResult);
@@ -100,7 +99,7 @@ Controller = function(io) {
 		} else if (item.type == "firewall") {
 			item.arg.blockList.forEach((id) => model.map[item.arg.pos].firewall[id] = true);
 		} else if (item.type == "opticalFiber") {
-			model.players[item.playerId].opticalFiber += 1;
+			model.players[item.playerId].opticalFiber = true;
 		}
 		publish()
 		setTimeout(itemEvent, 300);
@@ -132,6 +131,7 @@ Controller = function(io) {
 		var current = model.map[model.players[model.nowPlaying].pos];
 		var srcId = current.next.indexOf(model.players[model.nowPlaying].last);
 		var nowId = model.players[model.nowPlaying].id;
+		var player = model.players[model.nowPlaying];
 		if (current.type == "switch") {
 			next = current.next[(srcId + model.switchState + 3) % 3];
 			model.switchState *= -1;
@@ -139,10 +139,11 @@ Controller = function(io) {
 			next = current.next[srcId == 0 ? 1 : 0];
 			current.next.reverse();
 		}
-		model.players[model.nowPlaying].pos = next;
-		model.players[model.nowPlaying].last = current.id;
+		player.pos = next;
+		player.last = current.id;
 		publish();
-		if (steps <= 1 || model.map[next].firewall[nowId])   {
+		if (steps <= 1 || (!player.opticalFiber && model.map[next].firewall[nowId]))   {
+			player.opticalFiber = false;
 			setTimeout(nodeEvent, 300);
 		} else {
 			setTimeout(() => move(steps - 1), 300);
@@ -155,6 +156,8 @@ Controller = function(io) {
 		if (node.firewall[nowId]) {
 			node.firewall.forEach((x, id, a) => a[id] = false);
 		}
+		questionEvent();
+		return;
 		if (node.type == "question") {
 			questionEvent();
 		} else if (node.type == "server") {
@@ -234,13 +237,14 @@ Controller = function(io) {
 		if (model.question == null) {
 			return;
 		}
+		console.log("Player answer: " + ans);
 		var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
 		if ( correct ) {
 			model.players[model.nowPlaying].money += model.question.money;
 		}
-		model.question = null;
 		publish();
 		notify("show_answer", correct);
+		model.question = null;
 	}
 
 	function buyHouse() {
