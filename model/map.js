@@ -46,12 +46,11 @@ for( id in map){
 		node.price=[500,1000,3000];
 		node.tolls=[0,750,2250,9000];
 		node.level=0;
-		node.firewall=[false, false, false, false, false];
 	}
 	if(node.type=="home"){
 		node.tolls=[1000];
 		node.level=0;
-		node.firewall=[false, false, false, false, false];
 	}
+	node.firewall=[false, false, false, false, false];
 }
 module.exports = map;
