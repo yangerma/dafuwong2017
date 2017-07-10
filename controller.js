@@ -103,7 +103,7 @@ Controller = function(io) {
 		} else if (item.type == "opticalFiber") {
 			model.players[item.playerId].opticalFiber = true;
 		}
-		publish()
+		publish();
 		setTimeout(itemEvent, 300);
 	}
 
