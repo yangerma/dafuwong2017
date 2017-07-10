@@ -27,6 +27,7 @@ function showHouseEvent() {
 			clearInterval(timer);
 			$('.eventBox').hide();
 			showAlert("來 不 及 了 QQ");
+			turnOver();
 		}
 	} , 1000);
 
