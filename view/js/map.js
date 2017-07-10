@@ -17,15 +17,15 @@ function showNodeProperty( nodeID ) {
 			owner = node.owner;
 			if( owner == null ) {
 				title = "一塊無主的地";
-				price = node.price;
+				price = node.price[node.level];
 				des = "幸運的話，你可能可以花 $" + price +" 把這塊地買下來喔";
 			}
 			else {
 				house = true;
 				title = "一塊被佔據的地";
 				level = node.level;
-				price = node.price;
-				tolls = node.tolls;
+				price = node.price[node.level-1];
+				tolls = node.tolls[node.level-1];
 			}
 		break;
 		case ("home"):
@@ -71,8 +71,8 @@ function showNodeProperty( nodeID ) {
 	}
 
 	// move the block
-	var x = $('#' + nodeID).offset().left - 75;
-	var y = $('#' + nodeID).offset().top -  85;
+	var x = $('#' + nodeID).offset().left - 50;
+	var y = $('#' + nodeID).offset().top -  50;
 	$("#nodeProperty").css('top', y);
 	$("#nodeProperty").css('left', x);
 

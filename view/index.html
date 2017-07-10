@@ -78,14 +78,14 @@
 	</div>
 
 	<div id="fw_map">
-		<div class="" id="fw_switch"></div>
-		<div class="home" id="fw_t0" style="left: 410px; top: -34.8px;"></div>
-		<div class=" node" id="fw_s01" style="left: 425.7px; top: 230.5px;"><img class="firewallImg"></div>
+		<div class="" id="fw_switch"><img class="firewallImg"></div>
+		<div class="home" id="fw_t0" style="left: 410px; top: -34.8px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_s01" style="left: 425.7px; top: 230.5px;"><img class="firewallImg"></div>
 		<div class="chance" id="fw_s02" style="left: 423.8px; top: 141.8px;"><img class="firewallImg"></div>
 		<div class=" node" id="fw_s03" style="left: 421.9px; top: 53.1px;"><img class="firewallImg"></div>
 		<div class="node" id="fw_c01" style="left: 500px; top: 18.695px;"><img class="firewallImg"></div>
 		<div class="node" id="fw_c02" style="left: 575px; top: 63.39px;"><img class="firewallImg"></div>
-		<div class="dhcp" id="fw_c03" style="left: 650px; top: 108.085px;">DHCP</div>
+		<div class="dhcp" id="fw_c03" style="left: 650px; top: 108.085px;"><img class="firewallImg"></div>
 		<div class="node" id="fw_c04" style="left: 725px; top: 152.78px;"><img class="firewallImg"></div>
 		<div class="question" id="fw_c05" style="left: 800px; top: 197.475px;"><img class="firewallImg"></div>
 		<div class="home" id="fw_t1" style="left: 860px; top: 233.37px;">
@@ -115,7 +115,7 @@
 		<div class=" node" id="fw_s33" style="left: 213.595px; top: 578.1px;"><img class="firewallImg"></div>
 		<div class="node" id="fw_c31" style="left: 118.55px; top: 602.028px;"><img class="firewallImg"></div>
 		<div class="node" id="fw_c32" style="left: 89.84px; top: 530.057px;"><img class="firewallImg"></div>
-		<div class="dhcp" id="fw_c33" style="left: 61.13px; top: 458.085px;">DHCP</div>
+		<div class="dhcp" id="fw_c33" style="left: 61.13px; top: 458.085px;"><img class="firewallImg"></div>
 		<div class="node" id="fw_c34" style="left: 32.42px; top: 386.113px;"><img class="firewallImg"></div>
 		<div class="question" id="fw_c35" style="left: 3.71px; top: 314.142px;"><img class="firewallImg"></div>
 		<div class="home" id="fw_t4" style="left: -40px; top: 233.37px;">
@@ -203,39 +203,39 @@
 		<div class="title">
 			<h1>Scoreboard</h1>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank0">
 			<img class="picture" src="img/prof0.png">
 			<div class="info" id="info1">
 				<h4>第一小隊</h4>
-				<p>$1000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank1">
 			<img class="picture" src="img/prof1.png">
 			<div class="info"  id="info2">
 				<h4>第二小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank2">
 			<img class="picture" src="img/prof2.png">
 			<div class="info" id="info3">
 				<h4>第三小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank3">
 			<img class="picture" src="img/prof3.png">
 			<div class="info" id="info4">
 				<h4>第四小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank4">
 			<img class="picture" src="img/prof4.png">
 			<div class="info"  id="info5">
 				<h4>第五小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
 	</div>
@@ -354,6 +354,22 @@
 		<div class="timer"></div>
 	</div>
 
+	<div class="eventBox popBox" id="cantupdateHouse">
+		<h1>server已經是最高等級了!</h1>
+		<p>你什麼事情都不能做喔~呵呵</p>
+		<div class="buttons">
+			<div class="buttonBlock"  onclick="closeHouseBox()">
+				<img src="img/ok.png" class="okButton">
+				<div class="reply">好爽ㄛ</div>
+			</div>
+			<div class="buttonBlock" onclick="closeHouseBox()">
+				<img src="img/close.png" class="noButton" >
+				<div class="reply">好不爽ㄛ</div>
+			</div>
+		</div>
+		<div class="timer"></div>
+	</div>
+
 	<div class="eventBox popBox" id="passOthersHouse">
 		<h1>哎呀！你踩到 <span class="houseOwner">XXX</span> 的地盤了</h1>
 		<p>該付人家 <span class="housePrice">$500</span> 的過路費了唷。</p>
@@ -393,7 +409,8 @@
 	<div class="eventBox popBox" id="chanceBox">
 		<div class="des">
 			<h1> 機會！</h1>
-			<p> default </p>
+			<p id="chanceDescription"> description </p>
+			<p id="chanceEffect"> effect </p>
 		</div>
 		<div class="buttonBlock" id="iKnow" onclick="$('#chanceBox').hide();showTurnOver()">
 			<img src="img/ok.png" class="okButton">
@@ -409,11 +426,11 @@
 	<div id="backpack">
 		<div id="profile">
 			<div class="title">
-				<h1>第一小隊</h1>
+				<h1>觀戰模式</h1>
 			</div>
 			<img src="img/player1.gif" id="profilePic">
-			<div class="profileInfo" id="profMoney"></div>
-			<div class="profileInfo" id="profIP"></div>
+			<div class="profileInfo" id="profMoney">你可以買東西</div>
+			<div class="profileInfo" id="profIP">但是不能用owo</div>
 		</div>
 		<div id="shop">
 
@@ -516,6 +533,7 @@
 	<div class="title" id="welcome">Welcome to 2017 CSIE camp Monopoly!</div>
     請輸入小隊編號： <input id="teamID" type="number"/> <br/>
     請輸入小隊名稱： <input id="teamName" type="text"/> <br/>
+    請輸入小隊密碼： <input id="teamPassword" type="password"/> <br/>
     <input type="button" id="loginButton" value="Submit" onclick="login()">
 </div>
 

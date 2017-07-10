@@ -1,12 +1,13 @@
 function showChance() {
 	$('#chanceBox').show();	
-	$('#chanceBox .des p').text(model.chance.description);
+	$('#chanceBox .des #chanceDescription').text(model.chance.description);
+	$('#chanceBox .des #chanceEffect').text("效果:"+model.chance.effect);
 }
 
 function showNoConnection() {
 	$('#noConnection').show();
 	setTimeout(function(){
 		$('#noConnection').hide();
-		turnOver();
+		showTurnOver();
 	},1500);
 }
