@@ -226,7 +226,7 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		var home = model.map[model.players[model.nowPlaying].pos];
 		if (nowId == home.owner) {
-			var reward = 500;
+			var reward = 5000;
 			model.players[model.nowPlaying].money += reward;
 			publish();
 			notify("home", {playerId: model.nowPlaying, reward: reward});
@@ -277,9 +277,6 @@ Controller = function(io) {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
 		var tolls = house.tolls[house.level];
-		if(house.type=="home"){
-			tolls = house.tolls;
-		}
 		model.players[nowId].money -= tolls;
 		model.players[house.owner].money += tolls;
 		publish();
