@@ -276,10 +276,7 @@ Controller = function(io) {
 	function payTolls(id, house) {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
-		var tolls = house.tolls[house.level-1];
-		if(house.type=="home"){
-			tolls = house.tolls;
-		}
+		var tolls = house.tolls[house.level];
 		model.players[nowId].money -= tolls;
 		model.players[house.owner].money += tolls;
 		publish();

@@ -1,7 +1,7 @@
 function showHouseEvent() {
 	var house = model.map[model.players[model.nowPlaying].pos];
 	var nowId = model.players[model.nowPlaying].id;
-	if( house.owner == null ) {
+	if( house.owner == null ) {//blank space
 		$('#buyHouse .housePrice').text( house.price[house.level] );
 		$('#buyHouse').show();
 	}
