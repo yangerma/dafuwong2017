@@ -17,6 +17,7 @@ const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
+const WAIT_TURN_OVER = 87;
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
@@ -71,6 +72,11 @@ socket.on('update', function(data) {
 			break;
 		case CHANCE:
 			showChance();
+			break;
+		case WAIT_TURN_OVER:
+			if (model.nowPlaying == playerId) {
+				showTurnOver();
+			}
 			break;
 		default:	
 			console.log("Wrong state:" + state);
