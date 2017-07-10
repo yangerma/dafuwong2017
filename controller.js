@@ -218,7 +218,7 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		var home = model.map[model.players[model.nowPlaying].pos];
 		if (nowId == home.owner) {
-			var reward = 500;
+			var reward = 5000;
 			model.players[model.nowPlaying].money += reward;
 			publish();
 			notify("home", {playerId: model.nowPlaying, reward: reward});
@@ -229,12 +229,15 @@ Controller = function(io) {
 	}	
 
 	function answerQuestion(ans) {
-		var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
-		if ( correct ) {
-			model.players[model.nowPlaying].money += model.question.money;
+		if(model.question != null){
+			var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
+			if ( correct ) {
+				model.players[model.nowPlaying].money += model.question.money;
+			}
+			publish();
+			notify("show_answer", correct);
+			model.question = null;
 		}
-		publish();
-		notify("show_answer", correct);
 	}
 
 	function buyHouse() {
@@ -260,7 +263,7 @@ Controller = function(io) {
 	function payTolls(id, house) {
 		var house = model.map[model.players[model.nowPlaying].pos];
 		var nowId = model.players[model.nowPlaying].id;
-		var tolls = house.tolls[house.level];
+		var tolls = house.tolls[house.level-1];
 		if(house.type=="home"){
 			tolls = house.tolls;
 		}
