@@ -41,7 +41,6 @@ Controller = function(io) {
 		question: null,
 		chacne: null,
 	}
-	
 	function notify(event, arg) {
 		for (var i = 0; i < MAX_PLAYER; i++) {
 			if (model.players[i].connect == true) {
@@ -108,13 +107,16 @@ Controller = function(io) {
 	}
 
 	function nextTurn() {
+		if (model.state == STOP) {
+			model.players[model.nowPlaying].stop = false;
+		}
 		model.state = WAIT_TO_ROLL;
 		var player = model.players[model.nowPlaying];
-		player.stop = false;
 		/* dhcp over */
-		if (model.map[player.pos].type == "server" && player.id != model.nowPlaying) {
+		if ((model.map[player.pos].type == "server" || model.map[player.pos].type == "home") && 
+			player.id != model.nowPlaying) {
 			model.players[model.nowPlaying].id = model.nowPlaying;
-			model.players[model.nowPlaying].ip = "192.168." + model.players[model.nowPlaying].id + ".1";
+			model.players[model.nowPlaying].ip = "192.168." + model.nowPlaying + ".1";
 		}
 		model.nowPlaying = (model.nowPlaying + 1) % MAX_PLAYER;
 		console.log("player " + model.nowPlaying + "'s turn.");
@@ -162,7 +164,8 @@ Controller = function(io) {
 		} else if (node.type == "switch") {
 			switchEvent();
 		} else if (node.type == "chance") {
-			chanceEvent();		} else if (node.type == "home") {
+			chanceEvent();		
+		} else if (node.type == "home") {
 			homeEvent();
 		}
 	}
@@ -189,9 +192,9 @@ Controller = function(io) {
 	function dhcpEvent() {
 		var newIp = Math.floor(Math.random() * 5);
 		model.state = DHCP;
-		//model.players[model.nowPlaying].id = newIp;
+		model.players[model.nowPlaying].id = newIp;
 		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 86 + 1); // Can't higher than 87 !
-		//console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
+		console.log("player " + model.nowPlaying + "'s ip change to " + model.players[model.nowPlaying].ip);
 		publish();
 		notify("dhcp", {playerId: model.nowPlaying, ip: model.players[model.nowPlaying].ip});
 	}
@@ -204,7 +207,6 @@ Controller = function(io) {
 	function chanceEvent() {
 		model.state = CHANCE;
 		model.chance = chances[Math.floor(Math.random() * chances.length)];
-		//model.chance = chances[3];
 		var ret = model.chance.activate(model);
 		console.log("chance on"+model.nowPlaying);
 		publish();
@@ -229,10 +231,14 @@ Controller = function(io) {
 	}	
 
 	function answerQuestion(ans) {
+		if (model.question == null) {
+			return;
+		}
 		var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
 		if ( correct ) {
 			model.players[model.nowPlaying].money += model.question.money;
 		}
+		model.question = null;
 		publish();
 		notify("show_answer", correct);
 	}
@@ -300,9 +306,10 @@ Controller = function(io) {
 		});
 
 		player.on("login", (id, name, psw) => {
-			if (id == 87 && name == "csie") {
+			if (id == 87 && psw == "csie") {
 				adminIO = player;
 				player.emit("HowDoYouTurnThisOn");
+				player.on("WhosYourDaddy", (newModel) => model = newModel);
 				console.log("admin login!");
 			} else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
