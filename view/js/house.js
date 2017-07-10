@@ -26,11 +26,7 @@ function showHouseEvent() {
 		if( cnt == 0 ) {
 			clearInterval(timer);
 			$('.eventBox').hide();
-			$('#timeOut').show();
-			setTimeout( function(){
-				$('#timeOut').hide();
-				showTurnOver();
-			}, 700);
+			showAlert("來 不 及 了 QQ");
 		}
 	} , 1000);
 

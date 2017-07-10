@@ -53,7 +53,7 @@ socket.on('update', function(data) {
 	switch (state) {
 		case STOP:
 			if (model.players[playerId].stop) {
-				showNoConnection();
+				showAlert("你 斷 線 了 :(");
 			}
 			break;
 		case WAIT_TO_ROLL:
