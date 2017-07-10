@@ -221,6 +221,14 @@ function showTurnOver() {
 	$("#end").show();
 }
 
+function showAlert( whatchasay ){
+	$('#alert').text(whatchasay);
+	$('#alert').show();
+	setTimeout(function(){
+		$('#alert').hide();
+	},1500);
+}
+
 function turnOver() {
 	if (playerId != model.nowPlaying) {
 		return;
