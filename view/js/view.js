@@ -214,9 +214,9 @@ function showBackpack() {
 }
 
 function showTurnOver() {
-	if (playerId != model.nowPlaying) {
-		return;
-	}
+	// if (playerId != model.nowPlaying) {
+	// 	return;
+	// }
 	$('#eventBox').hide();
 	$("#end").show();
 }
@@ -230,11 +230,10 @@ function showAlert( whatchasay ){
 }
 
 function turnOver() {
-	if (playerId != model.nowPlaying) {
-		return;
-	}
 	$('#end').hide();
-	socket.emit("turn_over");
+	if (playerId == model.nowPlaying) {
+		socket.emit("turn_over");
+	}
 }
 
 function showNotification( res ) {
