@@ -53,8 +53,6 @@ function showQuestion(){
 		}
 	} , 1000);
 
-
-
 }
 
 function submitAnswer() {
@@ -71,6 +69,7 @@ function submitAnswer() {
 	console.log(ans);
 	$('#submitButton').hide();
 	socket.emit("answer_question", ans);
+	ans=[];
 }
 
 function showAnswer( correct ) {
