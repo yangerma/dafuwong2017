@@ -44,7 +44,7 @@ function buyHouse() {
 	if ( model.players[playerId].money >= node.price[0] ) {
 		socket.emit("buy_house");
 	} 
-	else showNoMoney();
+	else showAlert("你 買 不 起 :<");
 	closeHouseBox();
 }
 

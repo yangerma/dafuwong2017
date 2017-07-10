@@ -110,6 +110,9 @@ Controller = function(io) {
 	}
 
 	function nextTurn() {
+		if (model.state == WAIT_TO_ROLL){
+			return;
+		}
 		if (model.state == STOP) {
 			model.players[model.nowPlaying].stop = false;
 		}

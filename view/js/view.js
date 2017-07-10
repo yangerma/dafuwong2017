@@ -222,6 +222,9 @@ function showTurnOver() {
 	// 	return;
 	// }
 	$('#eventBox').hide();
+	if(model.state == WAIT_TO_ROLL || model.nowPlaying != playerId){
+		return;
+	}
 	$("#end").show();
 }
 
