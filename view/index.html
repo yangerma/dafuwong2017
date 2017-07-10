@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
+	<link type="text/css" rel="stylesheet" href="stylesheets/chatRoom.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/backpack.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/dice.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/event.css">
@@ -423,6 +424,12 @@
 
 	<div id="openBackpack" onclick="$('#backpack').show()">Check my backpack</div>
 	<div id="pauseButton" onclick="pause()"> 國防布！</div>
+	<div id="chatRoom">
+		<ul id="messages"></ul>
+    	<form action="">
+			<input id="m" autocomplete="off" /><button>Send</button>
+		</form>
+	</div>
 
 	<div id="backpack">
 		<div id="profile">
