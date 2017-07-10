@@ -18,6 +18,7 @@ const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
 const WAIT_TURN_OVER = 87;
+const ITEM="ITEM";
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
