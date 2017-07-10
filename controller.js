@@ -162,6 +162,7 @@ Controller = function(io) {
 		var nowId = model.players[model.nowPlaying].id;
 		if (node.firewall[nowId]) {
 			node.firewall.forEach((x, id, a) => a[id] = false);
+			chat("[系統]"+model.players[model.nowPlaying].name+" 撞牆了, 幫QQ");
 		}
 		if (node.type == "question") {
 			questionEvent();
@@ -276,6 +277,7 @@ Controller = function(io) {
 		model.state = WAIT_TURN_OVER;
 		publish();
 		notify("update_house", {playerId: nowId});
+		if(house.level==3)chat("[系統] 糟了! 是世界奇觀!");
 	}
 
 	function payTolls(id, house) {
@@ -302,11 +304,15 @@ Controller = function(io) {
 		console.log("Player " + playerId + " buy " + type);
 		publish();
 		notify("buy_item", {playerId: playerId, type: type});
+		chat("[系統]"+model.players[playerId].name+" 購買了 "+model.items[type].name+"!");
 	}
 
 	function pause() {
 		model.pause = (model.pause + 1) % 2;
 		publish();
+	}
+	function chat(msg){
+			io.emit('chat_message', msg);
 	}
 
 	/* Listen new connection */
@@ -348,7 +354,8 @@ Controller = function(io) {
 			player.on("update_house", updateHouse);
 			player.on("switch", (pos) => teleport(pos));
 			player.on("turn_over", itemEvent);
-			player.on('chat_message', (msg) => {io.emit('chat_message', msg);});
+			player.on('chat_message', (msg) => chat(msg));
+			if(id!=87)chat("[系統] "+name+" 上線了! 大家跟他打聲招呼吧!");
 		})
 	});
 }
