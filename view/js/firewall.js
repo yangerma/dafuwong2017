@@ -1,4 +1,8 @@
 function showFirewall(){
+	if ( model.players[playerId].money < model.items['firewall'].cost ) {
+		showAlert("你 買 不 起 :(");
+		return;
+	}
 	$('#firewallBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 	$("#firewallBox").show();
 }
