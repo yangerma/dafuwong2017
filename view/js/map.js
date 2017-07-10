@@ -69,6 +69,16 @@ function showNodeProperty( nodeID ) {
 		$('#nodeProperty #otherInfo').show();
 		$('#nodeProperty #otherInfo p').text(des);
 	}
+	var firewallList = "";
+	
+	node.firewall.forEach((v,id) => {
+		if (v) {
+			firewallList += '192.168.' + id + '.0/255.255.255.0\n';
+		}
+	});
+	if (firewallList.length > 0) {
+		$('#nodeProperty #firewallInfo p').text('防火牆：\n' + firewallList);
+	}
 
 	// move the block
 	var x = $('#' + nodeID).offset().left - 50;
