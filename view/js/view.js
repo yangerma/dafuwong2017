@@ -70,6 +70,16 @@ socket.on('update', function(data) {
 				showSwitch();
 			}
 			break;
+		case DHCP:
+			if (model.nowPlaying == playerId) {
+				showDHCP();
+			}
+			break;
+		case HOME:
+			if (model.nowPlaying == playrId) {
+				showHome(5000);
+			}
+			break;
 		case CHANCE:
 			showChance();
 			break;
@@ -150,7 +160,7 @@ function update() {
 		$('#info' + (i+1) + ' p .scoreboardMoney').text('$' + model.players[j].money);
 		$('#info' + (i+1) + ' p .scoreboardIP').text(model.players[j].ip);
 
-		if( model.players[j].ip.split('.')[2] != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
+		if( model.players[j].id != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
 		else $('#info' + (i+1) + ' p .notMine').removeClass('notMine');
 
 		if( j == model.nowPlaying ) $('#rank' + j).css('background-color', '#E9E9E9');
@@ -216,15 +226,6 @@ function showNotification( res ) {
 
 	// res: { teamId, eventType, arg }
 	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
-
-	if ( res.teamId == playerId ) {
-		if (res.eventType == 'DHCP') {
-			showDHCP();
-		} else if (res.eventType == 'home') {
-			showHome(res.arg);
-		}
-		return;
-	}
 
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text( model.players[res.teamId].name );

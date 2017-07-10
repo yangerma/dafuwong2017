@@ -192,7 +192,10 @@ Controller = function(io) {
 	}
 
 	function dhcpEvent() {
-		var newIp = Math.floor(Math.random() * 5);
+		var newIp;
+		do {
+			newIp = Math.floor(Math.random() * 5);
+		} while (newIp == model.nowPlaying); 
 		model.state = DHCP;
 		model.players[model.nowPlaying].id = newIp;
 		model.players[model.nowPlaying].ip = "192.168." + newIp + "." + Math.ceil(Math.random() * 86 + 1); // Can't higher than 87 !
@@ -241,9 +244,9 @@ Controller = function(io) {
 		if ( correct ) {
 			model.players[model.nowPlaying].money += model.question.money;
 		}
-		model.state = WAIT_TURN_OVER;
 		publish();
 		notify("show_answer", correct);
+		model.state = WAIT_TURN_OVER;
 		model.question = null;
 	}
 
@@ -254,9 +257,9 @@ Controller = function(io) {
 		house.owner = nowId;
 		house.level = 1;
 		console.log("Player " + nowId + " buy " + house.id);
-		model.state = WAIT_TURN_OVER;
 		publish();
 		notify("buy_house", {playerId: nowId});
+		model.state = WAIT_TURN_OVER;
 	}
 
 	function updateHouse() {
