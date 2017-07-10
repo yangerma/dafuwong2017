@@ -11,6 +11,7 @@ const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
 const WAIT_TURN_OVER = 87;
+const ITEM = "ITEM";
 
 var password = ["meow", "beep", "wang", "woof", "oops"];
 
@@ -103,6 +104,7 @@ Controller = function(io) {
 		} else if (item.type == "opticalFiber") {
 			model.players[item.playerId].opticalFiber = true;
 		}
+		model.state=ITEM;
 		publish();
 		setTimeout(itemEvent, 300);
 	}
