@@ -9,8 +9,6 @@
 	<link type="text/css" rel="stylesheet" href="stylesheets/event.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/index.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/map.css">
-	<link type="text/css" rel="stylesheet" href="stylesheets/cpy_map.css">
-	<link type="text/css" rel="stylesheet" href="stylesheets/fw_map.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/question.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/scoreboard.css">
 	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanstc.css">
@@ -22,7 +20,7 @@
 
 <div id ="container">
 
-	<div id="map">
+	<div id="origin_map" class="map">
 		<div class="inner" id="switch">
 			<img src="img/cycle.png">
 		</div>
@@ -77,7 +75,7 @@
 		<div class="question" id="c45" style="left: 350px; top: 18.695px;"><img src='img/question.png'></div> 
 	</div>
 
-	<div id="fw_map">
+	<div id="fw_map" class="map">
 		<div class="" id="fw_switch"><img class="firewallImg"></div>
 		<div class="home" id="fw_t0" style="left: 410px; top: -34.8px;"><img class="firewallImg"></div>
 		<div class="node" id="fw_s01" style="left: 425.7px; top: 230.5px;"><img class="firewallImg"></div>
@@ -152,7 +150,7 @@
 		<div class='info' id="firewallInfo"><p></p></div>
 	</div>
 
-	<div id="cpy_map" style="opacity: 0.01;">
+	<div id="cpy_map" style="opacity: 0.01;" class="map">
 		<div class="inner" id="cpy_switch">
 		</div>
 		<div class="home" id="cpy_t0" style="left: 410px; top: -34.8px;">
