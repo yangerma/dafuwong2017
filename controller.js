@@ -27,6 +27,7 @@ Controller = function(io) {
 	var obIO = new Array();
 	var itemQueue = new Array();
 	var model = {
+		pause: false,
 		state: WAIT_TO_ROLL,
 		nowPlaying: 0,
 		map: map,
@@ -300,7 +301,12 @@ Controller = function(io) {
 		publish();
 		notify("buy_item", {playerId: playerId, type: type});
 	}
-	
+
+	function pause() {
+		model.pause = (model.pause + 1) % 2;
+		publish();
+	}
+
 	/* Listen new connection */
 	io.on("connection", (player) => {
 
@@ -319,6 +325,7 @@ Controller = function(io) {
 				adminIO = player;
 				player.emit("HowDoYouTurnThisOn");
 				player.on("WhosYourDaddy", (newModel) => model = newModel);
+				player.on("pause", () => pause());
 				console.log("admin login!");
 			} else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");

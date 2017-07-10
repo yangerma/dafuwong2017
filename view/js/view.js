@@ -28,7 +28,7 @@ socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", t
 socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.ownerId}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
-socket.on("HowDoYouTurnThisOn", () => admin = true);
+socket.on("HowDoYouTurnThisOn", () => {admin = true; $("#pauseButton").show();});
 socket.on("YouCantDoNothing!", () => playerId = 87);
 
 socket.on('update', function(data) {
@@ -37,6 +37,13 @@ socket.on('update', function(data) {
 	}
 	old = model;
 	model = data;
+	if (model.pause) {
+		if (!admin) $('#pause').show();
+		$('#pauseButton').text("燒毀國防布！");
+	} else {
+		if (!admin) $('#pause').hide();
+		$('#pauseButton').text("國防布！");
+	}
 	update();
 	var state = model.state;
 	if (old != null && old.state == state) {
@@ -255,4 +262,9 @@ function showNotification( res ) {
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
 	},2000);
+}
+function pause() {
+	if (admin) {
+		socket.emit('pause');
+	}
 }
