@@ -24,8 +24,8 @@ function showNodeProperty( nodeID ) {
 				house = true;
 				title = "一塊被佔據的地";
 				level = node.level;
-				price = node.price[node.level-1];
-				tolls = node.tolls[node.level-1];
+				price = node.price[node.level];
+				tolls = node.tolls[node.level];
 			}
 		break;
 		case ("home"):

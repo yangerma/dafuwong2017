@@ -44,6 +44,8 @@ function firewallPos(blockList) {
 		landID = landID.substr(4);
 		timeToChooseLand = false;
 		socket.emit('buy_item', playerId, 'firewall', {pos: landID, blockList: blockList});
+		$('#firewallChosen').show();
+		setTimeout(function(){ $('#firewallChosen').hide(); },1500);
 	});
 
 }
