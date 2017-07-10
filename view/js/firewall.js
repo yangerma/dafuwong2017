@@ -5,23 +5,22 @@ function showFirewall(){
 
 function closeFirewall() {
 
-	var ans = [];
+	var choices = [];
 	$("#firewallBox input:checkbox:checked").each( function(){
-	    ans.push( Number( $(this).val() ) );
+	    choices.push( Number( $(this).val() ) );
 	});
 	
-	firewallPos(ans);
-	$('#backpack').hide()
+	firewallPos(choices);
+	$('#backpack').hide();
 	$('#firewallBox').hide();
+	$('#firewallBox form').find('input:checkbox').removeAttr('checked');
 	showAlert("請選擇目標地");
 }
 
 
 function firewallPos(blockList) {
 
-	timeToChooseLand = true;
-	$('#cpy_map div').addClass('activeLand');	
-
+	var timeToChooseLand = true;
 	var nodeID;
 
 	$('#cpy_map div').on('click', function() {
