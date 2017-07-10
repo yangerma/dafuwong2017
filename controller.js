@@ -306,7 +306,7 @@ Controller = function(io) {
 		});
 
 		player.on("login", (id, name, psw) => {
-			if (id == 87 && name == "csie") {
+			if (id == 87 && psw == "csie") {
 				adminIO = player;
 				player.emit("HowDoYouTurnThisOn");
 				player.on("WhosYourDaddy", (newModel) => model = newModel);
