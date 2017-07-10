@@ -118,10 +118,10 @@ strong {
 
 #login {
 	display: block;
-	height: 200px;
+	height: 250px;
 	width: 500px;
 	left: calc(50% - 250px);
-	top: calc(50% - 100px);
+	top: calc(50% - 125px);
 	padding: 20px;
 }
 #login *{

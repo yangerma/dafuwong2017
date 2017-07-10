@@ -20,13 +20,15 @@
 	border-radius: 25px;
 	/*-webkit-clip-path:circle(50% at 50% 50%);*/
 }
-#map .node img {
+#map .node .serverImg {
+	display: none;
 	position: relative;
-	margin-left: -50px;
+	margin-left: -70px;
 	margin-top: -70px;
 	width: 240px;
 	height: 135px;
 }
+
 #map .chance {
 	position: absolute;
 	margin-left: -10px;
@@ -52,10 +54,11 @@
 }
 #map .question img {
 	position: relative;
-	margin-left: 10px;
-	margin-top: 10px;
-	width: 50px;
-	height: 50px;
+	margin-left: 15px;
+	margin-top: 15px;
+	width: 40px;
+	height: 40px;
+	opacity: 0.4;
 }
 #map .home {
 	position: absolute;
@@ -88,8 +91,8 @@
 	position: absolute;
 	height: 80px;
 	width: 80px;
-	left: calc(50% - 42px);
-	top: calc(50% - 42px);
+	left: calc(50% - 40px);
+	top: calc(50% - 40px);
 	opacity: 0.2;
 }
 
@@ -99,3 +102,40 @@
 
 #map #t1 { transform: rotate(112deg); }
 #map #t4 { transform: rotate(328deg); }
+
+#nodeProperty {
+	position: absolute;
+	text-align: left;
+	padding: 5px;
+	max-width: 190px;
+}
+#nodeProperty #nodeType{
+	height: 23px;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 23px;
+	margin: 5px;
+	padding: 0px;
+}
+#nodeProperty .info{
+	margin: 5px;
+}
+#nodeProperty p{
+	font-size: 12px;
+	line-height: 20px;
+	margin: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

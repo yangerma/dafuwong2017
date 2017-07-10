@@ -9,6 +9,8 @@
 	<link type="text/css" rel="stylesheet" href="stylesheets/event.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/index.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/map.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/cpy_map.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/fw_map.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/question.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/scoreboard.css">
 	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanstc.css">
@@ -16,12 +18,7 @@
 
 <body>
 
-<div id="login" class="popBox">
-	<div class="title" id="welcome">Welcome to 2017 CSIE camp Monopoly!</div>
-    請輸入小隊編號： <input id="teamID" type="number"/> <br/>
-    請輸入小隊名稱： <input id="teamName" type="text"/> <br/>
-    <input type="button" id="loginButton" value="Submit" onclick="login()">
-</div>
+
 
 <div id ="container">
 
@@ -32,52 +29,103 @@
 		<div class="home" id="t0" style="left: 410px; top: -34.8px;">
 			<img src="img/home0.png">
 		</div>
-		<div class="inner node" id="s01" style="left: 425.7px; top: 230.5px;"><img src='img/server0.png'></div>
+		<div class="inner node" id="s01" style="left: 425.7px; top: 230.5px;"><img class="serverImg"></div>
 		<div class="chance" id="s02" style="left: 423.8px; top: 141.8px;"><img src='img/chance.png'></div>
-		<div class="inner node" id="s03" style="left: 421.9px; top: 53.1px;"><img src='img/server0.png'></div>
-		<div class="node" id="c01" style="left: 500px; top: 18.695px;"><img src='img/server0.png'></div>
-		<div class="node" id="c02" style="left: 575px; top: 63.39px;"><img src='img/server0.png'></div>
+		<div class="inner node" id="s03" style="left: 421.9px; top: 53.1px;"><img class="serverImg"></div>
+		<div class="node" id="c01" style="left: 500px; top: 18.695px;"><img class="serverImg"></div>
+		<div class="node" id="c02" style="left: 575px; top: 63.39px;"><img class="serverImg"></div>
 		<div class="dhcp" id="c03" style="left: 650px; top: 108.085px;">DHCP</div>
-		<div class="node" id="c04" style="left: 725px; top: 152.78px;"><img src='img/server0.png'></div>
+		<div class="node" id="c04" style="left: 725px; top: 152.78px;"><img class="serverImg"></div>
 		<div class="question" id="c05" style="left: 800px; top: 197.475px;"><img src='img/question.png'></div>
 		<div class="home" id="t1" style="left: 860px; top: 233.37px;">
 			<img src="img/home1.png">
 		</div>
-		<div class="node" id="c11" style="left: 846.29px; top: 314.142px;"><img src='img/server0.png'></div>
-		<div class="node" id="c12" style="left: 817.58px; top: 386.113px;"><img src='img/server0.png'></div>
-		<div class="node" id="c13" style="left: 788.87px; top: 458.085px;"><img src='img/server0.png'></div>
-		<div class="node" id="c14" style="left: 760.16px; top: 530.057px;"><img src='img/server0.png'></div>
+		<div class="node" id="c11" style="left: 846.29px; top: 314.142px;"><img class="serverImg"></div>
+		<div class="node" id="c12" style="left: 817.58px; top: 386.113px;"><img class="serverImg"></div>
+		<div class="node" id="c13" style="left: 788.87px; top: 458.085px;"><img class="serverImg"></div>
+		<div class="node" id="c14" style="left: 760.16px; top: 530.057px;"><img class="serverImg"></div>
 		<div class="question" id="c15" style="left: 731.45px; top: 602.028px;"><img src='img/question.png'></div>
 		<div class="home" id="t2" style="left: 687.74px; top: 665.2px;">
 			<img src="img/home2.png">
 		</div>
-		<div class="inner node" id="s21" style="left: 495.135px; top: 405.5px;"><img src='img/server0.png'></div>
+		<div class="inner node" id="s21" style="left: 495.135px; top: 405.5px;"><img class="serverImg"></div>
 		<div class="question" id="s22" style="left: 562.67px; top: 491.8px;"><img src='img/question.png'></div>
-		<div class="inner node" id="s23" style="left: 630.205px; top: 578.1px;"><img src='img/server0.png'></div>
-		<div class="node" id="c21" style="left: 610.16px; top: 674px;"><img src='img/server0.png'></div>
-		<div class="node" id="c22" style="left: 517.58px; top: 674px;"><img src='img/server0.png'></div>
+		<div class="inner node" id="s23" style="left: 630.205px; top: 578.1px;"><img class="serverImg"></div>
+		<div class="node" id="c21" style="left: 610.16px; top: 674px;"><img class="serverImg"></div>
+		<div class="node" id="c22" style="left: 517.58px; top: 674px;"><img class="serverImg"></div>
 		<div class="chance" id="c23" style="left: 425px; top: 674px;"><img src='img/chance.png'></div>
-		<div class="node" id="c24" style="left: 332.42px; top: 674px;"><img src='img/server0.png'></div>
+		<div class="node" id="c24" style="left: 332.42px; top: 674px;"><img class="serverImg"></div>
 		<div class="question" id="c25" style="left: 239.84px; top: 674px;"><img src='img/question.png'></div>
 		<div class="home" id="t3" style="left: 132.26px; top: 665.2px;">
 			<img src="img/home3.png">
 		</div>
-		<div class="inner node" id="s31" style="left: 356.265px; top: 405.5px;"><img src='img/server0.png'></div>
+		<div class="inner node" id="s31" style="left: 356.265px; top: 405.5px;"><img class="serverImg"></div>
 		<div class="question" id="s32" style="left: 284.93px; top: 491.8px;"><img src='img/question.png'></div>
-		<div class="inner node" id="s33" style="left: 213.595px; top: 578.1px;"><img src='img/server0.png'></div>
-		<div class="node" id="c31" style="left: 118.55px; top: 602.028px;"><img src='img/server0.png'></div>
-		<div class="node" id="c32" style="left: 89.84px; top: 530.057px;"><img src='img/server0.png'></div>
+		<div class="inner node" id="s33" style="left: 213.595px; top: 578.1px;"><img class="serverImg"></div>
+		<div class="node" id="c31" style="left: 118.55px; top: 602.028px;"><img class="serverImg"></div>
+		<div class="node" id="c32" style="left: 89.84px; top: 530.057px;"><img class="serverImg"></div>
 		<div class="dhcp" id="c33" style="left: 61.13px; top: 458.085px;">DHCP</div>
-		<div class="node" id="c34" style="left: 32.42px; top: 386.113px;"><img src='img/server0.png'></div>
+		<div class="node" id="c34" style="left: 32.42px; top: 386.113px;"><img class="serverImg"></div>
 		<div class="question" id="c35" style="left: 3.71px; top: 314.142px;"><img src='img/question.png'></div>
 		<div class="home" id="t4" style="left: -40px; top: 233.37px;">
 			<img src="img/home4.png">
 		</div>
-		<div class="node" id="c41" style="left: 50px; top: 197.475px;"><img src='img/server0.png'></div>
-		<div class="node" id="c42" style="left: 125px; top: 152.78px;"><img src='img/server0.png'></div>
-		<div class="node" id="c43" style="left: 200px; top: 108.085px;"><img src='img/server0.png'></div>
-		<div class="node" id="c44" style="left: 275px; top: 63.39px;"><img src='img/server0.png'></div>
+		<div class="node" id="c41" style="left: 50px; top: 197.475px;"><img class="serverImg"></div>
+		<div class="node" id="c42" style="left: 125px; top: 152.78px;"><img class="serverImg"></div>
+		<div class="node" id="c43" style="left: 200px; top: 108.085px;"><img class="serverImg"></div>
+		<div class="node" id="c44" style="left: 275px; top: 63.39px;"><img class="serverImg"></div>
 		<div class="question" id="c45" style="left: 350px; top: 18.695px;"><img src='img/question.png'></div> 
+	</div>
+
+	<div id="fw_map">
+		<div class="" id="fw_switch"><img class="firewallImg"></div>
+		<div class="home" id="fw_t0" style="left: 410px; top: -34.8px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_s01" style="left: 425.7px; top: 230.5px;"><img class="firewallImg"></div>
+		<div class="chance" id="fw_s02" style="left: 423.8px; top: 141.8px;"><img class="firewallImg"></div>
+		<div class=" node" id="fw_s03" style="left: 421.9px; top: 53.1px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c01" style="left: 500px; top: 18.695px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c02" style="left: 575px; top: 63.39px;"><img class="firewallImg"></div>
+		<div class="dhcp" id="fw_c03" style="left: 650px; top: 108.085px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c04" style="left: 725px; top: 152.78px;"><img class="firewallImg"></div>
+		<div class="question" id="fw_c05" style="left: 800px; top: 197.475px;"><img class="firewallImg"></div>
+		<div class="home" id="fw_t1" style="left: 860px; top: 233.37px;">
+			<img class="firewallImg">
+		</div>
+		<div class="node" id="fw_c11" style="left: 846.29px; top: 314.142px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c12" style="left: 817.58px; top: 386.113px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c13" style="left: 788.87px; top: 458.085px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c14" style="left: 760.16px; top: 530.057px;"><img class="firewallImg"></div>
+		<div class="question" id="fw_c15" style="left: 731.45px; top: 602.028px;"><img class="firewallImg"></div>
+		<div class="home" id="fw_t2" style="left: 687.74px; top: 665.2px;">
+			<img class="firewallImg">
+		</div>
+		<div class=" node" id="fw_s21" style="left: 495.135px; top: 405.5px;"><img class="firewallImg"></div>
+		<div class="question" id="fw_s22" style="left: 562.67px; top: 491.8px;"><img class="firewallImg"></div>
+		<div class=" node" id="fw_s23" style="left: 630.205px; top: 578.1px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c21" style="left: 610.16px; top: 674px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c22" style="left: 517.58px; top: 674px;"><img class="firewallImg"></div>
+		<div class="chance" id="fw_c23" style="left: 425px; top: 674px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c24" style="left: 332.42px; top: 674px;"><img class="firewallImg"></div>
+		<div class="question" id="fw_c25" style="left: 239.84px; top: 674px;"><img class="firewallImg"></div>
+		<div class="home" id="fw_t3" style="left: 132.26px; top: 665.2px;">
+			<img class="firewallImg">
+		</div>
+		<div class=" node" id="fw_s31" style="left: 356.265px; top: 405.5px;"><img class="firewallImg"></div>
+		<div class="question" id="fw_s32" style="left: 284.93px; top: 491.8px;"><img class="firewallImg"></div>
+		<div class=" node" id="fw_s33" style="left: 213.595px; top: 578.1px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c31" style="left: 118.55px; top: 602.028px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c32" style="left: 89.84px; top: 530.057px;"><img class="firewallImg"></div>
+		<div class="dhcp" id="fw_c33" style="left: 61.13px; top: 458.085px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c34" style="left: 32.42px; top: 386.113px;"><img class="firewallImg"></div>
+		<div class="question" id="fw_c35" style="left: 3.71px; top: 314.142px;"><img class="firewallImg"></div>
+		<div class="home" id="fw_t4" style="left: -40px; top: 233.37px;">
+			<img class="firewallImg">
+		</div>
+		<div class="node" id="fw_c41" style="left: 50px; top: 197.475px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c42" style="left: 125px; top: 152.78px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c43" style="left: 200px; top: 108.085px;"><img class="firewallImg"></div>
+		<div class="node" id="fw_c44" style="left: 275px; top: 63.39px;"><img class="firewallImg"></div>
+		<div class="question" id="fw_c45" style="left: 350px; top: 18.695px;"><img class="firewallImg"></div> 
 	</div>
 
 	<div id="players">
@@ -88,43 +136,106 @@
 		<img src="img/player4.gif" id="player4">
 	</div>
 
+
+	<div id="nodeProperty" class="popBox">
+		<div id="nodeType">
+		</div>
+		<div class="info" id="houseInfo">
+			<p id="nodeOwner">土地所有人：<strong></strong></p>
+			<p id="nodeLevel">目前等級：<strong></strong></p>
+			<p id="nodePrice">價格：<strong></strong></p>
+			<p id="nodeTolls">過路費：<strong></strong></p>
+		</div>
+		<div class="info" id="otherInfo">
+			<p></p>
+		</div>
+	</div>
+
+	<div id="cpy_map" style="opacity: 0.01;">
+		<div class="inner" id="cpy_switch">
+		</div>
+		<div class="home" id="cpy_t0" style="left: 410px; top: -34.8px;">
+		</div>
+		<div class="inner node" id="cpy_s01" style="left: 425.7px; top: 230.5px;"></div>
+		<div class="chance" id="cpy_s02" style="left: 423.8px; top: 141.8px;"></div>
+		<div class="inner node" id="cpy_s03" style="left: 421.9px; top: 53.1px;"></div>
+		<div class="node" id="cpy_c01" style="left: 500px; top: 18.695px;"></div>
+		<div class="node" id="cpy_c02" style="left: 575px; top: 63.39px;"></div>
+		<div class="dhcp" id="cpy_c03" style="left: 650px; top: 108.085px;">DHCP</div>
+		<div class="node" id="cpy_c04" style="left: 725px; top: 152.78px;"></div>
+		<div class="question" id="cpy_c05" style="left: 800px; top: 197.475px;"></div>
+		<div class="home" id="cpy_t1" style="left: 860px; top: 233.37px;">
+		</div>
+		<div class="node" id="cpy_c11" style="left: 846.29px; top: 314.142px;"></div>
+		<div class="node" id="cpy_c12" style="left: 817.58px; top: 386.113px;"></div>
+		<div class="node" id="cpy_c13" style="left: 788.87px; top: 458.085px;"></div>
+		<div class="node" id="cpy_c14" style="left: 760.16px; top: 530.057px;"></div>
+		<div class="question" id="cpy_c15" style="left: 731.45px; top: 602.028px;"></div>
+		<div class="home" id="cpy_t2" style="left: 687.74px; top: 665.2px;">
+		</div>
+		<div class="inner node" id="cpy_s21" style="left: 495.135px; top: 405.5px;"></div>
+		<div class="question" id="cpy_s22" style="left: 562.67px; top: 491.8px;"></div>
+		<div class="inner node" id="cpy_s23" style="left: 630.205px; top: 578.1px;"></div>
+		<div class="node" id="cpy_c21" style="left: 610.16px; top: 674px;"></div>
+		<div class="node" id="cpy_c22" style="left: 517.58px; top: 674px;"></div>
+		<div class="chance" id="cpy_c23" style="left: 425px; top: 674px;"></div>
+		<div class="node" id="cpy_c24" style="left: 332.42px; top: 674px;"></div>
+		<div class="question" id="cpy_c25" style="left: 239.84px; top: 674px;"></div>
+		<div class="home" id="cpy_t3" style="left: 132.26px; top: 665.2px;"></div>
+		<div class="inner node" id="cpy_s31" style="left: 356.265px; top: 405.5px;"></div>
+		<div class="question" id="cpy_s32" style="left: 284.93px; top: 491.8px;"></div>
+		<div class="inner node" id="cpy_s33" style="left: 213.595px; top: 578.1px;"></div>
+		<div class="node" id="cpy_c31" style="left: 118.55px; top: 602.028px;"></div>
+		<div class="node" id="cpy_c32" style="left: 89.84px; top: 530.057px;"></div>
+		<div class="dhcp" id="cpy_c33" style="left: 61.13px; top: 458.085px;"></div>
+		<div class="node" id="cpy_c34" style="left: 32.42px; top: 386.113px;"></div>
+		<div class="question" id="cpy_c35" style="left: 3.71px; top: 314.142px;"></div>
+		<div class="home" id="cpy_t4" style="left: -40px; top: 233.37px;">
+		</div>
+		<div class="node" id="cpy_c41" style="left: 50px; top: 197.475px;"></div>
+		<div class="node" id="cpy_c42" style="left: 125px; top: 152.78px;"></div>
+		<div class="node" id="cpy_c43" style="left: 200px; top: 108.085px;"></div>
+		<div class="node" id="cpy_c44" style="left: 275px; top: 63.39px;"></div>
+		<div class="question" id="cpy_c45" style="left: 350px; top: 18.695px;"></div> 
+	</div>
+
 	<div id="scoreboard">
 		<div class="title">
 			<h1>Scoreboard</h1>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank0">
 			<img class="picture" src="img/prof0.png">
 			<div class="info" id="info1">
 				<h4>第一小隊</h4>
-				<p>$1000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank1">
 			<img class="picture" src="img/prof1.png">
 			<div class="info"  id="info2">
 				<h4>第二小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank2">
 			<img class="picture" src="img/prof2.png">
 			<div class="info" id="info3">
 				<h4>第三小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank3">
 			<img class="picture" src="img/prof3.png">
 			<div class="info" id="info4">
 				<h4>第四小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
-		<div class="rank">
+		<div class="rank" id="rank4">
 			<img class="picture" src="img/prof4.png">
 			<div class="info"  id="info5">
 				<h4>第五小隊</h4>
-				<p>$2000</p>
+				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
 			</div>
 		</div>
 	</div>
@@ -184,11 +295,11 @@
 				</div>
 			</div>
 			<br><br>
-			<input type="button" id="submitButton" value="Submit">
+			<input type="button" id="submitButton" value="Submit" onclick="submitAnswer()">
 		</form>
 
 		<div id="answerResult">
-			<h1>答對/錯了</h1>
+			<h1 class="title">答對/錯了</h1>
 			<img src="">
 			<p></p>
 		</div>
@@ -206,6 +317,7 @@
 	<div class="diceBox popBox" id="rollDice">
 		<div class="txtbox">
 			<h1>Player # roll the dice!</h1>
+			<h2 style="display: none;">使用光纖，步數上限為8!</h2>
 		</div>
 		<img src="img/wifi4.png" id="wifi" onclick="rollDice()">
 	</div>
@@ -237,6 +349,22 @@
 			<div class="buttonBlock" onclick="closeHouseBox()">
 				<img src="img/close.png" class="noButton" >
 				<div class="reply">不要ouo</div>
+			</div>
+		</div>
+		<div class="timer"></div>
+	</div>
+
+	<div class="eventBox popBox" id="cantupdateHouse">
+		<h1>server已經是最高等級了!</h1>
+		<p>你什麼事情都不能做喔~呵呵</p>
+		<div class="buttons">
+			<div class="buttonBlock"  onclick="closeHouseBox()">
+				<img src="img/ok.png" class="okButton">
+				<div class="reply">好爽ㄛ</div>
+			</div>
+			<div class="buttonBlock" onclick="closeHouseBox()">
+				<img src="img/close.png" class="noButton" >
+				<div class="reply">好不爽ㄛ</div>
 			</div>
 		</div>
 		<div class="timer"></div>
@@ -278,21 +406,31 @@
 		</div>
 	</div>
 
-			
-
+	<div class="eventBox popBox" id="chanceBox">
+		<div class="des">
+			<h1> 機會！</h1>
+			<p id="chanceDescription"> description </p>
+			<p id="chanceEffect"> effect </p>
+		</div>
+		<div class="buttonBlock" id="iKnow" onclick="$('#chanceBox').hide();showTurnOver()">
+			<img src="img/ok.png" class="okButton">
+			<div class="reply"> 好ㄉ </div>
+		</div>
 	</div>
-
+			
 	<div id="end" class="popBox" onclick="turnOver()">結束回合</div>
 
-	<div id="openBackpack" onclick="$('#backpack').show()"> Check my backpack </div>
+	<div id="openBackpack" onclick="$('#backpack').show()"> 
+		Check my backpack 
+	</div>
 	<div id="backpack">
 		<div id="profile">
 			<div class="title">
-				<h1>第一小隊</h1>
+				<h1>觀戰模式</h1>
 			</div>
 			<img src="img/player1.gif" id="profilePic">
-			<div class="profileInfo" id="profMoney"></div>
-			<div class="profileInfo" id="profIP"></div>
+			<div class="profileInfo" id="profMoney">你可以買東西</div>
+			<div class="profileInfo" id="profIP">但是不能用owo</div>
 		</div>
 		<div id="shop">
 
@@ -316,11 +454,11 @@
 			</div>
 			<div class="item" id="opticalFiber">
 				<div class="itemName">種花電信光世代</div>
-				<div class="itemPic"><img src="img/opticalFiber.png"></div>
+				<div class="itemPic"><img src="img/flower.png"></div>
 				<div class="itemDes">
-					<strong>光纖（Optical fiber）</strong>是一種是利用光在玻璃塑料中全反射原理傳輸的光傳導工具。使用光纖傳輸具有傳輸容量大、保密性好等優點。</div>
+					<strong>光纖（Optical fiber）</strong>是一種是利用全反射原理傳輸的光傳導工具。使用光纖傳輸具有傳輸容量大、保密性好等優點。</div>
 				<div class="itemUsage">
-					<strong>功能：</strong>下次你的回合移動時wifi訊號上限變成兩倍。
+					<strong>功能：</strong>下次你的回合移動時wifi訊號上限變成兩倍，並且可以穿過<s>我的巴巴R</s>防火牆。
 				</div>
 				<div class="in">
 					<div class="itemPrice itemBlock">$87</div>
@@ -350,7 +488,7 @@
 			<img src="img/close.png" class="closeButton" onclick="$('#firewallBox').hide()">
 		</div>
 		<div class="qDes">
-			<p>請設定你要阻擋的子網域</p>
+			<p>請設定你要阻擋的子網域，送出後選擇要蓋的位置</p>
 		</div>
 		<form>
 			<div class="options">
@@ -377,6 +515,8 @@
 
 	<div class="alertBox" id="timeOut">來 不 及 了 QQ</div>
 	<div class="alertBox" id="noMoney">你 買 不 起 :(</div>
+	<div class="alertBox" id="noConnection">你 斷 線 了 :(</div>
+	<div class="alertBox" id="pleaseChooseLand">請選擇目標地</div>
 
 	<div id="notification" class="popBox">
 		<img src="">
@@ -387,6 +527,16 @@
 	</div>
 
 </div>
+
+
+<div id="login" class="popBox">
+	<div class="title" id="welcome">Welcome to 2017 CSIE camp Monopoly!</div>
+    請輸入小隊編號： <input id="teamID" type="number"/> <br/>
+    請輸入小隊名稱： <input id="teamName" type="text"/> <br/>
+    請輸入小隊密碼： <input id="teamPassword" type="password"/> <br/>
+    <input type="button" id="loginButton" value="Submit" onclick="login()">
+</div>
+
 </body>
 
 </html>
@@ -402,3 +552,5 @@
 <script src="js/house.js"></script>
 <script src="js/switch.js"></script>
 <script src="js/firewall.js"></script>
+<script src="js/map.js"></script>
+<script src="js/chance.js"></script>

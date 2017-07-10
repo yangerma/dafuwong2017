@@ -5,14 +5,16 @@ function showQuestion(){
 	$('#questionBox #timeLeft').show();
 	$('#questionBox .closeButton').hide();
 	$('#questionBox #answerResult').hide();
-	$('#questionBox .qTitle h1').text(q.subject);
-	$('#questionBox .qDes p').text(q.description);
+	$('#questionBox .title h1').text(q.subject);
+	$('#questionBox .qDes p').html(q.description);
 	
 	if (playerId == model.nowPlaying) {
 		$("#submitButton").show();
 	} else {
 		$("#submitButton").hide();
 	}
+
+	$('#questionBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 
 	if( q.multi ) {
 		$('#questionBox #multiOptions').show();
@@ -45,43 +47,37 @@ function showQuestion(){
 		$('#questionBox #timeLeft').text('剩餘時間：'+cnt);
 		if( cnt == 0 ) {
 			clearInterval(timer);
+			socket.emit("answer_question", []);
 			$('#questionBox #timeLeft').hide();
 			$('#answerResult h1').text("來不及了QQ");
-			$('#answerResult img').attr( 'src', "img/wrong.png" );
-			var correctAns = '正確答案：';
-			for (var i = 0; i < q.correct.length; i++) {
-				if( i!=0 ) correctAns += ",   ";
-				correctAns += ( q.options[ q.correct[i] ] );
-			}
-			$('#questionBox #answerResult p').text(correctAns);
-			$('#questionBox form').hide();
-			$('#questionBox .closeButton').show();
-			$('#questionBox #answerResult').show();
 		}
 	} , 1000);
 
-	$('#submitButton').click( function(){
-		clearInterval(timer);
-		$('#questionBox #timeLeft').hide();
-		var ans = [];
-		if( !q.multi ) ans.push( Number( $('input[name=qq]:checked').val() ) );
-		else {
-			$("input:checkbox[name=mq]:checked").each( function(){
-			    ans.push( Number( $(this).val() ) );
-			});
-		}
-		socket.emit("answer_question", ans);
-		showTurnOver();
 
-	})
 
 }
 
-function showAnswer(ans) {
+function submitAnswer() {
+	clearInterval(timer);
+	$('#questionBox #timeLeft').hide();
+	var ans = [];
 	var q = model.question;
-	var correct = ( JSON.stringify(ans)==JSON.stringify(q.correct) );
+	if( !q.multi ) ans.push( Number( $('input[name=qq]:checked').val() ) );
+	else {
+		$("input:checkbox[name=mq]:checked").each( function(){
+		    ans.push( Number( $(this).val() ) );
+		});
+	}
+	console.log(ans);
+	$('#submitButton').hide();
+	socket.emit("answer_question", ans);
+}
+
+function showAnswer( correct ) {
+	var q = model.question;
+
 	if (correct) {
-		$('#answerResult h1').text("答對了！");
+		$('#answerResult h1').text("答對了！獲得$" + q.money);
 		$('#answerResult img').attr( 'src', "img/correct.png" );
 	}
 	else {
@@ -103,4 +99,5 @@ function showAnswer(ans) {
 
 function closeQuestion() {
 	$('#questionBox').hide();
+	showTurnOver();
 }

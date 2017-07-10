@@ -1,4 +1,5 @@
 function showFirewall(){
+	$('#firewallBox form').find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 	$("#firewallBox").show();
 }
 
@@ -12,14 +13,35 @@ function closeFirewall() {
 	firewallPos(ans);
 	$('#backpack').hide()
 	$('#firewallBox').hide();
+
+	$('#pleaseChooseLand').show();
+	setTimeout(function(){
+		$('#pleaseChooseLand').hide();
+		firewallPos(ans);
+	},1500);
+
 }
+
+
 function firewallPos(blockList) {
 
-	$('#map div').addClass('activeLand');	
+	timeToChooseLand = true;
+	$('#cpy_map div').addClass('activeLand');	
 
-	$('#map div').on('click', function() {
-		$('#map div').removeClass('activeLand');
+	var nodeID;
+	$("#cpy_map .activeLand").on("mouseover", function() {
+	    nodeID = $( this ).prop('id');
+	    nodeID = nodeID.substr(4);
+	    $('#'+nodeID).css('transform', 'scale(1.15, 1.15)');
+	}).on("mouseout", function() {
+		$('#'+nodeID).css('transform', 'scale(1, 1)');
+	});
+
+	$('#cpy_map div').on('click', function() {
+		$('#cpy_map div').removeClass('activeLand');
+		if ( !timeToChooseLand ) return;
 		var landID = $( this ).prop('id');
+		landID = landID.substr(4);
 		timeToChooseLand = false;
 		socket.emit('buy_item', playerId, 'firewall', {pos: landID, blockList: blockList});
 	});

@@ -7,7 +7,7 @@ var timer = null;
 var admin = false;
 var playerColor = ['#F2E833', '#57CB60', '#A0362C', '#6968C5', '#686868'];
 
-const GAMEOVER = 0;
+const STOP = 0;
 const START = 1;
 const MOVE = 2;
 const SWITCH = 3;
@@ -16,6 +16,8 @@ const QUESTION = 5
 const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
+const CHANCE = 9;
+const WAIT_TURN_OVER = 87;
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
@@ -23,10 +25,11 @@ socket.on("show_answer", (ans) => showAnswer(ans));
 socket.on("buy_item", (arg) => showNotification({eventType: "buyItem", teamId: arg.playerId, arg: arg.type}));
 socket.on("buy_house", (arg) => showNotification({eventType: "buyHouse", teamId: arg.playerId}));
 socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", teamId: arg.playerId}));
-socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId}));
+socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.ownerId}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
 socket.on("HowDoYouTurnThisOn", () => admin = true);
+socket.on("YouCantDoNothing!", () => playerId = 87);
 
 socket.on('update', function(data) {
 	if (admin) {
@@ -41,6 +44,11 @@ socket.on('update', function(data) {
 	}
 	clearInterval(timer);
 	switch (state) {
+		case STOP:
+			if (model.players[playerId].stop) {
+				showNoConnection();
+			}
+			break;
 		case WAIT_TO_ROLL:
 			if (model.nowPlaying == playerId) {
 				console.log("It your turn!");
@@ -62,6 +70,24 @@ socket.on('update', function(data) {
 				showSwitch();
 			}
 			break;
+		case DHCP:
+			if (model.nowPlaying == playerId) {
+				showDHCP();
+			}
+			break;
+		case HOME:
+			if (model.nowPlaying == playrId) {
+				showHome(5000);
+			}
+			break;
+		case CHANCE:
+			showChance();
+			break;
+		case WAIT_TURN_OVER:
+			if (model.nowPlaying == playerId) {
+				showTurnOver();
+			}
+			break;
 		default:	
 			console.log("Wrong state:" + state);
 	}
@@ -70,24 +96,57 @@ socket.on('update', function(data) {
 function login() {
 	playerId = Number( $('#teamID').val() );
 	playerName = $('#teamName').val();
+	password = $('#teamPassword').val();
 	$('#container').show();
 	$('#login').hide();
-	socket.emit("login", playerId, playerName);
+	socket.emit("login", playerId, playerName, password);
 }
 
 function update() {
 	/* update map */
 	$.each(model.map, (id, node) => {
+		//server
 		if (node.type == "server" && node.owner != null) {
 			$('#' + node.id).css('background-color', playerColor[node.owner]);
-			$('#' + node.id + ' img').attr('src', 'img/server' + node.level + '.png');
+			$('#' + node.id + ' .serverImg').show();
+			$('#' + node.id + ' .serverImg').attr('src', 'img/server' + node.level + '.png');
+
 		}
-		if (old != null && node.level != old.map[node.id].level) {
-			$('#' + node.id + ' img').attr('src', 'img/server_setup' + node.level + '.gif');
+		if (old != null && node.level > old.map[node.id].level) {//server upgrade
+			$('#' + node.id + ' .serverImg').show();
+			$('#' + node.id + ' .serverImg').attr('src', 'img/server_update' + node.level + '.gif');
+		}
+		if (old != null && node.level < old.map[node.id].level) {//server downgrade
+			if(node.owner == null){
+				$('#' + node.id + ' .serverImg').hide();
+				$('#' + node.id).css('background-color', '#D9D9D9');
+			}else{
+				$('#' + node.id + ' .serverImg').show();
+				$('#' + node.id + ' .serverImg').attr('src', 'img/server' + node.level + '.png');
+			}
+		}
+		//firewall
+		if (node.firewall.some((val) => val)) {
+			$('#fw_' + node.id + ' .firewallImg').show();
+			$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_active.gif');
+		}
+		if (old != null && node.firewall.some((val, id) => old.map[node.id].firewall[id] != val) ) {
+			console.log("make firewall great again");
+			if (node.firewall.some((val) => val)) {
+				$('#fw_' + node.id + ' .firewallImg').show();
+				$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_add.gif');
+			} else {
+				$('#fw_' + node.id + ' .firewallImg').attr('src', 'img/firewall_clear.gif');
+				$('#fw_' + node.id + ' .firewallImg').hide();
+			}
 		}
 	});
 	for (var i = 0; i < 5; i++) {
-
+		if (model.players[i].stop) {
+			$('#player' + i).attr('src', 'img/dinosaur.png');
+		} else {
+			$('#player' + i).attr('src', 'img/player' + i + '.gif');
+		}
 		// update position
 		var currPos = '#' + model.players[i].pos;
 		var x = $(currPos).offset().left - 15 - i;
@@ -98,14 +157,20 @@ function update() {
 		// update scoreboard
 		var j = i;
 		$('#info' + (i+1) + ' h4').text(model.players[j].name);
-		$('#info' + (i+1) + ' p').text('$' + model.players[j].money);
+		$('#info' + (i+1) + ' p .scoreboardMoney').text('$' + model.players[j].money);
+		$('#info' + (i+1) + ' p .scoreboardIP').text(model.players[j].ip);
 
-		// update ip
+		if( model.players[j].id != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
+		else $('#info' + (i+1) + ' p .notMine').removeClass('notMine');
+
+		if( j == model.nowPlaying ) $('#rank' + j).css('background-color', '#E9E9E9');
+		else $('#rank' + j).css('background-color', '');
+
 	}
 
 	// update switch state
-	if( model.switchState == 1 ) $('#switch img').css('transform', 'scale(1,1)');
-	else $('#switch img').css('transform', 'scale(1,-1)');
+	if( model.switchState == 1 ) $('#switch img').attr('src', 'img/countercycle.png');
+	else $('#switch img').attr('src', 'img/cycle.png');
 
 	// check intersection
 	if( model.map.t0.next[0] == 'c01' ) 
@@ -120,7 +185,7 @@ function update() {
 
 	$('#hao123 .itemPrice').text('$' + model.items["hao123"].cost);
 	$('#opticalFiber .itemPrice').text('$' + model.items["opticalFiber"].cost);
-	$('#firewall .itemPrice').text('$' + model.items["firewall"].cost);
+	$('#firewall .itemPrice').text(model.items["firewall"].cost);
 
 	// update backpack
 	if (playerId >= 5) {
@@ -132,8 +197,7 @@ function update() {
 
 	// update items 
 	$('#profMoney').text('you have $' + model.players[playerId].money);
-	$('#profIP').text('your IP ' + model.players[playerId].ip );
-
+	$('#profIP').text('your IP ' + model.players[playerId].ip );	
 	
 }
 
@@ -143,11 +207,17 @@ function showBackpack() {
 }
 
 function showTurnOver() {
+	if (playerId != model.nowPlaying) {
+		return;
+	}
 	$('#eventBox').hide();
 	$("#end").show();
 }
 
 function turnOver() {
+	if (playerId != model.nowPlaying) {
+		return;
+	}
 	$('#end').hide();
 	socket.emit("turn_over");
 }
@@ -156,15 +226,6 @@ function showNotification( res ) {
 
 	// res: { teamId, eventType, arg }
 	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
-
-	if ( res.teamId == playerId ) {
-		if (res.eventType == 'DHCP') {
-			showDHCP();
-		} else if (res.eventType == 'home') {
-			showHome(res.arg);
-		}
-		return;
-	}
 
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text( model.players[res.teamId].name );
@@ -180,7 +241,7 @@ function showNotification( res ) {
 			$('#notification #eventDes').text( '升級了server。' );
 			break;
 		case 'passOthersHouse' :
-			$('#notification #eventDes').text( '踩到了 Player' + res.arg + ' 的地！' );
+			$('#notification #eventDes').text( '踩到了 ' + model.players[res.arg].name + ' 的地！' );
 			break;
 		case 'DHCP' :
 			$('#notification #eventDes').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );

@@ -2,16 +2,19 @@ function showHouseEvent() {
 	var house = model.map[model.players[model.nowPlaying].pos];
 	var nowId = model.players[model.nowPlaying].id;
 	if( house.owner == null ) {
-		$('#buyHouse .housePrice').text( house.price );
+		$('#buyHouse .housePrice').text( house.price[house.level] );
 		$('#buyHouse').show();
 	}
-	else if( house.owner == nowId ) {
-		$('#updateHouse .housePrice').text( house.price );
+	else if( house.owner == nowId && house.level <3 ) {
+		$('#updateHouse .housePrice').text( house.price[house.level] );
 		$('#updateHouse').show();
 	}
+	else if(house.owner == nowId){
+		$('#cantupdateHouse').show();
+	}
 	else {	//other's house
-		$('#passOthersHouse .houseOwner').text( 'player' + house.owner );
-		$('#passOthersHouse .housePrice').text( house.tolls );
+		$('#passOthersHouse .houseOwner').text( model.players[house.owner].name );
+		$('#passOthersHouse .housePrice').text( house.tolls[house.level] );
 		$('#passOthersHouse').show();
 	}
 
@@ -26,6 +29,7 @@ function showHouseEvent() {
 			$('#timeOut').show();
 			setTimeout( function(){
 				$('#timeOut').hide();
+				showTurnOver();
 			}, 700);
 		}
 	} , 1000);
