@@ -200,7 +200,7 @@
 	</div>
 
 	<div id="scoreboard">
-		<div onclick="$('#rankings').toggle()" id="scoreboardTitle" class="title">
+		<div onclick="$('#rankings').toggle();" id="scoreboardTitle" class="title">
 			<h1>Scoreboard</h1>
 		</div>
 		<div id="rankings" >
@@ -240,6 +240,16 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div id="openBackpack" onclick="$('#backpack').show()">Check my backpack</div>
+	<div id="pauseButton" onclick="pause()"> 國防布！</div>
+	<div id="chatRoom">
+		<nav>
+			<ul id="messages"></ul>
+		</nav>
+    	<form action="">
+			<input id="m" autocomplete="off" /><button>Send</button>
+		</form>
 	</div>
 
 	<div class="popBox eventBox" id="questionBox">
@@ -422,14 +432,7 @@
 			
 	<div id="end" class="popBox" onclick="turnOver()">結束回合</div>
 
-	<div id="openBackpack" onclick="$('#backpack').show()">Check my backpack</div>
-	<div id="pauseButton" onclick="pause()"> 國防布！</div>
-	<div id="chatRoom">
-		<ul id="messages"></ul>
-    	<form action="">
-			<input id="m" autocomplete="off" /><button>Send</button>
-		</form>
-	</div>
+
 
 	<div id="backpack">
 		<div id="profile">
