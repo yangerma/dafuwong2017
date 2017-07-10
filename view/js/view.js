@@ -17,6 +17,7 @@ const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
+const WAIT_TURN_OVER = 87;
 
 /* Notification */
 socket.on("dice_result", (diceResult) => showDiceResult(diceResult));
@@ -27,7 +28,7 @@ socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", t
 socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.ownerId}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
-socket.on("HowDoYouTurnThisOn", () => admin = true);
+socket.on("HowDoYouTurnThisOn", () => {admin = true; $("#pauseButton").show();});
 socket.on("YouCantDoNothing!", () => playerId = 87);
 
 socket.on('update', function(data) {
@@ -36,6 +37,13 @@ socket.on('update', function(data) {
 	}
 	old = model;
 	model = data;
+	if (model.pause) {
+		if (!admin) $('#pause').show();
+		$('#pauseButton').text("燒毀國防布！");
+	} else {
+		if (!admin) $('#pause').hide();
+		$('#pauseButton').text("國防布！");
+	}
 	update();
 	var state = model.state;
 	if (old != null && old.state == state) {
@@ -69,8 +77,23 @@ socket.on('update', function(data) {
 				showSwitch();
 			}
 			break;
+		case DHCP:
+			if (model.nowPlaying == playerId) {
+				showDHCP();
+			}
+			break;
+		case HOME:
+			if (model.nowPlaying == playrId) {
+				showHome(5000);
+			}
+			break;
 		case CHANCE:
 			showChance();
+			break;
+		case WAIT_TURN_OVER:
+			if (model.nowPlaying == playerId) {
+				showTurnOver();
+			}
 			break;
 		default:	
 			console.log("Wrong state:" + state);
@@ -144,7 +167,7 @@ function update() {
 		$('#info' + (i+1) + ' p .scoreboardMoney').text('$' + model.players[j].money);
 		$('#info' + (i+1) + ' p .scoreboardIP').text(model.players[j].ip);
 
-		if( model.players[j].ip.split('.')[2] != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
+		if( model.players[j].id != j ) $('#info' + (i+1) + ' p .scoreboardIP').addClass('notMine');
 		else $('#info' + (i+1) + ' p .notMine').removeClass('notMine');
 
 		if( j == model.nowPlaying ) $('#rank' + j).css('background-color', '#E9E9E9');
@@ -211,15 +234,6 @@ function showNotification( res ) {
 	// res: { teamId, eventType, arg }
 	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
 
-	if ( res.teamId == playerId ) {
-		if (res.eventType == 'DHCP') {
-			showDHCP();
-		} else if (res.eventType == 'home') {
-			showHome(res.arg);
-		}
-		return;
-	}
-
 	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
 	$('#notification #team').text( model.players[res.teamId].name );
 
@@ -248,4 +262,9 @@ function showNotification( res ) {
 	setTimeout(function(){
 		$('#notification').fadeOut(1000);
 	},2000);
+}
+function pause() {
+	if (admin) {
+		socket.emit('pause');
+	}
 }

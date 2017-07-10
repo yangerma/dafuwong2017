@@ -149,6 +149,7 @@
 		<div class="info" id="otherInfo">
 			<p></p>
 		</div>
+		<div class='info' id="firewallInfo"><p></p></div>
 	</div>
 
 	<div id="cpy_map" style="opacity: 0.01;">
@@ -295,7 +296,7 @@
 				</div>
 			</div>
 			<br><br>
-			<input type="button" id="submitButton" value="Submit">
+			<input type="button" id="submitButton" value="Submit" onclick="submitAnswer()">
 		</form>
 
 		<div id="answerResult">
@@ -423,6 +424,9 @@
 	<div id="openBackpack" onclick="$('#backpack').show()"> 
 		Check my backpack 
 	</div>
+	<div id="pauseButton" onclick="pause()"> 
+		國防布！ 
+	</div>
 	<div id="backpack">
 		<div id="profile">
 			<div class="title">
@@ -458,7 +462,7 @@
 				<div class="itemDes">
 					<strong>光纖（Optical fiber）</strong>是一種是利用全反射原理傳輸的光傳導工具。使用光纖傳輸具有傳輸容量大、保密性好等優點。</div>
 				<div class="itemUsage">
-					<strong>功能：</strong>下次你的回合移動時wifi訊號上限變成兩倍。
+					<strong>功能：</strong>下次你的回合移動時wifi訊號上限變成兩倍，並且可以穿過<s>我的巴巴R</s>防火牆。
 				</div>
 				<div class="in">
 					<div class="itemPrice itemBlock">$87</div>
@@ -536,6 +540,7 @@
     請輸入小隊密碼： <input id="teamPassword" type="password"/> <br/>
     <input type="button" id="loginButton" value="Submit" onclick="login()">
 </div>
+<div id='pause'> 國 防 布 ！<div>
 
 </body>
 
