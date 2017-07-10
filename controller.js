@@ -162,7 +162,8 @@ Controller = function(io) {
 		} else if (node.type == "switch") {
 			switchEvent();
 		} else if (node.type == "chance") {
-			chanceEvent();		} else if (node.type == "home") {
+			chanceEvent();		
+		} else if (node.type == "home") {
 			homeEvent();
 		}
 	}
@@ -229,10 +230,14 @@ Controller = function(io) {
 	}	
 
 	function answerQuestion(ans) {
+		if (model.question == null) {
+			return;
+		}
 		var correct = JSON.stringify(model.question.correct) == JSON.stringify(ans);
 		if ( correct ) {
 			model.players[model.nowPlaying].money += model.question.money;
 		}
+		model.question = null;
 		publish();
 		notify("show_answer", correct);
 	}
