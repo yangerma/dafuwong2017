@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>2017 CSIE camp Monopoly!</title>
+	<link type="text/css" rel="stylesheet" href="stylesheets/chatRoom.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/backpack.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/dice.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/event.css">
@@ -199,44 +200,56 @@
 	</div>
 
 	<div id="scoreboard">
-		<div class="title">
+		<div onclick="$('#rankings').toggle();" id="scoreboardTitle" class="title">
 			<h1>Scoreboard</h1>
 		</div>
-		<div class="rank" id="rank0">
-			<img class="picture" src="img/prof0.png">
-			<div class="info" id="info1">
-				<h4>第一小隊</h4>
-				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
+		<div id="rankings" >
+			<div class="rank" id="rank0">
+				<img class="picture" src="img/prof0.png">
+				<div class="info" id="info1">
+					<h4>第一小隊</h4>
+					<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
+				</div>
+			</div>
+			<div class="rank" id="rank1">
+				<img class="picture" src="img/prof1.png">
+				<div class="info"  id="info2">
+					<h4>第二小隊</h4>
+					<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
+				</div>
+			</div>
+			<div class="rank" id="rank2">
+				<img class="picture" src="img/prof2.png">
+				<div class="info" id="info3">
+					<h4>第三小隊</h4>
+					<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
+				</div>
+			</div>
+			<div class="rank" id="rank3">
+				<img class="picture" src="img/prof3.png">
+				<div class="info" id="info4">
+					<h4>第四小隊</h4>
+					<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
+				</div>
+			</div>
+			<div class="rank" id="rank4">
+				<img class="picture" src="img/prof4.png">
+				<div class="info"  id="info5">
+					<h4>第五小隊</h4>
+					<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
+				</div>
 			</div>
 		</div>
-		<div class="rank" id="rank1">
-			<img class="picture" src="img/prof1.png">
-			<div class="info"  id="info2">
-				<h4>第二小隊</h4>
-				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
-			</div>
-		</div>
-		<div class="rank" id="rank2">
-			<img class="picture" src="img/prof2.png">
-			<div class="info" id="info3">
-				<h4>第三小隊</h4>
-				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
-			</div>
-		</div>
-		<div class="rank" id="rank3">
-			<img class="picture" src="img/prof3.png">
-			<div class="info" id="info4">
-				<h4>第四小隊</h4>
-				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
-			</div>
-		</div>
-		<div class="rank" id="rank4">
-			<img class="picture" src="img/prof4.png">
-			<div class="info"  id="info5">
-				<h4>第五小隊</h4>
-				<p><span class="scoreboardIP"></span><span class="scoreboardMoney"></span></p>
-			</div>
-		</div>
+	</div>
+	<div id="openBackpack" onclick="$('#backpack').show()">Check my backpack</div>
+	<div id="pauseButton" onclick="pause()"> 國防布！</div>
+	<div id="chatRoom">
+		<nav>
+			<ul id="messages"></ul>
+		</nav>
+    	<form action="">
+			<input id="messageForm" autocomplete="off" /><button>Send</button>
+		</form>
 	</div>
 
 	<div class="popBox eventBox" id="questionBox">
@@ -419,8 +432,7 @@
 			
 	<div id="end" class="popBox" onclick="turnOver()">結束回合</div>
 
-	<div id="openBackpack" onclick="$('#backpack').show()">Check my backpack</div>
-	<div id="pauseButton" onclick="pause()"> 國防布！</div>
+
 
 	<div id="backpack">
 		<div id="profile">
@@ -549,3 +561,4 @@
 <script src="js/firewall.js"></script>
 <script src="js/map.js"></script>
 <script src="js/chance.js"></script>
+<script src="js/chatRoom.js"></script>

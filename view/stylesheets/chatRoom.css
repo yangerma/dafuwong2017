@@ -1,0 +1,50 @@
+#chatRoom {
+	margin-left: 1000px;
+	margin-right: 30px;
+	margin-bottom: 40px;
+}
+#chatRoom *{
+	box-sizing: border-box;
+}
+#messages {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	overflow:hidden;
+	overflow-y:scroll;
+	width: calc(100% - 1030px);
+	position: absolute;
+	bottom: 50px;
+	top: 650px;
+}
+#messages li { 
+	padding: 5px 10px;
+}
+#messages li:nth-child(odd) {
+	background: #eee;
+}
+#messages {
+	margin-bottom: 40px;
+}
+#chatRoom form{
+	background: #000; 
+	padding: 3px;
+	bottom: 0; 
+	height: 50px;
+	width: calc(100% - 1030px);
+	position: absolute;
+}
+#chatRoom form input{
+	border: 0;
+	padding: 10px; 
+	width: 89%; 
+	height:100%;
+	margin-right: .5%;
+}
+#chatRoom form button{
+	width: 10%;
+	height:100%;
+	background: rgb(130, 224, 255);
+	border: none; 
+	padding: 10px;
+}

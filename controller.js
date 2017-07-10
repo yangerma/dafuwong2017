@@ -348,6 +348,7 @@ Controller = function(io) {
 			player.on("update_house", updateHouse);
 			player.on("switch", (pos) => teleport(pos));
 			player.on("turn_over", itemEvent);
+			player.on('chat_message', (msg) => {io.emit('chat_message', msg);});
 		})
 	});
 }
