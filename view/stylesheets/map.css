@@ -87,8 +87,8 @@
 	height:120px;
 	left: calc(50% - 60px);
 	top: calc(50% - 60px);
-	-webkit-clip-path:circle(50% at 50% 50%);
 }
+
 #origin_map #switch img{
 	position: absolute;
 	height: 80px;
@@ -96,6 +96,10 @@
 	left: calc(50% - 40px);
 	top: calc(50% - 40px);
 	opacity: 0.2;
+}
+
+#origin_map #switch {
+	border-radius: 60px;
 }
 
 .map .activeLand:hover {
@@ -152,5 +156,4 @@
 	height:120px;
 	left: calc(50% - 60px);
 	top: calc(50% - 60px);
-	-webkit-clip-path:circle(50% at 50% 50%);
 }

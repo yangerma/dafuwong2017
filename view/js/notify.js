@@ -61,5 +61,3 @@ function showNotification( res ) {
 		console.log('a notification was destroyed');
 	}, 3000);
 }
-
-
