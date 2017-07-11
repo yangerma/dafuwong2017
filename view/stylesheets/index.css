@@ -85,33 +85,40 @@ strong {
 	font-weight: 700;
 }
 
-#notification {
-	right: 30px;
-	top: 30px;
+#notifyContainer {
+	right: 20px;
+	top: 20px;
+	width: 500px;
+	position: fixed;
+}
+
+.notification {
+	position: static;
 	height: 120px;
-	width: 420px;
+	width: 100%;
 	padding: 10px;
+	margin: 10px;
 	background-color:rgba(255,255,255,0.9);
 }
-#notification img{
+.notification img{
 	float: left;
 	height: 80px;
 	width: 80px;
 	margin: 10px;
 }
-#notification div{
+.notification div{
 	float: left;
 	margin: 10px;
 	height: 80px;
 }
-#notification p {
+.notification p {
 	text-align: left;
 	line-height: 40px;
 	padding-left: 10px;
 	margin: 0px;
 	font-size: 18px;
 }
-#notification #team {
+.notification .team {
 	font-size: 22px;
 	font-weight: 500;
 }

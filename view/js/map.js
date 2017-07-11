@@ -69,7 +69,6 @@ function showNodeProperty( nodeID ) {
 		$('#nodeProperty #otherInfo p').text(des);
 	}
 	var firewallList = "";
-	console.log(node);
 	
 	node.firewall.forEach((v,id) => {
 		if (v) {
