@@ -228,13 +228,7 @@ function showTurnOver() {
 	$("#end").show();
 }
 
-function showAlert( whatchasay ){
-	$('#alert').text(whatchasay);
-	$('#alert').show();
-	setTimeout(function(){
-		$('#alert').hide();
-	},1500);
-}
+
 
 function turnOver() {
 	$('#end').hide();
@@ -243,40 +237,7 @@ function turnOver() {
 	}
 }
 
-function showNotification( res ) {
 
-	// res: { teamId, eventType, arg }
-	// eventType = [ 'buyItem' | 'buyHouse' | 'updateHouse' | 'passOthersHouse' | 'DHCP' ]
-
-	$('#notification img').attr('src', 'img/prof' + res.teamId + '.png');
-	$('#notification #team').text( model.players[res.teamId].name );
-
-	switch( res.eventType ) {
-		case 'buyItem' :
-			$('#notification #eventDes').text( '購買了 ' + model.items[res.arg].name + ' 。' );
-			break;
-		case 'buyHouse' :
-			$('#notification #eventDes').text( '架了一台server。' );
-			break;
-		case 'updateHouse' :
-			$('#notification #eventDes').text( '升級了server。' );
-			break;
-		case 'passOthersHouse' :
-			$('#notification #eventDes').text( '踩到了 ' + model.players[res.arg].name + ' 的地！' );
-			break;
-		case 'DHCP' :
-			$('#notification #eventDes').text( '的ip已被DHCP更改為 ' + res.arg + ' 。' );
-			break;
-		case 'home':
-			$('#notification #eventDes').text( '挖礦挖到了฿ ' + res.arg + ' !' );
-			break;
-	}
-	
-	$('#notification').fadeIn(1000);
-	setTimeout(function(){
-		$('#notification').fadeOut(1000);
-	},2000);
-}
 function pause() {
 	if (admin) {
 		socket.emit('pause');
