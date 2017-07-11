@@ -31,6 +31,8 @@ Controller = function(io, fs) {
 	var model;
 	if(fs.existsSync('./backup.json')) {
 		model = require('./backup.json');
+		for(var i=0; i<MAX_PLAYER; i++)
+			model.players[i].connect = false;
 	} else {
 		model = {
 			pause: false,
