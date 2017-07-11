@@ -21,28 +21,34 @@ var questions = require("./model/questions.js");
 var items = require("./model/items.js");
 var chances = require("./model/chance.js");
 
-Controller = function(io) {
+Controller = function(io, fs) {
 	var io = io;
+	var fs = fs;
 	var playerIO = new Array();
 	var adminIO = null;
 	var obIO = new Array();
 	var itemQueue = new Array();
-	var model = {
-		pause: false,
-		state: WAIT_TO_ROLL,
-		nowPlaying: 0,
-		map: map,
-		items: items,
-		players: [
-			Player(0, "p0"),
-			Player(1, "p1"),
-			Player(2, "p2"),
-			Player(3, "p3"),
-			Player(4, "p4"),
-		],
-		switchState: 1,
-		question: null,
-		chacne: null,
+	var model;
+	if(fs.existsSync('./backup.json')) {
+		model = require('./backup.json');
+	} else {
+		model = {
+			pause: false,
+			state: WAIT_TO_ROLL,
+			nowPlaying: 0,
+			map: map,
+			items: items,
+			players: [
+				Player(0, "p0"),
+				Player(1, "p1"),
+				Player(2, "p2"),
+				Player(3, "p3"),
+				Player(4, "p4"),
+			],
+			switchState: 1,
+			question: null,
+			chacne: null,
+		}
 	}
 	function notify(event, arg) {
 		for (var i = 0; i < MAX_PLAYER; i++) {
@@ -55,6 +61,7 @@ Controller = function(io) {
 		obIO.forEach((io) => io.emit(event, arg));
 	}
 	function publish() {
+		fs.writeFileSync('./backup.json', JSON.stringify(model), 'utf8');
 		for (var i = 0; i < MAX_PLAYER; i++) {
 			if (model.players[i].connect == true) {
 				playerIO[i].emit("update", model);
