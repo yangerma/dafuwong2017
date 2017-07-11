@@ -244,14 +244,11 @@
 	<div id="openBackpack" onclick="$('#backpack').show()">Check my backpack</div>
 	<div id="pauseButton" onclick="pause()"> 國防布！</div>
 	<div id="chatRoom">
-		<nav>
-			<ul id="messages"></ul>
-		</nav>
-    	<form action="">
-			<input id="messageForm" autocomplete="off" /><button>Send</button>
+		<ul tabindex="1" id="messages"></ul>
+		<form action="">
+			<input id="messageForm" autocomplete="off" /><div id='sendButton' onclick='sendMessage()'>Send</div>
 		</form>
 	</div>
-
 	<div class="popBox eventBox" id="questionBox">
 		<img src="img/close.png" class="closeButton" onclick="closeQuestion()">
 		<div class="title">
