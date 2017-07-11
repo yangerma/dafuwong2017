@@ -202,7 +202,7 @@ module.exports = function() {
 			"id": 13,
 			"multi" : false,
 			"subject" : "Python",
-			"description" : '以下 Python 程式碼執行後會印出？<img src="img/q13.png" style="height:181.33px; width:314.67px; float:right;"> (單選)',
+			"description" : '以下 Python 程式碼執行後會印出？<img src="img/q13.png" style="height:217.6px; width:377.64px; float:right;"> (單選)',
 			"options" : [
 				"145", 
 				"None", 
