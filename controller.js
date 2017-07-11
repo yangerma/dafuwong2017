@@ -110,8 +110,6 @@ Controller = function(io, fs) {
 			}
 		} else if (item.type == "firewall") {
 			item.arg.blockList.forEach((id) => model.map[item.arg.pos].firewall[id] = true);
-		} else if (item.type == "opticalFiber") {
-			model.players[item.playerId].opticalFiber = true;
 		}
 		model.state=ITEM;
 		publish();
@@ -308,7 +306,10 @@ Controller = function(io, fs) {
 	}
 
 	function buyItem(playerId, type, arg) {
-		itemQueue.push({playerId: playerId, type: type, arg: arg});
+		if(type == "opticalFiber")
+			model.players[playerId].opticalFiber = true;
+		else
+			itemQueue.push({playerId: playerId, type: type, arg: arg});
 		model.players[playerId].money -= model.items[type].cost;
 		console.log("Player " + playerId + " buy " + type);
 		publish();
