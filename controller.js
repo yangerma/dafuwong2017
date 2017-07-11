@@ -17,7 +17,7 @@ var password = ["meow", "beep", "wang", "woof", "oops"];
 
 var map = require("./model/map.js");
 var Player = require("./model/player.js");
-var questions = require("./model/questions.js");
+var questions = require("./model/questions.js")();
 var items = require("./model/items.js");
 var chances = require("./model/chance.js");
 
@@ -189,9 +189,10 @@ Controller = function(io, fs) {
 	function questionEvent() {
 		model.state = QUESTION;
 		if (questions.length == 0) {
-			questions = require("./model/questions.js");
+			questions = require("./model/questions.js")();
 		}
 		model.question = questions.shift()
+		console.log("Question: " + model.question.id);
 		publish();
 	}
 

@@ -291,6 +291,7 @@ module.exports = function() {
 			"correct" : [ 1, 2, 3, 4 ]
 		}
 	];
+
 	/* shuffle */
 	var j, x;
 	for (var i = questions.length; i; i--) {
@@ -300,4 +301,4 @@ module.exports = function() {
 		questions[j] = x;
 	}
 	return questions;
-}();
+};
