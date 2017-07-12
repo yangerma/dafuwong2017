@@ -3,9 +3,7 @@ module.exports = [
 		description: "政府為推廣電子貨幣 發錢囉",
 		effect: "所有人得到5000元",
 		activate: (model) => {
-			for(player in model.players){
-				player.money+=5000;
-			}
+			model.players.forEach((p) => p.money+=5000);
 			return false;
 		}
 	},
@@ -15,10 +13,10 @@ module.exports = [
 		activate: (model) => {
 			var max = model.players[0];
 			var min = model.players[0];
-			for(player in model.players){
+			model.players.forEach((player) => {
 				if( player.money > max.money ) max = player;
 				if( player.money < min.money ) min = player;
-			}
+			});
 			var even = 0.5 * ( max.money + min.money );
 			max.money = even;
 			min.money = even;
