@@ -17,6 +17,7 @@ const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
+const ENVIRONMENT = 10;
 const WAIT_TURN_OVER = 87;
 const ITEM="ITEM";
 
@@ -55,6 +56,7 @@ socket.on('update', function(data) {
 		case STOP:
 			if (model.players[playerId].stop) {
 				showAlert("你 斷 線 了 :(");
+				setTimeout( () => showTurnOver(), 1500 );
 			}
 			break;
 		case WAIT_TO_ROLL:
@@ -95,6 +97,9 @@ socket.on('update', function(data) {
 			if (model.nowPlaying == playerId) {
 				showTurnOver();
 			}
+			break;
+		case ENVIRONMENT:
+			showEnvironment();
 			break;
 		default:	
 			console.log("Wrong state:" + state);

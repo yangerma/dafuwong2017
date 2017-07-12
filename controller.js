@@ -118,7 +118,7 @@ Controller = function(io, model) {
 		var ret = model.environment.activate(model);
 		console.log("environment!!");
 		publish();
-		setTimeout(nextTurn, 5000);
+		setTimeout(nextTurn, 2500);
 	}
 
 	function nextTurn() {
