@@ -43,3 +43,11 @@
 	font-size: 22px;
 	font-weight: 500;
 }
+
+#environmentBox img {
+	height: 100px;
+	width: 100px;
+}
+#environmentBox p {
+	font-size: 20px;
+}
