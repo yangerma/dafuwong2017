@@ -20,56 +20,47 @@ var Player = require("./model/player.js");
 var questions = require("./model/questions.js")();
 var items = require("./model/items.js");
 var chances = require("./model/chance.js");
+var fs = require("fs");
 
-Controller = function(io, fs) {
+Controller = function(io, model) {
 	var io = io;
-	var fs = fs;
 	var playerIO = new Array();
 	var adminIO = null;
 	var obIO = new Array();
 	var itemQueue = new Array();
 	var model;
-	if(fs.existsSync('./backup.json')) {
-		model = require('./backup.json');
-		for(var i=0; i<MAX_PLAYER; i++)
-			model.players[i].connect = false;
-	} else {
-		model = {
-			pause: false,
-			state: WAIT_TO_ROLL,
-			nowPlaying: 0,
-			map: map,
-			items: items,
-			players: [
-				Player(0, "p0"),
-				Player(1, "p1"),
-				Player(2, "p2"),
-				Player(3, "p3"),
-				Player(4, "p4"),
-			],
-			switchState: 1,
-			question: null,
-			chacne: null,
-		}
+	model = model || {
+		pause: false,
+		state: WAIT_TO_ROLL,
+		nowPlaying: 0,
+		map: map,
+		items: items,
+		players: [
+			Player(0, "p0"),
+			Player(1, "p1"),
+			Player(2, "p2"),
+			Player(3, "p3"),
+			Player(4, "p4"),
+		],
+		switchState: 1,
+		question: null,
+		chacne: null,
 	}
+
 	function notify(event, arg) {
-		for (var i = 0; i < MAX_PLAYER; i++) {
-			if (model.players[i].connect == true) {
-				playerIO[i].emit(event, arg);
-			}
-		}
-		if (adminIO != null)
+		playerIO.forEach((io) => {
+			if (io) io.emit(event, arg)
+		});
+		if (adminIO)
 			adminIO.emit(event, arg);
 		obIO.forEach((io) => io.emit(event, arg));
 	}
+
 	function publish() {
-		fs.writeFileSync('./backup.json', JSON.stringify(model), 'utf8');
-		for (var i = 0; i < MAX_PLAYER; i++) {
-			if (model.players[i].connect == true) {
-				playerIO[i].emit("update", model);
-			}
-		}
-		if (adminIO != null) {
+		playerIO.forEach((io) => {
+			if (io) io.emit("update", model);
+		});
+		if (adminIO) {
 			adminIO.emit("update", model);
 		}
 		obIO.forEach((io) => io.emit("update", model));
@@ -117,7 +108,7 @@ Controller = function(io, fs) {
 	}
 
 	function nextTurn() {
-		if (model.state == WAIT_TO_ROLL){
+		if (model.state == WAIT_TO_ROLL) {
 			return;
 		}
 		if (model.state == STOP) {
@@ -137,7 +128,7 @@ Controller = function(io, fs) {
 			model.state = STOP;
 		}
 		publish();
-
+		fs.writeFileSync('./backup.json', JSON.stringify(model), 'utf8');
 	}
 
 	function move(steps) {
@@ -169,7 +160,7 @@ Controller = function(io, fs) {
 		var nowId = model.players[model.nowPlaying].id;
 		if (node.firewall[nowId]) {
 			node.firewall.forEach((x, id, a) => a[id] = false);
-			chat("[系統]"+model.players[model.nowPlaying].name+" 撞牆了, 幫QQ");
+			chat("[系統]" + model.players[model.nowPlaying].name + " 撞牆了, 幫QQ");
 		}
 		if (node.type == "question") {
 			questionEvent();
@@ -228,9 +219,9 @@ Controller = function(io, fs) {
 		model.state = CHANCE;
 		model.chance = chances[Math.floor(Math.random() * chances.length)];
 		var ret = model.chance.activate(model);
-		console.log("chance on"+model.nowPlaying);
+		console.log("chance on" + model.nowPlaying);
 		publish();
-		if(ret == true){//need nodeEvent();
+		if(ret == true) {//need nodeEvent();
 			nodeEvent();
 		}
 	}
@@ -285,7 +276,9 @@ Controller = function(io, fs) {
 		model.state = WAIT_TURN_OVER;
 		publish();
 		notify("update_house", {playerId: nowId});
-		if(house.level==3)chat("[系統] 糟了! 是世界奇觀!");
+		if(house.level == 3) {
+			chat("[系統] 糟了! 是世界奇觀!");
+		}
 	}
 
 	function payTolls(id, house) {
@@ -315,15 +308,15 @@ Controller = function(io, fs) {
 		console.log("Player " + playerId + " buy " + type);
 		publish();
 		notify("buy_item", {playerId: playerId, type: type});
-		chat("[系統]"+model.players[playerId].name+" 購買了 "+model.items[type].name+"!");
+		chat("[系統]" + model.players[playerId].name + " 購買了 " + model.items[type].name + "!");
 	}
 
 	function pause() {
 		model.pause = (model.pause + 1) % 2;
 		publish();
 	}
-	function chat(msg){
-			io.emit('chat_message', msg);
+	function chat(msg) {
+		io.emit('chat_message', msg);
 	}
 
 	/* Listen new connection */
@@ -335,7 +328,7 @@ Controller = function(io, fs) {
 			var id = playerIO.indexOf(player);
 			console.log("Player " + id + " disconnect.");
 			if (id >= 0) {
-				model.players[id].connect = false;
+				playerIO[id] = null;
 			}
 		});
 
@@ -349,7 +342,6 @@ Controller = function(io, fs) {
 			} else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
 				playerIO[id] = player;
-				model.players[id].connect = true;
 				model.players[id].name = name;
 			} else {
 				obIO.push(player);
@@ -366,7 +358,9 @@ Controller = function(io, fs) {
 			player.on("switch", (pos) => teleport(pos));
 			player.on("turn_over", itemEvent);
 			player.on('chat_message', (msg) => chat(msg));
-			if(id!=87)chat("[系統] "+name+" 上線了! 大家跟他打聲招呼吧!");
+			if(id != 87) {
+				chat("[系統] 玩家 " + name + " 上線了! 大家跟他打聲招呼吧!");
+			}
 		})
 	});
 }

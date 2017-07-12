@@ -7,7 +7,6 @@ Player = function(id, name) {
 		pos: "t" + id,
 		last: null,
 		stop: false,
-		connect: false,
 		ip: "192.168." + id + ".1",
 		opticalFiber: 0
 	}
