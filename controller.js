@@ -10,6 +10,7 @@ const HOUSE = 6;
 const DHCP = 7;
 const HOME = 8;
 const CHANCE = 9;
+const ENVIRONMENT = 10;
 const WAIT_TURN_OVER = 87;
 const ITEM = "ITEM";
 
@@ -20,6 +21,7 @@ var Player = require("./model/player.js");
 var questions = require("./model/questions.js")();
 var items = require("./model/items.js");
 var chances = require("./model/chance.js");
+var environments = require("./model/environment.js");
 
 Controller = function(io, fs) {
 	var io = io;
@@ -95,7 +97,10 @@ Controller = function(io, fs) {
 
 	function itemEvent() {
 		if (itemQueue.length == 0) {
-			setTimeout(nextTurn, 300);
+			if(model.nowPlaying == MAX_PLAYER-1)
+				setTimeout(environmentEvent, 300);
+			else
+				setTimeout(nextTurn, 300);
 			return;
 		}
 		var item = itemQueue.shift();
@@ -114,6 +119,15 @@ Controller = function(io, fs) {
 		model.state=ITEM;
 		publish();
 		setTimeout(itemEvent, 300);
+	}
+
+	function environmentEvent() {
+		model.state = ENVIRONMENT;
+		model.environment = environments[Math.floor(Math.random() * environments.length)];
+		var ret = model.environment.activate(model);
+		console.log("environment!!");
+		publish();
+		setTimeout(nextTurn, 5000);
 	}
 
 	function nextTurn() {
