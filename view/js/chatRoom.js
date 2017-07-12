@@ -8,3 +8,10 @@ function sendMessage() {
 socket.on('chat_message',(msg) => {
 	$('#messages').prepend($('<li>').text(msg));
 });
+$('#messageForm').keypress(function(e){
+	var keyCode = e.keyCode || e.which;
+	if (keyCode == '13'){
+		sendMessage();
+		return false;
+	}
+});
