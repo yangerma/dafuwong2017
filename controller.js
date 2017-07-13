@@ -87,6 +87,9 @@ Controller = function(io, model) {
 	}
 
 	function itemEvent() {
+		if (model.state == STOP) {
+			model.players[model.nowPlaying].stop = false;
+		}
 		if (itemQueue.length == 0) {
 			if(model.nowPlaying == MAX_PLAYER-1)
 				setTimeout(environmentEvent, 300);
@@ -125,9 +128,6 @@ Controller = function(io, model) {
 	function nextTurn() {
 		if (model.state == WAIT_TO_ROLL) {
 			return;
-		}
-		if (model.state == STOP) {
-			model.players[model.nowPlaying].stop = false;
 		}
 		model.state = WAIT_TO_ROLL;
 		var player = model.players[model.nowPlaying];
