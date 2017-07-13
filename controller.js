@@ -117,6 +117,7 @@ Controller = function(io, model) {
 		model.environment = environments[Math.floor(Math.random() * environments.length)];
 		var ret = model.environment.activate(model);
 		console.log("environment!!");
+		chat("[系統] " + model.environment.effect);
 		publish();
 		setTimeout(nextTurn, 2500);
 	}
@@ -174,7 +175,7 @@ Controller = function(io, model) {
 		var nowId = model.players[model.nowPlaying].id;
 		if (node.firewall[nowId]) {
 			node.firewall.forEach((x, id, a) => a[id] = false);
-			chat("[系統]" + model.players[model.nowPlaying].name + " 撞牆了, 幫QQ");
+			chat("[系統] " + model.players[model.nowPlaying].name + " 撞牆了, 幫QQ");
 		}
 		if (node.type == "question") {
 			questionEvent();
@@ -330,7 +331,7 @@ Controller = function(io, model) {
 		publish();
 	}
 	function chat(msg) {
-		io.emit('chat_message', msg);
+		io.emit('chat_message', msg ,"SYSTEM");
 	}
 
 	/* Listen new connection */
@@ -371,7 +372,7 @@ Controller = function(io, model) {
 			player.on("update_house", updateHouse);
 			player.on("switch", (pos) => teleport(pos));
 			player.on("turn_over", itemEvent);
-			player.on('chat_message', (msg) => chat(msg));
+			player.on('chat_message', (msg,flag) => io.emit('chat_message', msg ,flag));
 			if(id != 87) {
 				chat("[系統] 玩家 " + name + " 上線了! 大家跟他打聲招呼吧!");
 			}
