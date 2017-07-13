@@ -289,6 +289,70 @@ module.exports = function() {
 				"贏過世界棋王的AlphaGO"
 			],
 			"correct" : [ 1, 2, 3, 4 ]
+		},
+		{
+			"money": 3000,
+			"id": 19,
+			"multi": false,
+			"subject": "Python",
+			"description": "下列哪一行程式會出現Error？（單選）"
+			"options": [
+				"c = []",
+				"s = <>",
+				"i = ()",
+				"e = {}",
+			],
+			"correct": [1]
+		},
+		{
+			"money": 5000,
+			"id": 20,
+			"multi": false,
+			"subject": "Python",
+			"description" : "下列c、s、i、e哪一個的值跟其他三個不一樣？ (單選)",
+			"options": [
+				"c = 2 + 2",
+				"s = 2 ** 2",
+				"i = 2 ^ 2",
+				"e = 2 * 2",
+			]
+			"correct": [2]
+
+		},
+		{
+			"money": 5000,
+			"id": 21,
+			"multi": true,
+			"subject": "Python",
+			"description" : "下列哪些是Python內建函式(Build-in Functions)？ (多選)",
+			"options": [
+				"min()",
+				"int()",
+				"sorted()"
+				"max()",
+				"range()",
+				"sum()",
+				"abs()",
+				"print()",
+				"len()",
+			],
+			"correct": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+		},
+		{
+			"money": 2017,
+			"id": 22,
+			"multi": true,
+			"subject": "送分題",
+			"description" : "這次資訊營的標題是什麼？ (單選)",
+			"options": [
+				"2017臺大資訊營-你的城市",
+				"2087臺大資訊營-你的程式",
+				"2017臺大資訊營-你的名字",
+				"2017臺大資訊營-你的程式",
+			],
+			"correct": [3]
+
 		}
 	];
 
