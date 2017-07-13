@@ -315,7 +315,7 @@ module.exports = function() {
 				"s = 2 ** 2",
 				"i = 2 ^ 2",
 				"e = 2 * 2",
-			]
+			],
 			"correct": [2]
 
 		},
@@ -328,7 +328,7 @@ module.exports = function() {
 			"options": [
 				"min()",
 				"int()",
-				"sorted()"
+				"sorted()",
 				"max()",
 				"range()",
 				"sum()",
