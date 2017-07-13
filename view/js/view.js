@@ -87,7 +87,7 @@ socket.on('update', function(data) {
 			break;
 		case HOME:
 			if (model.nowPlaying == playerId) {
-				showHome(5000);
+				showHome(3000);
 			}
 			break;
 		case CHANCE:

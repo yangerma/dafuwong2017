@@ -17,43 +17,11 @@ module.exports = [
 	},
 	{
 		description: "瓦斯有關嗎? 好像有又好像沒有 衝回家關一下",
-		effect: "立刻回到家 獲得回家獎勵5000元",
+		effect: "立刻回到家 獲得回家獎勵3000元",
 		activate: (model) => {
 			model.players[model.nowPlaying].pos="t"+model.nowPlaying;
 			model.players[model.nowPlaying].last = null;
-			model.players[model.nowPlaying].money+=5000;
-			return false;
-		}
-	},
-	{
-		description: "五穀豐登登登登~",
-		effect: "隨機一排server全部升級",
-		activate: (model) => {
-			var rand = Math.floor(Math.random()*5)
-			for(var i = 1; i <= 5; i++){
-				node = model.map[("c"+rand)+i];
-				if(node.type == 'server' && node.level>0 && node.level <3){
-					node.level+=1;
-				}
-			}
-			return false;
-		}
-	},
-	{
-		description: "酷斯拉來襲!!!塊塊塊塊塊陶阿",
-		effect: "隨機一排server全部降級",
-		activate: (model) => {
-			var rand = Math.floor(Math.random()*5)
-			for(var i = 1; i <= 5; i++){
-				node = model.map[("c"+rand)+i];
-				if(node.type == 'server'&&node.level>0){
-					node.level-=1;
-					if(node.level==0){
-						node.owner=null;
-					}
-						
-				}
-			}
+			model.players[model.nowPlaying].money+=3000;
 			return false;
 		}
 	},

@@ -246,7 +246,7 @@ Controller = function(io, model) {
 		var nowId = model.players[model.nowPlaying].id;
 		var home = model.map[model.players[model.nowPlaying].pos];
 		if (nowId == home.owner) {
-			var reward = 5000;
+			var reward = 3000;
 			model.players[model.nowPlaying].money += reward;
 			publish();
 			notify("home", {playerId: model.nowPlaying, reward: reward});
