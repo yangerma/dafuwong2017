@@ -326,17 +326,13 @@ module.exports = function() {
 			"subject": "Python",
 			"description" : "下列哪些是Python內建函式(Build-in Functions)？ (多選)",
 			"options": [
-				"min()",
 				"int()",
 				"sorted()",
-				"max()",
-				"range()",
 				"sum()",
 				"abs()",
-				"print()",
 				"len()",
 			],
-			"correct": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+			"correct": [0, 1, 2, 3, 4]
 
 		},
 		{
