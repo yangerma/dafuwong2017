@@ -340,7 +340,7 @@ module.exports = function() {
 		{
 			"money": 2017,
 			"id": 22,
-			"multi": true,
+			"multi": false,
 			"subject": "送分題",
 			"description" : "這次資訊營的標題是什麼？ (單選)",
 			"options": [
