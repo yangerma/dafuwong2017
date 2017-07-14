@@ -396,7 +396,7 @@ module.exports = function() {
 				"小雞",
 				"小牛",
 			],
-			"correct": [3]	
+			"correct": [0]	
 		}
 	];	
 
