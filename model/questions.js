@@ -108,17 +108,17 @@ module.exports = function() {
 		{
 			"money": 5000,
 			"id": 7,
-			"multi" : true,
+			"multi" : false,
 			"subject" : "Network",
-			"description" : "下列哪些Subnet皆屬於Private IP？ (多選)",
+			"description" : "下列哪個Subnet皆屬於Private IP？ (單選)",
 			"options" : [
-				"172.25.0.0/255.255.0.0", 
-				"192.168.204.0/255.255.255.0", 
-				"10.0.0.0/255.0.0.0", 
-				"172.16.0.0/255.0.0.0",
-				"140.112.0.0/255.255.0.0"
+				"10.88.0.256",
+				"8.8.8.8",
+				"172.40.21.244",
+				"192.168.241.125",
+				"31.13.87.36"
 			],
-			"correct" : [ 0, 1, 2 ]
+			"correct" : [ 3 ]
 		},
 
 		{
@@ -140,15 +140,17 @@ module.exports = function() {
 		{
 			"money": 3000,
 			"id": 9,
-			"multi" : false,
+			"multi" : true,
 			"subject" : "Network",
-			"description" : "台大校園內的網路錯綜複雜，為了有效的管理，校園各處充滿的各種網路設備，計算機與網路中心的機房內，其規模之龐大更是難以計數。請問下列哪一種設備在校園的核心骨幹網路中，現在通常已經逐漸淘汰而不再使用？ (單選)",
+			"description" : "下列哪些IP屬於140.112.0.0/12的子網域內？ (多選)",
 			"options" : [
-				"Hub，集線器", 
-				"Switch，交換器", 
-				"Router，路由器"
+				"140.112.37.223",
+				"140.112.253.99",
+				"140.114.2.243",
+				"140.118.77.103",
+				"140.132.1.30"
 			],
-			"correct" : [ 0 ]
+			"correct" : [ 0, 1, 2, 3 ]
 		},
 
 		{
@@ -370,7 +372,7 @@ module.exports = function() {
 		{
 			"money": 2017,
 			"id": 24,
-			"multi": true,
+			"multi": false,
 			"subject": "送分題",
 			"description" : "這次資訊營的標題是什麼？ (單選)",
 			"options": [

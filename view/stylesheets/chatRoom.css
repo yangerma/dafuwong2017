@@ -25,6 +25,11 @@
 #messages li:nth-child(odd) {
 	background: #eee;
 }
+.PLAYER {
+}
+.SYSTEM {
+	color: #009933;
+}
 #chatRoom form{
 	height: 40px;
 	width: 100%;
@@ -46,6 +51,7 @@
 	border-radius: 5px;
 	background-color: #E9E9E9;
 	margin: 0px auto;
+	text-align: center;
 }
 #sendButton:hover{
 	background-color: #FFE5B5;

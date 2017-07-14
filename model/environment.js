@@ -1,9 +1,61 @@
 module.exports = [
 	{
 		description: "政府為推廣電子貨幣 發錢囉",
-		effect: "所有人得到5000元",
+		effect: "所有人得到3000元",
 		activate: (model) => {
-			model.players.forEach((p) => p.money+=5000);
+			model.players.forEach((p) => p.money+=3000);
+			return false;
+		}
+	},
+	{
+		description: "政府為推廣電子貨幣 發錢囉",
+		effect: "所有人得到1000元",
+		activate: (model) => {
+			model.players.forEach((p) => p.money+=1000);
+			return false;
+		}
+	},
+	{
+		description: "政府為推廣電子貨幣 發錢囉",
+		effect: "所有人得到1000元",
+		activate: (model) => {
+			model.players.forEach((p) => p.money+=1000);
+			return false;
+		}
+	},
+	{
+		description: "政府為推廣電子貨幣 發錢囉",
+		effect: "所有人得到1000元",
+		activate: (model) => {
+			model.players.forEach((p) => p.money+=1000);
+			return false;
+		}
+	},
+	{
+		description: "一起搭捷運去淡水玩~",
+		effect: "每個人付出交通費50元",
+		activate: (model) => {
+			model.players.forEach((p) => p.money-=50);
+			return false;
+		}
+	},
+	{
+		description: "去Google參訪，吃了很多垃圾食物",
+		effect: "每個人都胖了一公斤",
+		activate: (model) => {
+			return false;
+		}
+	},
+	{
+		description: "社會救助",
+		effect: "每個人給最窮的人1000元",
+		activate: (model) => {
+			var min = model.players[0];
+			model.players.forEach((player) => {
+				if( player.money < min.money ) min = player;
+				player.money-=1000;
+			});
+			min.money += 5000;
 			return false;
 		}
 	},
@@ -52,6 +104,48 @@ module.exports = [
 						
 				}
 			}
+			return false;
+		}
+	},
+	{
+		description: "你知道嗎?",
+		effect: "Java跟Javascript的關係就像狗根熱狗一樣唷。",
+		activate: (model) => {
+			return false;
+		}
+	},
+	{
+		description: "你知道嗎?",
+		effect: "USB圖標的設計來源是海神尼普頓手中的三齒神叉唷。",
+		activate: (model) => {
+			return false;
+		}
+	},
+	{
+		description: "你知道嗎?",
+		effect: "電腦的中央處理器中含有黃金唷。",
+		activate: (model) => {
+			return false;
+		}
+	},
+	{
+		description: "你知道嗎?",
+		effect: "超過87%的系統工程師會在主機上放乖乖祈求平安。",
+		activate: (model) => {
+			return false;
+		}
+	},
+	{
+		description: "你知道嗎?",
+		effect: "如果有無限的時間，猴子也能寫程式唷。",
+		activate: (model) => {
+			return false;
+		}
+	},
+	{
+		description: "你知道嗎?",
+		effect: "C語言的前身是B語言，B語言到前身是A語言。",
+		activate: (model) => {
 			return false;
 		}
 	},
