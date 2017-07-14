@@ -382,9 +382,23 @@ module.exports = function() {
 				"2017臺大資訊營-你的程式",
 			],
 			"correct": [3]
-
+		},
+		{
+			"money": 3000,
+			"id": 25,
+			"multi": false,
+			"subject": "Python",
+			"description" : "教Python的講師名牌上的綽號是什麼？ (單選)",
+			"options": [
+				"小羊",
+				"小狗",
+				"小貓",
+				"小雞",
+				"小牛",
+			],
+			"correct": [3]	
 		}
-	];
+	];	
 
 	/* shuffle */
 	var j, x;
