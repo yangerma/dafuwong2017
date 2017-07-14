@@ -320,24 +320,56 @@ module.exports = function() {
 
 		},
 		{
-			"money": 5000,
+			"money": 3000,
 			"id": 21,
+			"multi": false,
+			"subject": "Python",
+			"description" : "[2, 0, 1, 7][-2]會回傳什麼值？ (單選)",
+			"options": [
+				"2",
+				"0",
+				"1",
+				"7",
+				"8",
+			],
+			"correct": [2]
+
+		},
+		{
+			"money": 5000,
+			"id": 22,
 			"multi": true,
 			"subject": "Python",
-			"description" : "下列哪些是Python內建函式(Build-in Functions)？ (多選)",
+			"description" : "要怎麼修改tuple裡面的值？ (單選)",
 			"options": [
-				"int()",
-				"sorted()",
-				"sum()",
-				"abs()",
-				"len()",
+				"用索引值直接修改",
+				"建一個新的tuple蓋過去",
+				"把電腦重新開機",
+				"放下它，接受它，放棄它",
+				"rm -rf /",
 			],
-			"correct": [0, 1, 2, 3, 4]
+			"correct": [1] 
+		},
+		{
+			
+			"money": 3000,
+			"id": 23,
+			"multi": false,
+			"subject": "Python",
+			"description" : "要如何從s = \"2017臺大資訊營-你的程式\"中取出\"你的程式\"？ (單選)",
+			"options": [
+				"s[\"你的程式\"]",
+				"s[-4]",
+				"s[10 ~ 14]",
+				"s[10 : 14]",
+				"s[10 - 14]",
+			],
+			"correct": [3]
 
 		},
 		{
 			"money": 2017,
-			"id": 22,
+			"id": 24,
 			"multi": true,
 			"subject": "送分題",
 			"description" : "這次資訊營的標題是什麼？ (單選)",
