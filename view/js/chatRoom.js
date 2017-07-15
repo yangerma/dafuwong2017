@@ -5,10 +5,11 @@ function sendMessage() {
 	$('#messageForm').val('');
 	return false;
 }
-socket.on('chat_message',(msg,flag) => {
+function addMessage(msg,flag){
 	$('#messages').prepend($('<li class='+flag+' >').text(msg));
 	console.log(flag);
-});
+}
+socket.on('chat_message',(msg,flag) => addMessage(msg,flag));
 $('#messageForm').keypress(function(e){
 	var keyCode = e.keyCode || e.which;
 	if (keyCode == '13'){

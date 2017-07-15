@@ -332,9 +332,24 @@ Controller = function(io, model) {
 		publish();
 	}
 	function chat(msg) {
-
-		msg = "[系統] " + msg;
-		io.emit('chat_message', msg ,"SYSTEM");
+		if(msg[0] == '/'){
+			msg = msg.slice(1).split(' ');
+			io.emit('cmd','[DEBUG]' + msg.length);
+			if(msg[0]=="addmoney"){
+				if(msg.length==3 && Number(msg[1])<5 && Number(msg[1])>=0 ){
+					model.players[Number(msg[1])].money+=Number(msg[2]);
+					chat('關主被賄賂了 呵呵');
+					publish();
+				}
+				else{
+					io.emit('cmd','usage : /addmoney [playerId] [money]')
+				}
+			}
+		}
+		else{
+			msg = "[系統] " + msg;
+			io.emit('chat_message', msg ,"SYSTEM");
+		}
 	}
 	function chatPlayer(msg,id){
 		msg = model.players[id].name + " 說: "+msg;
