@@ -12,6 +12,7 @@
 	<link type="text/css" rel="stylesheet" href="stylesheets/map.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/question.css">
 	<link type="text/css" rel="stylesheet" href="stylesheets/scoreboard.css">
+	<link type="text/css" rel="stylesheet" href="stylesheets/account.css">
 	<link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosanstc.css">
 </head>
 
@@ -531,106 +532,7 @@
 
 	<div id="notifyContainer"></div>
 
-	<div id="accountBox">
-		<div class="title">遊 戲 結 束</div>
-		<div id="accountBoard">
-			<div class="account" id="account0">
-				<div class="accountProf">
-					<img src="img/prof0.png"> p0
-				</div>
-				<div class="accountMoney">
-					<img src="img/prof0.png"> $0000.0000
-				</div>
-				<div class="accountServer1">
-					<img src="img/server1.png"> X 0
-				</div>
-				<div class="accountServer2">
-					<img src="img/server2.png"> X 0
-				</div>
-				<div class="accountServer3">
-					<img src="img/server3.png"> X 0
-				</div>
-				<div class="accountTotal">
-				</div>
-			</div>
-			<div class="account" id="account1">
-				<div class="accountProf">
-					<img src="img/prof1.png"> p0
-				</div>
-				<div class="accountMoney">
-					<img src="img/prof0.png"> $0000.0000
-				</div>
-				<div class="accountServer1">
-					<img src="img/server1.png"> X 0
-				</div>
-				<div class="accountServer2">
-					<img src="img/server2.png"> X 0
-				</div>
-				<div class="accountServer3">
-					<img src="img/server3.png"> X 0
-				</div>
-				<div class="accountTotal">
-				</div>
-			</div>
-			<div class="account" id="account2">
-				<div class="accountProf">
-					<img src="img/prof2.png"> p0
-				</div>
-				<div class="accountMoney">
-					<img src="img/prof0.png"> $0000.0000
-				</div>
-				<div class="accountServer1">
-					<img src="img/server1.png"> X 0
-				</div>
-				<div class="accountServer2">
-					<img src="img/server2.png"> X 0
-				</div>
-				<div class="accountServer3">
-					<img src="img/server3.png"> X 0
-				</div>
-				<div class="accountTotal">
-				</div>
-			</div>
-			<div class="account" id="account3">
-				<div class="accountProf">
-					<img src="img/prof3.png"> p0
-				</div>
-				<div class="accountMoney">
-					<img src="img/prof0.png"> $0000.0000
-				</div>
-				<div class="accountServer1">
-					<img src="img/server1.png"> X 0
-				</div>
-				<div class="accountServer2">
-					<img src="img/server2.png"> X 0
-				</div>
-				<div class="accountServer3">
-					<img src="img/server3.png"> X 0
-				</div>
-				<div class="accountTotal">
-				</div>
-			</div>
-			<div class="account" id="account4">
-				<div class="accountProf">
-					<img src="img/prof4.png"> p0
-				</div>
-				<div class="accountMoney">
-					<img src="img/prof0.png"> $0000.0000
-				</div>
-				<div class="accountServer1">
-					<img src="img/server1.png"> X 0
-				</div>
-				<div class="accountServer2">
-					<img src="img/server2.png"> X 0
-				</div>
-				<div class="accountServer3">
-					<img src="img/server3.png"> X 0
-				</div>
-				<div class="accountTotal">
-				</div>
-			</div>
-		</div>
-	</div>
+	
 
 </div>
 
@@ -642,6 +544,109 @@
     請輸入小隊密碼： <input id="teamPassword" type="password"/> <br/>
     <input type="button" id="loginButton" value="Submit" onclick="login()">
 </div>
+
+<div id="accountBox" class="popBox">
+		<div class="title">遊 戲 結 束</div>
+		<div id="accountBoard">
+			<div class="account" id="account0">
+				<div class="accountProf">
+					<img src="img/prof0.png"><span></span>
+				</div>
+				<div class="accountMoney">
+					$<span></span>
+				</div>
+				<div class="accountServer1 accountElement">
+					<img src="img/server1.png"> X <span>0</span>
+				</div>
+				<div class="accountServer2 accountElement">
+					<img src="img/server2.png"> X <span>0</span>
+				</div>
+				<div class="accountServer3 accountElement">
+					<img src="img/server3.png"> X <span>0</span>
+				</div>
+				<div class="accountTotal">
+					<span></span>
+				</div>
+			</div>
+			<div class="account" id="account1">
+				<div class="accountProf">
+					<img src="img/prof1.png"> <span></span>
+				</div>
+				<div class="accountMoney">
+					$0000.0000
+				</div>
+				<div class="accountServer1 accountElement">
+					<img src="img/server1.png"> X <span></span>
+				</div>
+				<div class="accountServer2 accountElement">
+					<img src="img/server2.png"> X <span></span>
+				</div>
+				<div class="accountServer3 accountElement">
+					<img src="img/server3.png"> X <span></span>
+				</div>
+				<div class="accountTotal">
+				</div>
+			</div>
+			<div class="account" id="account2">
+				<div class="accountProf">
+					<img src="img/prof2.png"> p0
+				</div>
+				<div class="accountMoney">
+					$0000.0000
+				</div>
+				<div class="accountServer1 accountElement">
+					<img src="img/server1.png"> X 0
+				</div>
+				<div class="accountServer2 accountElement">
+					<img src="img/server2.png"> X 0
+				</div>
+				<div class="accountServer3 accountElement">
+					<img src="img/server3.png"> X 0
+				</div>
+				<div class="accountTotal">
+				</div>
+			</div>
+			<div class="account" id="account3">
+				<div class="accountProf">
+					<img src="img/prof3.png"> p0
+				</div>
+				<div class="accountMoney">
+					$0000.0000
+				</div>
+				<div class="accountServer1 accountElement">
+					<img src="img/server1.png"> X 0
+				</div>
+				<div class="accountServer2 accountElement">
+					<img src="img/server2.png"> X 0
+				</div>
+				<div class="accountServer3 accountElement">
+					<img src="img/server3.png"> X 0
+				</div>
+				<div class="accountTotal">
+				</div>
+			</div>
+			<div class="account" id="account4">
+				<div class="accountProf">
+					<img src="img/prof4.png"> p0
+				</div>
+				<div class="accountMoney">
+					$0000.0000
+				</div>
+				<div class="accountServer1 accountElement">
+					<img src="img/server1.png"> X 0
+				</div>
+				<div class="accountServer2 accountElement">
+					<img src="img/server2.png"> X 0
+				</div>
+				<div class="accountServer3 accountElement">
+					<img src="img/server3.png"> X 0
+				</div>
+				<div class="accountTotal">
+				</div>
+			</div>
+		</div>
+</div>
+
 <div id='pause'> 國 防 布 ！<div>
 
 </body>
