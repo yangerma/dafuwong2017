@@ -334,6 +334,10 @@ Controller = function(io, model) {
 	function chat(msg) {
 		io.emit('chat_message', msg ,"SYSTEM");
 	}
+	function chatPlayer(msg,id){
+		msg = model.players[id].name + " 說: "+msg;
+		io.emit('chat_message', msg ,"PLAYER");
+	}
 	function callGame() {
 		var serverValue=[0,250,750,2250];
 		model.state = END;
@@ -375,6 +379,7 @@ Controller = function(io, model) {
 				player.on("WhosYourDaddy", (newModel) => model = newModel);
 				player.on("pause", () => pause());
 				player.on("call_game", () => callGame());
+				player.on('chat_message', (msg) => chat(msg));
 				console.log("admin login!");
 			} else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
@@ -394,9 +399,9 @@ Controller = function(io, model) {
 			player.on("update_house", updateHouse);
 			player.on("switch", (pos) => teleport(pos));
 			player.on("turn_over", itemEvent);
-			player.on('chat_message', (msg,flag) => io.emit('chat_message', msg ,flag));
 			if(id != 87) {
 				chat("[系統] 玩家 " + name + " 上線了! 大家跟他打聲招呼吧!");
+				player.on('chat_message', (msg) => chatPlayer(msg,id));
 			}
 		})
 	});
