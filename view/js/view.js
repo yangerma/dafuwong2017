@@ -32,6 +32,7 @@ socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.play
 socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
 socket.on("HowDoYouTurnThisOn", () => {admin = true; $("#pauseButton").show();});
 socket.on("YouCantDoNothing!", () => playerId = 87);
+socket.on("call_game", (asset) => showAccountBox(asset));
 
 socket.on('update', function(data) {
 	if (admin) {

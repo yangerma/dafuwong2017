@@ -13,6 +13,7 @@ const CHANCE = 9;
 const ENVIRONMENT = 10;
 const WAIT_TURN_OVER = 87;
 const ITEM = "ITEM";
+const END = "END GAME";
 
 var password = ["meow", "beep", "wang", "woof", "oops"];
 
@@ -333,6 +334,26 @@ Controller = function(io, model) {
 	function chat(msg) {
 		io.emit('chat_message', msg ,"SYSTEM");
 	}
+	function callGame() {
+		var serverValue=[0,250,750,2250];
+		model.state = END;
+		var asset=[{},{},{},{},{}];
+		for( var i = 0; i < 5; i++ ){
+			asset[i].money = model.players[i].money;
+			asset[i].total = model.players[i].money;
+			asset[i].servers = [0,0,0,0];
+		}
+		for(var i in model.map){
+			node = model.map[i];
+			if(node.type=='server' && node.owner!=null){
+				asset[node.owner].servers[node.level]+=1;
+				asset[node.owner].total += serverValue[node.level];
+			}
+		}
+		console.log(asset);
+		io.emit('call_game',asset);
+		
+	}
 
 	/* Listen new connection */
 	io.on("connection", (player) => {
@@ -353,6 +374,7 @@ Controller = function(io, model) {
 				player.emit("HowDoYouTurnThisOn");
 				player.on("WhosYourDaddy", (newModel) => model = newModel);
 				player.on("pause", () => pause());
+				player.on("call_game", () => callGame());
 				console.log("admin login!");
 			} else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
