@@ -1,4 +1,4 @@
- MAX_PLAYER = 5;
+MAX_PLAYER = 5;
 /* Define game state. */
 const STOP = 0;
 const START = 1;
@@ -121,7 +121,7 @@ Controller = function(io, model) {
 		model.environment = environments[Math.floor(Math.random() * environments.length)];
 		var ret = model.environment.activate(model);
 		console.log("environment!!");
-		chat("[系統] " + model.environment.effect);
+		chat(model.environment.effect);
 		publish();
 		setTimeout(nextTurn, 2500);
 	}
@@ -176,7 +176,7 @@ Controller = function(io, model) {
 		var nowId = model.players[model.nowPlaying].id;
 		if (node.firewall[nowId]) {
 			node.firewall.forEach((x, id, a) => a[id] = false);
-			chat("[系統] " + model.players[model.nowPlaying].name + " 撞牆了, 幫QQ");
+			chat(model.players[model.nowPlaying].name + " 撞牆了, 幫QQ");
 		}
 		if (node.type == "question") {
 			questionEvent();
@@ -293,7 +293,7 @@ Controller = function(io, model) {
 		publish();
 		notify("update_house", {playerId: nowId});
 		if(house.level == 3) {
-			chat("[系統] 糟了! 是世界奇觀!");
+			chat("糟了! 是世界奇觀!");
 		}
 	}
 
@@ -324,7 +324,7 @@ Controller = function(io, model) {
 		console.log("Player " + playerId + " buy " + type);
 		publish();
 		notify("buy_item", {playerId: playerId, type: type});
-		chat("[系統]" + model.players[playerId].name + " 購買了 " + model.items[type].name + "!");
+		chat(model.players[playerId].name + " 購買了 " + model.items[type].name + "!");
 	}
 
 	function pause() {
@@ -332,6 +332,8 @@ Controller = function(io, model) {
 		publish();
 	}
 	function chat(msg) {
+
+		msg = "[系統] " + msg;
 		io.emit('chat_message', msg ,"SYSTEM");
 	}
 	function chatPlayer(msg,id){
@@ -381,7 +383,7 @@ Controller = function(io, model) {
 				player.on("call_game", () => callGame());
 				player.on('chat_message', (msg) => chat(msg));
 				console.log("admin login!");
-			} else if (id >= 0 && id < 5 && psw == password[id]) {
+			}else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
 				playerIO[id] = player;
 				model.players[id].name = name;
@@ -400,7 +402,7 @@ Controller = function(io, model) {
 			player.on("switch", (pos) => teleport(pos));
 			player.on("turn_over", itemEvent);
 			if(id != 87) {
-				chat("[系統] 玩家 " + name + " 上線了! 大家跟他打聲招呼吧!");
+				chat("玩家 " + name + " 上線了! 大家跟他打聲招呼吧!");
 				player.on('chat_message', (msg) => chatPlayer(msg,id));
 			}
 		})

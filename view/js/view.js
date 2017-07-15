@@ -36,7 +36,7 @@ socket.on("call_game", (asset) => showAccountBox(asset));
 
 socket.on('update', function(data) {
 	if (admin) {
-		playerId = data.nowPlaying;
+		//playerId = data.nowPlaying;
 	}
 	old = model;
 	model = data;

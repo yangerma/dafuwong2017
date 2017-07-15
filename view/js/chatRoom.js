@@ -1,5 +1,6 @@
 function sendMessage() {
 	var msg = $('#messageForm').val();
+	if(msg==''){return;}
 	socket.emit('chat_message',msg);
 	$('#messageForm').val('');
 	return false;
