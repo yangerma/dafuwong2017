@@ -3,16 +3,15 @@ module.exports = function() {
 		{
 			"money": 5000,
 			"id": 0,
-			"multi" : true,
+			"multi" : false,
 			"subject" : "Python",
-			"description" : "在 Python 中，下列哪些資料結構是唯讀的？ (多選)",
+			"description" : "在 Python 中，下列哪些資料結構是唯讀的？ (單選)",
 			"options" : [
-				"tuple",
 				"list",
 				"dict",
-				"string"
+				"tuple"
 			],
-			"correct" : [ 0, 3 ]
+			"correct" : [ 2 ]
 		},
 
 		{
@@ -31,13 +30,13 @@ module.exports = function() {
 		},
 
 		{
-			"money": 2000,
+			"money": 3000,
 			"id": 2,
 			"multi" : false,
 			"subject" : "Secure",
 			"description" : "2017 年 2 月，台灣有諸多證券商遭到駭客攻擊，駭客利用殭屍電腦發出大量封包，癱瘓目標網路，該攻擊稱為？ (單選)",
 			"options" : [
-				"雞雞攻擊 (chiken attack)",
+				"雞雞攻擊 (chicken attack)",
 				"鯊魚海底電纜攻擊 (sharks attack on cables)",
 				"線路洪水攻擊 (link flooding attack, LFA)",
 				"分散式阻斷服務攻擊 (distributed denial-of-service attack, DDoS)"
@@ -76,7 +75,7 @@ module.exports = function() {
 		},
 
 		{
-			"money": 5000,
+			"money": 3000,
 			"id": 5,
 			"multi" : false,
 			"subject" : "Network",
@@ -112,13 +111,12 @@ module.exports = function() {
 			"subject" : "Network",
 			"description" : "下列哪個Subnet皆屬於Private IP？ (單選)",
 			"options" : [
-				"10.88.0.256",
 				"8.8.8.8",
 				"172.40.21.244",
 				"192.168.241.125",
 				"31.13.87.36"
 			],
-			"correct" : [ 3 ]
+			"correct" : [ 2 ]
 		},
 
 		{
@@ -138,11 +136,11 @@ module.exports = function() {
 		},
 
 		{
-			"money": 3000,
+			"money": 5000,
 			"id": 9,
 			"multi" : true,
 			"subject" : "Network",
-			"description" : "下列哪些IP屬於140.112.0.0/12的子網域內？ (多選)",
+			"description" : "下列哪些IP屬於140.112.0.0/16的子網域內？ (多選)",
 			"options" : [
 				"140.112.37.223",
 				"140.112.253.99",
@@ -150,7 +148,7 @@ module.exports = function() {
 				"140.118.77.103",
 				"140.132.1.30"
 			],
-			"correct" : [ 0, 1, 2, 3 ]
+			"correct" : [ 0, 1 ]
 		},
 
 		{
@@ -170,18 +168,17 @@ module.exports = function() {
 		},
 
 		{
-			"money": 8000,
+			"money": 5000,
 			"id": 11,
 			"multi" : true,
 			"subject" : "Python",
-			"description" : "下列哪一個 Python 語法是錯誤的？(A,B 型態皆為 Int) (多選)",
+			"description" : "下列哪一個 Python 語法是錯誤的？(A,B 型態皆為 Int) (單選)",
 			"options" : [
 				"if A = B:",
 				"for A in range(2017):",
 				"A,B = (1,2)",
-				"def while(self, A, B):"
 			],
-			"correct" : [ 0, 3 ]
+			"correct" : [ 0 ]
 		},
 
 		{
@@ -200,26 +197,26 @@ module.exports = function() {
 		},
 
 		{
-			"money": 8000,
+			"money": 5000,
 			"id": 13,
 			"multi" : false,
 			"subject" : "Python",
-			"description" : '以下 Python 程式碼執行後會印出？<img src="img/q13.png" style="height:217.6px; width:377.64px; float:right;"> (單選)',
+			"description" : '以下 Python 程式碼執行後會印出？<img src="img/q13.png" style="height:225.6px; width:473.4px; float:right;"> (單選)',
 			"options" : [
-				"145",
-				"None",
-				"45",
-				"Error message"
+				"61",
+				"62",
+				"2147483647",
+				"2147483648"
 			],
 			"correct" : [ 2 ]
 		},
 
 		{
-			"money": 2000,
+			"money": 3000,
 			"id": 14,
 			"multi" : false,
 			"subject" : "Machine Learning",
-			"description" : "下列哪個問題最不適合使用機器學習的方法解決？ (單選)",
+			"description" : "下列哪個問題最<strong>不適合</strong>使用機器學習的方法解決？ (單選)",
 			"options" : [
 				"判斷一封電子郵件是不是垃圾信件",
 				"利用氣象台的觀測資料預測未來七天的天氣",
@@ -230,11 +227,11 @@ module.exports = function() {
 		},
 
 		{
-			"money": 2000,
+			"money": 3000,
 			"id": 15,
-			"multi" : true,
+			"multi" : false,
 			"subject" : "Machine Learning",
-			"description" : "下列哪些方法有助於解決過適化(Overfitting)的問題？ (多選)",
+			"description" : "下列哪些方法有助於解決過適化(Overfitting)的問題？ (單選)",
 			"options" : [
 				"找到更多的訓練用的資料",
 				"「這一定是不夠深」，所以加強模型的能力(capability)",
@@ -248,21 +245,20 @@ module.exports = function() {
 		{
 			"money": 8000,
 			"id": 16,
-			"multi" : true,
+			"multi" : false,
 			"subject" : "Machine Learning",
-			"description" : "以下關於機器學習的描述，何者正確？ (多選)",
+			"description" : "以下關於機器學習的描述，何者正確？ (單選)",
 			"options" : [
-				"機器學習的模型在手上的資料做得很好並不表示這是個很好的模型",
+				"機器學習的模型在手上的資料做得很好，就表示這是一個很好的模型",
 				"挑選假說集合(hypothesis set)時，應該盡量挑選能力較弱的假說集合以避免overfitting",
 				"對於同一個問題，不同的損失函數(loss function)不會影響最好解出來的模型為何",
 				"利用模擬退火法做最佳化(optimization)時，可能會停在區間極小值而無法得到全域最小值",
-				"比起直接選用(與答案的差距)的絕對值作為損失函數，使用(與答案的差距)的平方會讓損失函數更為平滑"
 			],
-			"correct" : [ 0, 3, 4 ]
+			"correct" : [ 3 ]
 		},
 
 		{
-			"money": 3000,
+			"money": 8000,
 			"id": 17,
 			"multi" : true,
 			"subject" : "Machine Learning",
@@ -280,9 +276,9 @@ module.exports = function() {
 		{
 			"money": 5000,
 			"id": 18,
-			"multi" : true,
+			"multi" : false,
 			"subject" : "Machine Learning",
-			"description" : "下列哪些應用是用機器學習的方式實現的？ (多選)",
+			"description" : "下列哪些應用不是用機器學習的方式實現的？ (單選)",
 			"options" : [
 				"當你打出特定的字詞時，會回答特定句子的對話機器人",
 				"iPhone的Siri將語音資料轉換成文字的過程",
@@ -290,10 +286,10 @@ module.exports = function() {
 				"自動駕駛車當中，試著判斷路上的物件的應用",
 				"贏過世界棋王的AlphaGO"
 			],
-			"correct" : [ 1, 2, 3, 4 ]
+			"correct" : [ 0 ]
 		},
 		{
-			"money": 3000,
+			"money": 5000,
 			"id": 19,
 			"multi": false,
 			"subject": "Python",
@@ -326,7 +322,7 @@ module.exports = function() {
 			"id": 21,
 			"multi": false,
 			"subject": "Python",
-			"description" : "[2, 0, 1, 7][-2]會回傳什麼值？ (單選)",
+			"description" : "[2, 0, 1, 7][-2]會回傳什麼值？ (單選）（ 提示:index )",
 			"options": [
 				"2",
 				"0",
@@ -340,7 +336,7 @@ module.exports = function() {
 		{
 			"money": 5000,
 			"id": 22,
-			"multi": true,
+			"multi": false,
 			"subject": "Python",
 			"description" : "要怎麼修改tuple裡面的值？ (單選)",
 			"options": [
@@ -384,7 +380,7 @@ module.exports = function() {
 			"correct": [3]
 		},
 		{
-			"money": 3000,
+			"money": 2000,
 			"id": 25,
 			"multi": false,
 			"subject": "Python",
@@ -416,7 +412,7 @@ module.exports = function() {
 		{
 			"money": 8000,
 			"id": 27,
-			"multi": true,
+			"multi": false,
 			"subject": "金頭腦題",
 			"description" : "甲乙丙丁戊五人由左至右坐成一排，你要從他們口述的一些線索中，找出他們每個人的位置！" + 
 				"</br>    甲：我和丁中間坐了兩個人" +
@@ -424,19 +420,18 @@ module.exports = function() {
 				"</br>    丙：我坐在正中央" +
 				"　　　　　　　　丁：甲坐在丙旁邊" +
 				"</br>    戊：我坐在丁旁邊" +
-				"</br>請問以下有哪些正確？ (多選)  (提示：這五個人都很誠實。)",
+				"</br>請問以下有哪些正確？ (單選)  (提示：這五個人都很誠實。)",
 			"options": [
 				"甲坐在戊旁邊",
-				"乙不在甲旁邊",
+				"乙在甲的旁邊",
 				"丙坐在戊旁邊",
 				"丁不在乙旁邊",
-				"戊站在正中間",
 			],
-			"correct": [1, 2]
+			"correct": [2]
 
 		}, 
 		{
-			"money": 2000,
+			"money": 3000,
 			"id": 28,
 			"multi": false,
 			"subject": "金頭腦題",
