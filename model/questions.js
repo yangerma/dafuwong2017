@@ -156,13 +156,13 @@ module.exports = function() {
 			"id": 10,
 			"multi" : false,
 			"subject" : "Python",
-			"description" : "下列哪些不是 Python 可以辦到的事情？ (單選)",
+			"description" : "下列哪些是 Python 可以辦到的事情？ (單選)",
 			"options" : [
 				"動態網頁爬蟲",
 				"機器學習",
 				"架設動態網站",
 				"自然語言處理",
-				"以上皆非"
+				"以上皆是"
 			],
 			"correct" : [ 4 ]
 		},
@@ -170,7 +170,7 @@ module.exports = function() {
 		{
 			"money": 5000,
 			"id": 11,
-			"multi" : true,
+			"multi" : false,
 			"subject" : "Python",
 			"description" : "下列哪一個 Python 語法是錯誤的？(A,B 型態皆為 Int) (單選)",
 			"options" : [

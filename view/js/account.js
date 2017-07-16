@@ -6,7 +6,6 @@ function showAccountBox( res ) {
 		$('#account' + i + ' .accountProf span').text( model.players[i].name );
 		$('#account' + i + ' .accountMoney span').text( Math.round( model.players[i].money, -3 ) );
 		
-		/* TODO : read res */
 		for (var j = 1; j <=3; j++){
 			$('#account' + i + ' .accountServer' + j + ' span').text(  res[i].servers[j]);
 		}
