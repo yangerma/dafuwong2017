@@ -53,6 +53,6 @@ function updateHouse() {
 	if ( model.players[playerId].money >= node.price[node.level] ) {
 		socket.emit("update_house");
 	} 
-	else showNoMoney();
+	else showAlert("你 買 不 起 :<");
 	closeHouseBox();
 }
