@@ -1,0 +1,41 @@
+#accountBox {
+	height: 100%;
+	width: 100%;
+}
+
+#accountBox .title {
+	height: 100px;
+	margin-top: 30px;
+	font-weight: 500;
+	font-size: 50px;
+	line-height: 100px;
+}
+
+#accountBoard .account {
+	margin: 10px;
+	height: 100px;
+	font-size: 20px;
+}
+
+#accountBoard .account div{
+	display: inline-block;
+	padding: 10px;
+	border: none;
+	line-height: 80px;
+}
+
+.accountProf img{
+	position: relative;
+	top: 30px;
+	height: 80px;
+	width: 80px;
+	overflow: hidden;
+}
+
+.accountElement img{
+	position: relative;
+	top: 20px;
+	height: 80px;
+	width: 120px;
+	overflow: hidden;
+}

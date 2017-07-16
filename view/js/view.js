@@ -30,12 +30,17 @@ socket.on("update_house", (arg) => showNotification({eventType: "updateHouse", t
 socket.on("pay_tolls", (arg) => showNotification({eventType: "passOthersHouse", teamId: arg.playerId, arg: arg.ownerId}));
 socket.on("dhcp", (arg) => showNotification({eventType: "DHCP", teamId: arg.playerId, arg: arg.ip}));
 socket.on("home", (arg) => showNotification({eventType: "home", teamId: arg.playerId, arg: arg.reward}));
-socket.on("HowDoYouTurnThisOn", () => {admin = true; $("#pauseButton").show();});
 socket.on("YouCantDoNothing!", () => playerId = 87);
+socket.on("call_game", (asset) => showAccountBox(asset));
+socket.on("HowDoYouTurnThisOn", () => {
+	admin = true;
+	socket.on("cmd",(msg)=>addMessage(msg,"SYSTEM"));
+	$("#pauseButton").show();
+});
 
 socket.on('update', function(data) {
 	if (admin) {
-		playerId = data.nowPlaying;
+		//playerId = data.nowPlaying;
 	}
 	old = model;
 	model = data;

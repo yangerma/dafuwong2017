@@ -1,4 +1,4 @@
- MAX_PLAYER = 5;
+MAX_PLAYER = 5;
 /* Define game state. */
 const STOP = 0;
 const START = 1;
@@ -13,6 +13,7 @@ const CHANCE = 9;
 const ENVIRONMENT = 10;
 const WAIT_TURN_OVER = 87;
 const ITEM = "ITEM";
+const END = "END GAME";
 
 var password = ["meow", "beep", "wang", "woof", "oops"];
 
@@ -120,7 +121,7 @@ Controller = function(io, model) {
 		model.environment = environments[Math.floor(Math.random() * environments.length)];
 		var ret = model.environment.activate(model);
 		console.log("environment!!");
-		chat("[系統] " + model.environment.effect);
+		chat(model.environment.effect);
 		publish();
 		setTimeout(nextTurn, 2500);
 	}
@@ -175,7 +176,7 @@ Controller = function(io, model) {
 		var nowId = model.players[model.nowPlaying].id;
 		if (node.firewall[nowId]) {
 			node.firewall.forEach((x, id, a) => a[id] = false);
-			chat("[系統] " + model.players[model.nowPlaying].name + " 撞牆了, 幫QQ");
+			chat(model.players[model.nowPlaying].name + " 撞牆了, 幫QQ");
 		}
 		if (node.type == "question") {
 			questionEvent();
@@ -292,7 +293,7 @@ Controller = function(io, model) {
 		publish();
 		notify("update_house", {playerId: nowId});
 		if(house.level == 3) {
-			chat("[系統] 糟了! 是世界奇觀!");
+			chat("糟了! 是世界奇觀!");
 		}
 	}
 
@@ -323,7 +324,7 @@ Controller = function(io, model) {
 		console.log("Player " + playerId + " buy " + type);
 		publish();
 		notify("buy_item", {playerId: playerId, type: type});
-		chat("[系統]" + model.players[playerId].name + " 購買了 " + model.items[type].name + "!");
+		chat(model.players[playerId].name + " 購買了 " + model.items[type].name + "!");
 	}
 
 	function pause() {
@@ -331,7 +332,48 @@ Controller = function(io, model) {
 		publish();
 	}
 	function chat(msg) {
-		io.emit('chat_message', msg ,"SYSTEM");
+		if(msg[0] == '/'){
+			msg = msg.slice(1).split(' ');
+			io.emit('cmd','[DEBUG]' + msg.length);
+			if(msg[0]=="addmoney"){
+				if(msg.length==3 && Number(msg[1])<5 && Number(msg[1])>=0 ){
+					model.players[Number(msg[1])].money+=Number(msg[2]);
+					chat('關主被賄賂了 呵呵');
+					publish();
+				}
+				else{
+					io.emit('cmd','usage : /addmoney [playerId] [money]')
+				}
+			}
+		}
+		else{
+			msg = "[系統] " + msg;
+			io.emit('chat_message', msg ,"SYSTEM");
+		}
+	}
+	function chatPlayer(msg,id){
+		msg = model.players[id].name + " 說: "+msg;
+		io.emit('chat_message', msg ,"PLAYER");
+	}
+	function callGame() {
+		var serverValue=[0,250,750,2250];
+		model.state = END;
+		var asset=[{},{},{},{},{}];
+		for( var i = 0; i < 5; i++ ){
+			asset[i].money = model.players[i].money;
+			asset[i].total = model.players[i].money;
+			asset[i].servers = [0,0,0,0];
+		}
+		for(var i in model.map){
+			node = model.map[i];
+			if(node.type=='server' && node.owner!=null){
+				asset[node.owner].servers[node.level]+=1;
+				asset[node.owner].total += serverValue[node.level];
+			}
+		}
+		console.log(asset);
+		io.emit('call_game',asset);
+		
 	}
 
 	/* Listen new connection */
@@ -353,8 +395,10 @@ Controller = function(io, model) {
 				player.emit("HowDoYouTurnThisOn");
 				player.on("WhosYourDaddy", (newModel) => model = newModel);
 				player.on("pause", () => pause());
+				player.on("call_game", () => callGame());
+				player.on('chat_message', (msg) => chat(msg));
 				console.log("admin login!");
-			} else if (id >= 0 && id < 5 && psw == password[id]) {
+			}else if (id >= 0 && id < 5 && psw == password[id]) {
 				console.log("Player " + id + " login.");
 				playerIO[id] = player;
 				model.players[id].name = name;
@@ -372,9 +416,9 @@ Controller = function(io, model) {
 			player.on("update_house", updateHouse);
 			player.on("switch", (pos) => teleport(pos));
 			player.on("turn_over", itemEvent);
-			player.on('chat_message', (msg,flag) => io.emit('chat_message', msg ,flag));
 			if(id != 87) {
-				chat("[系統] 玩家 " + name + " 上線了! 大家跟他打聲招呼吧!");
+				chat("玩家 " + name + " 上線了! 大家跟他打聲招呼吧!");
+				player.on('chat_message', (msg) => chatPlayer(msg,id));
 			}
 		})
 	});
