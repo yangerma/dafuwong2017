@@ -101,7 +101,7 @@ Controller = function(io, model) {
 		var item = itemQueue.shift();
 		var hao123Set = new Set();
 		if (item.type == "hao123") {
-			if (hao123Set.has(model.players[item.playerId].pos)) {
+			if (hao123Set.has(model.players[item.playerId].pos) || model.map[model.players[item.playerId].pos].type!="server") {
 				model.players[item.playerId].money += model.items["hao123"].cost;
 				/* TODO: notify player hao123 fail (?) */
 			} else {
@@ -344,6 +344,11 @@ Controller = function(io, model) {
 				else{
 					io.emit('cmd','usage : /addmoney [playerId] [money]')
 				}
+			}else if(msg[0]=='gg'){
+				callGame();
+			}else if(msg[0]=='next'){
+				nextTurn();
+				publish();
 			}
 		}
 		else{
@@ -356,7 +361,7 @@ Controller = function(io, model) {
 		io.emit('chat_message', msg ,"PLAYER");
 	}
 	function callGame() {
-		var serverValue=[0,250,750,2250];
+		var serverValue=[0,750,3000,9000];
 		model.state = END;
 		var asset=[{},{},{},{},{}];
 		for( var i = 0; i < 5; i++ ){
@@ -371,7 +376,6 @@ Controller = function(io, model) {
 				asset[node.owner].total += serverValue[node.level];
 			}
 		}
-		console.log(asset);
 		io.emit('call_game',asset);
 		
 	}
