@@ -344,6 +344,11 @@ Controller = function(io, model) {
 				else{
 					io.emit('cmd','usage : /addmoney [playerId] [money]')
 				}
+			}else if(msg[0]=='gg'){
+				callGame();
+			}else if(msg[0]=='next'){
+				nextTurn();
+				publish();
 			}
 		}
 		else{
@@ -371,7 +376,6 @@ Controller = function(io, model) {
 				asset[node.owner].total += serverValue[node.level];
 			}
 		}
-		console.log(asset);
 		io.emit('call_game',asset);
 		
 	}
