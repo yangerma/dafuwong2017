@@ -1,4 +1,5 @@
 var timeToChooseLand = false;
+var timeToSwitch = false;
 
 function showSwitch() {
 	$('#switchBox').show();
@@ -31,9 +32,11 @@ function chooseLand() {
 	$('#cpy_map div').on('click', function() {
 		if ( !timeToSwitch ) return;
 		var landID = $( this ).prop('id');
+		if (landID[4] == 's') return;
 		console.log( 'choosen #' + landID );
 		timeToSwitch = false;
 		socket.emit('switch', landID.split('_')[1] );
+		//$('#cpy_map div').off('click');
 	});
 
 }
